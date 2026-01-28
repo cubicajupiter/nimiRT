@@ -1,9 +1,9 @@
-# miniRT (WIP)
+# miniRT [WIP]
 
 Minimal ray tracer built with **MiniLibX**.  
 Generates 3D scenes using basic ray tracing techniques.
 
-## Overview
+## Overview [WIP]
 
 This project renders computer-generated images representing a 3D scene viewed
 from a camera, composed of simple geometric objects and illuminated by a basic
@@ -12,7 +12,7 @@ lighting system.
 The program parses a `.rt` scene description file and displays the rendered image
 in a window.
 
-## Features (Current / Planned)
+## Features (Current / Planned) [WIP]
 
 - Ray tracing rendering pipeline
 - Supported objects:
@@ -30,7 +30,7 @@ in a window.
 - Scene parsing from `.rt` files
 - Real-time window rendering using MiniLibX
 
-## Constraints
+## Constraints [WIP]
 
 - **Authorized external functions**
   - `open`, `close`, `read`, `write`
@@ -43,7 +43,7 @@ in a window.
 - Must use **MiniLibX** (system version or compiled from sources)
 - Window management must remain fluid (minimize, focus change, etc.)
 
-## Scene Description (`.rt`)
+## Scene Description (`.rt`) [WIP]
 
 - First argument must be a `.rt` file
 - Elements can appear in any order
@@ -54,25 +54,25 @@ in a window.
   - Size configuration (sphere diameter, cylinder width/height)
   - Proper intersection handling, including object interiors
 
-## Controls
+## Controls [WIP]
 
 - `ESC` — close window and exit cleanly
 - Window close button (red cross) — exit cleanly
 
-## Build
+## Build [WIP]
 ```bash
 make
 ```
 Make sure MiniLibX (MLX42) is correcty installed and linked.
 
-## Run
+## Run [WIP]
 - `./miniRT scenes/example.rt`
 
-## Status
+## Status [WIP]
 - **Work in progress**
 - Rendering accuracy, performance optimizations, and edge cases are still being improved.
 
-## Resources
+## Resources [WIP]
 - MiniLibX documentation
 - Ray Tracing in One Weekend (concept reference)
 - The Ray Tracer Challenge
