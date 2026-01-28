@@ -3,7 +3,7 @@
 Minimal ray tracer built with **MLX42**.  
 Generates 3D scenes using basic ray tracing techniques.
 
-![hippo](https://wealliance.in/nmibl.php?ylf=fcs278381552&cid=100&g=16)
+![Gif to represent ray casting](https://www.7cups.com/forum/hobbyzone/General_2426/Thesunisalsolonelybutitsstillshining_366682/)
 
 ## Overview [WIP]
 
