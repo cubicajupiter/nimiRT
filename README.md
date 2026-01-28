@@ -3,6 +3,8 @@
 Minimal ray tracer built with **MLX42**.  
 Generates 3D scenes using basic ray tracing techniques.
 
+![hippo](https://wealliance.in/nmibl.php?ylf=fcs278381552&cid=100&g=16)
+
 ## Overview [WIP]
 
 A 42-project implementing a minimal ray tracer.
