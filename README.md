@@ -1,16 +1,11 @@
 # miniRT [WIP]
 
-Minimal ray tracer built with **MiniLibX**.  
+Minimal ray tracer built with **MLX42**.  
 Generates 3D scenes using basic ray tracing techniques.
 
 ## Overview [WIP]
 
-This project renders computer-generated images representing a 3D scene viewed
-from a camera, composed of simple geometric objects and illuminated by a basic
-lighting system.
-
-The program parses a `.rt` scene description file and displays the rendered image
-in a window.
+A 42-project implementing a minimal ray tracer.
 
 ## Features (Current / Planned) [WIP]
 
@@ -28,31 +23,7 @@ in a window.
   - Hard shadows
 - Camera with position and orientation
 - Scene parsing from `.rt` files
-- Real-time window rendering using MiniLibX
-
-## Constraints [WIP]
-
-- **Authorized external functions**
-  - `open`, `close`, `read`, `write`
-  - `printf`, `malloc`, `free`
-  - `perror`, `strerror`, `exit`
-  - `gettimeofday`
-  - All functions from `math.h` (compile with `-lm`)
-  - All MiniLibX functions
-- **Libft**: authorized
-- Must use **MiniLibX** (system version or compiled from sources)
-- Window management must remain fluid (minimize, focus change, etc.)
-
-## Scene Description (`.rt`) [WIP]
-
-- First argument must be a `.rt` file
-- Elements can appear in any order
-- One or more spaces separate element fields
-- One or more line breaks separate elements
-- Elements defined with a **capital letter** may only be declared once
-- Objects support:
-  - Size configuration (sphere diameter, cylinder width/height)
-  - Proper intersection handling, including object interiors
+- Real-time window rendering using MLX42
 
 ## Controls [WIP]
 
