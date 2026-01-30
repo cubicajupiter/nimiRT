@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-int	add_tuples(tuple dst, tuple const a, const tuple b)
+int	tuple_add(tuple dst, tuple const a, const tuple b)
 {
 	if (!dst || !a || !b)
 		return (ERROR);
@@ -23,7 +23,7 @@ int	add_tuples(tuple dst, tuple const a, const tuple b)
 	return (SUCCESS);
 }
 
-int	subract_tuples(tuple dst, tuple a, const tuple b)
+int	tuple_subtract(tuple dst, tuple a, const tuple b)
 {
 	if (!dst || !a || !b)
 		return (ERROR);
@@ -31,5 +31,27 @@ int	subract_tuples(tuple dst, tuple a, const tuple b)
 	dst[Y] = a[Y] - b[Y];
 	dst[Z] = a[Z] - b[Z];
 	dst[W] = a[W] - b[W];
+	return (SUCCESS);
+}
+
+int	vector_multiply(tuple dst, const float scalar, tuple vector)
+{
+	if (!dst || !scalar || !vector)
+		return (ERROR);
+	dst[X] = vector[X] * scalar;
+	dst[Y] = vector[Y] * scalar;
+	dst[Z] = vector[Z] * scalar;
+	dst[X] = vector[X] * scalar;
+	return (SUCCESS);
+}
+
+int	vector_divide(tuple dst, const float scalar, tuple vector)
+{
+	if (!dst || !scalar || !vector)
+		return (ERROR);
+	dst[X] = vector[X] / scalar;
+	dst[Y] = vector[Y] / scalar;
+	dst[Z] = vector[Z] / scalar;
+	dst[X] = vector[X] / scalar;
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 10:56:57 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/01/30 18:07:39 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int main(int ac, char **av)
     }
     else
     {
-        vector(a, 4, -4, 3);
-        printf("tuple a: %f %f %f %f\n", a[0], a[1], a[2], a[3]);
+        vector_new(a, 1, 2, 3);
+        tuple_print(a);
+        vector_normalise(a, a);
+        tuple_print(a);
         instruct();
     }
     return (0);

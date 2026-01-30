@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-int	point(tuple tuple, float x, float y, float z)
+int	point_new(tuple tuple, float x, float y, float z)
 {
 	if (!tuple || !x || !y || !z)
 		return (ERROR);
@@ -23,7 +23,7 @@ int	point(tuple tuple, float x, float y, float z)
 	return (SUCCESS);
 }
 
-int	vector(tuple tuple, float x, float y, float z)
+int	vector_new(tuple tuple, float x, float y, float z)
 {
 	if (!tuple || !x || !y || !z)
 		return (ERROR);
@@ -44,7 +44,7 @@ int	is_tuple_equal(tuple a, tuple b)
 	return (FALSE);
 }
 
-int	negate_tuple(tuple dst, tuple src)
+int	vector_negate(tuple dst, tuple src)
 {
 	if (!dst || !src)
 		return (ERROR);
