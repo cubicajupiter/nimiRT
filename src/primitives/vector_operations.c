@@ -12,36 +12,36 @@
 
 #include "defines.h"
 
-int	scale_vector(tuple new, const float scalar, tuple vector)
+int	scale_vector(tuple dst, const float scalar, tuple vector)
 {
-	if (!new || !scalar || !vector)
+	if (!dst || !scalar || !vector)
 		return (ERROR);
-	new[X] = vector[X] * scalar;
-	new[Y] = vector[Y] * scalar;
-	new[Z] = vector[Z] * scalar;
-	new[X] = vector[X] * scalar;
+	dst[X] = vector[X] * scalar;
+	dst[Y] = vector[Y] * scalar;
+	dst[Z] = vector[Z] * scalar;
+	dst[X] = vector[X] * scalar;
 	return (SUCCESS);
 }
 
-int	get_magnitude(float *magn, const tuple vector)
+int	get_magnitude(float *magnitude, const tuple vector)
 {
-	if (!magn || vector)
+	if (!magnitude || vector)
 		return (ERROR);
-	*magn = sqrtf(vector[X] * vector[X] + vector[Y] * vector[Y] + vector[Z]
+	*magnitude = sqrtf(vector[X] * vector[X] + vector[Y] * vector[Y] + vector[Z]
 			* vector[Z]);
 	return (SUCCESS);
 }
 
-int	normalise_vector(tuple new, tuple vector)
+int	normalise_vector(tuple dst, tuple vector)
 {
 	float	magnitude;
 
-	if (!new || !vector)
+	if (!dst || !vector)
 		return (ERROR);
 	get_magnitude(&magnitude, vector);
-	new[X] = vector[X] / magnitude;
-	new[Y] = vector[Y] / magnitude;
-	new[Z] = vector[Z] / magnitude;
+	dst[X] = vector[X] / magnitude;
+	dst[Y] = vector[Y] / magnitude;
+	dst[Z] = vector[Z] / magnitude;
 	return (SUCCESS);
 }
 
@@ -57,12 +57,12 @@ int dot_product(float *dot, tuple a, tuple b)
     return (SUCCESS);
 }
 
-int cross_product(tuple new, tuple a, tuple b)
+int cross_product(tuple dst, tuple a, tuple b)
 {
-    if (!new || !a || !b)
+    if (!dst || !a || !b)
         return (ERROR);
-    new[X] = a[Y] * b[Z] - a[Z] * b[Y];
-    new[Y] = a[Z] * b[X] - a[X] * b[Z];
-    new[Z] = a[X] * b[Y] - a[Y] * b[X];
+    dst[X] = a[Y] * b[Z] - a[Z] * b[Y];
+    dst[Y] = a[Z] * b[X] - a[X] * b[Z];
+    dst[Z] = a[X] * b[Y] - a[Y] * b[X];
     return (SUCCESS);
 }
