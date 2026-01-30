@@ -25,6 +25,16 @@ Defines that aren't relevant for the whole project can go in specific header fil
 # include <stdio.h>
 # include <stdlib.h>
 
+// Retrun Values
+// Run checks
+# define FAIL 1
+# define SUCCESS 0
+// Is checks
+# define TRUE 1
+# define FALSE 0
+// Error
+# define ERROR -1
+
 //  TUPLES
 // TUPLE MODE FLAG
 # define POINT 1
