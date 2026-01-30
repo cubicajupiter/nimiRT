@@ -44,13 +44,13 @@ int	is_tuple_equal(tuple a, tuple b)
 	return (FALSE);
 }
 
-int	negate_tuple(tuple new, tuple a)
+int	negate_tuple(tuple dst, tuple src)
 {
-	if (!new || !a)
+	if (!dst || !src)
 		return (ERROR);
-	new[X] = 0.0 - a[X];
-	new[Y] = 0.0 - a[Y];
-	new[Z] = 0.0 - a[Z];
-	new[W] = 0.0 - a[W];
+	dst[X] = 0.0 - src[X];
+	dst[Y] = 0.0 - src[Y];
+	dst[Z] = 0.0 - src[Z];
+	dst[W] = 0.0 - src[W];
 	return (SUCCESS);
 }

@@ -12,24 +12,24 @@
 
 #include "miniRT.h"
 
-int	add_tuples(tuple new, tuple const a, const tuple b)
+int	add_tuples(tuple dst, tuple const a, const tuple b)
 {
-	if (!new || !a || !b)
+	if (!dst || !a || !b)
 		return (ERROR);
-	new[X] = a[X] + b[X];
-	new[Y] = a[Y] + b[Y];
-	new[Z] = a[Z] + b[Z];
-	new[W] = a[W] + b[W];
+	dst[X] = a[X] + b[X];
+	dst[Y] = a[Y] + b[Y];
+	dst[Z] = a[Z] + b[Z];
+	dst[W] = a[W] + b[W];
 	return (SUCCESS);
 }
 
-int	subract_tuples(tuple new, tuple a, const tuple b)
+int	subract_tuples(tuple dst, tuple a, const tuple b)
 {
-	if (!new || !a || !b)
+	if (!dst || !a || !b)
 		return (ERROR);
-	new[X] = a[X] - b[X];
-	new[Y] = a[Y] - b[Y];
-	new[Z] = a[Z] - b[Z];
-	new[W] = a[W] - b[W];
+	dst[X] = a[X] - b[X];
+	dst[Y] = a[Y] - b[Y];
+	dst[Z] = a[Z] - b[Z];
+	dst[W] = a[W] - b[W];
 	return (SUCCESS);
 }
