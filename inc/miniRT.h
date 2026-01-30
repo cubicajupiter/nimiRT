@@ -13,6 +13,9 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <math.h>
+# include "defines.h"
+
+// Primitives
+bool	is_float_equal(float a, float b);
 
 #endif
