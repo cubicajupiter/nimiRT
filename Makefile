@@ -30,7 +30,7 @@ SRC			= $(SRC_DEV)
 # SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 # PROJECT HEADER
-HEADER		= $(INC_DIR)/defines.h
+HEADER		= $(INC_DIR)/miniRT.h
 
 # PROJECT OBJECTS
 OBJ			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
@@ -59,8 +59,7 @@ LIBFT_A		= $(LIBFT_DIR)/libft.a
 
 # INCLUDE PATHS AND LIBRARIES
 INC			= -I$(INC_DIR) -I$(LIBFT_DIR)/inc
-MATHS		= -lm
-LIBS		= $(LIBFT)
+LIBS		= $(LIBFT) -lm
 
 # MESSAGES
 START		= @echo "==== THOMASROFF MAKEFILE =============" \

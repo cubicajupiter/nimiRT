@@ -10,48 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
+#include "miniRT.h"
 
-int add_tuples(tuple new, tuple a, const tuple b)
+int	add_tuples(tuple new, tuple a, const tuple b)
 {
-    new[X] = a[X] + b[X];
-    new[Y] = a[Y] + b[Y];
-    new[Z] = a[Z] + b[Z];
-    new[W] = a[W] + b[W];
-    return (0);
+	new[X] = a[X] + b[X];
+	new[Y] = a[Y] + b[Y];
+	new[Z] = a[Z] + b[Z];
+	new[W] = a[W] + b[W];
+	return (0);
 }
 
-int subract_tuples(tuple new, tuple a, const tuple b)
+int	subract_tuples(tuple new, tuple a, const tuple b)
 {
-    new[X] = a[X] - b[X];
-    new[Y] = a[Y] - b[Y];
-    new[Z] = a[Z] - b[Z];
-    new[W] = a[W] - b[W];
-    return (0);
+	new[X] = a[X] - b[X];
+	new[Y] = a[Y] - b[Y];
+	new[Z] = a[Z] - b[Z];
+	new[W] = a[W] - b[W];
+	return (0);
 }
 
-int scale_vector(tuple new, const float scalar, tuple vector)
+int	scale_vector(tuple new, const float scalar, tuple vector)
 {
-    new[X] = vector[X] * scalar;
-    new[Y] = vector[Y] * scalar;
-    new[Z] = vector[Z] * scalar;
-    new[X] = vector[X] * scalar;
-    return (0);
+	new[X] = vector[X] * scalar;
+	new[Y] = vector[Y] * scalar;
+	new[Z] = vector[Z] * scalar;
+	new[X] = vector[X] * scalar;
+	return (0);
 }
 
-int get_magnitude(float *magn, const tuple vec)
- {
-    *magn = sqrt(vec[X] * vec[X] + vec[Y] * vec[Y] + vec[Z] * vec[Z]);
-    return (0);
- }
-
-int normalise_vector(tuple new, tuple vector)
+int	get_magnitude(float *magn, const tuple vec)
 {
-    float       magnitude;
+	*magn = sqrtf(vec[X] * vec[X] + vec[Y] * vec[Y] + vec[Z] * vec[Z]);
+	return (0);
+}
 
-    get_magnitude(&magnitude, vector);
-    new[X] = vector[X] / magnitude;
-    new[Y] = vector[Y] / magnitude;
-    new[Z] = vector[Z] / magnitude;
-    return (0);
+int	normalise_vector(tuple new, tuple vector)
+{
+	float	magnitude;
+
+	get_magnitude(&magnitude, vector);
+	new[X] = vector[X] / magnitude;
+	new[Y] = vector[Y] / magnitude;
+	new[Z] = vector[Z] / magnitude;
+	return (0);
 }
