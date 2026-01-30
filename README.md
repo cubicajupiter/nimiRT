@@ -1,18 +1,15 @@
-# miniRT (WIP)
+# miniRT [WIP]
 
-Minimal ray tracer built with **MiniLibX**.  
+Minimal ray tracer built with **MLX42**.  
 Generates 3D scenes using basic ray tracing techniques.
 
-## Overview
+![Gif to represent ray casting](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWgwMXp4ZXN4Z2QyMW0xNnV0cHJuazlmdzYydWM1YnBjdDNpMW8yMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i6BsWXxUSHp7amMJS3/giphy.gif)
 
-This project renders computer-generated images representing a 3D scene viewed
-from a camera, composed of simple geometric objects and illuminated by a basic
-lighting system.
+## Overview [WIP]
 
-The program parses a `.rt` scene description file and displays the rendered image
-in a window.
+A 42-project implementing a minimal ray tracer.
 
-## Features (Current / Planned)
+## Features (Current / Planned) [WIP]
 
 - Ray tracing rendering pipeline
 - Supported objects:
@@ -28,51 +25,27 @@ in a window.
   - Hard shadows
 - Camera with position and orientation
 - Scene parsing from `.rt` files
-- Real-time window rendering using MiniLibX
+- Real-time window rendering using MLX42
 
-## Constraints
-
-- **Authorized external functions**
-  - `open`, `close`, `read`, `write`
-  - `printf`, `malloc`, `free`
-  - `perror`, `strerror`, `exit`
-  - `gettimeofday`
-  - All functions from `math.h` (compile with `-lm`)
-  - All MiniLibX functions
-- **Libft**: authorized
-- Must use **MiniLibX** (system version or compiled from sources)
-- Window management must remain fluid (minimize, focus change, etc.)
-
-## Scene Description (`.rt`)
-
-- First argument must be a `.rt` file
-- Elements can appear in any order
-- One or more spaces separate element fields
-- One or more line breaks separate elements
-- Elements defined with a **capital letter** may only be declared once
-- Objects support:
-  - Size configuration (sphere diameter, cylinder width/height)
-  - Proper intersection handling, including object interiors
-
-## Controls
+## Controls [WIP]
 
 - `ESC` — close window and exit cleanly
 - Window close button (red cross) — exit cleanly
 
-## Build
+## Build [WIP]
 ```bash
 make
 ```
 Make sure MiniLibX (MLX42) is correcty installed and linked.
 
-## Run
+## Run [WIP]
 - `./miniRT scenes/example.rt`
 
-## Status
+## Status [WIP]
 - **Work in progress**
 - Rendering accuracy, performance optimizations, and edge cases are still being improved.
 
-## Resources
+## Resources [WIP]
 - MiniLibX documentation
 - Ray Tracing in One Weekend (concept reference)
 - The Ray Tracer Challenge
