@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 09:28:18 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/01/30 10:56:57 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,23 @@ int main(int ac, char **av)
     return (0);
 }
 
-void    instruct(void)
+static void    instruct(void)
 {
     printf("\nUsage:\n\t./miniRT <scene description as a .rt file>\n");
 }
 
-void    trace(void)
+static void    trace(void)
 {
-    while (x)
+    while (x < image_width)
     {
-        while (y)
+        while (y < image_height)
         {
-            ray();
-            intersection();
-            shading();
+            ray_generation();   //primary rays(intersects)
+            while (k < n_objects)
+            {
+                intersections();     
+                shading(); //secondary rays(diffuse)
+            }
         }
     }
 }
