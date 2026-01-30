@@ -1,0 +1,7 @@
+*.json
+*.supp
+/obj
+/libft/obj
+.cache
+*.a
+miniRT
