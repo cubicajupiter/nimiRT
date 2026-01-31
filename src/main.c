@@ -6,17 +6,17 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 18:07:39 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:12:18 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void    instruct(void);
+// static void    instruct(void);
 
 int main(int ac, char **av)
 {
-    tuple   a;
+    // tuple   a;
     (void)av;
     if (ac == 2)
     {
@@ -29,19 +29,20 @@ int main(int ac, char **av)
     }
     else
     {
-        vector_new(a, 1, 2, 3);
-        tuple_print(a);
-        vector_normalise(a, a);
-        tuple_print(a);
-        instruct();
+        throw();
+        // vector_new(a, 1, 2, 3);
+        // tuple_print(a);
+        // vector_normalise(a, a);
+        // tuple_print(a);
+        // instruct();
     }
     return (0);
 }
 
-static void    instruct(void)
-{
-    printf("\nUsage:\n\t./miniRT <scene description as a .rt <file>\n");
-}
+// static void    instruct(void)
+// {
+//     printf("\nUsage:\n\t./miniRT <scene description as a .rt <file>\n");
+// }
 
 // static void    trace(void)
 // {

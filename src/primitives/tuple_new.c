@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuples.c                                           :+:      :+:    :+:   */
+/*   tuple_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:15:13 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 17:10:36 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:13:10 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	point_new(tuple tuple, float x, float y, float z)
 {
-	if (!tuple || !x || !y || !z)
+	if (!tuple)
 		return (ERROR);
 	tuple[X] = x;
 	tuple[Y] = y;
@@ -25,7 +25,7 @@ int	point_new(tuple tuple, float x, float y, float z)
 
 int	vector_new(tuple tuple, float x, float y, float z)
 {
-	if (!tuple || !x || !y || !z)
+	if (!tuple)
 		return (ERROR);
 	tuple[X] = x;
 	tuple[Y] = y;

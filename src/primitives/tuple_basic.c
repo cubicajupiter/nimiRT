@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_arithmetics.c                                :+:      :+:    :+:   */
+/*   tuple_basic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:27:35 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 17:11:36 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/01/31 16:59:02 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@ int	tuple_subtract(tuple dst, tuple a, const tuple b)
 	return (SUCCESS);
 }
 
-int	vector_multiply(tuple dst, const float scalar, tuple vector)
+int	tuple_incr(tuple dst, const tuple increment)
 {
-	if (!dst || !scalar || !vector)
+	if (!dst || !increment)
 		return (ERROR);
-	dst[X] = vector[X] * scalar;
-	dst[Y] = vector[Y] * scalar;
-	dst[Z] = vector[Z] * scalar;
-	dst[X] = vector[X] * scalar;
+	dst[X] += increment[X];
+	dst[Y] += increment[Y];
+	dst[Z] += increment[Z];
+	dst[W] += increment[W];
 	return (SUCCESS);
 }
 
-int	vector_divide(tuple dst, const float scalar, tuple vector)
+int	tuple_decr(tuple dst, const tuple decrement)
 {
-	if (!dst || !scalar || !vector)
+	if (!dst || !decrement)
 		return (ERROR);
-	dst[X] = vector[X] / scalar;
-	dst[Y] = vector[Y] / scalar;
-	dst[Z] = vector[Z] / scalar;
-	dst[X] = vector[X] / scalar;
+	dst[X] -= decrement[X];
+	dst[Y] -= decrement[Y];
+	dst[Z] -= decrement[Z];
+	dst[W] -= decrement[W];
 	return (SUCCESS);
 }
