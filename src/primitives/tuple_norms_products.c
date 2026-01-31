@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_operations.c                                :+:      :+:    :+:   */
+/*   tuple_norms_products.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 18:07:58 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:42:15 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	magnitude_get(float *magnitude, const tuple vector)
 
 */
 
-int	vector_normalise(tuple dst, tuple vector)
+int	normalize_get(tuple dst, tuple vector)
 {
 	float	magnitude;
 
@@ -49,6 +49,21 @@ int	vector_normalise(tuple dst, tuple vector)
 	dst[Z] = vector[Z] / magnitude;
 	// Same here as in magnitude_get()..
 	// dst[W] = vector[W] / magnitude;
+	return (SUCCESS);
+}
+
+int	normalize_apply(tuple vector)
+{
+	float	magnitude;
+
+	if (!vector)
+		return (ERROR);
+	magnitude_get(&magnitude, vector);
+	vector[X] /= magnitude;
+	vector[Y] /= magnitude;
+	vector[Z] /= magnitude;
+	// Same here as in magnitude_get()..
+	// vector[W] /= magnitude;
 	return (SUCCESS);
 }
 

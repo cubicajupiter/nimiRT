@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:42:04 by thblack-          #+#    #+#             */
-/*   Updated: 2026/01/31 17:26:05 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:43:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int throw(void)
     // Input values for the starting position and velocity of the ball
     if (point_new(ball.position, 0, 1, 0) != SUCCESS
         || vector_new(ball.velocity, 1, 1, 0) != SUCCESS
-        || vector_normalise(ball.velocity, ball.velocity) != SUCCESS)
+        || normalize_apply(ball.velocity) != SUCCESS)
     {
         printf("Ball creation failed\n");
         return (ERROR);
