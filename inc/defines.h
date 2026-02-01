@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 13:46:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/01 15:28:07 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,17 @@ Defines that aren't relevant for the whole project can go in specific header fil
 
 //  TUPLES
 // TUPLE MODE FLAG
-# define POINT 1
-# define VECTOR 0
+# define POINT 1.0f
+# define VECTOR 0.0f
 // TUPLE INDEXES
 # define X 0
 # define Y 1
 # define Z 2
 # define W 3
 
-typedef float	tuple[4];
+typedef float   tuple[4];
+typedef float   matrix[4][4];
+typedef float   matrix2[2][2];
+typedef float   matrix3[3][3];
 
 #endif

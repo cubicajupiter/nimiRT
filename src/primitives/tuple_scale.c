@@ -12,6 +12,11 @@
 
 #include "miniRT.h"
 
+/*
+Multiplication/division creates a new result vector,
+whereas scale_up/scale_down modifies the original vector in place.
+*/
+
 int	vector_multiply(tuple dst, const float scalar, tuple vector)
 {
 	if (!dst || !vector)

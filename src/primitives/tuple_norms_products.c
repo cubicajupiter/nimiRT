@@ -27,7 +27,9 @@ int	magnitude_get(float *magnitude, const tuple vector)
 		return (ERROR);
 	*magnitude = sqrtf(vector[X] * vector[X] + vector[Y] * vector[Y] + vector[Z]
 			* vector[Z]);
-	// Should it include W?!? Book seems unclear and AI suggests it should be there
+	// Should it include W?!? Book seems unclear and AI suggests it should be there.
+		//	-> I think it would depend on whether the fourth dimension is also used for something other than mode flag.
+		// E.g. if W is used for transformations as johnny once suggested to me ("4th dimension") then maybe?
 	// *magnitude = sqrtf(vector[X] * vector[X] + vector[Y] * vector[Y] + vector[Z]
 	// 		* vector[Z] + vector[W] * vector[W]);
 	return (SUCCESS);
@@ -49,6 +51,8 @@ int	normalize_get(tuple dst, tuple vector)
 	dst[Z] = vector[Z] / magnitude;
 	// Same here as in magnitude_get()..
 	// dst[W] = vector[W] / magnitude;
+	//		here the rationale for including W is to help with debugging: only vectors should be normalized, so it's always zero.
+	//		If W is non-zero after normalization, something other than a vector got normalised by accident.
 	return (SUCCESS);
 }
 
