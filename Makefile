@@ -30,7 +30,9 @@ SRC			= $(SRC_DEV)
 # SRC			= $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 # PROJECT HEADER
-HEADER		= $(INC_DIR)/miniRT.h
+HDR_DEV		= $(shell find inc -name "*.h")
+HEADERS		= $(HDR_DEV)
+# HEADERS		= $(INC_DIR)/miniRT.h
 
 # PROJECT OBJECTS
 OBJ			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
@@ -92,7 +94,7 @@ $(LIBFT_A):
 	@compiledb make -C $(LIBFT_DIR) $(MAKE_QUIET)
 	$(SPACER)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADER)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	@$(MKDIR) $(dir $@)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 

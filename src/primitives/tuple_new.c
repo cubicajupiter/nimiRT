@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuples.c                                           :+:      :+:    :+:   */
+/*   tuple_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:15:13 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/30 17:10:36 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:13:10 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	point(tuple tuple, float x, float y, float z)
+int	point_new(tuple tuple, float x, float y, float z)
 {
-	if (!tuple || !x || !y || !z)
+	if (!tuple)
 		return (ERROR);
 	tuple[X] = x;
 	tuple[Y] = y;
@@ -23,9 +23,9 @@ int	point(tuple tuple, float x, float y, float z)
 	return (SUCCESS);
 }
 
-int	vector(tuple tuple, float x, float y, float z)
+int	vector_new(tuple tuple, float x, float y, float z)
 {
-	if (!tuple || !x || !y || !z)
+	if (!tuple)
 		return (ERROR);
 	tuple[X] = x;
 	tuple[Y] = y;
@@ -44,13 +44,13 @@ int	is_tuple_equal(tuple a, tuple b)
 	return (FALSE);
 }
 
-int	negate_tuple(tuple new, tuple a)
+int	vector_negate(tuple dst, tuple src)
 {
-	if (!new || !a)
+	if (!dst || !src)
 		return (ERROR);
-	new[X] = 0.0 - a[X];
-	new[Y] = 0.0 - a[Y];
-	new[Z] = 0.0 - a[Z];
-	new[W] = 0.0 - a[W];
+	dst[X] = 0.0 - src[X];
+	dst[Y] = 0.0 - src[Y];
+	dst[Z] = 0.0 - src[Z];
+	dst[W] = 0.0 - src[W];
 	return (SUCCESS);
 }
