@@ -38,6 +38,11 @@ Defines that aren't relevant for the whole project can go in specific header fil
 # define Y 1
 # define Z 2
 # define W 3
+// COLOR INDEXES
+# define R 0
+# define G 1
+# define B 2
+# define A 3
 
 typedef float   tuple[4];
 typedef float   matrix[4][4];
