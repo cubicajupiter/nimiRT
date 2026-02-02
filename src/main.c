@@ -14,9 +14,19 @@
 
 // static void    instruct(void);
 
+void    commands(void *data)
+{
+    t_tree  *t;
+
+    t = (t_tree *)data;
+	if (mlx_is_key_down(t->window, MLX_KEY_ESCAPE))
+		mlx_close_window(t->window);
+}
+
 int main(int ac, char **av)
 {
-    // tuple   a;
+    t_tree  t;
+
     (void)av;
     if (ac == 2)
     {
@@ -29,7 +39,11 @@ int main(int ac, char **av)
     }
     else
     {
+        window_init(&t.window, &t.image);
+        mlx_loop_hook(t.window, commands, &t);
         throw();
+        mlx_loop(t.window);
+        window_destroy(t.window);
         // vector_new(a, 1, 2, 3);
         // tuple_print(a);
         // vector_normalise(a, a);

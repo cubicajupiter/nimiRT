@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/31 17:42:15 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 10:19:22 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ a^2 + b^2 + c^2 = d^2.
 int	magnitude_get(float *magnitude, const tuple vector)
 {
 	if (!magnitude || !vector)
-		return (ERROR);
+		return (ft_error(EINVAL, "magnitude_get"));
 	*magnitude = sqrtf(vector[X] * vector[X] + vector[Y] * vector[Y] + vector[Z]
 			* vector[Z]);
 	// Should it include W?!? Book seems unclear and AI suggests it should be there.
@@ -44,7 +44,7 @@ int	normalize_get(tuple dst, tuple vector)
 	float	magnitude;
 
 	if (!dst || !vector)
-		return (ERROR);
+		return (ft_error(EINVAL, "normalize_get"));
 	magnitude_get(&magnitude, vector);
 	dst[X] = vector[X] / magnitude;
 	dst[Y] = vector[Y] / magnitude;
@@ -61,7 +61,7 @@ int	normalize_apply(tuple vector)
 	float	magnitude;
 
 	if (!vector)
-		return (ERROR);
+		return (ft_error(EINVAL, "normalize_apply"));
 	magnitude_get(&magnitude, vector);
 	vector[X] /= magnitude;
 	vector[Y] /= magnitude;
@@ -78,7 +78,7 @@ It is actually the cosine of the angle between two unit vectors.
 int	vector_dot(float *dot, tuple a, tuple b)
 {
 	if (!*dot || !a || !b)
-		return (ERROR);
+		return (ft_error(EINVAL, "vector_dot"));
 	*dot = a[X] * b[X] + a[Y] * b[Y] + a[Z] * b[Z] + a[W] * b[W];
 	return (SUCCESS);
 }
@@ -86,7 +86,7 @@ int	vector_dot(float *dot, tuple a, tuple b)
 int	vector_cross(tuple dst, tuple a, tuple b)
 {
 	if (!dst || !a || !b)
-		return (ERROR);
+		return (ft_error(EINVAL, "vector_cross"));
 	// Function specifically for vectors, so add this check to reject points?
 	// if (dst[W] == 0)
 	// 	return (FAIL);

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:15:13 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/31 17:13:10 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 10:20:26 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	point_new(tuple tuple, float x, float y, float z)
 {
 	if (!tuple)
-		return (ERROR);
+		return (ft_error(EINVAL, "point_new"));
 	tuple[X] = x;
 	tuple[Y] = y;
 	tuple[Z] = z;
@@ -26,7 +26,7 @@ int	point_new(tuple tuple, float x, float y, float z)
 int	vector_new(tuple tuple, float x, float y, float z)
 {
 	if (!tuple)
-		return (ERROR);
+		return (ft_error(EINVAL, "vector_new"));
 	tuple[X] = x;
 	tuple[Y] = y;
 	tuple[Z] = z;
@@ -37,7 +37,7 @@ int	vector_new(tuple tuple, float x, float y, float z)
 int	is_tuple_equal(tuple a, tuple b)
 {
 	if (!a || !b)
-		return (ERROR);
+		return (ft_error(EINVAL, "is_tuple_equal"));
 	if (is_float_equal(a[X], b[X]) && is_float_equal(a[Y], b[Y])
 		&& is_float_equal(a[Z], b[Z]))
 		return (TRUE);
@@ -47,7 +47,7 @@ int	is_tuple_equal(tuple a, tuple b)
 int	vector_negate(tuple dst, tuple src)
 {
 	if (!dst || !src)
-		return (ERROR);
+		return (ft_error(EINVAL, "vector_negate"));
 	dst[X] = 0.0 - src[X];
 	dst[Y] = 0.0 - src[Y];
 	dst[Z] = 0.0 - src[Z];

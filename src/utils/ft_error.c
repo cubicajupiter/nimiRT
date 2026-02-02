@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_print.c                                      :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 11:40:01 by thblack-         ###   ########.fr       */
+/*   Created: 2026/02/02 10:05:46 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/02 10:23:58 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
 #include "miniRT.h"
 
-int	tuple_print(tuple src)
+int ft_error(int code, const char *message)
 {
-	if (!src)
-		return (ft_error(EINVAL, "tuple_print"));
-	if (src[W] == POINT)
-		if (printf("p(%f, %f, %f)", src[X], src[Y], src[Z]) < 0)
-			return (ft_error(0, "printf"));
-	if (src[W] == VECTOR)
-		if (printf("v(%f, %f, %f)", src[X], src[Y], src[Z]) < 0)
-			return (ft_error(0, "printf"));
-	return (SUCCESS);
+    if (code)
+        errno = code;
+    if (message && *message)
+        printf("Error: %s() fail\n", message);
+    return (ERROR);
 }
