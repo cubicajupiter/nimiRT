@@ -6,7 +6,7 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2026/02/02 11:34:34 by thblack-         ###   ########.fr        #
+#    Updated: 2026/02/02 11:47:57 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,6 @@ CGENERAL	= -O2
 CDEBUG		= -g3 -O0
 MAKE_QUIET	= --no-print-directory
 
-# REMOVE
-RMFILE = rm -f
-RMDIR = rm -rf
-
-# MAKE DIRECTORY
-MKDIR		= mkdir -p
-
 # LIBFT LINKING
 LIBFT_DIR	= ./libft
 LIBFT_H		= $(LIBFT_DIR)/inc/libft.h
@@ -75,7 +68,7 @@ LIBS		= $(LIBFT) $(MLX42) -lm
 # MESSAGES
 START		= @echo "==== THOMASROFF MAKEFILE =============" \
 			  && echo "==== STARTED: $(shell date '+%Y-%m-%d %H:%M:%S') ===="
-BUILD_PROJ	= @echo "==== BUILDING $(PROJECT) ===============" \
+BUILD_PROJ	= @echo "==== BUILDING $(PROJECT) =================" \
 				&& echo "compiling in $(MODE) mode"
 COMPILED	= @echo "$(PROJECT) compiled successfully"
 FINISH		= @echo "==== BUILD COMPLETE ==================" \
@@ -115,7 +108,7 @@ $(LIBFT_A):
 	$(SPACER)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
-	@$(MKDIR) $(dir $@)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 -include $(DEPS)
@@ -131,15 +124,19 @@ release:
 	@$(MAKE) DEBUG=0 all $(MAKE_QUIET)
 clean:
 	@echo "Removing object files"
-	@$(RMDIR) obj
+	@rm -rf obj
 	@make -C libft clean $(MAKE_QUIET)
+	@if [ -d "$(MLX42_OBJ)/build" ]; then \
+		cmake --build $(MLX42_OBJ)/build --target clean $(SHELL_QUIET); \
+	fi
 
 fclean:
 	@echo "Removing object files"
-	@$(RMDIR) obj
+	@rm -rf obj
 	@echo "Removing static library files"
-	@$(RMFILE) $(NAME)
+	@rm -f $(NAME)
 	@make -C libft fclean $(MAKE_QUIET)
+	@rm -rf $(MLX42_DIR)
 
 re: fclean all
 
