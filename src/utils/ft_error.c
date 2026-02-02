@@ -12,11 +12,11 @@
 
 #include "miniRT.h"
 
-int ft_error(int code, char *message)
+int ft_error(int code, const char *message)
 {
     if (code)
         errno = code;
     if (message && *message)
-        printf("%s() fail\n", message);
+        printf("Error: %s() fail\n", message);
     return (ERROR);
 }

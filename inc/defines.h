@@ -29,16 +29,20 @@ Defines that aren't relevant for the whole project can go in specific header fil
 // Error
 # define ERROR -1
 
-//  TUPLES
-// TUPLE MODE FLAG
+// Window & Image
+# define WIDTH 400
+# define HEIGHT 300
+
+// Tuples
+// Tuple Mode Flag
 # define POINT 1.0f
 # define VECTOR 0.0f
-// TUPLE INDEXES
+// Tuple Indexes
 # define X 0
 # define Y 1
 # define Z 2
 # define W 3
-// COLOR INDEXES
+// Color Indexes
 # define R 0
 # define G 1
 # define B 2
@@ -50,5 +54,14 @@ typedef float   trio[3];
 typedef float   matrix[4][4];
 typedef float   matrix2[2][2];
 typedef float   matrix3[3][3];
+
+typedef struct mlx			mlx_t;
+typedef struct mlx_image	mlx_image_t;
+
+typedef struct	s_tree
+{
+	mlx_t		*window;
+	mlx_image_t	*image;
+}	t_tree;
 
 #endif

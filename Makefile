@@ -63,7 +63,7 @@ MLX42_CLONE	= git clone https://github.com/codam-coding-college/MLX42.git
 INC			= -I$(INC_DIR) -I$(LIBFT_DIR)/inc -I$(MLX42_DIR)/include/MLX42
 LIBFT		= -L$(LIBFT_DIR) -lft
 MLX42		= -L$(MLX42_DIR)/build -lmlx42
-LIBS		= $(LIBFT) $(MLX42) -lm
+LIBS		= $(LIBFT) $(MLX42) -lm -lglfw
 
 # MESSAGES
 START		= @echo "==== THOMASROFF MAKEFILE =============" \
