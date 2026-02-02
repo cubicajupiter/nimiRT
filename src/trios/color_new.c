@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_print.c                                      :+:      :+:    :+:   */
+/*   color_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 11:40:01 by thblack-         ###   ########.fr       */
+/*   Created: 2026/02/02 10:38:40 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/02 11:04:38 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
 #include "miniRT.h"
 
-int	tuple_print(tuple src)
+int	color_new(trio c, float r, float g, float b)
 {
-	if (!src)
-		return (ft_error(EINVAL, "tuple_print"));
-	if (src[W] == POINT)
-		if (printf("p(%f, %f, %f)", src[X], src[Y], src[Z]) < 0)
-			return (ft_error(0, "printf"));
-	if (src[W] == VECTOR)
-		if (printf("v(%f, %f, %f)", src[X], src[Y], src[Z]) < 0)
-			return (ft_error(0, "printf"));
+	if (!c)
+		return (ft_error(EINVAL, "color_new"));
+	c[R] = r;
+	c[G] = g;
+	c[B] = b;
 	return (SUCCESS);
 }

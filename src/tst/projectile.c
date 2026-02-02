@@ -6,12 +6,11 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:42:04 by thblack-          #+#    #+#             */
-/*   Updated: 2026/01/31 17:46:09 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 11:37:47 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include <stdio.h>
 
 typedef struct s_env
 {
@@ -31,9 +30,9 @@ int tick(t_proj *ball, t_env world)
 {
     tuple   accelleration;
 
-    if (tuple_incr(ball->position, ball->velocity) != SUCCESS
-        || tuple_add(accelleration, world.gravity, world.wind) != SUCCESS
-        || tuple_incr(ball->velocity, accelleration) != SUCCESS)
+    if (tuple_add_apply(ball->position, ball->velocity) != SUCCESS
+        || tuple_add_get(accelleration, world.gravity, world.wind) != SUCCESS
+        || tuple_add_apply(ball->velocity, accelleration) != SUCCESS)
         return (ERROR);
     tuple_print(ball->position);
     printf(" ");

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 10:14:21 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 11:36:39 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ int	is_tuple_equal(tuple a, tuple b);
 int	vector_negate(tuple dst, tuple src);
 
 // Basic
-int	tuple_add(tuple new, tuple const a, const tuple b);
-int	tuple_subtract(tuple new, tuple a, const tuple b);
-int	tuple_incr(tuple dst, const tuple increment);
-int	tuple_decr(tuple dst, const tuple decrement);
+int	tuple_add_get(tuple new, tuple const a, const tuple b);
+int	tuple_add_apply(tuple dst, const tuple increment);
+int	tuple_minus_get(tuple new, tuple a, const tuple b);
+int	tuple_minus_apply(tuple dst, const tuple decrement);
 
 // Scale
-int	vector_multiply(tuple new, const float scalar, tuple vector);
-int	vector_divide(tuple dst, const float scalar, tuple vector);
-int	vector_scale_up(tuple dst, const float scalar);
-int	vector_scale_down(tuple dst, const float scalar);
+int	vector_multiply_get(tuple new, const float scalar, tuple vector);
+int	vector_multiply_apply(tuple dst, const float scalar);
+int	vector_divide_get(tuple dst, const float scalar, tuple vector);
+int	vector_divide_apply(tuple dst, const float scalar);
 
 // Normlisation and Products
 int	magnitude_get(float *magn, const tuple vector);

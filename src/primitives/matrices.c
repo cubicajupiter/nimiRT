@@ -6,11 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 14:53:19 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/01 16:23:05 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/02 11:35:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
+#include "miniRT.h"
 
 int matrix_compare(matrix a, matrix b)
 {

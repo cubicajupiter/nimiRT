@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:09:02 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 10:10:20 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 11:28:07 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <errno.h>
+# include "MLX42.h"
 
 #endif
