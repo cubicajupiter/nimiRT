@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/01/31 17:42:40 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 10:14:21 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "defines.h"
+# include "headers.h"
 
 // Tests
 int throw(void);
@@ -47,6 +48,7 @@ int	vector_dot(float *dot, tuple a, tuple b);
 int	vector_cross(tuple dst, tuple a, tuple b);
 
 // Utilities
+int ft_error(int code, char *message);
 int	tuple_print(tuple src);
 
 #endif

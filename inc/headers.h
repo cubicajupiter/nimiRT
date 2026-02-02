@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_print.c                                      :+:      :+:    :+:   */
+/*   headers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 10:23:51 by thblack-         ###   ########.fr       */
+/*   Created: 2026/02/02 10:09:02 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/02 10:10:20 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
-#include "miniRT.h"
+#ifndef INCLUDES_H
+# define INCLUDES_H
 
-int	tuple_print(tuple src)
-{
-	if (!src)
-		return (ft_error(EINVAL, "tuple_print"));
-	if (src[W] == POINT)
-		if (printf("p(%f, %f, %f)", src[X], src[Y], src[Z]))
-			return (ft_error(0, "printf"));
-	if (src[W] == VECTOR)
-		if (printf("v(%f, %f, %f)", src[X], src[Y], src[Z]))
-			return (ft_error(0, "printf"));
-	return (SUCCESS);
-}
+# include <float.h>
+# include <math.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <errno.h>
+
+#endif

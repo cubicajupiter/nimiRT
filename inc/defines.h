@@ -19,12 +19,6 @@ Defines that aren't relevant for the whole project can go in specific header fil
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# include <float.h>
-# include <math.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-
 // Retrun Values
 // Run checks
 # define FAIL 1
