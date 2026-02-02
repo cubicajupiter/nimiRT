@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_utils.c                                      :+:      :+:    :+:   */
+/*   tuple_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/01/30 18:03:55 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/01/31 17:45:09 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	tuple_print(tuple src)
 	if (!src)
 		return (ERROR);
 	if (src[W] == POINT)
-		if (printf("p(%f, %f, %f)\n", src[X], src[Y], src[Z]))
+		if (printf("p(%f, %f, %f)", src[X], src[Y], src[Z]))
 			return (ERROR);
 	if (src[W] == VECTOR)
-		if (printf("v(%f, %f, %f)\n", src[X], src[Y], src[Z]))
+		if (printf("v(%f, %f, %f)", src[X], src[Y], src[Z]))
 			return (ERROR);
 	return (SUCCESS);
 }
