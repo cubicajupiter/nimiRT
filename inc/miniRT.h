@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 11:36:39 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 15:24:17 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,47 @@
 # include "headers.h"
 
 // Tests
-int		throw(void);
+int		throw(t_tree *t);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
 int		window_destroy(mlx_t *window);
+int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
+bool		is_pixel_on_image(t_uint x, t_uint y);
 
 // Primitives
-bool	is_float_equal(float a, float b);
+bool		is_float_equal(float a, float b);
 
 // Tuples
-int		point_new(tuple tuple, float x, float y, float z);
-int		vector_new(tuple tuple, float x, float y, float z);
-int		is_tuple_equal(tuple a, tuple b);
-int		vector_negate(tuple dst, tuple src);
+int		point_new(t_tuple tuple, float x, float y, float z);
+int		vector_new(t_tuple tuple, float x, float y, float z);
+int		is_tuple_equal(t_tuple a, t_tuple b);
+int		vector_negate(t_tuple dst, t_tuple src);
 
 // Basic
-int		tuple_add_get(tuple new, tuple const a, const tuple b);
-int		tuple_add_apply(tuple dst, const tuple increment);
-int		tuple_minus_get(tuple new, tuple a, const tuple b);
-int		tuple_minus_apply(tuple dst, const tuple decrement);
+int		tuple_add_get(t_tuple new, t_tuple const a, const t_tuple b);
+int		tuple_add_apply(t_tuple dst, const t_tuple increment);
+int		tuple_minus_get(t_tuple new, t_tuple a, const t_tuple b);
+int		tuple_minus_apply(t_tuple dst, const t_tuple decrement);
 
 // Scale
-int		vector_multiply_get(tuple new, const float scalar, tuple vector);
-int		vector_multiply_apply(tuple dst, const float scalar);
-int		vector_divide_get(tuple dst, const float scalar, tuple vector);
-int		vector_divide_apply(tuple dst, const float scalar);
+int		vector_multiply_get(t_tuple new, const float scalar, t_tuple vector);
+int		vector_multiply_apply(t_tuple dst, const float scalar);
+int		vector_divide_get(t_tuple dst, const float scalar, t_tuple vector);
+int		vector_divide_apply(t_tuple dst, const float scalar);
 
 // Normlisation and Products
-int		magnitude_get(float *magn, const tuple vector);
-int		normalize_get(tuple dst, tuple vector);
-int		normalize_apply(tuple vector);
-int		vector_dot(float *dot, tuple a, tuple b);
-int		vector_cross(tuple dst, tuple a, tuple b);
+int		magnitude_get(float *magn, const t_tuple vector);
+int		normalize_get(t_tuple dst, t_tuple vector);
+int		normalize_apply(t_tuple vector);
+int		vector_dot(float *dot, t_tuple a, t_tuple b);
+int		vector_cross(t_tuple dst, t_tuple a, t_tuple b);
+
+// Color
+int		color_trio_to_uint(uint32_t *color, t_trio c);
 
 // Utilities
 int		ft_error(int code, const char *message);
-int		tuple_print(tuple src);
+int		tuple_print(t_tuple src);
 
 #endif

@@ -6,14 +6,14 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 11:40:01 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:25:36 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.h"
 #include "miniRT.h"
 
-int	tuple_print(tuple src)
+int	tuple_print(t_tuple src)
 {
 	if (!src)
 		return (ft_error(EINVAL, "tuple_print"));
