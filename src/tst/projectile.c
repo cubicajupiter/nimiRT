@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:42:04 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 15:42:19 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 16:20:51 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ int tick(t_tree *t, t_proj *ball, t_env world)
     (void)t;
     x = ball->position[X] * 30;
     y = HEIGHT - (ball->position[Y] * 30);
-    if (is_pixel_on_image(x, y))
-        pixel_put(t->image, x, y, (t_trio){1, 0, 0});
+    pixel_put(t->image, x, y, (t_trio){1, 0, 0});
     tuple_print(ball->position);
     printf(" ");
     tuple_print(ball->velocity);
