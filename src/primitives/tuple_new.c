@@ -6,13 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:15:13 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 10:20:26 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:25:25 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	point_new(tuple tuple, float x, float y, float z)
+int	point_new(t_tuple tuple, float x, float y, float z)
 {
 	if (!tuple)
 		return (ft_error(EINVAL, "point_new"));
@@ -23,7 +23,7 @@ int	point_new(tuple tuple, float x, float y, float z)
 	return (SUCCESS);
 }
 
-int	vector_new(tuple tuple, float x, float y, float z)
+int	vector_new(t_tuple tuple, float x, float y, float z)
 {
 	if (!tuple)
 		return (ft_error(EINVAL, "vector_new"));
@@ -34,7 +34,7 @@ int	vector_new(tuple tuple, float x, float y, float z)
 	return (SUCCESS);
 }
 
-int	is_tuple_equal(tuple a, tuple b)
+int	is_tuple_equal(t_tuple a, t_tuple b)
 {
 	if (!a || !b)
 		return (ft_error(EINVAL, "is_tuple_equal"));
@@ -44,7 +44,7 @@ int	is_tuple_equal(tuple a, tuple b)
 	return (FALSE);
 }
 
-int	vector_negate(tuple dst, tuple src)
+int	vector_negate(t_tuple dst, t_tuple src)
 {
 	if (!dst || !src)
 		return (ft_error(EINVAL, "vector_negate"));

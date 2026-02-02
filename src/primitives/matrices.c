@@ -6,13 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 14:53:19 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 11:35:04 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:26:07 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int matrix_compare(matrix a, matrix b)
+int matrix_compare(t_matrix a, t_matrix b)
 {
     int     i;
     int     j;
@@ -34,7 +34,7 @@ int matrix_compare(matrix a, matrix b)
     return (TRUE);
 }
 
-int matrix_multiply(matrix dst, matrix a, matrix b)
+int matrix_multiply(t_matrix dst, t_matrix a, t_matrix b)
 {
     float       result;
     int         i;
@@ -61,7 +61,7 @@ int matrix_multiply(matrix dst, matrix a, matrix b)
     return (SUCCESS);
 }
 
-int matrix_tuple_multiply(tuple dst, matrix a, tuple b)
+int matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
 {
     float       result;
     int         i;

@@ -6,13 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:27:35 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 10:57:08 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:25:16 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	tuple_add_get(tuple dst, tuple const a, const tuple b)
+int	tuple_add_get(t_tuple dst, t_tuple const a, const t_tuple b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "tuple_add"));
@@ -23,7 +23,7 @@ int	tuple_add_get(tuple dst, tuple const a, const tuple b)
 	return (SUCCESS);
 }
 
-int	tuple_minus_get(tuple dst, tuple a, const tuple b)
+int	tuple_minus_get(t_tuple dst, t_tuple a, const t_tuple b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "tuple_subtract"));
@@ -34,7 +34,7 @@ int	tuple_minus_get(tuple dst, tuple a, const tuple b)
 	return (SUCCESS);
 }
 
-int	tuple_add_apply(tuple dst, const tuple increment)
+int	tuple_add_apply(t_tuple dst, const t_tuple increment)
 {
 	if (!dst || !increment)
 		return (ft_error(EINVAL, "tuple_incr"));
@@ -45,7 +45,7 @@ int	tuple_add_apply(tuple dst, const tuple increment)
 	return (SUCCESS);
 }
 
-int	tuple_minus_apply(tuple dst, const tuple decrement)
+int	tuple_minus_apply(t_tuple dst, const t_tuple decrement)
 {
 	if (!dst || !decrement)
 		return (ft_error(EINVAL, "tuple_decr"));
