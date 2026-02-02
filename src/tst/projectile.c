@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:42:04 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 15:29:17 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 15:42:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@ int tick(t_tree *t, t_proj *ball, t_env world)
     (void)t;
     x = ball->position[X] * 30;
     y = HEIGHT - (ball->position[Y] * 30);
-    if (!is_pixel_on_image(x, y))
-        return (SUCCESS);
-    pixel_put(t->image, x, y, (t_trio){1, 0, 0});
+    if (is_pixel_on_image(x, y))
+        pixel_put(t->image, x, y, (t_trio){1, 0, 0});
     tuple_print(ball->position);
     printf(" ");
     tuple_print(ball->velocity);
     printf("\n");
-    usleep(20000);
+    // usleep(20000);
     return (SUCCESS);
 }
 
@@ -55,15 +54,16 @@ int throw(t_tree *t)
     t_env   world;
     t_proj  ball;
 
+    canvas_put(t->image, (t_trio){0, 0, 0});
     //  Input values for gravity and wind on this world
     if (vector_new(world.gravity, 0, -0.01, 0) != SUCCESS
-        || vector_new(world.wind, -0.005, 0, 0) != SUCCESS)
+        || vector_new(world.wind, -0.004, 0, 0) != SUCCESS)
     {
         printf("World creation failed\n");
         return (ERROR);
     }
     // Input values for the starting position and velocity of the ball
-    if (point_new(ball.position, 0, 1, 0) != SUCCESS
+    if (point_new(ball.position, 0, 20, 0) != SUCCESS
         || vector_new(ball.velocity, 1, 1, 0) != SUCCESS
         || normalize_apply(ball.velocity) != SUCCESS)
     {

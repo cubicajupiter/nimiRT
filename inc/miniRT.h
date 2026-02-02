@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 15:24:17 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 15:38:56 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		throw(t_tree *t);
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
 int		window_destroy(mlx_t *window);
+int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
 bool		is_pixel_on_image(t_uint x, t_uint y);
 
