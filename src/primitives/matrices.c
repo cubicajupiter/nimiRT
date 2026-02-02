@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 14:53:19 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 12:55:11 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/02 19:13:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int matrix_compare(matrix a, matrix b)
     int     j;
 
     if (!a || !b)
-        return (ERROR);
+        return (ft_error(EINVAL, "matrix_compare"));
     i = 0;
     while (i < 4)
     {
@@ -41,7 +41,7 @@ int matrix_multiply(matrix dst, matrix a, matrix b)
     int         j;
     
     if (!dst || !a || !b)
-        return (ERROR);
+        return (ft_error(EINVAL, "matrix_multiply"));
     i = 0;
     while (i < 4)
     {
@@ -68,7 +68,7 @@ int matrix_tuple_multiply(tuple dst, matrix a, tuple b)
     int         j;
 
     if (!dst || !a || !b)
-        return (ERROR);
+        return (ft_error(EINVAL, "matrix_tuple_multiply"));
     i = 0;
     while (i < 4)
     {
@@ -83,4 +83,27 @@ int matrix_tuple_multiply(tuple dst, matrix a, tuple b)
         i++;
     }
     return (SUCCESS);
+}
+
+int matrix_transpose(matrix dst, matrix src)
+{
+	tuple		row;
+	int			i;
+	int			j;
+
+    if (!dst || !src)
+        return (ft_error(EINVAL, "matrix_transpose"));
+	i = 0;
+	while (i < 4)
+	{
+		row = src[i];
+		j = 0;
+		while (j < 4)
+		{
+			dst[j][i] = row[j];
+			j++;
+		}
+		i++;
+	}
+	return (SUCCESS);
 }
