@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/01/31 17:12:18 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 15:31:38 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int ac, char **av)
     {
         window_init(&t.window, &t.image);
         mlx_loop_hook(t.window, commands, &t);
-        throw();
+        throw(&t);
         mlx_loop(t.window);
         window_destroy(t.window);
         // vector_new(a, 1, 2, 3);

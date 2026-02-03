@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:55:38 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 10:17:28 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:25:42 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Multiplication/division_get creates a new result vector,
 whereas Multiplication/division_apply modifies the original vector in place.
 */
 
-int	vector_multiply_get(tuple dst, const float scalar, tuple vector)
+int	vector_multiply_get(t_tuple dst, const float scalar, t_tuple vector)
 {
 	if (!dst || !vector)
 		return (ft_error(EINVAL, "vector_multiply_get"));
@@ -28,7 +28,7 @@ int	vector_multiply_get(tuple dst, const float scalar, tuple vector)
 	return (SUCCESS);
 }
 
-int	vector_divide_get(tuple dst, const float scalar, tuple vector)
+int	vector_divide_get(t_tuple dst, const float scalar, t_tuple vector)
 {
 	if (!dst || !vector)
 		return (ft_error(EINVAL, "vector_divide_get"));
@@ -39,7 +39,7 @@ int	vector_divide_get(tuple dst, const float scalar, tuple vector)
 	return (SUCCESS);
 }
 
-int	vector_multiply_apply(tuple dst, const float scalar)
+int	vector_multiply_apply(t_tuple dst, const float scalar)
 {
 	if (!dst)
 		return (ft_error(EINVAL, "vector_multiply_apply"));
@@ -50,7 +50,7 @@ int	vector_multiply_apply(tuple dst, const float scalar)
 	return (SUCCESS);
 }
 
-int	vector_divide_apply(tuple dst, const float scalar)
+int	vector_divide_apply(t_tuple dst, const float scalar)
 {
 	if (!dst)
 		return (ft_error(EINVAL, "vector_divide_apply"));

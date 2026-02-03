@@ -6,7 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/02/02 19:13:52 by jvalkama         ###   ########.fr       */
+=======
+/*   Updated: 2026/02/02 14:25:31 by thblack-         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +25,7 @@ Pythagoras's a^2 + b^2 = c^2 but in the 3D plane i.e. magnitude becomes d in
 a^2 + b^2 + c^2 = d^2.
 */
 
-int	magnitude_get(float *magnitude, const tuple vector)
+int	magnitude_get(float *magnitude, const t_tuple vector)
 {
 	if (!magnitude || !vector)
 		return (ft_error(EINVAL, "magnitude_get"));
@@ -39,7 +43,7 @@ int	magnitude_get(float *magnitude, const tuple vector)
 
 */
 
-int	normalize_get(tuple dst, tuple vector)
+int	normalize_get(t_tuple dst, t_tuple vector)
 {
 	float	magnitude;
 
@@ -56,7 +60,7 @@ int	normalize_get(tuple dst, tuple vector)
 	return (SUCCESS);
 }
 
-int	normalize_apply(tuple vector)
+int	normalize_apply(t_tuple vector)
 {
 	float	magnitude;
 
@@ -75,7 +79,7 @@ int	normalize_apply(tuple vector)
 Dot product calculates the angle between two vectors (e.g. as a ray bounces off the surface of an object).
 It is actually the cosine of the angle between two unit vectors.
 */
-int	vector_dot(float *dot, tuple a, tuple b)
+int	vector_dot(float *dot, t_tuple a, t_tuple b)
 {
 	if (!*dot || !a || !b)
 		return (ft_error(EINVAL, "vector_dot"));
@@ -83,7 +87,7 @@ int	vector_dot(float *dot, tuple a, tuple b)
 	return (SUCCESS);
 }
 
-int	vector_cross(tuple dst, tuple a, tuple b)
+int	vector_cross(t_tuple dst, t_tuple a, t_tuple b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "vector_cross"));

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   submatrix.c                                        :+:      :+:    :+:   */
+/*   matrix_submatrices.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:35:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 19:13:48 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:52:30 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@
 	Determinants are needed for inverting a 4x4 matrix.
 */
 
-int	submatrix3(matrix3 dst, matrix src, int row, int column)
+t_matrix3	submatrix3(t_matrix src, int row, int column)
 {
-	int		i;
-	int		j;
+	t_matrix3	new;
+	int			i;
+	int			j;
 
-	if (!dst || !src || !row || !column \
-		|| row > 3 || row < 0 || column > 3 || column < 0)
-		return (ft_error(EINVAL, "submatrix3"));
 	i = 0;
 	while (i < 4)
 	{
@@ -37,25 +35,24 @@ int	submatrix3(matrix3 dst, matrix src, int row, int column)
 			{
 				if (j != column)
 				{
-					**dst = src[i][j];
-					*dst++;
+					**new = src[i][j];
+					*new++;
 				}
 				j++;
 			}
-			dst++;
+			new++;
 		}
 		i++;
 	}
+	return (new);
 }
 
-int	submatrix2(matrix2 dst, matrix3 src, int row, int column)
+t_matrix2	submatrix2(t_matrix3 src, int row, int column)
 {
-	int		i;
-	int		j;
+	t_matrix2	new;
+	int			i;
+	int			j;
 
-	if (!dst || !src || !row || !column \
-		|| row > 2 || row < 0 || column > 2 || column < 0)
-		return (ft_error(EINVAL, "submatrix2"));
 	i = 0;
 	while (i < 3)
 	{
@@ -66,13 +63,14 @@ int	submatrix2(matrix2 dst, matrix3 src, int row, int column)
 			{
 				if (j != column)
 				{
-					**dst = src[i][j];
-					*dst++;
+					**new = src[i][j];
+					*new++;
 				}
 				j++;
 			}
-			dst++;
+			new++;
 		}
 		i++;
 	}
+	return (new);
 }

@@ -6,13 +6,13 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:58:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 11:07:17 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:23:21 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int trio_add_get(trio dst, trio a, trio b)
+int trio_add_get(t_trio dst, t_trio a, t_trio b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "trio_add_get"));
@@ -22,7 +22,7 @@ int trio_add_get(trio dst, trio a, trio b)
 	return (SUCCESS);
 }
 
-int trio_add_apply(trio dst, trio c)
+int trio_add_apply(t_trio dst, t_trio c)
 {
 	if (!dst || !c)
 		return (ft_error(EINVAL, "trio_add_apply"));
@@ -32,7 +32,7 @@ int trio_add_apply(trio dst, trio c)
 	return (SUCCESS);
 }
 
-int trio_minus_get(trio dst, trio a, trio b)
+int trio_minus_get(t_trio dst, t_trio a, t_trio b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "trio_minus_get"));
@@ -42,7 +42,7 @@ int trio_minus_get(trio dst, trio a, trio b)
 	return (SUCCESS);
 }
 
-int trio_minus_apply(trio dst, trio c)
+int trio_minus_apply(t_trio dst, t_trio c)
 {
 	if (!dst || !c)
 		return (ft_error(EINVAL, "trio_minus_apply"));

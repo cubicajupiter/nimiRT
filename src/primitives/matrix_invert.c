@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:20:21 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 11:32:40 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:49:05 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ of the original matrix.
 
 #include "miniRT.h"
 
-static bool		is_invertible(t_matrix m);
 static int		determinant(float *det, float **matrix, int width);
 static float	minor(float **matrix, int row, int column, int width);
 static float	cofactor(float **matrix, int row, int column, int width);
+static bool		is_invertible(t_matrix m);
 
 int	matrix_invert(t_matrix dst, t_matrix src)
 {
@@ -85,9 +85,9 @@ static float	minor(float **matrix, int row, int column, int width)
 	float		det;
 
 	if (width == 3)
-		determinant(&det, submatrix2((t_matrix3) matrix, row, column), 2);
+		determinant(&det, submatrix2((t_matrix3)matrix, row, column), 2);
 	else if (width == 4)
-		determinant(&det, submatrix3((t_matrix) matrix, row, column), 3);
+		determinant(&det, submatrix3((t_matrix)matrix, row, column), 3);
 	return (det);
 }
 
@@ -115,5 +115,9 @@ static bool	is_invertible(t_matrix matrix)
 
 int	main(void)
 {
-	; //TODO: TESTS AFTER EXAM!!!!!!!!!!
+	t_matrix dst, src;
+
+	dst = NULL; src = NULL;
+	matrix_invert(dst, src);
+	return 0; //TODO: TESTS AFTER EXAM!!!!!!!!!!
 }
