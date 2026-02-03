@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 15:38:56 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:53:27 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ bool		is_pixel_on_image(t_uint x, t_uint y);
 
 // Primitives
 bool		is_float_equal(float a, float b);
+
+// Matrices
+int 	matrix_compare(t_matrix a, t_matrix b);
+int 	matrix_multiply(t_matrix dst, t_matrix a, t_matrix b);
+int 	matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b);
+int 	matrix_transpose(t_matrix dst, t_matrix src);
+
+// Invert
+int		matrix_invert(t_matrix dst, t_matrix src);
+
+// Submatrices (only used internally by matrix_invert)
+t_matrix3	submatrix3(t_matrix src, int row, int column);
+t_matrix2	submatrix2(t_matrix3 src, int row, int column);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
@@ -60,5 +73,6 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 // Utilities
 int		ft_error(int code, const char *message);
 int		tuple_print(t_tuple src);
+
 
 #endif

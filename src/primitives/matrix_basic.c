@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrices.c                                         :+:      :+:    :+:   */
+/*   matrix_basic.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 14:53:19 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 14:26:07 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:38:29 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int matrix_compare(t_matrix a, t_matrix b)
     int     j;
 
     if (!a || !b)
-        return (ERROR);
+        return (ft_error(EINVAL, "matrix_compare"));
     i = 0;
     while (i < 4)
     {
@@ -41,7 +41,7 @@ int matrix_multiply(t_matrix dst, t_matrix a, t_matrix b)
     int         j;
     
     if (!dst || !a || !b)
-        return (ERROR);
+        return (ft_error(EINVAL, "matrix_multiply"));
     i = 0;
     while (i < 4)
     {
@@ -68,7 +68,7 @@ int matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
     int         j;
 
     if (!dst || !a || !b)
-        return (ERROR);
+        return (ft_error(EINVAL, "matrix_tuple_multiply"));
     i = 0;
     while (i < 4)
     {
@@ -83,4 +83,27 @@ int matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
         i++;
     }
     return (SUCCESS);
+}
+
+int matrix_transpose(t_matrix dst, t_matrix src)
+{
+	t_tuple		row;
+	int			i;
+	int			j;
+
+    if (!dst || !src)
+        return (ft_error(EINVAL, "matrix_transpose"));
+	i = 0;
+	while (i < 4)
+	{
+		row = src[i];
+		j = 0;
+		while (j < 4)
+		{
+			dst[j][i] = row[j];
+			j++;
+		}
+		i++;
+	}
+	return (SUCCESS);
 }
