@@ -15,18 +15,21 @@ Inverting matrices: Cofactor expansion.
 Relies on these concepts: determinants, submatrices, minors & cofactors.
 Determinants are needed for inverting a matrix.
 Determinants are calculated from 2x2 submatrices.
-2x2 submatrices are made by deleting a row & column from a 4x4 matrix to make a 3x3, then again for a 2x2.
+2x2 submatrices are made by deleting a row & column from a 4x4 matrix to make a 3x3,
+	then again for a 2x2.
 	(This divide-and-conquer submatrix logic is in the file 'submatrix.c')
 The Determinants found in these submatrices are called 'minors'.
 Cofactors are needed to calculate determinants for matrices larger than 2x2.
 	- To calculate the cofactors, you calculate minors from submatrices.
 		-- SO the minors of 4x4 matrices are the determinants of 3x3 matrices,
 		-- and the minors of 3x3 are the determinants of its 2x2 matrices.
-You need a matrix of cofactors, which is then transposed and finally divided by the determinant
+You need a matrix of cofactors,
+	which is then transposed and finally divided by the determinant
 of the original matrix.
 */
 
-//NOTE: Make sure 4x4 -> 3x3 -> 2x2 divide-and-conquer happens correctly!!!!!!!!!!
+// NOTE: Make sure 4x4 -> 3x3
+	// -> 2x2 divide-and-conquer happens correctly!!!!!!!!!!
 
 #include "miniRT.h"
 #include "matrix_invert.h"

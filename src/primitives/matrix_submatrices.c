@@ -26,7 +26,6 @@ void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column)
 	int			j;
     int         r;
     int         c;
-
 	i = 0;
     r = 0;
 	while (i < 4)

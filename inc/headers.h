@@ -21,5 +21,6 @@
 # include <stdlib.h>
 # include <errno.h>
 # include "MLX42.h"
+# include "libft.h"
 
 #endif

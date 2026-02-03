@@ -82,5 +82,4 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		ft_error(int code, const char *message);
 int		tuple_print(t_tuple src);
 
-
 #endif
