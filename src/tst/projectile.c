@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:42:04 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 16:20:51 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:16:41 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ int throw(t_tree *t)
     while (ball.position[Y] > 0)
         tick(t, &ball, world);
     printf("Impact!\n");
+    mlx_put_string(t->window, "miniRT", 20, 20);
     return (SUCCESS);
 }

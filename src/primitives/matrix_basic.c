@@ -12,10 +12,10 @@
 
 #include "miniRT.h"
 
-int matrix_compare(t_matrix a, t_matrix b)
+int	matrix_compare(t_matrix a, t_matrix b)
 {
-    int     i;
-    int     j;
+	int	i;
+	int	j;
 
     if (!a || !b)
         return (ft_error(EINVAL, "matrix_compare"));
@@ -34,7 +34,7 @@ int matrix_compare(t_matrix a, t_matrix b)
     return (TRUE);
 }
 
-int matrix_multiply(t_matrix dst, t_matrix a, t_matrix b)
+int	matrix_multiply(t_matrix dst, t_matrix a, t_matrix b)
 {
     float       result;
     int         i;
@@ -61,7 +61,7 @@ int matrix_multiply(t_matrix dst, t_matrix a, t_matrix b)
     return (SUCCESS);
 }
 
-int matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
+int	matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
 {
     t_fl        result;
     int         i;

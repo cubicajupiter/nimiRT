@@ -44,7 +44,7 @@ int main(int ac, char **av)
         mlx_loop_hook(t.window, commands, &t);
         throw(&t);
         mlx_loop(t.window);
-        window_destroy(t.window);
+        window_destroy(t.window, t.image);
         // vector_new(a, 1, 2, 3);
         // tuple_print(a);
         // vector_normalise(a, a);
