@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   floats.c                                           :+:      :+:    :+:   */
+/*   matrix_invert.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 13:50:05 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 17:39:25 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/03 16:40:57 by jvalkama          #+#    #+#             */
+/*   Updated: 2026/02/03 16:45:07 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
-#include "stdbool.h"
+#ifndef MATRIX_INVERT_H
+# define MATRIX_INVERT_H
 
-/*
-Currently compares all float values by reference to FLT_EQUAL.
-However, for very large floats,
-	epsilon may have to scale respectively to maintain precision.
-*/
-bool	is_float_equal(float a, float b)
-{
-	if (fabsf(a - b) < FLT_EPSILON)
-		return (true);
-	return (false);
-}
+# define ROW        0
+# define COLUMN     0
+
+#endif

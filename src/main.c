@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 15:31:38 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:27:31 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int main(int ac, char **av)
     (void)av;
     if (ac == 2)
     {
+        test_matrix();
         return (0);
+        
         // parse();    //      -> check & fetch scene
         // initialise();   //  -> wrap up a handy struct(s)
         // trace();    //      -> the BIG LOOP(S) OF MATHS.

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:35:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 11:52:30 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/03 18:27:53 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,58 +19,56 @@
 	Determinants are needed for inverting a 4x4 matrix.
 */
 
-t_matrix3	submatrix3(t_matrix src, int row, int column)
+void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column)
 {
-	t_matrix3	new;
 	int			i;
 	int			j;
+    int         r;
+    int         c;
 
 	i = 0;
+    r = 0;
 	while (i < 4)
 	{
 		if (i != row)
 		{
 			j = 0;
+            c = 0;
 			while (j < 4)
 			{
 				if (j != column)
-				{
-					**new = src[i][j];
-					*new++;
-				}
+					dst[r][c++] = src[i][j];
 				j++;
 			}
-			new++;
+			r++;
 		}
 		i++;
 	}
-	return (new);
 }
 
-t_matrix2	submatrix2(t_matrix3 src, int row, int column)
+void	submatrix2(t_matrix2 dst, t_matrix3 src, int row, int column)
 {
-	t_matrix2	new;
 	int			i;
 	int			j;
+    int         r;
+    int         c;
 
 	i = 0;
+    r = 0;
 	while (i < 3)
 	{
 		if (i != row)
 		{
 			j = 0;
+            c = 0;
 			while (j < 3)
 			{
 				if (j != column)
-				{
-					**new = src[i][j];
-					*new++;
-				}
+					dst[r][c++] = src[i][j];
 				j++;
 			}
-			new++;
+			r++;
 		}
 		i++;
 	}
-	return (new);
 }
