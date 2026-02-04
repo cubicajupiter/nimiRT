@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 18:06:49 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:22:38 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int    test_rays(void)
     point_new(point, 1, 2, 3);
     vector_new(vector, 4, 5, 6);
     ray_new(ray, point, vector);
+    printf("\nRay data:  %f %f %f  -  %f %f %f\n", ray[ORIGIN][0], ray[ORIGIN][1], ray[ORIGIN][2], ray[DIRECTION][0], ray[DIRECTION][1], ray[DIRECTION][2]);
 
 
     

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 17:51:38 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:47:26 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef float				t_matrix[4][4];
 typedef float				t_matrix2[2][2];
 typedef float				t_matrix3[3][3];
 typedef t_tuple             t_ray[2];
+typedef uint32_t            t_sphere;
 
 // Structs
 typedef struct s_tree
