@@ -29,8 +29,9 @@ int	window_init(mlx_t **window, mlx_image_t **image)
 	return (SUCCESS);
 }
 
-int	window_destroy(mlx_t *window)
+int	window_destroy(mlx_t *window, mlx_image_t *image)
 {
+	mlx_delete_image(window, image);
 	mlx_close_window(window);
 	mlx_terminate(window);
 	return (SUCCESS);

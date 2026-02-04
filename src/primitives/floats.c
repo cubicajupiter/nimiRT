@@ -18,7 +18,7 @@ Currently compares all float values by reference to FLT_EQUAL.
 However, for very large floats,
 	epsilon may have to scale respectively to maintain precision.
 */
-bool	is_float_equal(float a, float b)
+bool	is_float_equal(t_fl a, t_fl b)
 {
 	if (fabsf(a - b) < EPSILON)
 		return (true);

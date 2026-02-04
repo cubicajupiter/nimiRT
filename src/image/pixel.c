@@ -20,13 +20,13 @@ bool	is_pixel_on_image(t_uint x, t_uint y)
 	return (false);
 }
 
-int pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c)
+int	pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c)
 {
 	uint32_t	color;
 
 	if (!image || !c)
 		return (ft_error(EINVAL, "pixel_put"));
-    if (is_pixel_on_image(x, y))
+	if (is_pixel_on_image(x, y))
 	{
 		color_trio_to_uint(&color, c);
 		mlx_put_pixel(image, x, y, color);

@@ -14,44 +14,45 @@
 
 // static void    instruct(void);
 
-void    commands(void *data)
+void	commands(void *data)
 {
-    t_tree  *t;
+	t_tree	*t;
 
-    t = (t_tree *)data;
+	t = (t_tree *)data;
 	if (mlx_is_key_down(t->window, MLX_KEY_ESCAPE))
 		mlx_close_window(t->window);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_tree  t;
+	t_tree	t;
 
-    (void)av;
-    if (ac == 2)
-    {
-        return (0);
-        
-        // parse();    //      -> check & fetch scene
-        // initialise();   //  -> wrap up a handy struct(s)
-        // trace();    //      -> the BIG LOOP(S) OF MATHS.
-        // render();   //      -> MLX images
-        // cleanup();  //      -> free allocations / mutexes / threads/ anything else..
-    }
-    else
-    {
-        window_init(&t.window, &t.image);
-        mlx_loop_hook(t.window, commands, &t);
-        throw(&t);
-        mlx_loop(t.window);
-        window_destroy(t.window);
-        // vector_new(a, 1, 2, 3);
-        // tuple_print(a);
-        // vector_normalise(a, a);
-        // tuple_print(a);
-        // instruct();
-    }
-    return (0);
+	(void)av;
+	if (ac == 2)
+	{
+		return (0);
+		// parse();    //      -> check & fetch scene
+		// initialise();   //  -> wrap up a handy struct(s)
+		// trace();    //      -> the BIG LOOP(S) OF MATHS.
+		// render();   //      -> MLX images
+		// cleanup();  //      -> free allocations / mutexes
+		// threads/ anything else..
+	}
+	else
+	{
+		window_init(&t.window, &t.image);
+		mlx_loop_hook(t.window, commands, &t);
+		throw(&t);
+		mlx_loop(t.window);
+		window_destroy(t.window, t.image);
+		test_matrix();
+		// vector_new(a, 1, 2, 3);
+		// tuple_print(a);
+		// vector_normalise(a, a);
+		// tuple_print(a);
+		// instruct();
+	}
+	return (0);
 }
 
 // static void    instruct(void)
@@ -68,7 +69,7 @@ int main(int ac, char **av)
 //             ray_generation();   //primary rays(intersects)
 //             while (k < n_objects)
 //             {
-//                 intersections();     
+//                 intersections();
 //                 shading(); //secondary rays(diffuse)
 //             }
 //         }

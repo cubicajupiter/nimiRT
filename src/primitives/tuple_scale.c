@@ -17,7 +17,7 @@ Multiplication/division_get creates a new result vector,
 whereas Multiplication/division_apply modifies the original vector in place.
 */
 
-int	vector_multiply_get(t_tuple dst, const float scalar, t_tuple vector)
+int	vector_multiply_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 {
 	if (!dst || !vector)
 		return (ft_error(EINVAL, "vector_multiply_get"));
@@ -28,7 +28,7 @@ int	vector_multiply_get(t_tuple dst, const float scalar, t_tuple vector)
 	return (SUCCESS);
 }
 
-int	vector_divide_get(t_tuple dst, const float scalar, t_tuple vector)
+int	vector_divide_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 {
 	if (!dst || !vector)
 		return (ft_error(EINVAL, "vector_divide_get"));
@@ -39,7 +39,7 @@ int	vector_divide_get(t_tuple dst, const float scalar, t_tuple vector)
 	return (SUCCESS);
 }
 
-int	vector_multiply_apply(t_tuple dst, const float scalar)
+int	vector_multiply_apply(t_tuple dst, const t_fl scalar)
 {
 	if (!dst)
 		return (ft_error(EINVAL, "vector_multiply_apply"));
@@ -50,7 +50,7 @@ int	vector_multiply_apply(t_tuple dst, const float scalar)
 	return (SUCCESS);
 }
 
-int	vector_divide_apply(t_tuple dst, const float scalar)
+int	vector_divide_apply(t_tuple dst, const t_fl scalar)
 {
 	if (!dst)
 		return (ft_error(EINVAL, "vector_divide_apply"));

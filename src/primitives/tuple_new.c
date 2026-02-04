@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-int	point_new(t_tuple tuple, float x, float y, float z)
+int	point_new(t_tuple tuple, t_fl x, t_fl y, t_fl z)
 {
 	if (!tuple)
 		return (ft_error(EINVAL, "point_new"));
@@ -23,7 +23,7 @@ int	point_new(t_tuple tuple, float x, float y, float z)
 	return (SUCCESS);
 }
 
-int	vector_new(t_tuple tuple, float x, float y, float z)
+int	vector_new(t_tuple tuple, t_fl x, t_fl y, t_fl z)
 {
 	if (!tuple)
 		return (ft_error(EINVAL, "vector_new"));

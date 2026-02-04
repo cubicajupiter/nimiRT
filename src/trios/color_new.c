@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-int	color_new(t_trio c, float r, float g, float b)
+int	color_new(t_trio c, t_fl r, t_fl g, t_fl b)
 {
 	if (!c)
 		return (ft_error(EINVAL, "color_new"));

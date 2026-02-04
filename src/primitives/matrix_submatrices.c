@@ -6,12 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:35:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 10:57:13 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:43:25 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "matrix_invert.h"
 
 /*
 	Divide-and-conquer.
@@ -22,19 +21,19 @@
 
 void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column)
 {
-	int			i;
-	int			j;
-    int         r;
-    int         c;
+	int	i;
+	int	j;
+	int	r;
+	int	c;
 
 	i = 0;
-    r = 0;
+	r = 0;
 	while (i < 4)
 	{
 		if (i != row)
 		{
 			j = 0;
-            c = 0;
+			c = 0;
 			while (j < 4)
 			{
 				if (j != column)
@@ -49,19 +48,19 @@ void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column)
 
 void	submatrix2(t_matrix2 dst, t_matrix3 src, int row, int column)
 {
-	int			i;
-	int			j;
-    int         r;
-    int         c;
+	int	i;
+	int	j;
+	int	r;
+	int	c;
 
 	i = 0;
-    r = 0;
+	r = 0;
 	while (i < 3)
 	{
 		if (i != row)
 		{
 			j = 0;
-            c = 0;
+			c = 0;
 			while (j < 3)
 			{
 				if (j != column)
