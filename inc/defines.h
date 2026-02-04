@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 14:41:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:09:14 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ files.
 
 // Epsilon for float margin of error.
 # define EPSILON 1e-5 // NOTE: This margin of error might cause bugs later.
+
+// Identity matrices
+# define ID_MATRIX4 {{1.0f, 0.0f, 0.0f, 0.0f}, \
+					{0.0f, 1.0f, 0.0f, 0.0f}, \
+					{0.0f, 0.0f, 1.0f, 0.0f}, \
+					{0.0f, 0.0f, 0.0f, 1.0f}} \
 
 // Types (custom types allow for easy switching later)
 typedef float				t_fl; // Custom float type
