@@ -6,7 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/02/04 17:48:21 by jvalkama         ###   ########.fr       */
+=======
+/*   Updated: 2026/02/04 17:24:56 by thblack-         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +18,12 @@
 
 // static void    instruct(void);
 
-void	commands(void *data)
-{
-	t_tree	*t;
-
-	t = (t_tree *)data;
-	if (mlx_is_key_down(t->window, MLX_KEY_ESCAPE))
-		mlx_close_window(t->window);
-}
-
 int	main(int ac, char **av)
 {
 	t_tree	t;
 
 	(void)av;
+	(void)t;
 	if (ac == 2)
 	{
         test_rays();
@@ -41,12 +37,9 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		window_init(&t.window, &t.image);
-		mlx_loop_hook(t.window, commands, &t);
-		throw(&t);
-		mlx_loop(t.window);
-		window_destroy(t.window, t.image);
-		test_matrix();
+		transformation_test();
+		// projectile_test(&t);
+		// test_matrix();
 		// vector_new(a, 1, 2, 3);
 		// tuple_print(a);
 		// vector_normalise(a, a);
