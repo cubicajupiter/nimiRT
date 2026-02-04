@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 13:50:05 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 17:39:25 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:39:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ However, for very large floats,
 */
 bool	is_float_equal(float a, float b)
 {
-	if (fabsf(a - b) < FLT_EPSILON)
+	if (fabsf(a - b) < EPSILON)
 		return (true);
 	return (false);
 }

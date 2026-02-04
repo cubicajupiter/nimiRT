@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 11:37:33 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:41:14 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ Defines that aren't relevant for the whole project can go in specific header fil
 // # define A 3 Possibly not needed? Had a look for alpha and transparency and
 // it doesn't seem to be used in the RTC book.
 # define ALPHA 0xFF
+
+// Epsilon for float margin of error.
+# define EPSILON 1e-5 //NOTE: This margin of error might cause bugs later.
 
 // Forward declarations of library structs from various headers in headers.h
 // typedef __uint32_t	uint32_t;

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 16:40:57 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 16:45:07 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 08:22:38 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 # define MATRIX_INVERT_H
 
 # define ROW        0
-# define COLUMN     0
+# define COLUMN     1
 
 #endif
