@@ -13,7 +13,7 @@
 #include "miniRT.h"
 #include <stdint.h>
 
-static uint8_t	color_float_to_8bit(float c)
+static uint8_t	color_float_to_8bit(t_fl c)
 {
 	return ((uint8_t)c * 255);
 }
