@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 17:15:16 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:47:52 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int ray_new(t_ray ray, t_tuple origin, t_tuple direction)
         ray[DIRECTION][i] = direction[i];
         i++;
     }
+    return (SUCCESS);
 }
 
 /*
@@ -46,6 +47,7 @@ int position_get(t_tuple pos, t_ray ray, const t_fl time)
 
     vector_multiply_get(distance, time, ray[DIRECTION]);
     tuple_add_get(pos, ray[ORIGIN], distance);
+    return (SUCCESS);
 }
 
 
@@ -62,15 +64,28 @@ void    test_rays(void)
     ray_new(ray, point, vector);
 
 
+    
     printf("\n[ POSITION GET ]\n");
     time = 3.5;
     point_new(point, 2, 3, 4);
     vector_new(vector, 1, 0, 0);
     ray_new(ray, point, vector);
-    position_get(point, ray_new, time);
-    position_get(point, ray_new, 0);
-    position_get(point, ray_new, 1);
-    position_get(point, ray_new, -1);
+
+    position_get(point, ray, time);
+    printf("\t%f\t%f\t%f\n", point[X], point[Y], point[Z]);
+
+    position_get(point, ray, 0.0);
+    printf("\t%f\t%f\t%f\n", point[X], point[Y], point[Z]);
+
+    position_get(point, ray, 1.0);
+    printf("\t%f\t%f\t%f\n", point[X], point[Y], point[Z]);
+
+    position_get(point, ray, -1.0);
+    printf("\t%f\t%f\t%f\n", point[X], point[Y], point[Z]);
+
+    position_get(point, ray, 2.5);
+    printf("\t%f\t%f\t%f\n", point[X], point[Y], point[Z]);
+
 
 
     printf("\n[ ]\n");
