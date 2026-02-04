@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-int trio_multiply_get(t_trio dst, t_trio a, t_trio b)
+int	trio_multiply_get(t_trio dst, t_trio a, t_trio b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "trio_multiply_get"));
@@ -22,7 +22,7 @@ int trio_multiply_get(t_trio dst, t_trio a, t_trio b)
 	return (SUCCESS);
 }
 
-int trio_multiply_apply(t_trio dst, t_trio c)
+int	trio_multiply_apply(t_trio dst, t_trio c)
 {
 	if (!dst || !c)
 		return (ft_error(EINVAL, "trio_multiply_apply"));
@@ -32,7 +32,7 @@ int trio_multiply_apply(t_trio dst, t_trio c)
 	return (SUCCESS);
 }
 
-int trio_divide_get(t_trio dst, t_trio a, t_trio b)
+int	trio_divide_get(t_trio dst, t_trio a, t_trio b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "trio_divide_get"));
@@ -42,7 +42,7 @@ int trio_divide_get(t_trio dst, t_trio a, t_trio b)
 	return (SUCCESS);
 }
 
-int trio_divide_apply(t_trio dst, t_trio c)
+int	trio_divide_apply(t_trio dst, t_trio c)
 {
 	if (!dst || !c)
 		return (ft_error(EINVAL, "trio_divide_apply"));

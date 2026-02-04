@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#ifndef HEADERS_H
+# define HEADERS_H
 
-# include <stdint.h>
+# include <errno.h>
 # include <float.h>
 # include <math.h>
 # include <stdbool.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <errno.h>
-# include "MLX42.h"
-# include "libft.h"
 
 #endif

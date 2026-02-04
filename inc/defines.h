@@ -13,18 +13,21 @@
 /* To contain widely needed definitions and inclusions.
 To reduce the risk of conflicting defines.
 One shared place for all widely needed defines.
-Defines that aren't relevant for the whole project can go in specific header files.
+Defines that aren't relevant for the whole project can go in specific header
+files.
 */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
 # include <stdint.h>
+# include "MLX42.h"
+# include "libft.h"
 
 // Retrun Values
 // Run checks
-# define FAIL 1
-# define SUCCESS 0
+// # define FAIL 1
+// # define SUCCESS 0
 // Is checks
 # define TRUE 1
 # define FALSE 0
@@ -52,13 +55,12 @@ Defines that aren't relevant for the whole project can go in specific header fil
 // it doesn't seem to be used in the RTC book.
 # define ALPHA 0xFF
 
-// Epsilon for float margin of error.
-# define EPSILON 1e-5 //NOTE: This margin of error might cause bugs later.
+// Matrix coordinate flags
+# define ROW 0
+# define COLUMN 1
 
-// Forward declarations of library structs from various headers in headers.h
-// typedef __uint32_t	uint32_t;
-typedef struct mlx			mlx_t;
-typedef struct mlx_image	mlx_image_t;
+// Epsilon for float margin of error.
+# define EPSILON 1e-5 // NOTE: This margin of error might cause bugs later.
 
 // Types (custom types allow for easy switching later)
 typedef float				t_fl; // Custom float type
