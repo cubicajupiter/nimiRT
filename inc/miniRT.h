@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/04 17:21:32 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:06:37 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // Tests
 // FIX: Remove before evals
 int		test_matrix(void);
-void	test_matrix_basics(void);
+int     test_rays(void);
 int		projectile_test(t_tree *t);
 int		transformation_test(void);
 

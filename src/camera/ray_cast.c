@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 17:47:52 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:06:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int position_get(t_tuple pos, t_ray ray, const t_fl time)
 }
 
 
-void    test_rays(void)
+int    test_rays(void)
 {
     t_tuple     point;
     t_tuple     vector;
@@ -101,4 +101,6 @@ void    test_rays(void)
 
     
     printf("\n[ ]\n");
+    
+    return 0;
 }
