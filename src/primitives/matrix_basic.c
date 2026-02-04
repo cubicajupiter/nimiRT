@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 14:53:19 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 11:38:29 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 12:52:02 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int matrix_multiply(t_matrix dst, t_matrix a, t_matrix b)
 
 int matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
 {
-    float       result;
+    t_fl        result;
     int         i;
     int         j;
 
@@ -87,23 +87,54 @@ int matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
 
 int matrix_transpose(t_matrix dst, t_matrix src)
 {
-	t_tuple		row;
 	int			i;
 	int			j;
 
     if (!dst || !src)
         return (ft_error(EINVAL, "matrix_transpose"));
-	i = 0;
+    i = 0;
 	while (i < 4)
 	{
-		row = src[i];
 		j = 0;
 		while (j < 4)
 		{
-			dst[j][i] = row[j];
+			dst[j][i] = src[i][j];
 			j++;
 		}
 		i++;
 	}
 	return (SUCCESS);
+}
+
+/*
+    Gets you the Identity Matrix (builds it and places it).
+    When any matrix is multiplied by the identity matrix, the result is the matrix itself.
+    Multiplying the identity matrix by any tuple keeps the identity matrix unchanged.
+    Used for default transformations.
+*/
+int matrix_identity_get(t_matrix identity)
+{
+    int     i;
+    int     j;
+    int     count;
+
+    if (!identity)
+        return (ft_error(EINVAL, "matrix_identity_get"));
+    i = 0;
+    count = 0;
+    while (i < 4)
+    {
+        j = 0;
+        while (j < 4)
+        {
+            if (count % 5 == 0)
+                identity[i][j] = 1;
+            else
+                identity[i][j] = 0;
+            j++;
+            count++;
+        }
+        i++;
+    }
+    return (SUCCESS);
 }

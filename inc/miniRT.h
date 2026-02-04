@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/03 11:53:27 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:46:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,31 @@ int		window_init(mlx_t **window, mlx_image_t **image);
 int		window_destroy(mlx_t *window);
 int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
-bool		is_pixel_on_image(t_uint x, t_uint y);
+bool    is_pixel_on_image(t_uint x, t_uint y);
 
 // Primitives
-bool		is_float_equal(float a, float b);
+bool    is_float_equal(float a, float b);
 
 // Matrices
 int 	matrix_compare(t_matrix a, t_matrix b);
 int 	matrix_multiply(t_matrix dst, t_matrix a, t_matrix b);
 int 	matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b);
 int 	matrix_transpose(t_matrix dst, t_matrix src);
+int     matrix_identity_get(t_matrix identity);
 
-// Invert
+// Matrix Invert
 int		matrix_invert(t_matrix dst, t_matrix src);
+t_fl	cofactor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int width);
+t_fl	minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int width);
+bool	is_invertible(t_matrix matrix4);
+void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column);
+void	submatrix2(t_matrix2 dst, t_matrix3 src, int row, int column);
+void	determinant2x2(t_fl *det, t_matrix2 matrix);
+void	determinant(t_fl *det, t_matrix3 matrix3, t_matrix matrix4, int width);
 
-// Submatrices (only used internally by matrix_invert)
-t_matrix3	submatrix3(t_matrix src, int row, int column);
-t_matrix2	submatrix2(t_matrix3 src, int row, int column);
+//FIX: REMOVE BEFORE EVALS!!!!!!!!!!!!!!!!!!!!!!!!!!
+int test_matrix(void);
+void    test_matrix_basics(void);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
