@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 14:41:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:41:00 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ Defines that aren't relevant for the whole project can go in specific header fil
 # define HEIGHT 1600
 
 // Tuples
+// Ray data indexes
+# define ORIGIN 0
+# define DIRECTION 1
 // Tuple Mode Flag
 # define POINT 1.0f
 # define VECTOR 0.0f
@@ -68,6 +71,7 @@ typedef float				t_trio[3];
 typedef float				t_matrix[4][4];
 typedef float				t_matrix2[2][2];
 typedef float				t_matrix3[3][3];
+typedef t_tuple             t_ray[2];
 
 // Structs
 typedef struct s_tree
