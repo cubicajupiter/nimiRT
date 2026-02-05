@@ -73,12 +73,14 @@ int	matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
 	while (i < 4)
 	{
 		j = 0;
-		result = 0.0;
+		result = 0.0f;
 		while (j < 4)
 		{
 			result += a[i][j] * b[j];
 			j++;
+			// printf("result: %f\n", result);
 		}
+		// printf("final result: %f\n", result);
 		dst[i] = result;
 		i++;
 	}

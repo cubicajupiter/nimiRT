@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/04 17:21:32 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:12:44 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ bool	is_pixel_on_image(t_uint x, t_uint y);
 
 // Primitives
 bool	is_float_equal(float a, float b);
+int		ft_dtor(float *dst, int src);
+int		ft_rtod(int *dst, float src);
 
 // Matrices
 int		matrix_copy(t_matrix dst, t_matrix src);
@@ -49,7 +51,12 @@ t_fl	minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int width);
 bool	is_invertible(t_matrix matrix4);
 
 // Transformations
-int		translation(t_matrix dst, t_trio src);
+int		translation(t_matrix dst, t_fl x, t_fl y, t_fl z);
+int		scaling(t_matrix dst, t_fl x, t_fl y, t_fl z);
+int		rotation_x(t_matrix dst, t_fl radians);
+int		rotation_y(t_matrix dst, t_fl radians);
+int		rotation_z(t_matrix dst, t_fl radians);
+int		shearing(t_matrix dst, t_fl src[6]);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
@@ -82,5 +89,6 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 // Utilities
 int		ft_error(int code, const char *message);
 int		tuple_print(t_tuple src);
+int		matrix_print(t_matrix src);
 
 #endif
