@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/04 18:06:37 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 10:34:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // Tests
 // FIX: Remove before evals
 int		test_matrix(void);
-int     test_rays(void);
+int		test_rays(void);
 int		projectile_test(t_tree *t);
 int		transformation_test(void);
 
@@ -29,6 +29,14 @@ int		window_destroy(mlx_t *window, mlx_image_t *image);
 int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
 bool	is_pixel_on_image(t_uint x, t_uint y);
+
+// Geometry
+int		sphere_new(t_sphere *dst);
+int		intersect_get(t_xs *dst, const t_sphere *const sphere, t_ray ray);
+
+// Camera
+int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
+int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 
 // Primitives
 bool	is_float_equal(float a, float b);

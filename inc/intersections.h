@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   intersections.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 09:55:43 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/05 11:32:55 by jvalkama          #+#    #+#             */
+/*   Updated: 2026/02/06 09:27:12 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#ifndef INTERSECTIONS_H
+# define INTERSECTIONS_H
 
-int	sphere_new(t_sphere *dst)
-{
-	static t_fl		id = 0;
+// Intersection dot product indexes for returning and accessing in arrays. DISCR = discriminant.
+# define FIRST 0
+# define SECOND 1
+# define DISCR 2
 
-	id++;
-	dst->id = id;
-	return (SUCCESS);
-}
+#endif

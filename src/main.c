@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 18:04:26 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/05 09:13:25 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	(void)t;
 	if (ac == 2)
 	{
-        test_rays();
+		test_rays();
 		return (0);
 		// parse();    //      -> check & fetch scene
 		// initialise();   //  -> wrap up a handy struct(s)

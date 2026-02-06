@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 18:47:26 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 09:47:44 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,71 @@ files.
 					{0.0f, 0.0f, 0.0f, 1.0f}} \
 
 // Types (custom types allow for easy switching later)
-typedef float				t_fl; // Custom float type
-typedef uint32_t			t_uint; // Custom uint type
-typedef float				t_tuple[4];
-typedef float				t_trio[3];
-typedef float				t_matrix[4][4];
-typedef float				t_matrix2[2][2];
-typedef float				t_matrix3[3][3];
-typedef t_tuple             t_ray[2];
-typedef uint32_t            t_sphere;
+typedef float			t_fl; // Custom float type
+typedef uint32_t		t_uint; // Custom uint type
+typedef int_fast16_t	t_fastint; // For performance critical things.
+typedef float			t_tuple[4];
+typedef float			t_trio[3];
+typedef float			t_matrix[4][4];
+typedef float			t_matrix2[2][2];
+typedef float			t_matrix3[3][3];
+typedef t_tuple			t_ray[2];
+typedef float			t_cylinder[4];
+typedef float			t_plane[2];
+
+typedef struct s_tree	t_tree;
+typedef struct s_scene	t_scene;
+typedef struct s_sphere	t_sphere;
+typedef enum e_obj_t	t_obj_t;
+typedef struct s_xs		t_xs;
+typedef struct s_object	t_object;
+
+enum e_obj_t
+{
+	SPHERE,
+	CYLINDER,
+	PLANE
+};
 
 // Structs
-typedef struct s_tree
+struct s_tree
 {
-	mlx_t					*window;
-	mlx_image_t				*image;
-}							t_tree;
+	mlx_t				*window;
+	mlx_image_t			*image;
+};
+
+struct s_sphere
+{
+	t_fastint			id; //All spheres have a unique ID number 
+	t_tuple				center;
+	t_fl				radius;
+	
+};
+
+struct s_object
+{
+	t_obj_t				type;
+	union {
+		t_sphere		sphere;
+		t_cylinder		cylinder;
+		t_plane			plane;
+	};
+};
+
+struct s_scene
+{
+	t_object			*objects;
+	t_xs				*intersections;
+};
+
+struct s_xs
+{
+	t_fastint			count;
+	t_object			object;
+	t_fl				xsect[2];
+	t_xs				*next;
+};
+
+
 
 #endif
