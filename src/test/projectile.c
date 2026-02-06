@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:42:04 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/04 17:19:17 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/06 11:59:54 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,14 @@ int	throw(t_tree * t)
 	while (ball.position[Y] > 0)
 		tick(t, &ball, world);
 	printf("Impact!\n");
-	mlx_put_string(t->window, "miniRT", 20, 20);
+	mlx_put_string(t->window, "miniRT: point and vector ball test", 20, 20);
 	return (SUCCESS);
-}
-
-void	commands(void *data)
-{
-	t_tree	*t;
-
-	t = (t_tree *)data;
-	if (mlx_is_key_down(t->window, MLX_KEY_ESCAPE))
-		mlx_close_window(t->window);
 }
 
 int	projectile_test(t_tree *t)
 {
 	window_init(&t->window, &t->image);
-	mlx_loop_hook(t->window, commands, &t);
+	mlx_loop_hook(t->window, commands, t);
 	throw(t);
 	mlx_loop(t->window);
 	window_destroy(t->window, t->image);

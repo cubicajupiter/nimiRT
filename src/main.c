@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 17:24:56 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/06 11:39:57 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		transformation_test();
+		transformation_test(&t);
 		// projectile_test(&t);
 		// test_matrix();
 		// vector_new(a, 1, 2, 3);

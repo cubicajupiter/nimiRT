@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/05 16:16:54 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:09:14 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ files.
 
 // PI
 # define PI 3.14159
-
-// Identity matrices
-# define ID_MATRIX4 {{1.0f, 0.0f, 0.0f, 0.0f}, \
-					{0.0f, 1.0f, 0.0f, 0.0f}, \
-					{0.0f, 0.0f, 1.0f, 0.0f}, \
-					{0.0f, 0.0f, 0.0f, 1.0f}} \
 
 // Types (custom types allow for easy switching later)
 typedef float				t_fl; // Custom float type

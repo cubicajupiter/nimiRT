@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 12:15:13 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/02 14:25:25 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/06 10:37:14 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,16 @@ int	vector_negate(t_tuple dst, t_tuple src)
 	dst[Y] = 0.0 - src[Y];
 	dst[Z] = 0.0 - src[Z];
 	dst[W] = 0.0 - src[W];
+	return (SUCCESS);
+}
+
+int	tuple_copy(t_tuple dst, t_tuple src)
+{
+	if (!dst || !src)
+		return (ft_error(EINVAL, "tuple_copy"));
+	dst[X] = src[X];
+	dst[Y] = src[Y];
+	dst[Z] = src[Z];
+	dst[W] = src[W];
 	return (SUCCESS);
 }

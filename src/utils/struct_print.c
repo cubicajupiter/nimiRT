@@ -43,7 +43,7 @@ int	tuple_print(t_tuple src)
 		if (printf("vector") < 0)
 			return (ft_error(0, "printf"));
 	i = 0;
-	while (i <  3)
+	while (i < 3)
 	{
 		if (printf("\t") < 0)
 			return (ft_error(0, "printf"));
@@ -66,7 +66,7 @@ int	matrix_print(t_matrix src)
 	if (printf("matrix") < 0)
 		return (ft_error(0, "printf"));
 	i = 0;
-	while (i <  4)
+	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)

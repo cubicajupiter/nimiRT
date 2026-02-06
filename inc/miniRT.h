@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/05 17:12:44 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:00:09 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@
 int		test_matrix(void);
 void	test_matrix_basics(void);
 int		projectile_test(t_tree *t);
-int		transformation_test(void);
+int		transformation_test(t_tree *t);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
 int		window_destroy(mlx_t *window, mlx_image_t *image);
 int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
+int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 bool	is_pixel_on_image(t_uint x, t_uint y);
+void	commands(void *data);
 
 // Primitives
 bool	is_float_equal(float a, float b);
@@ -39,8 +41,10 @@ int		ft_rtod(int *dst, float src);
 int		matrix_copy(t_matrix dst, t_matrix src);
 int		id_matrix(t_matrix dst);
 int		matrix_compare(t_matrix a, t_matrix b);
-int		matrix_multiply(t_matrix dst, t_matrix a, t_matrix b);
-int		matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b);
+int		matrix_multiply_get(t_matrix dst, t_matrix a, t_matrix b);
+int		matrix_tuple_multiply_get(t_tuple dst, t_matrix a, t_tuple b);
+int		matrix_multiply_apply(t_matrix dst, t_matrix src);
+int		matrix_tuple_multiply_apply(t_tuple dst, t_matrix src);
 int		matrix_transpose(t_matrix dst, t_matrix src);
 int		matrix_identity_get(t_matrix identity);
 
@@ -57,12 +61,15 @@ int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
 int		shearing(t_matrix dst, t_fl src[6]);
+int		matrix_chain3(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		matrix_chain4(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
 int		vector_new(t_tuple tuple, float x, float y, float z);
 int		is_tuple_equal(t_tuple a, t_tuple b);
 int		vector_negate(t_tuple dst, t_tuple src);
+int		tuple_copy(t_tuple dst, t_tuple src);
 
 // Basic
 int		tuple_add_get(t_tuple new, t_tuple const a, const t_tuple b);
