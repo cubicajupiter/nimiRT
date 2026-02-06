@@ -6,31 +6,31 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 11:43:23 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 14:26:35 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 16:21:57 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int		find_tail(t_xs **tail, t_xs *head);
+//static int		quicksort_find_tail(t_xs **tail, t_xs *head);
 static void		quicksort_recursion(t_xs *low, t_xs *high);
-static t_xs		*partition(t_xs *low, t_xs *high);
-static void		swap(t_xs *a, t_xs *b);
+static t_xs		*quicksort_partition(t_xs *low, t_xs *high);
+static void		quicksort_swap(t_xs *a, t_xs *b);
 
-void	quicksort(t_xs **head)
+int	quicksort(t_xs *head)
 {
 	t_xs		*tail;
 
-	if (find_tail(&tail, *head) == TRUE)
+	if (find_tail(&tail, head) == TRUE)
 	{
-		quicksort_recursion(tail, head);
+		quicksort_recursion(head, tail);
 		return (SUCCESS);
 	}
 	else
 		return (FAIL);
 }
 
-static int	find_tail(t_xs **tail, t_xs *head)
+int	find_tail(t_xs **tail, t_xs *head)
 {
 	if (!head)
 		return (ft_error(EINVAL, "find_tail"));
@@ -50,30 +50,30 @@ static void	quicksort_recursion(t_xs *low, t_xs *high)
 
 	if (low != NULL && high != NULL && low != high)
 	{
-		pivot = partition(low, high);
+		pivot = quicksort_partition(low, high);
 		quicksort_recursion(low, pivot);
 		quicksort_recursion(pivot->next, high);
 	}
 }
 
-static t_xs	*partition(t_xs *low, t_xs *high)
+static t_xs	*quicksort_partition(t_xs *low, t_xs *high)
 {
 	t_fl		pivot_val;
 	t_xs		*i;
 	t_xs		*current;
 
-	pivot_val = high->t[0];
+	pivot_val = high->t;
 	i = low;
 	current = low;
 	while (current != high)
 	{
-		if (float_cmp(current->t[0], pivot_val) <= 0)
+		if (float_cmp(current->t, pivot_val) <= 0)
 		{
 			if (i == NULL)
 				i = low;
 			else
 				i = i->next;
-			swap(i, current);
+			quicksort_swap(i, current);
 		}
 		current = current->next;
 	}
@@ -81,15 +81,17 @@ static t_xs	*partition(t_xs *low, t_xs *high)
 		i = low;
 	else
 		i = i->next;
-	swap(i, high);
+	quicksort_swap(i, high);
 	return (i);
 }
 
-static void	swap(t_xs *a, t_xs *b)
+static void	quicksort_swap(t_xs *a, t_xs *b) //swap values instead (t and object)
 {
 	t_xs	*tmp;
 
 	tmp = a;
-	*a = *b;
-	*b = *tmp;
+	a->t = b->t;
+	a->object = b->object;
+	b->t = tmp->t;
+	b->object = tmp->object;
 }

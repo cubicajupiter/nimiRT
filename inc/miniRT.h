@@ -6,11 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/02/06 12:13:19 by jvalkama         ###   ########.fr       */
-=======
-/*   Updated: 2026/02/06 12:00:09 by thblack-         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2026/02/06 16:20:01 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +34,19 @@ void	commands(void *data);
 
 // Geometry
 int		sphere_new(t_sphere *dst);
-int		intersect_get(t_xs *dst, const t_sphere *const sphere, t_ray ray);
-int		intersections_get(t_xs *xs, t_sphere sphere, t_ray ray);
 int		hit(t_xs *hit, t_xs *intersections);
+int		intersections_get(t_xs *xs, t_sphere sphere, t_ray ray);
+int		intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray);
 
 // Camera
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 
 // Primitives
-<<<<<<< HEAD
 bool	is_float_equal(t_fl a, t_fl b);
 int		float_cmp(t_fl a, t_fl b);
-=======
-bool	is_float_equal(float a, float b);
 int		ft_dtor(float *dst, int src);
 int		ft_rtod(int *dst, float src);
->>>>>>> main
 
 // Matrices
 int		matrix_copy(t_matrix dst, t_matrix src);
@@ -116,5 +108,7 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		ft_error(int code, const char *message);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
+int		quicksort(t_xs *head);
+int		find_tail(t_xs **tail, t_xs *head);
 
 #endif

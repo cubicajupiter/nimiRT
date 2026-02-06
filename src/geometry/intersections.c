@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 14:34:12 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 16:46:36 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,24 @@
 //GET RID OF NEGATIVE INTERSECTIONS.
 //in fact, DISCARD ALL INTERSECTIONS AFTER HIT
 
-static int	dotproducts_get(t_tuple dot_ps, const t_sphere *const sphere, t_ray ray);
+static int	time_val_get(t_fl *time, t_sphere *sphere, t_ray ray);
 
 int	hit(t_xs *hit, t_xs *intersections)
 {
-	t_xs		first;	//FIND SMALLEST POSITIVE T
+	t_xs	*xs;
 
-	if (intersections_get(first, ))
-		*hit = first;
+	if (!intersections)
+		return (ft_error(EINVAL, "hit"));
+	xs = intersections;
+	while (xs->t < 0)
+	{
+		if (xs->t > 0)
+		{
+			*hit = *xs;
+			break ;
+		}
+		xs = xs->next;
+	}
 	return (SUCCESS);
 }
 
@@ -31,52 +41,55 @@ int	hit(t_xs *hit, t_xs *intersections)
  // t_scene *world will replace sphere. then loop through all objects in world to find any xs.
 int	intersections_get(t_xs *xs, t_sphere sphere, t_ray ray)
 {
-	t_xs		new;
-	t_fl		smallest_positive;
-	
+	t_xs		new[2];
+
 	if (!ray) //only ray is checked here. xs can be NULL. sphere will be changed to WORLD at some point.
 		return (ft_error(EINVAL, "intersections_get"));
-	while (intersect_get(&new, &sphere, ray)) //once sphere is replaced with world, the loop should become embedded: while object {while intersect{}}
+	if (intersect_get(new, &sphere, ray)) //once sphere is replaced with world, the loop should be: while (world_objects) {if intersect_get(){;}}
 	{	
 		if (xs == NULL)
 		{
-			*xs = new;
-			xs->next = NULL;
+			*xs = new[0];
+			xs->next = &new[1];
+			xs = xs->next;
 		}
 		else
-			xs->next = &new;
-		xs = xs->next;
+		{
+			xs->next = &new[0];
+			xs->next->next = &new[1];
+			xs = xs->next->next;
+		}
 	}
-	quicksort(&xs);
+	quicksort(xs); // sorting by t value.
 	return (SUCCESS);
 }
 
 //will eventually replace sphere with scene, whcih contains sphere: have object-type specific func calls then
-int	intersect_get(t_xs *dst, const t_sphere *const sphere, t_ray ray)
+int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 {
-	t_trio		dot_ps;
+	t_fl		time[2];
 
 	if (!dst || !sphere || !ray)
 		return (ERROR);
-	if (dotproducts_get(dot_ps, sphere, ray))
+	if (time_val_get(time, sphere, ray))
 	{
-		dst->count = 2;
-		dst->t[0] = (-dot_ps[SECOND] - sqrtf(dot_ps[DISCR])) / (2 * dot_ps[FIRST]);
-		dst->t[1] = (-dot_ps[SECOND] + sqrtf(dot_ps[DISCR])) / (2 * dot_ps[FIRST]);
-		//dst->object = ;
+		dst[0].t = time[0];
+		dst[0].object->sphere = sphere;
+		dst[1].t = time[1];
+		dst[1].object->sphere = sphere;
 	}
-	else
-	{
-		dst->count = 0;
-		dst->t[0] = 0.0;
-		dst->t[1] = 0.0;
-		//dst->object = ;
+	else 
+	{ //EVENTUALLY THESE SHOULDN'T PLACE ANYTHING AT ALL IN DST. it's only for testing non-hits
+		dst[0].t = 0.0;
+		dst[0].object->sphere = sphere;
+		dst[1].next->t = 0.0;
+		dst[1].next->object->sphere = sphere;
 		return (FALSE);
 	}
 	return (TRUE);
 }
 
-static int	dotproducts_get(t_tuple dot_ps, const t_sphere *const sphere, t_ray ray)
+static int	time_val_get(t_fl *time, t_sphere *sphere, t_ray ray)
 {
 	t_fl		discriminant;
 	t_tuple		sphere_to_ray;
@@ -93,8 +106,7 @@ static int	dotproducts_get(t_tuple dot_ps, const t_sphere *const sphere, t_ray r
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (FALSE);
-	dot_ps[FIRST] = a;
-	dot_ps[SECOND] = b;
-	dot_ps[DISCR] = discriminant;
+	time[0] = (-b - sqrtf(discriminant)) / (2 * a);
+	time[1] = (-b + sqrtf(discriminant)) / (2 * a);
 	return (TRUE);
 }

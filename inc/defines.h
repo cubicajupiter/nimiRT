@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 12:13:19 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 16:07:16 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ struct s_object
 {
 	t_obj_t				type;
 	union {
-		t_sphere		sphere;
-		t_cylinder		cylinder;
-		t_plane			plane;
+		t_sphere		*sphere;
+		t_cylinder		*cylinder;
+		t_plane			*plane;
 	};
 };
 
@@ -128,9 +128,8 @@ struct s_scene
 
 struct s_xs
 {
-	t_fastint			count;
-	t_object			object;
-	t_fl				t[2];
+	t_object			*object;
+	t_fl				t;
 	t_xs				*next;
 };
 
