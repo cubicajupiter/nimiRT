@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   translation.c                                      :+:      :+:    :+:   */
+/*   ft_rtod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/04 16:50:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/04 17:18:17 by thblack-         ###   ########.fr       */
+/*   Created: 2026/02/05 16:12:19 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/05 16:22:46 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
 #include "miniRT.h"
 
-int	translation(t_matrix dst, t_trio src)
+/*
+ * Radian to degrees converter
+*/
+
+int	ft_rtod(int *dst, float src)
 {
-	if (!dst || !src)
-		return (ft_error(EINVAL, "translation"));
-	id_matrix(dst);
-	dst[0][3] = src[0];
-	dst[1][3] = src[1];
-	dst[2][3] = src[2];
+	long long	tmp;
+
+	if (!dst)
+		return (ft_error(EINVAL, "ft_rtod"));
+	tmp = src / PI * 180;
+	if (tmp > INT_MAX || tmp < INT_MIN)
+		return (ft_error(EOVERFLOW, "ft_rtod"));
+	*dst = (int)tmp;
 	return (SUCCESS);
 }

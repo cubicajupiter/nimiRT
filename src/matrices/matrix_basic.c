@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/01 14:53:19 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 17:34:56 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:37:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,57 +32,6 @@ int	matrix_compare(t_matrix a, t_matrix b)
 		i++;
 	}
 	return (TRUE);
-}
-
-int	matrix_multiply(t_matrix dst, t_matrix a, t_matrix b)
-{
-	t_fl	result;
-	int		i;
-	int		j;
-
-	if (!dst || !a || !b)
-		return (ft_error(EINVAL, "matrix_multiply"));
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			result = 0.0;
-			result += a[i][0] * b[0][j];
-			result += a[i][1] * b[1][j];
-			result += a[i][2] * b[2][j];
-			result += a[i][3] * b[3][j];
-			dst[i][j] = result;
-			j++;
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
-
-int	matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b)
-{
-	t_fl	result;
-	int		i;
-	int		j;
-
-	if (!dst || !a || !b)
-		return (ft_error(EINVAL, "matrix_tuple_multiply"));
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		result = 0.0;
-		while (j < 4)
-		{
-			result += a[i][j] * b[j];
-			j++;
-		}
-		dst[i] = result;
-		i++;
-	}
-	return (SUCCESS);
 }
 
 int	matrix_transpose(t_matrix dst, t_matrix src)

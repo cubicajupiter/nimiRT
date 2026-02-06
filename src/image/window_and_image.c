@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:49:39 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 16:12:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:00:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,13 @@ int	window_destroy(mlx_t *window, mlx_image_t *image)
 	mlx_close_window(window);
 	mlx_terminate(window);
 	return (SUCCESS);
+}
+
+void	commands(void *data)
+{
+	t_tree	*t;
+
+	t = (t_tree *)data;
+	if (mlx_is_key_down(t->window, MLX_KEY_ESCAPE))
+		mlx_close_window(t->window);
 }

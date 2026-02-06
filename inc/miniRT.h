@@ -6,7 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/02/06 12:13:19 by jvalkama         ###   ########.fr       */
+=======
+/*   Updated: 2026/02/06 12:00:09 by thblack-         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +25,16 @@
 int		test_matrix(void);
 int		test_rays(void);
 int		projectile_test(t_tree *t);
-int		transformation_test(void);
+int		transformation_test(t_tree *t);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
 int		window_destroy(mlx_t *window, mlx_image_t *image);
 int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
+int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 bool	is_pixel_on_image(t_uint x, t_uint y);
+void	commands(void *data);
 
 // Geometry
 int		sphere_new(t_sphere *dst);
@@ -41,15 +47,23 @@ int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 
 // Primitives
+<<<<<<< HEAD
 bool	is_float_equal(t_fl a, t_fl b);
 int		float_cmp(t_fl a, t_fl b);
+=======
+bool	is_float_equal(float a, float b);
+int		ft_dtor(float *dst, int src);
+int		ft_rtod(int *dst, float src);
+>>>>>>> main
 
 // Matrices
 int		matrix_copy(t_matrix dst, t_matrix src);
 int		id_matrix(t_matrix dst);
 int		matrix_compare(t_matrix a, t_matrix b);
-int		matrix_multiply(t_matrix dst, t_matrix a, t_matrix b);
-int		matrix_tuple_multiply(t_tuple dst, t_matrix a, t_tuple b);
+int		matrix_multiply_get(t_matrix dst, t_matrix a, t_matrix b);
+int		matrix_tuple_multiply_get(t_tuple dst, t_matrix a, t_tuple b);
+int		matrix_multiply_apply(t_matrix dst, t_matrix src);
+int		matrix_tuple_multiply_apply(t_tuple dst, t_matrix src);
 int		matrix_transpose(t_matrix dst, t_matrix src);
 int		matrix_identity_get(t_matrix identity);
 
@@ -60,13 +74,21 @@ t_fl	minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int width);
 bool	is_invertible(t_matrix matrix4);
 
 // Transformations
-int		translation(t_matrix dst, t_trio src);
+int		translation(t_matrix dst, t_fl x, t_fl y, t_fl z);
+int		scaling(t_matrix dst, t_fl x, t_fl y, t_fl z);
+int		rotation_x(t_matrix dst, t_fl radians);
+int		rotation_y(t_matrix dst, t_fl radians);
+int		rotation_z(t_matrix dst, t_fl radians);
+int		shearing(t_matrix dst, t_fl src[6]);
+int		matrix_chain3(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		matrix_chain4(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
 int		vector_new(t_tuple tuple, float x, float y, float z);
 int		is_tuple_equal(t_tuple a, t_tuple b);
 int		vector_negate(t_tuple dst, t_tuple src);
+int		tuple_copy(t_tuple dst, t_tuple src);
 
 // Basic
 int		tuple_add_get(t_tuple new, t_tuple const a, const t_tuple b);
@@ -93,5 +115,6 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 // Utilities
 int		ft_error(int code, const char *message);
 int		tuple_print(t_tuple src);
+int		matrix_print(t_matrix src);
 
 #endif
