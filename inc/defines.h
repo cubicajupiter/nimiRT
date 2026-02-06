@@ -62,11 +62,8 @@ files.
 // Epsilon for float margin of error.
 # define EPSILON 1e-5 // NOTE: This margin of error might cause bugs later.
 
-// Identity matrices
-# define ID_MATRIX4 {{1.0f, 0.0f, 0.0f, 0.0f}, \
-					{0.0f, 1.0f, 0.0f, 0.0f}, \
-					{0.0f, 0.0f, 1.0f, 0.0f}, \
-					{0.0f, 0.0f, 0.0f, 1.0f}} \
+// PI
+# define PI 3.14159
 
 // Types (custom types allow for easy switching later)
 typedef float				t_fl; // Custom float type

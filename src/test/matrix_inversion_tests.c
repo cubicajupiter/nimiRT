@@ -387,7 +387,7 @@ int	test_matrix(void)
 
 	printf("\n\n\n");
 	t_matrix C;
-	matrix_multiply(C, A, b);
+	matrix_multiply_get(C, A, b);
 	i = 0;
 	while (i < 4)
 	{
@@ -417,7 +417,7 @@ int	test_matrix(void)
 	}
 	printf("\n");
 	t_matrix A_1;
-	matrix_multiply(A_1, C, B_invert);
+	matrix_multiply_get(A_1, C, B_invert);
 	i = 0;
 	while (i < 4)
 	{
