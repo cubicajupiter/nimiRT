@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/06 10:34:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:13:19 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,16 @@ bool	is_pixel_on_image(t_uint x, t_uint y);
 // Geometry
 int		sphere_new(t_sphere *dst);
 int		intersect_get(t_xs *dst, const t_sphere *const sphere, t_ray ray);
+int		intersections_get(t_xs *xs, t_sphere sphere, t_ray ray);
+int		hit(t_xs *hit, t_xs *intersections);
 
 // Camera
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 
 // Primitives
-bool	is_float_equal(float a, float b);
+bool	is_float_equal(t_fl a, t_fl b);
+int		float_cmp(t_fl a, t_fl b);
 
 // Matrices
 int		matrix_copy(t_matrix dst, t_matrix src);

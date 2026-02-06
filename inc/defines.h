@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 09:47:44 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:13:19 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ struct s_xs
 {
 	t_fastint			count;
 	t_object			object;
-	t_fl				xsect[2];
+	t_fl				t[2];
 	t_xs				*next;
 };
 

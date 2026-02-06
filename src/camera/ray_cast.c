@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 10:39:54 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:13:18 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,43 +100,53 @@ int    test_rays(void)
 	point_new(s.center, 0.0, 0.0, 0.0);
 
 	intersect_get(&xs, &s, ray);
-	printf("\nFIRST RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.xsect[0], xs.xsect[1]);
+	printf("\nFIRST RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.t[0], xs.t[1]);
 
 	point_new(point, 0.0, 1.0, -5.0);
 	vector_new(vector, 0.0, 0.0, 1.0);
 	ray_new(ray, point, vector);
 	intersect_get(&xs, &s, ray);
-	printf("\nSECOND RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.xsect[0], xs.xsect[1]);
+	printf("\nSECOND RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.t[0], xs.t[1]);
 
 	point_new(point, 0.0, 2.0, -5.0);
 	vector_new(vector, 0.0, 0.0, 1.0);
 	ray_new(ray, point, vector);
 	intersect_get(&xs, &s, ray);
-	printf("\nTHIRD RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.xsect[0], xs.xsect[1]);
+	printf("\nTHIRD RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.t[0], xs.t[1]);
 
 	point_new(point, 0.0, 0.0, 0.0);
 	vector_new(vector, 0.0, 0.0, 1.0);
 	ray_new(ray, point, vector);
 	intersect_get(&xs, &s, ray);
-	printf("\nFOURTH RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.xsect[0], xs.xsect[1]);
+	printf("\nFOURTH RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.t[0], xs.t[1]);
 
 	point_new(point, 0.0, 0.0, 5.0);
 	vector_new(vector, 0.0, 0.0, 1.0);
 	ray_new(ray, point, vector);
 	intersect_get(&xs, &s, ray);
-	printf("\nFIFTH RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.xsect[0], xs.xsect[1]);
+	printf("\nFIFTH RAY intersect count: %li		intersections 0 and 1: %f	%f\n", xs.count, xs.t[0], xs.t[1]);
 
 
 
-	printf("\n[  ]\n");
+	printf("\n[ TRACKING MULTIPLE INTERSECTIONS ]\n");
+	sphere_new(&s);
+	point_new(s.center, 0.0, 0.0, 0.0);
+	// t_xs 	i1;
+	// t_xs	i2;
+	// i1.t[0] = 3.5;
+	// i1.object.sphere = s;
+	// i2.t[0] = 1;
+	// i2.object.sphere = s;
+
+	intersections_get();
+	printf();
 
 
-
-	printf("\n[  ]\n");
+	printf("\n[ HITS ]\n");
 
 
     
-	printf("\n[  ]\n");
+	printf("\n[ TRANSFORMATIONS ]\n");
     
 	return 0;
 }
