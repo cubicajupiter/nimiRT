@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 17:23:48 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 20:00:04 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,16 @@ int	position_get(t_tuple pos, t_ray ray, const t_fl time)
 	return (SUCCESS);
 }
 
+/*
+	Transforming the ray is a substitute to transforming a sphere.
+	Whatever transformation you want for a sphere, do the inverse of that transformation to a ray.
+*/
+int	ray_transform_get(t_ray dst, t_ray src, t_matrix transform)
+{
+	matrix_tuple_multiply_get(dst[ORIGIN], transform, src[ORIGIN]);
+	matrix_tuple_multiply_get(dst[DIRECTION], transform, src[DIRECTION]);
+	return (SUCCESS);
+}
 
 int    test_rays(void)
 {
@@ -179,6 +189,55 @@ int    test_rays(void)
 
 
 	printf("\n[ TRANSFORMATIONS ]\n");
-    
+	t_tuple		p;
+	t_tuple		v;
+	t_ray		ray1;
+	t_ray		ray2;
+	t_matrix	transformation;
+
+	printf("Translation:\n");
+	point_new(p, 1, 2, 3);
+	vector_new(v, 0, 1, 0);
+	ray_new(ray1, p, v);
+	translation(transformation, 3, 4, 5);
+	ray_transform_get(ray2, ray1, transformation);
+	tuple_print(ray2[ORIGIN]);
+	tuple_print(ray2[DIRECTION]);
+
+	t_ray		ray3;
+	t_matrix	transformation2;
+	printf("Scaling:\n");
+	scaling(transformation2, 2, 3, 4);
+	ray_transform_get(ray3, ray1, transformation2);
+	tuple_print(ray3[ORIGIN]);
+	tuple_print(ray3[DIRECTION]);
+
+	t_matrix	transformation3;
+	t_sphere	sphere1;
+	sphere_new(&sphere1);
+	printf("Sphere's identity matrix:\n");
+	matrix_print(sphere1.transform);
+	translation(transformation3, 2, 3, 4);
+	sphere_transform_set(&sphere1, transformation3);
+	printf("Sphere's transform matrix after setting:\n");
+	matrix_print(sphere1.transform);
+	
+	t_tuple		point2;
+	t_tuple		vector2;
+	t_ray		ray4;
+	t_matrix	transformation4;
+	t_sphere	sphere2;
+	t_xs		intersect[2];
+	printf("Intersecting a transformed sphere with a ray:\n");
+	point_new(point2, 0, 0, -5);
+	vector_new(vector2, 0, 0, 1);
+	ray_new(ray4, point2, vector2);
+	scaling(transformation4, 2, 2, 2);
+	sphere_new(&sphere2);
+	sphere_transform_set(&sphere2, transformation4);
+
+	intersect_get(intersect, &sphere2, ray4);
+	printf("T1: %f	T2: %f\n", intersect[0].data.t, intersect[1].data.t);	//FIX: These are currently giving garbage values.
+
 	return 0;
 }

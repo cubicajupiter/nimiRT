@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/07 17:09:17 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 19:54:26 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ struct s_tree
 
 struct s_sphere
 {
-	t_fastint			id; //All spheres have a unique ID number 
+	int					id; //All spheres have a unique ID number
 	t_tuple				center;
 	t_fl				radius;
-	
+	t_matrix			transform;
 };
 
 struct s_scene

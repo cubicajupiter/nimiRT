@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 16:46:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 19:24:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,22 @@ int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
 int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 {
 	t_fl		time[2];
+	t_ray		ray2;
+	t_matrix	inverted;
 
 	if (!dst || !sphere || !ray)
 		return (ERROR);
-	if (time_val_get(time, sphere, ray))
+	matrix_invert(inverted, sphere->transform);
+	ray_transform_get(ray2, ray, inverted);
+	if (time_val_get(time, sphere, ray2))
 	{
 		dst[0].data.t = time[0];
 		dst[0].data.sphere = sphere;
 		dst[1].data.t = time[1];
 		dst[1].data.sphere = sphere;
 	}
-	else 
-	{
+	else
 		return (FALSE);
-	}
 	return (TRUE);
 }
 
