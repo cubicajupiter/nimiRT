@@ -74,8 +74,11 @@ int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
 int		shearing(t_matrix dst, t_fl src[6]);
-int		matrix_chain3(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
-int		matrix_chain4(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
+int		chain2_apply(t_matrix dst, t_matrix a);
+int		chain3_get(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		chain3_apply(t_matrix dst, t_matrix a, t_matrix b);
+int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
