@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:20:21 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 15:44:55 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/07 16:15:45 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_fl	cofactor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size)
 {
 	t_fl	det;
 
+	det = 0.0;
 	if (size == 4)
 		det = minor(matrix4, NULL, coord, size);
 	if (size == 3)

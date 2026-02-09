@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 16:07:16 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:09:17 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,13 @@ typedef t_tuple			t_ray[2];
 typedef float			t_cylinder[4];
 typedef float			t_plane[2];
 
-typedef struct s_tree	t_tree;
-typedef struct s_scene	t_scene;
-typedef struct s_sphere	t_sphere;
-typedef enum e_obj_t	t_obj_t;
-typedef struct s_xs		t_xs;
-typedef struct s_object	t_object;
+typedef enum e_obj_t		t_obj_t;
+
+typedef struct s_tree		t_tree;
+typedef struct s_scene		t_scene;
+typedef struct s_sphere		t_sphere;
+typedef struct s_intersect	t_intersect;
+typedef struct s_xs			t_xs;
 
 enum e_obj_t
 {
@@ -110,26 +111,27 @@ struct s_sphere
 	
 };
 
-struct s_object
+struct s_scene
 {
-	t_obj_t				type;
+	void				*object_array;
+	t_xs				*intersections;
+	//more
+};
+
+struct s_intersect
+{
+	t_obj_t				obj_type;
 	union {
 		t_sphere		*sphere;
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
-};
-
-struct s_scene
-{
-	t_object			*objects;
-	t_xs				*intersections;
+	t_fl				t;
 };
 
 struct s_xs
 {
-	t_object			*object;
-	t_fl				t;
+	t_intersect			data;
 	t_xs				*next;
 };
 

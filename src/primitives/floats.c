@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 13:50:05 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 12:13:21 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:47:53 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,4 @@ bool	is_float_equal(t_fl a, t_fl b)
 	if (fabsf(a - b) < EPSILON)
 		return (true);
 	return (false);
-}
-
-int	float_cmp(t_fl a, t_fl b)
-{
-	return (fabsf(a - b));
 }

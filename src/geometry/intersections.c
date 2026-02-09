@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 16:46:36 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/07 17:50:14 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	hit(t_xs *hit, t_xs *intersections)
 	if (!intersections)
 		return (ft_error(EINVAL, "hit"));
 	xs = intersections;
-	while (xs->t < 0)
+	while (xs->data.t < 0)
 	{
-		if (xs->t > 0)
+		if (xs->data.t > 0)
 		{
 			*hit = *xs;
 			break ;
@@ -42,25 +42,33 @@ int	hit(t_xs *hit, t_xs *intersections)
 int	intersections_get(t_xs *xs, t_sphere sphere, t_ray ray)
 {
 	t_xs		new[2];
+	t_xs		*tmp;
 
 	if (!ray) //only ray is checked here. xs can be NULL. sphere will be changed to WORLD at some point.
 		return (ft_error(EINVAL, "intersections_get"));
+	tmp = xs;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+	}
 	if (intersect_get(new, &sphere, ray)) //once sphere is replaced with world, the loop should be: while (world_objects) {if intersect_get(){;}}
-	{	
-		if (xs == NULL)
+	{
+		if (tmp == NULL)
 		{
-			*xs = new[0];
-			xs->next = &new[1];
-			xs = xs->next;
+			*tmp = new[0];
+			tmp->next = &new[1];
+			tmp = tmp->next;
 		}
 		else
 		{
-			xs->next = &new[0];
-			xs->next->next = &new[1];
-			xs = xs->next->next;
+			tmp->next = &new[0];
+			tmp->next->next = &new[1];
+			tmp = tmp->next->next;
 		}
 	}
+	tmp->next = NULL;
 	quicksort(xs); // sorting by t value.
+	printf("HERE3\n");
 	return (SUCCESS);
 }
 
@@ -73,17 +81,17 @@ int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 		return (ERROR);
 	if (time_val_get(time, sphere, ray))
 	{
-		dst[0].t = time[0];
-		dst[0].object->sphere = sphere;
-		dst[1].t = time[1];
-		dst[1].object->sphere = sphere;
+		dst[0].data.t = time[0];
+		dst[0].data.sphere = sphere;
+		dst[1].data.t = time[1];
+		dst[1].data.sphere = sphere;
 	}
 	else 
 	{ //EVENTUALLY THESE SHOULDN'T PLACE ANYTHING AT ALL IN DST. it's only for testing non-hits
-		dst[0].t = 0.0;
-		dst[0].object->sphere = sphere;
-		dst[1].next->t = 0.0;
-		dst[1].next->object->sphere = sphere;
+		dst[0].data.t = 0.0;
+		dst[0].data.sphere = sphere;
+		dst[1].data.t = 0.0;
+		dst[1].data.sphere = sphere;
 		return (FALSE);
 	}
 	return (TRUE);
