@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/07 17:39:04 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 11:43:46 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,12 @@ int    test_rays(void)
 	intersections->next->next = &i3;
 	intersections->next->next->next = &i4;
 
-	printf("Here 7\n");
 	intersections_get(intersections, s, ray);
-	printf("Here 8\n");
-	while (intersections)
+	t_xs	*tmp = intersections;
+	while (tmp)
 	{
-		printf("%f	", intersections->data.t);
-		intersections = intersections->next;
+		printf("%f	", tmp->data.t);
+		tmp = tmp->next;
 	}
 	printf("\n");
 //	tuple_print();
@@ -174,11 +173,12 @@ int    test_rays(void)
 
 
 	printf("\n[ HITS ]\n");
-	t_xs	h;
-	printf("Here 8\n");
+	t_xs	*h;
 	hit(&h, intersections);
-	printf("Here 9\n");
+	printf("Hit at: %f\n", h->data.t);
     
+
+
 	printf("\n[ TRANSFORMATIONS ]\n");
     
 	return 0;

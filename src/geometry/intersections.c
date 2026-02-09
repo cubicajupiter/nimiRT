@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/07 17:50:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 11:49:04 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,22 @@
 
 static int	time_val_get(t_fl *time, t_sphere *sphere, t_ray ray);
 
-int	hit(t_xs *hit, t_xs *intersections)
+int	hit(t_xs **hit, t_xs *xs)
 {
-	t_xs	*xs;
+	t_xs	*tmp;
 
-	if (!intersections)
+	if (!xs)
 		return (ft_error(EINVAL, "hit"));
-	xs = intersections;
-	while (xs->data.t < 0)
+	tmp = xs;
+	while (tmp->data.t < 0)
 	{
-		if (xs->data.t > 0)
+		printf("hit?\n");
+		if (tmp->data.t > 0)
 		{
-			*hit = *xs;
+			*hit = tmp;
 			break ;
 		}
-		xs = xs->next;
+		tmp = tmp->next;
 	}
 	return (SUCCESS);
 }
@@ -41,16 +42,14 @@ int	hit(t_xs *hit, t_xs *intersections)
  // t_scene *world will replace sphere. then loop through all objects in world to find any xs.
 int	intersections_get(t_xs *xs, t_sphere sphere, t_ray ray)
 {
-	t_xs		new[2];
+	t_xs		new[2];	//would need to be allocated for changes to persist.
 	t_xs		*tmp;
 
 	if (!ray) //only ray is checked here. xs can be NULL. sphere will be changed to WORLD at some point.
 		return (ft_error(EINVAL, "intersections_get"));
 	tmp = xs;
 	while (tmp->next)
-	{
 		tmp = tmp->next;
-	}
 	if (intersect_get(new, &sphere, ray)) //once sphere is replaced with world, the loop should be: while (world_objects) {if intersect_get(){;}}
 	{
 		if (tmp == NULL)
@@ -67,8 +66,9 @@ int	intersections_get(t_xs *xs, t_sphere sphere, t_ray ray)
 		}
 	}
 	tmp->next = NULL;
-	quicksort(xs); // sorting by t value.
-	printf("HERE3\n");
+	tmp = xs;
+	printf("tmp values: %f	%f	%f	%f	%f	%f	%p\n", tmp->data.t, tmp->next->data.t, tmp->next->next->data.t, tmp->next->next->next->data.t, tmp->next->next->next->next->data.t, tmp->next->next->next->next->next->data.t, tmp->next->next->next->next->next->next);
+	//insertion_sort(xs, tmp); // sorting by t value.
 	return (SUCCESS);
 }
 
@@ -87,11 +87,7 @@ int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 		dst[1].data.sphere = sphere;
 	}
 	else 
-	{ //EVENTUALLY THESE SHOULDN'T PLACE ANYTHING AT ALL IN DST. it's only for testing non-hits
-		dst[0].data.t = 0.0;
-		dst[0].data.sphere = sphere;
-		dst[1].data.t = 0.0;
-		dst[1].data.sphere = sphere;
+	{
 		return (FALSE);
 	}
 	return (TRUE);
