@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 11:43:46 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 17:23:48 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ int    test_rays(void)
 	t_xs	i3;
 	t_xs	i4;
 	i1.data.t = 10.0;
-
 	i1.data.sphere = &s;
 
 	i2.data.t = 13.0;
@@ -159,24 +158,24 @@ int    test_rays(void)
 	intersections->next->next = &i3;
 	intersections->next->next->next = &i4;
 
-	intersections_get(intersections, s, ray);
+	intersections_get(&intersections, s, ray);
 	t_xs	*tmp = intersections;
+	printf("Sorted intersections\n");
 	while (tmp)
 	{
-		printf("%f	", tmp->data.t);
+		printf("\t %f\n", tmp->data.t);
 		tmp = tmp->next;
 	}
 	printf("\n");
-//	tuple_print();
-//	matrix_print();
 
-
+	
 
 	printf("\n[ HITS ]\n");
 	t_xs	*h;
 	hit(&h, intersections);
 	printf("Hit at: %f\n", h->data.t);
-    
+	free(intersections->next);
+
 
 
 	printf("\n[ TRANSFORMATIONS ]\n");

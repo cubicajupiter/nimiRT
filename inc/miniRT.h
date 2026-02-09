@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/09 11:40:47 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:29:20 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	commands(void *data);
 // Geometry
 int		sphere_new(t_sphere *dst);
 int		hit(t_xs **hit, t_xs *intersections);
-int		intersections_get(t_xs *xs, t_sphere sphere, t_ray ray);
+int		intersections_get(t_xs **xs, t_sphere sphere, t_ray ray);
 int		intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray);
 
 // Camera
@@ -108,6 +108,6 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		ft_error(int code, const char *message);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
-int		insertion_sort(t_xs *dst, t_xs *head);
+int		insertion_sort(t_xs **dst, t_xs *head);
 
 #endif

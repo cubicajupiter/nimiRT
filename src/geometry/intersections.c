@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 11:49:04 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/09 16:46:14 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ int	hit(t_xs **hit, t_xs *xs)
 	if (!xs)
 		return (ft_error(EINVAL, "hit"));
 	tmp = xs;
-	while (tmp->data.t < 0)
+	while (tmp)
 	{
-		printf("hit?\n");
 		if (tmp->data.t > 0)
 		{
 			*hit = tmp;
@@ -40,14 +39,15 @@ int	hit(t_xs **hit, t_xs *xs)
 
  // aggregates all intersections found for the ray per object in the world, sorting by t value. 
  // t_scene *world will replace sphere. then loop through all objects in world to find any xs.
-int	intersections_get(t_xs *xs, t_sphere sphere, t_ray ray)
+int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
 {
-	t_xs		new[2];	//would need to be allocated for changes to persist.
+	t_xs		*new;
 	t_xs		*tmp;
 
-	if (!ray) //only ray is checked here. xs can be NULL. sphere will be changed to WORLD at some point.
+	if (!ray)
 		return (ft_error(EINVAL, "intersections_get"));
-	tmp = xs;
+	new = malloc(2 * sizeof(t_xs));	//malloc here so the new intersections persist
+	tmp = *xs;
 	while (tmp->next)
 		tmp = tmp->next;
 	if (intersect_get(new, &sphere, ray)) //once sphere is replaced with world, the loop should be: while (world_objects) {if intersect_get(){;}}
@@ -65,10 +65,12 @@ int	intersections_get(t_xs *xs, t_sphere sphere, t_ray ray)
 			tmp = tmp->next->next;
 		}
 	}
+	else
+		free(new);	// FREE here for now.
 	tmp->next = NULL;
-	tmp = xs;
-	printf("tmp values: %f	%f	%f	%f	%f	%f	%p\n", tmp->data.t, tmp->next->data.t, tmp->next->next->data.t, tmp->next->next->next->data.t, tmp->next->next->next->next->data.t, tmp->next->next->next->next->next->data.t, tmp->next->next->next->next->next->next);
-	//insertion_sort(xs, tmp); // sorting by t value.
+	tmp = *xs;
+	*xs = NULL;
+	insertion_sort(xs, tmp); // sorting by t value.
 	return (SUCCESS);
 }
 
