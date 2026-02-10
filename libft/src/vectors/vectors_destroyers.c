@@ -30,7 +30,7 @@ void	vec_data_free(t_vec *src)
 int	vec_reset(t_vec *src)
 {
 	if (!src)
-		return (FAIL);
+		return (ft_liberror(EINVAL, "vec_reset"));
 	if (src->data && !src->arena)
 		free(src->data);
 	vec_set(src, NULL, 0, 0);

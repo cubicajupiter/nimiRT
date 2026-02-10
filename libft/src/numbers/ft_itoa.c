@@ -65,7 +65,10 @@ char	*ft_itoa(int n)
 		nlen += 1;
 	num = malloc((nlen + 1) * sizeof(char));
 	if (!num)
+	{
+		ft_liberror(ENOMEM, "ft_itoa");
 		return (NULL);
+	}
 	ft_nbrcpy(num, n, sign, nlen);
 	num[nlen] = '\0';
 	return (num);

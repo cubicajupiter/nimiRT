@@ -24,16 +24,6 @@ files.
 # include "MLX42.h"
 # include "libft.h"
 
-// Retrun Values
-// Run checks
-// # define FAIL 1
-// # define SUCCESS 0
-// Is checks
-# define TRUE 1
-# define FALSE 0
-// Error
-# define ERROR -1
-
 // Window & Image
 # define WIDTH 2000
 # define HEIGHT 1600

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
+#include <asm-generic/errno.h>
 
 int	ft_big_atof(const char *nptr, float *nbr)
 {
@@ -19,7 +20,7 @@ int	ft_big_atof(const char *nptr, float *nbr)
 
 	res = 0.0;
 	if (!ft_naf(nptr))
-		return (KO);
+		return (ft_liberror(EINVAL, "ft_big_atof"));
 	while (ft_isspace((int)*nptr))
 		nptr++;
 	if (ft_issign((int)*nptr))
@@ -29,21 +30,21 @@ int	ft_big_atof(const char *nptr, float *nbr)
 		digit = *nptr - '0';
 		res = res * 10 + (double)digit;
 		if (res > FLT_MAX)
-			return (KO);
+			return (ft_liberror(EOVERFLOW, "ft_big_atof"));
 		nptr++;
 	}
 	*nbr = (float)res;
-	return (OK);
+	return (SUCCESS);
 }
 
-bool	ft_atof(const char *nptr, float	*nbr)
+int	ft_atof(const char *nptr, float	*nbr)
 {
 	t_float	fl;
 	int		i;
 	int		sign;
 
-	if (!ft_big_atof(nptr, &fl.whole))
-		return (false);
+	if (ft_big_atof(nptr, &fl.whole) != SUCCESS)
+		return (ft_liberror(EINHERIT, "ft_atof"));
 	fl.dec = 0.0f;
 	i = 0;
 	sign = 1;
@@ -62,5 +63,5 @@ bool	ft_atof(const char *nptr, float	*nbr)
 	while (ft_isdigit((int)nptr[i]))
 		fl.dec = (fl.dec * 10) + (nptr[i++] - '0');
 	*nbr = ((float)fl.whole + (fl.dec / (float)ft_power(10, i))) * (float)sign;
-	return (true);
+	return (SUCCESS);
 }
