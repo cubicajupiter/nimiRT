@@ -6,24 +6,35 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/10 12:23:16 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 18:00:31 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "miniRT.h"
 
 // static void    instruct(void);
 
+int	program_init(t_tree *t)
+{
+	t->a_sys = NULL;
+	t->a_buf = NULL;
+	if (ft_arena_init(&t->a_sys, BUF_SIZE) != SUCCESS
+		|| ft_arena_init(&t->a_buf, BUF_SIZE) != SUCCESS)
+		return (ft_error(EINHERIT, "program_init"));
+	return (SUCCESS);
+}
+
 int	main(int ac, char **av)
 {
-	t_tree	t;
+	t_tree	tree;
 
 	(void)av;
-	(void)t;
+	program_init(&tree);
 	if (ac == 2)
 	{
 		//test_matrix();
-		test_rays();
+		test_rays(&tree);
 		return (0);
 		// parse();    //      -> check & fetch scene
 		// initialise();   //  -> wrap up a handy struct(s)
@@ -34,7 +45,7 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		transformation_test(&t);
+		transformation_test(&tree);
 		// projectile_test(&t);
 		// test_matrix();
 		// vector_new(a, 1, 2, 3);
@@ -43,6 +54,8 @@ int	main(int ac, char **av)
 		// tuple_print(a);
 		// instruct();
 	}
+	if (errno)
+		ft_perror();
 	return (0);
 }
 

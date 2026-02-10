@@ -6,10 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/10 11:52:15 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 18:05:58 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "miniRT.h"
 #include "intersections.h"
 
@@ -18,34 +19,62 @@
 
 static int	time_val_get(t_fl *time, t_sphere *sphere, t_ray ray);
 
-int	hit(t_xs **hit, t_xs *xs)
+int	hit(t_xs **hit, t_vec *xs)
 {
 	t_xs	*tmp;
+	size_t	i;
 
 	if (!xs)
 		return (ft_error(EINVAL, "hit"));
-	tmp = xs;
-	while (tmp)
+	i = 0;
+	while (i < xs->len)
 	{
-		if (tmp->data.t > 0)
-		{
-			*hit = tmp;
+		tmp = vec_get(xs, i);
+		if (tmp->t > 0.0f)
 			break ;
-		}
-		tmp = tmp->next;
 	}
+	*hit = tmp;
 	return (SUCCESS);
+}
+
+static int	sort_ascending(void *a, void *b)
+{
+	return ((long)*(int *)a - *(int *)b);
 }
 
  // aggregates all intersections found for the ray per object in the world, sorting by t value. 
  // t_scene *world will replace sphere. then loop through all objects in world to find any xs.
-int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
+int	intersections_get(t_vec *xs, t_sphere sphere, t_ray ray, t_tree *t)
 {
-	t_xs		*new;
-	t_xs		*tmp;
-
 	if (!ray)
 		return (ft_error(EINVAL, "intersections_get"));
+	xs = NULL;
+	if (vec_alloc(&xs, t->a_buf) != SUCCESS
+		|| vec_new(xs, INIT_XS, sizeof(t_xs)) != SUCCESS)
+		return (ft_error(EINHERIT, "intersections_get"));
+	intersect_get(xs, &sphere, ray); //once sphere is replaced with world, the loop should be: while (world_objects) {if intersect_get(){;}}
+
+	size_t	i;
+	t_xs	*print;
+	i = 0;
+	while (i < xs->len)
+	{
+		print = vec_get(xs, i);
+		printf("t: %f\n", print->t);
+		i++;
+	}
+	if (xs->len > 0)
+		if (vec_sort(xs, sort_ascending) != SUCCESS)
+			return (ft_error(EINHERIT, "intersections_get"));
+	i = 0;
+	while (i < xs->len)
+	{
+		print = vec_get(xs, i);
+		printf("t: %f\n", print->t);
+		i++;
+	}
+	
+	/*
 	new = malloc(2 * sizeof(t_xs));	//malloc here so the new intersections persist
 	tmp = *xs;
 	while (tmp->next)
@@ -71,27 +100,30 @@ int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
 	tmp = *xs;
 	*xs = NULL;
 	insertion_sort(xs, tmp); // sorting by t value.
+	// */
 	return (SUCCESS);
 }
 
 //will eventually replace sphere with scene, whcih contains sphere
-int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
+int	intersect_get(t_vec *xs, t_sphere *sphere, t_ray ray)
 {
 	t_fl		time[2];
 	t_ray		ray2;
-	t_matrix	inverted;
+	t_matrix	inversion;
+	t_xs		tmp1;
+	t_xs		tmp2;
 
-	if (!dst || !sphere || !ray)
-		return (ERROR);
+	if (!xs || !sphere || !ray)
+		return (ft_error(EINVAL, "intersect_get"));
 
-	matrix_invert(inverted, sphere->transform);		//INVERSION
+	matrix_invert(inversion, sphere->transform);		//INVERSION
 
 	printf("Sphere transform matrix:\n");
 	matrix_print(sphere->transform);
-	printf("\nInverted Sphere transform matrix:\n"); //NOTE: the signs might be an issue!!
-	matrix_print(inverted);
+	printf("\nInverted Sphere transform matrix:\n");
+	matrix_print(inversion);
 
-	ray_transform_get(ray2, ray, inverted);		//RAY TRANSFORMATION
+	ray_transform_get(ray2, ray, inversion);		//RAY TRANSFORMATION
 
 	printf("Ray origin:\n");
 	tuple_print(ray[ORIGIN]);
@@ -107,10 +139,14 @@ int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 
 	if (time_val_get(time, sphere, ray2))
 	{
-		dst[0].data.t = time[0];
-		dst[0].data.sphere = sphere;
-		dst[1].data.t = time[1];
-		dst[1].data.sphere = sphere;
+		tmp1.t = time[0];
+		tmp1.sphere = sphere;
+		if (vec_push(xs, &tmp1) != SUCCESS)
+			return (ft_error(EINHERIT, "intersect_get"));
+		tmp2.t = time[1];
+		tmp2.sphere = sphere;
+		if (vec_push(xs, &tmp2) != SUCCESS)
+			return (ft_error(EINHERIT, "intersect_get"));
 	}
 	else
 		return (FALSE);
@@ -125,8 +161,8 @@ static int	time_val_get(t_fl *time, t_sphere *sphere, t_ray ray)
 	t_fl		b;
 	t_fl		c;
 
-	tuple_minus_get(sphere_to_ray, ray[ORIGIN], sphere->center); //distance L between origin of ray and center of sphere
-	vector_dot(&a, ray[DIRECTION], ray[DIRECTION]);  //dot product between ray's direction vec and L
+	tuple_minus_get(sphere_to_ray, ray[ORIGIN], sphere->center); //distance between origin of ray and center of sphere
+	vector_dot(&a, ray[DIRECTION], ray[DIRECTION]);  //dot products comparing vectors (both size and angle)
 	vector_dot(&b, ray[DIRECTION], sphere_to_ray);
 	b *= 2;
 	vector_dot(&c, sphere_to_ray, sphere_to_ray);
