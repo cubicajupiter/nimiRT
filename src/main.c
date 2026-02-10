@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 14:37:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 12:23:16 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int ac, char **av)
 	(void)t;
 	if (ac == 2)
 	{
+		//test_matrix();
 		test_rays();
 		return (0);
 		// parse();    //      -> check & fetch scene

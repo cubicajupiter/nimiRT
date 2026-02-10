@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 19:24:49 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 11:52:15 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
 	return (SUCCESS);
 }
 
-//will eventually replace sphere with scene, whcih contains sphere: have object-type specific func calls then
+//will eventually replace sphere with scene, whcih contains sphere
 int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 {
 	t_fl		time[2];
@@ -83,8 +83,28 @@ int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 
 	if (!dst || !sphere || !ray)
 		return (ERROR);
-	matrix_invert(inverted, sphere->transform);
-	ray_transform_get(ray2, ray, inverted);
+
+	matrix_invert(inverted, sphere->transform);		//INVERSION
+
+	printf("Sphere transform matrix:\n");
+	matrix_print(sphere->transform);
+	printf("\nInverted Sphere transform matrix:\n"); //NOTE: the signs might be an issue!!
+	matrix_print(inverted);
+
+	ray_transform_get(ray2, ray, inverted);		//RAY TRANSFORMATION
+
+	printf("Ray origin:\n");
+	tuple_print(ray[ORIGIN]);
+	printf("\nRay direction:\n");
+	tuple_print(ray[DIRECTION]);
+
+	//normalize_apply(ray2[DIRECTION]);		IN CASE OF SCALING, NO NORMALIZATION NEEDED...
+
+	printf("\nRay2 origin:\n");
+	tuple_print(ray2[ORIGIN]);
+	printf("\nRay2 direction:\n");
+	tuple_print(ray2[DIRECTION]);
+
 	if (time_val_get(time, sphere, ray2))
 	{
 		dst[0].data.t = time[0];

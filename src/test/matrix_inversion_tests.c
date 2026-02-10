@@ -274,11 +274,11 @@ int	test_matrix(void)
 
 	t_matrix m4b;
 	matrix_invert(m4b, m4);
-	printf("B[3,2]: %f should be -160/532: %f / %f\n", m4b[3][2], m4b[3][2]
+	printf("B[3,2]: %f should be '-160/532': %f / %f\n", m4b[3][2], m4b[3][2]
 		* 532.0, 532.0);
 	cof = cofactor(m4, NULL, (int[]){3, 2}, 4);
 	printf("Cofactor a[2][3]: %f\n", cof);
-	printf("B[2,3]: %f should be -160/532: %f / %f\n", m4b[2][3], m4b[2][3]
+	printf("B[2,3]: %f should be '105/532': %f / %f\n", m4b[2][3], m4b[2][3]
 		* 532.0, 532.0);
 	printf("\nNOW INVERTED 4x4 Matrix:\n\t%f %f %f %f\n\t%f %f %f %f\n\t%f %f %f\
 		%f\n\t%f %f %f %f\n", m4b[0][0], m4b[0][1], m4b[0][2], m4b[0][3],
@@ -386,6 +386,7 @@ int	test_matrix(void)
 	b[3][3] = 5.0;
 
 	printf("\n\n\n");
+	
 	t_matrix C;
 	matrix_multiply_get(C, A, b);
 	i = 0;
@@ -400,7 +401,9 @@ int	test_matrix(void)
 		printf("\n");
 		i++;
 	}
+
 	printf("\n");
+
 	t_matrix B_invert;
 	matrix_invert(B_invert, b);
 	i = 0;
@@ -415,7 +418,9 @@ int	test_matrix(void)
 		printf("\n");
 		i++;
 	}
+
 	printf("\n");
+
 	t_matrix A_1;
 	matrix_multiply_get(A_1, C, B_invert);
 	i = 0;
@@ -430,7 +435,9 @@ int	test_matrix(void)
 		printf("\n");
 		i++;
 	}
+
 	printf("\n");
+
 	i = 0;
 	while (i < 4)
 	{
@@ -448,6 +455,7 @@ int	test_matrix(void)
 		printf("same\n");
 	else
 		printf("fail\n");
+
 
 	printf("\n####################################### END OF MATRIX TESTS #######################################\n");
 	return (0);
