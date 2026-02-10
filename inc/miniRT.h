@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/10 14:21:39 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:47:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int		chain2_apply(t_matrix dst, t_matrix a);
 int		chain3_get(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 int		chain3_apply(t_matrix dst, t_matrix a, t_matrix b);
 int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+
+// Lighting
+int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
