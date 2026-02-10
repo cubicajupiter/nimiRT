@@ -19,7 +19,12 @@
 
 static int	float_print(t_fl fl)
 {
-	if (fl < 0)
+	if (is_float_equal(fl, 0.0f))
+	{
+		if (printf(" %f", 0.0f) < 0)
+			return (ft_error(0, "printf"));
+	}
+	else if (fl < 0.0f)
 	{
 		if (printf("%f", fl) < 0)
 			return (ft_error(0, "printf"));
