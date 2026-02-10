@@ -25,6 +25,13 @@ int	program_init(t_tree *t)
 	return (SUCCESS);
 }
 
+int	program_exit(t_tree *t)
+{
+	ft_arena_free(&t->a_sys);
+	ft_arena_free(&t->a_buf);
+	return (SUCCESS);
+}
+
 int	main(int ac, char **av)
 {
 	t_tree	tree;
@@ -35,7 +42,6 @@ int	main(int ac, char **av)
 	{
 		//test_matrix();
 		test_rays(&tree);
-		return (0);
 		// parse();    //      -> check & fetch scene
 		// initialise();   //  -> wrap up a handy struct(s)
 		// trace();    //      -> the BIG LOOP(S) OF MATHS.
@@ -56,6 +62,7 @@ int	main(int ac, char **av)
 	}
 	if (errno)
 		ft_perror();
+	program_exit(&tree);
 	return (0);
 }
 

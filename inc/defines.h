@@ -86,7 +86,7 @@ enum	e_obj
 {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
 };
 
 // Structs
@@ -106,10 +106,20 @@ typedef struct	s_sphere
 	t_matrix			transform; // Translation, scaling or shearing from its original locaiton
 }						t_sphere;
 
+typedef struct	s_object
+{
+	t_obj				obj_type;
+	union {
+		t_sphere		*sphere;
+		t_cylinder		*cylinder;
+		t_plane			*plane;
+	};
+}						t_object;
+
 typedef struct	s_scene
 {
-	void				*object_array;
-	t_xs				*intersections;
+	t_vec				*objects;
+	t_vec				*xs;
 	//more
 }						t_scene;
 

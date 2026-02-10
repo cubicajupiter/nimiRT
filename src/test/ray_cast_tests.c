@@ -1,4 +1,5 @@
 
+#include "libft.h"
 #include "miniRT.h"
 
 int    test_rays(t_tree *t)
@@ -166,23 +167,41 @@ int    test_rays(t_tree *t)
 	t_tuple		point2;
 	t_tuple		vector2;
 	t_tuple		center;
+	t_scene		scene;
+	t_object	object;
 	
 	t_ray		ray4;
 	t_matrix	transformation4;
 	t_sphere	sphere2;
-	t_vec		*xs;
 	// t_xs		intersect[2];
-	xs = NULL;
-	(void)t;
+	scene.xs = NULL;
+	scene.objects = NULL;
+	if (vec_alloc(&scene.objects, t->a_buf) != SUCCESS)
+		return (ERROR);
+	vec_new(scene.objects, 0, sizeof(t_object));
 	printf("Intersecting a transformed sphere with a ray:\n");
 	point_new(point2, 0, 0, -5);
+	point_new(center, 0, 0, 0);
 	vector_new(vector2, 0, 0, 1);
 	ray_new(ray4, point2, vector2);
 	scaling(transformation4, 2, 2, 2);
 	sphere_new(&sphere2, center);
+	object.obj_type = SPHERE;
+	object.sphere = &sphere2;
+	vec_push(scene.objects, &object);
 	sphere_transform_set(&sphere2, transformation4);
+	intersections_get(&scene, ray4, t);
 
-	intersections_get(xs, sphere2, ray4, t);
+	t_xs	*hit;
+	size_t	i;
+
+	i = 0;
+	while (i < scene.xs->len)
+	{
+		hit = vec_get(scene.xs, i);
+		printf("xs[%zu]: %f\n", i, hit->t);
+		i++;
+	}
 	// intersect[0].t = 0.0f;
 	// intersect[1].t = 0.0f;
 	// printf("T1: %f	T2: %f\n", intersect[0].data.t, intersect[1].data.t);	

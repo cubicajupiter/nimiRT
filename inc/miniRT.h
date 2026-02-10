@@ -36,8 +36,8 @@ void	commands(void *data);
 int		sphere_new(t_sphere *dst, t_tuple center);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		hit(t_xs **hit, t_vec *xs);
-int		intersections_get(t_vec *xs, t_sphere sphere, t_ray ray, t_tree *t);
-int		intersect_get(t_vec *xs, t_sphere *sphere, t_ray ray);
+int		intersections_get(t_scene *scene, t_ray ray, t_tree *t);
+int		intersect_get(t_vec *xs, t_object *obj, t_ray ray);
 
 // Camera
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
