@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 13:28:18 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 14:37:00 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 14:18:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	normal_tests(void)
 	t_sphere	s;
 	t_tuple		point;
 
-	sphere_new(&s);
+	sphere_new(&s, 0);
 	point_new(s.center, 0.0, 0.0, 0.0);
 	point_new(point, 1, 0, 0);
 

@@ -6,18 +6,19 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 19:54:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 14:20:02 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	sphere_new(t_sphere *dst)
+int	sphere_new(t_sphere *dst, t_tuple center)
 {
 	static int		id = 0;
 
 	id++;
 	dst->id = id;
+	tuple_copy(dst->center, center);
 	id_matrix(dst->transform);
 	return (SUCCESS);
 }

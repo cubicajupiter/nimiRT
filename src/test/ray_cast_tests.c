@@ -42,12 +42,13 @@ int    test_rays(void)
 	printf("\n[ INTERSECTIONS ]\n");
 	t_sphere	s;
 	t_xs		xs[2];
+	t_tuple		center;
+	point_new(center, 0.0, 0.0, 0.0);
 	point_new(point, 0.0, 0.0, -5.0);
 	vector_new(vector, 0.0, 0.0, 1.0);
 	ray_new(ray, point, vector);
 
-	sphere_new(&s);
-	point_new(s.center, 0.0, 0.0, 0.0);
+	sphere_new(&s, center);
 
 	intersect_get(xs, &s, ray);
 	printf("\nFIRST RAY intersections 0 and 1: %f	%f\n", xs[0].data.t, xs[1].data.t);
@@ -82,8 +83,7 @@ int    test_rays(void)
 	point_new(point, 0.0, 0.0, -2.0);
 	vector_new(vector, 0.0, 0.0, 1.0);
 	ray_new(ray, point, vector);
-	sphere_new(&s);
-	point_new(s.center, 0.0, 0.0, 0.0);
+	sphere_new(&s, center);
 
 	t_xs 	i1;
 	t_xs	i2;
@@ -154,7 +154,7 @@ int    test_rays(void)
 
 	t_matrix	transformation3;
 	t_sphere	sphere1;
-	sphere_new(&sphere1);
+	sphere_new(&sphere1, center);
 	printf("Sphere's identity matrix:\n");
 	matrix_print(sphere1.transform);
 	translation(transformation3, 2, 3, 4);
@@ -165,6 +165,7 @@ int    test_rays(void)
 	printf("\n[ SCALED RAY INTERSECTION ]\n");
 	t_tuple		point2;
 	t_tuple		vector2;
+	
 	t_ray		ray4;
 	t_matrix	transformation4;
 	t_sphere	sphere2;
@@ -176,7 +177,7 @@ int    test_rays(void)
 	vector_new(vector2, 0, 0, 1);
 	ray_new(ray4, point2, vector2);
 	scaling(transformation4, 2, 2, 2);
-	sphere_new(&sphere2);
+	sphere_new(&sphere2, center);
 	sphere_transform_set(&sphere2, transformation4);
 
 	intersect_get(intersect, &sphere2, ray4); // These are now giving either  0 and 0,  or 5 and 5.  Should be  3 and 7!!!!!!!!!!!!!!
