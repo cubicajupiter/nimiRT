@@ -108,7 +108,7 @@ int    test_rays(void)
 	intersections->next->next = &i3;
 	intersections->next->next->next = &i4;
 
-	intersections_get(&intersections, s, ray);
+	intersections_get(&intersections, &s, ray);
 	t_xs	*tmp = intersections;
 	printf("Sorted intersections\n");
 	while (tmp)
@@ -183,24 +183,24 @@ int    test_rays(void)
 	intersect_get(intersect, &sphere2, ray4); // These are now giving either  0 and 0,  or 5 and 5.  Should be  3 and 7!!!!!!!!!!!!!!
 	printf("T1: %f	T2: %f\n", intersect[0].data.t, intersect[1].data.t);	
 
-	// printf("\n[ TRANSLATED RAY INTERSECTION (WORKS) ]\n");
-	// t_tuple		point3;
-	// t_tuple		vector3;
-	// t_ray		ray5;
-	// t_matrix	transformation5;
-	// t_sphere	sphere3;
-	// t_xs		intersect2[2];
-	// intersect2[0].data.t = 0.0;
-	// intersect2[1].data.t = 0.0;
-	// point_new(point3, 0, 0, -5);
-	// vector_new(vector3, 0, 0, 1);
-	// ray_new(ray5, point3, vector3);
-	// translation(transformation5, 5, 0, 0);
-	// sphere_new(&sphere3);
-	// sphere_transform_set(&sphere3, transformation5);
+	printf("\n[ TRANSLATED RAY INTERSECTION (WORKS) ]\n");
+	t_tuple		point3;
+	t_tuple		vector3;
+	t_ray		ray5;
+	t_matrix	transformation5;
+	t_sphere	sphere3;
+	t_xs		intersect2[2];
+	intersect2[0].data.t = 0.0;
+	intersect2[1].data.t = 0.0;
+	point_new(point3, 0, 0, -5);
+	vector_new(vector3, 0, 0, 1);
+	ray_new(ray5, point3, vector3);
+	translation(transformation5, 5, 0, 0);
+	sphere_new(&sphere3, (t_tuple){0, 0, 0});
+	sphere_transform_set(&sphere3, transformation5);
 
-	//intersect_get(intersect2, &sphere3, ray5);
-	//printf("T1: %f	T2: %f\n", intersect2[0].data.t, intersect2[1].data.t);
+	intersect_get(intersect2, &sphere3, ray5);
+	printf("T1: %f	T2: %f\n", intersect2[0].data.t, intersect2[1].data.t);
 
 	
 	return 0;
