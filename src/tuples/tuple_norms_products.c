@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/03 17:58:13 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/06 10:47:45 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ int	normalize_apply(t_tuple vector)
 }
 
 /*
-Dot product calculates the angle between two vectors (e.g. as a ray bounces
-off the surface of an object). It is actually the cosine of the angle between
-two unit vectors.
+Dot product calculates the cosine of the angle between two (unit) vectors.
 */
 int	vector_dot(t_fl *dot, t_tuple a, t_tuple b)
 {
-	if (!*dot || !a || !b)
+	if (!dot || !a || !b)
 		return (ft_error(EINVAL, "vector_dot"));
 	*dot = a[X] * b[X] + a[Y] * b[Y] + a[Z] * b[Z] + a[W] * b[W];
 	return (SUCCESS);

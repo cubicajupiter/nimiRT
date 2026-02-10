@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moving_scaling_shearing.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 11:36:21 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/06 11:37:22 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/10 09:26:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

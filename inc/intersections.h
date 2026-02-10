@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   floats.c                                           :+:      :+:    :+:   */
+/*   intersections.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 13:50:05 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/07 17:47:53 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/05 11:32:55 by jvalkama          #+#    #+#             */
+/*   Updated: 2026/02/06 09:27:12 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
-#include "stdbool.h"
+#ifndef INTERSECTIONS_H
+# define INTERSECTIONS_H
 
-/*
-Currently compares all float values by reference to FLT_EQUAL.
-However, for very large floats,
-	epsilon may have to scale respectively to maintain precision.
-*/
-bool	is_float_equal(t_fl a, t_fl b)
-{
-	if (fabsf(a - b) < EPSILON)
-		return (true);
-	return (false);
-}
+// Intersection dot product indexes for returning and accessing in arrays. DISCR = discriminant.
+# define FIRST 0
+# define SECOND 1
+# define DISCR 2
+
+#endif

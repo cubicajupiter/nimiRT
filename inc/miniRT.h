@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/06 12:00:09 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/10 14:21:39 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // Tests
 // FIX: Remove before evals
 int		test_matrix(void);
-void	test_matrix_basics(void);
+int		test_rays(void);
 int		projectile_test(t_tree *t);
 int		transformation_test(t_tree *t);
 
@@ -32,8 +32,21 @@ int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 bool	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
+// Geometry
+int		sphere_new(t_sphere *dst, t_tuple center);
+int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
+int		hit(t_xs **hit, t_xs *intersections);
+int		intersections_get(t_xs **xs, t_sphere sphere, t_ray ray);
+int		intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray);
+
+// Camera
+int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
+int		position_get(t_tuple pos, t_ray ray, const t_fl time);
+int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
+
 // Primitives
-bool	is_float_equal(float a, float b);
+bool	is_float_equal(t_fl a, t_fl b);
+int		float_cmp(t_fl a, t_fl b);
 int		ft_dtor(float *dst, int src);
 int		ft_rtod(int *dst, float src);
 
@@ -97,5 +110,6 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		ft_error(int code, const char *message);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
+int		insertion_sort(t_xs **dst, t_xs *head);
 
 #endif
