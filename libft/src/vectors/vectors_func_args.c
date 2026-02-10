@@ -18,29 +18,27 @@ int	vec_iter(t_vec *src, void (*f)(void *))
 
 	i = 0;
 	if (!src || !src->data || src->elem_size == 0 || src->len == 0 || !f)
-		return (-1);
+		return (ft_liberror(EINVAL, "vec_iter"));
 	while (i < src->len)
 		(f)(src->data + src->elem_size * i++);
-	return (1);
+	return (SUCCESS);
 }
 
 int	vec_map(t_vec *dst, t_vec *src, void (*f)(void *))
 {
 	if (!src || !dst || dst == src || src->elem_size == 0 || !src->data || !f)
-		return (-1);
+		return (ft_liberror(EINVAL, "vec_map"));
 	if (src->len > dst->capacity)
 	{
 		if (!src->data)
-			if (vec_new(dst, src->len, src->elem_size) < 0)
-				return (-1);
+			if (vec_new(dst, src->len, src->elem_size) != SUCCESS)
+				return (ft_liberror(EINHERIT, "vec_map"));
 		if (src->data)
 			if (vec_resize(dst, src->len))
-				return (-1);
+				return (ft_liberror(EINHERIT, "vec_map"));
 	}
-	if (vec_copy(dst, src) < 0)
-		return (-1);
-	if (vec_iter(dst, f) < 0)
-		return (-1);
+	if (vec_copy(dst, src) != SUCCESS || vec_iter(dst, f) != SUCCESS)
+		return (ft_liberror(EINHERIT, "vec_map"));
 	return (1);
 }
 
@@ -50,12 +48,12 @@ int	vec_filter(t_vec *dst, t_vec *src, bool (*f)(void *))
 
 	i = 0;
 	if (!src || !dst || dst == src || src->elem_size == 0 || !src->data || !f)
-		return (-1);
+		return (ft_liberror(EINVAL, "vec_filter"));
 	while (i < src->len)
 	{
 		if (f(src->data + i * src->elem_size) == true)
-			if (vec_push(dst, src->data + i * src->elem_size) < 0)
-				return (-1);
+			if (vec_push(dst, src->data + i * src->elem_size) != SUCCESS)
+				return (ft_liberror(EINHERIT, "vec_filter"));
 		i++;
 	}
 	return (1);
@@ -67,7 +65,7 @@ int	vec_reduce(void *acc, t_vec *src, void (*f)(void *, void *))
 
 	i = 0;
 	if (!acc || !src || src->elem_size == 0 || !src->data || !f)
-		return (-1);
+		return (ft_liberror(EINVAL, "vec_reduce"));
 	while (i < src->len)
 		f(acc, src->data + src->elem_size * i++);
 	return (1);

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
+#include <asm-generic/errno.h>
 
 long long	ft_super_atoi(const char *nptr)
 {
@@ -39,18 +40,15 @@ long long	ft_super_atoi(const char *nptr)
 	return (res * sign);
 }
 
-bool	ft_atoi(const char *nptr, int *nbr)
+int	ft_atoi(const char *nptr, int *nbr)
 {
 	int	res;
 
 	if (!ft_nan(nptr))
-		return (false);
+		return (ft_liberror(EINVAL, "ft_atoi"));
 	res = ft_super_atoi(nptr);
 	if (res > INT_MAX || res < INT_MIN)
-		return (false);
-	else
-	{
-		*nbr = res;
-		return (true);
-	}
+		return (ft_liberror(EOVERFLOW, "ft_atoi"));
+	*nbr = res;
+	return (SUCCESS);
 }

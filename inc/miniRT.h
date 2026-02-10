@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/10 14:21:39 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:47:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,14 @@ int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
 int		shearing(t_matrix dst, t_fl src[6]);
-int		matrix_chain3(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
-int		matrix_chain4(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
+int		chain2_apply(t_matrix dst, t_matrix a);
+int		chain3_get(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		chain3_apply(t_matrix dst, t_matrix a, t_matrix b);
+int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+
+// Lighting
+int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);

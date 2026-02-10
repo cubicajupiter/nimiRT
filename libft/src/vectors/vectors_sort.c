@@ -43,11 +43,11 @@ int	vec_sort(t_vec *src, int (*f)(void *, void *))
 
 	i = 0;
 	if (!src || !src->data || src->elem_size == 0 || src->len == 0 || !f)
-		return (-1);
+		return (ft_liberror(EINVAL, "vec_sort"));
 	temp = malloc(sizeof(src->elem_size));
 	if (!temp)
-		return (-1);
-	while (vec_issort(src, f) == false)
+		return (ft_liberror(ENOMEM, "vec_sort"));
+	while (!vec_issort(src, f))
 	{
 		while (i < src->len - 1)
 		{
@@ -58,5 +58,5 @@ int	vec_sort(t_vec *src, int (*f)(void *, void *))
 		}
 	}
 	free(temp);
-	return (1);
+	return (SUCCESS);
 }
