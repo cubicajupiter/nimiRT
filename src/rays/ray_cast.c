@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/10 15:06:34 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/11 12:27:01 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@
     But it really only becomes an actual ray with position(), which applies
 	time.
 */
-<<<<<<< HEAD:src/camera/ray_cast.c
-int	ray_new(t_ray new, t_tuple origin, t_tuple direction)
-=======
 int	ray_new(t_ray dst, t_tuple origin, t_tuple direction)
->>>>>>> main:src/rays/ray_cast.c
 {
 	int		i;
 
@@ -31,13 +27,8 @@ int	ray_new(t_ray dst, t_tuple origin, t_tuple direction)
 	i = 0;
 	while (i < 4)
 	{
-<<<<<<< HEAD:src/camera/ray_cast.c
-		new[ORIGIN][i] = origin[i];
-		new[DIRECTION][i] = direction[i];
-=======
 		dst[ORIGIN][i] = origin[i];
 		dst[DIRECTION][i] = direction[i];
->>>>>>> main:src/rays/ray_cast.c
 		i++;
 	}
 	return (SUCCESS);

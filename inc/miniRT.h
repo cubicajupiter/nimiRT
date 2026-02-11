@@ -6,11 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/02/10 17:00:39 by jvalkama         ###   ########.fr       */
-=======
-/*   Updated: 2026/02/10 17:52:04 by thblack-         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2026/02/11 14:04:15 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +36,10 @@ void	commands(void *data);
 // Geometry
 int		sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
-<<<<<<< HEAD
-int		hit(t_xs **hit, t_xs *intersections);
-int		intersections_get(t_xs **xs, t_sphere *sphere, t_ray ray);
-int		intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray);
-
-// Camera
-int		ray_new(t_ray new, t_tuple origin, t_tuple direction);
-=======
 int		sphere_intersect_get(t_vec *xs, t_sphere *sphere, t_ray ray);
 
 // Rays
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
->>>>>>> main
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		hit(t_xs **hit, t_vec *xs);

@@ -207,7 +207,7 @@ int    test_rays(t_tree *t)
 	vector_new(vector3, 0, 0, 1);
 	ray_new(ray5, point3, vector3);
 	translation(transformation5, 5, 0, 0);
-	sphere_new(&sphere3, (t_tuple){0, 0, 0});
+	sphere_new(&sphere3, (t_trio){0, 0, 0}, 1.0f, t);
 	sphere_transform_set(&sphere3, transformation5);
 
 	intersect_get(intersect2, &sphere3, ray5);

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_new.c                                        :+:      :+:    :+:   */
+/*   light_sources.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 10:38:40 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/11 14:55:41 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/11 14:31:03 by jvalkama          #+#    #+#             */
+/*   Updated: 2026/02/11 14:31:04 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	color_new(t_trio c, t_fl r, t_fl g, t_fl b)
+int	point_light(t_tuple pos, t_trio intensity)
 {
-	if (!c)
-		return (ft_error(EINVAL, "color_new"));
-	c[R] = r;
-	c[G] = g;
-	c[B] = b;
-	return (SUCCESS);
+	;
 }

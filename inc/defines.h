@@ -120,6 +120,7 @@ typedef struct	s_object
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
+	t_material			*material;
 }						t_object;
 
 typedef struct s_xs
@@ -132,6 +133,14 @@ typedef struct s_xs
 	};
 	t_fl				t;
 }						t_xs;
+
+typedef struct	s_material
+{
+	t_fl				ambient;
+	t_fl				diffuse;
+	t_fl				specular;
+	t_fl				shininess;
+}						t_material;
 
 typedef struct	s_sphere
 {
