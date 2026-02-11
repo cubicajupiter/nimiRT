@@ -110,7 +110,7 @@ struct s_sphere
 	int					id; //All spheres have a unique ID number
 	t_tuple				center;
 	t_fl				radius;
-	t_matrix			transform;
+	t_matrix			transform; // Translation, scaling or shearing from its original locaiton
 };
 
 struct s_scene
