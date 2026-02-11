@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
+#include <asm-generic/errno.h>
 #include <stdint.h>
 
 void	vec_init(t_vec *dst, size_t init_len, size_t elem_size, t_arena *arena)
@@ -33,17 +34,17 @@ void	vec_set(t_vec *dst, uint8_t *data, size_t len, size_t capacity)
 	dst->capacity = capacity;
 }
 
-int	vec_exit(t_vec *dst)
+int	vec_exit(int code, const char *message, t_vec *dst)
 {
 	dst->capacity = 0;
 	dst->elem_size = 0;
-	return (FAIL);
+	return (ft_liberror(code, message));
 }
 
 int	vec_safe_size(size_t a, size_t b, size_t *dst)
 {
 	if (b != 0 && a > SIZE_MAX / b)
-		return (FAIL);
+		return (ft_liberror(EOVERFLOW, "vec_safe_size"));
 	*dst = a * b;
 	return (SUCCESS);
 }

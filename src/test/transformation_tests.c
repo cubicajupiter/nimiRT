@@ -154,7 +154,7 @@ void	chaining_test(void)
 	tuple_print(point_b);
 	printf("\n");
 	printf("OR chaining transformations together\n");
-	matrix_chain3(chain, rotate, scale, translate);
+	chain3_get(chain, rotate, scale, translate);
 	matrix_tuple_multiply_get(point_c, chain, point_a);
 	tuple_print(point_c);
 }

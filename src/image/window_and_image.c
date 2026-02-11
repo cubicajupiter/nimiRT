@@ -15,7 +15,7 @@
 
 int	window_init(mlx_t **window, mlx_image_t **image)
 {
-	*window = mlx_init(WIDTH, HEIGHT, "Fract-ol", FALSE);
+	*window = mlx_init(WIDTH, HEIGHT, "miniRT", FALSE);
 	if (!window || !*window)
 		ft_error(EFAULT, mlx_strerror(mlx_get_errno()));
 	*image = mlx_new_image(*window, WIDTH, HEIGHT);

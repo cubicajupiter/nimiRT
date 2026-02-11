@@ -21,6 +21,8 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <float.h>
+# include <errno.h>
+# include <string.h>
 
 // BUF_SIZE (USED IN GNL AND MINITALK)
 # define BUF_SIZE 1024
@@ -34,15 +36,18 @@
 // ARENA_BUF (DEFAULT INITIAL SIZE OF AN ARENA WHEN CREATED)
 # define ARENA_BUF 1024
 
-// CODES FOR ERROR TRACKING
-// SUCCESSFUL EXECUTION
-# define SUCCESS 0
-// UNSUCCEFUL EXECUTION
+// -- Return Values
+
+// Run checks
 # define FAIL 1
-// SUCCESSFUL EXECUTION
-# define OK 1
-// UNSUCCEFUL EXECUTION
-# define KO 0
+# define SUCCESS 0
+// Is checks
+# define TRUE 1
+# define FALSE 0
+// Error
+# define ERROR -1
+// Inherit errno from sub-function
+# define EINHERIT 0
 
 typedef struct s_list
 {
@@ -133,9 +138,13 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 
+// Messages
+void	ft_perror(void);
+int		ft_liberror(int code, const char *message);
+
 // NUMBERS
-bool	ft_atoi(const char *nptr, int *nbr);
-bool	ft_atof(const char *nptr, float	*nbr);
+int		ft_atoi(const char *nptr, int *nbr);
+int		ft_atof(const char *nptr, float	*nbr);
 char	*ft_itoa(int n);
 int		ft_power(int base, int exponent);
 int		ft_digitcount(unsigned int n, unsigned int base);
@@ -204,7 +213,7 @@ int		vec_sort(t_vec *src, int (*f)(void *, void *));
 void	vec_init(t_vec *dst, size_t init_len, size_t elem_size, t_arena *arena);
 void	vec_set(t_vec *dst, uint8_t *data, size_t len, size_t capacity);
 int		vec_safe_size(size_t a, size_t b, size_t *dst);
-int		vec_exit(t_vec *dst);
+int		vec_exit(int code, const char *message, t_vec *dst);
 
 // ARENA FUNCTIONS
 int		ft_arena_init(t_arena **arena, size_t capacity);

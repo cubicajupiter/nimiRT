@@ -29,6 +29,7 @@ PRINTING_DIR	= printing
 STRINGS_DIR		= strings
 VECTORS_DIR		= vectors
 ARENA_DIR		= arena
+MSG_DIR			= messages
 
 # ASCII
 ASCII_FILES	= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
@@ -46,6 +47,10 @@ LISTS_FILES = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 			  ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
 			  ft_lstmap.c
 LISTS		= $(addprefix $(LISTS_DIR)/, $(LISTS_FILES))
+
+# Messages
+MSG_FILES	= error.c
+MSG			= $(addprefix $(MSG_DIR)/, $(MSG_FILES))
 
 # MEMORY
 MEMORY_FILES = ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c \
@@ -82,7 +87,7 @@ ARENA		= $(addprefix $(ARENA_DIR)/, $(ARENA_FILES))
 
 # SOURCES AND OBJECTS
 SRC			= $(addprefix $(SRC_DIR)/, $(ASCII) $(GNL) $(LISTS) $(MEMORY) \
-			  $(NUMBERS) $(PRINTING) $(STRINGS) $(VECTORS) $(ARENA))
+			  $(MSG) $(NUMBERS) $(PRINTING) $(STRINGS) $(VECTORS) $(ARENA))
 OBJ			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 OBJ_SUB		= $(sort $(dir $(OBJ)))
 

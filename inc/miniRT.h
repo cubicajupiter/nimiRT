@@ -6,7 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/02/10 17:00:39 by jvalkama         ###   ########.fr       */
+=======
+/*   Updated: 2026/02/10 17:52:04 by thblack-         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +21,9 @@
 # include "headers.h"
 
 // Tests
-// FIX: Remove before evals
+// FIX: Remove before evaluations
 int		test_matrix(void);
-int		test_rays(void);
+int		test_rays(t_tree *t);
 int		projectile_test(t_tree *t);
 int		transformation_test(t_tree *t);
 void	test_draw_sphere(t_tree *tree);
@@ -34,16 +38,26 @@ bool	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
 // Geometry
-int		sphere_new(t_sphere *dst, t_tuple center);
+int		sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
+<<<<<<< HEAD
 int		hit(t_xs **hit, t_xs *intersections);
 int		intersections_get(t_xs **xs, t_sphere *sphere, t_ray ray);
 int		intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray);
 
 // Camera
 int		ray_new(t_ray new, t_tuple origin, t_tuple direction);
+=======
+int		sphere_intersect_get(t_vec *xs, t_sphere *sphere, t_ray ray);
+
+// Rays
+int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
+>>>>>>> main
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
+int		hit(t_xs **hit, t_vec *xs);
+int		intersections_get(t_vec **dst, t_ray ray, t_tree *t);
+int		intersect_get(t_vec *xs, t_object *obj, t_ray ray);
 
 // Primitives
 bool	is_float_equal(t_fl a, t_fl b);
@@ -75,8 +89,14 @@ int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
 int		shearing(t_matrix dst, t_fl src[6]);
-int		matrix_chain3(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
-int		matrix_chain4(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
+int		chain2_apply(t_matrix dst, t_matrix a);
+int		chain3_get(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+int		chain3_apply(t_matrix dst, t_matrix a, t_matrix b);
+int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
+
+// Lighting
+int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
