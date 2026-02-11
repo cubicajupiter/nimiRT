@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/10 14:21:39 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 17:00:39 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		test_matrix(void);
 int		test_rays(void);
 int		projectile_test(t_tree *t);
 int		transformation_test(t_tree *t);
+void	test_draw_sphere(t_tree *tree);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
@@ -36,11 +37,11 @@ void	commands(void *data);
 int		sphere_new(t_sphere *dst, t_tuple center);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		hit(t_xs **hit, t_xs *intersections);
-int		intersections_get(t_xs **xs, t_sphere sphere, t_ray ray);
+int		intersections_get(t_xs **xs, t_sphere *sphere, t_ray ray);
 int		intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray);
 
 // Camera
-int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
+int		ray_new(t_ray new, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/10 12:23:11 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 15:06:34 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
     Origin is a point tuple, and Direction is a vector tuple.
     But it really only becomes an actual ray with position(), which applies time.
 */
-int	ray_new(t_ray ray, t_tuple origin, t_tuple direction)
+int	ray_new(t_ray new, t_tuple origin, t_tuple direction)
 {
 	int		i;
 
@@ -28,8 +28,8 @@ int	ray_new(t_ray ray, t_tuple origin, t_tuple direction)
 	i = 0;
 	while (i < 4)
 	{
-		ray[ORIGIN][i] = origin[i];
-		ray[DIRECTION][i] = direction[i];
+		new[ORIGIN][i] = origin[i];
+		new[DIRECTION][i] = direction[i];
 		i++;
 	}
 	return (SUCCESS);

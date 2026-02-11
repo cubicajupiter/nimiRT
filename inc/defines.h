@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 19:54:26 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 18:00:19 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ files.
 # define ERROR -1
 
 // Window & Image
-# define WIDTH 2000
-# define HEIGHT 1600
+// # define WIDTH 2000
+// # define HEIGHT 1600
+# define WIDTH 1000
+# define HEIGHT 1000
 
 // Tuples
 // Ray data indexes

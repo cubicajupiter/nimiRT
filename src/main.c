@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/10 12:23:16 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 15:27:57 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		//test_matrix();
-		test_rays();
+		//test_rays();
+		test_draw_sphere(&t);
 		return (0);
 		// parse();    //      -> check & fetch scene
 		// initialise();   //  -> wrap up a handy struct(s)

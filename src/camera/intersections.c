@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/10 11:52:15 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 19:13:01 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	hit(t_xs **hit, t_xs *xs)
 
  // aggregates all intersections found for the ray per object in the world, sorting by t value. 
  // t_scene *world will replace sphere. then loop through all objects in world to find any xs.
-int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
+int	intersections_get(t_xs **xs, t_sphere *sphere, t_ray ray)
 {
 	t_xs		*new;
 	t_xs		*tmp;
@@ -48,9 +48,12 @@ int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
 		return (ft_error(EINVAL, "intersections_get"));
 	new = malloc(2 * sizeof(t_xs));	//malloc here so the new intersections persist
 	tmp = *xs;
-	while (tmp->next)
-		tmp = tmp->next;
-	if (intersect_get(new, &sphere, ray)) //once sphere is replaced with world, the loop should be: while (world_objects) {if intersect_get(){;}}
+	if (tmp)
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+	}
+	if (intersect_get(new, sphere, ray)) //once sphere is replaced with world, the loop should be: while (world_objects) {if intersect_get(){;}}
 	{
 		if (tmp == NULL)
 		{
@@ -67,10 +70,10 @@ int	intersections_get(t_xs **xs, t_sphere sphere, t_ray ray)
 	}
 	else
 		free(new);	// FREE here for now.
-	tmp->next = NULL;
-	tmp = *xs;
-	*xs = NULL;
-	insertion_sort(xs, tmp); // sorting by t value.
+	//tmp->next = NULL;
+	//tmp = *xs;
+	// *xs = NULL;
+	// insertion_sort(xs, tmp); // sorting by t value.
 	return (SUCCESS);
 }
 
@@ -83,28 +86,8 @@ int	intersect_get(t_xs *dst, t_sphere *sphere, t_ray ray)
 
 	if (!dst || !sphere || !ray)
 		return (ERROR);
-
-	matrix_invert(inverted, sphere->transform);		//INVERSION
-
-	printf("Sphere transform matrix:\n");
-	matrix_print(sphere->transform);
-	printf("\nInverted Sphere transform matrix:\n"); //NOTE: the signs might be an issue!!
-	matrix_print(inverted);
-
-	ray_transform_get(ray2, ray, inverted);		//RAY TRANSFORMATION
-
-	printf("Ray origin:\n");
-	tuple_print(ray[ORIGIN]);
-	printf("\nRay direction:\n");
-	tuple_print(ray[DIRECTION]);
-
-	//normalize_apply(ray2[DIRECTION]);		IN CASE OF SCALING, NO NORMALIZATION NEEDED...
-
-	printf("\nRay2 origin:\n");
-	tuple_print(ray2[ORIGIN]);
-	printf("\nRay2 direction:\n");
-	tuple_print(ray2[DIRECTION]);
-
+	matrix_invert(inverted, sphere->transform);
+	ray_transform_get(ray2, ray, inverted);
 	if (time_val_get(time, sphere, ray2))
 	{
 		dst[0].data.t = time[0];
