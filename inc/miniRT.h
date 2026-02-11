@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/10 17:52:04 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/11 16:21:09 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ int		test_matrix(void);
 int		test_rays(t_tree *t);
 int		projectile_test(t_tree *t);
 int		transformation_test(t_tree *t);
+
+// Initialization
+int		init(t_tree *t, char *rt_file);
+int		parse_rt(t_tree *t, char *rt_file);
+int		parse_main_vars(t_tree *t, char *line);
+int		parse_objects(t_tree *t, char *line);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
@@ -114,9 +120,11 @@ int		vector_cross(t_tuple dst, t_tuple a, t_tuple b);
 int		color_new(t_trio c, t_fl r, t_fl g, t_fl b);
 int		color_copy(t_trio dst, t_trio src);
 int		color_trio_to_uint(uint32_t *color, t_trio c);
+int		color_uint_to_trio(t_trio c, int *color);
 
 // Utilities
 int		ft_error(int code, const char *message);
+int		ft_atotrio(t_trio dst, const char *nptr);
 int		color_print(t_trio src);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
