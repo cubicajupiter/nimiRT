@@ -166,39 +166,27 @@ int    test_rays(t_tree *t)
 	printf("\n[ SCALED RAY INTERSECTION ]\n");
 	t_tuple		point2;
 	t_tuple		vector2;
-	t_tuple		center;
-	t_scene		scene;
-	t_object	object;
 	
 	t_ray		ray4;
 	t_matrix	transformation4;
-	t_sphere	sphere2;
-	// t_xs		intersect[2];
-	scene.xs = NULL;
-	scene.objects = NULL;
-	if (vec_alloc(&scene.objects, t->a_buf) != SUCCESS)
-		return (ERROR);
-	vec_new(scene.objects, 0, sizeof(t_object));
+	t_sphere	*sphere2;
+	sphere2 = NULL;
 	printf("Intersecting a transformed sphere with a ray:\n");
 	point_new(point2, 0, 0, -5);
-	point_new(center, 0, 0, 0);
 	vector_new(vector2, 0, 0, 1);
 	ray_new(ray4, point2, vector2);
 	scaling(transformation4, 2, 2, 2);
-	sphere_new(&sphere2, center);
-	object.obj_type = SPHERE;
-	object.sphere = &sphere2;
-	vec_push(scene.objects, &object);
-	sphere_transform_set(&sphere2, transformation4);
-	intersections_get(&scene, ray4, t);
+	sphere_new(&sphere2, (t_trio){0, 0, 0}, 1.0f, t);
+	matrix_copy(sphere2->transform, transformation4);
+	intersections_get(NULL, ray4, t);
 
 	t_xs	*hit;
 	size_t	i;
 
 	i = 0;
-	while (i < scene.xs->len)
+	while (i < t->scene->xs->len)
 	{
-		hit = vec_get(scene.xs, i);
+		hit = vec_get(t->scene->xs, i);
 		printf("xs[%zu]: %f\n", i, hit->t);
 		i++;
 	}

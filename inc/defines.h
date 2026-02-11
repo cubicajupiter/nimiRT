@@ -96,15 +96,15 @@ typedef struct	s_tree
 	mlx_image_t			*image;
 	t_arena				*a_sys;
 	t_arena				*a_buf;
+	t_scene				*scene;
 }						t_tree;
 
-typedef struct	s_sphere
+typedef struct	s_scene
 {
-	int					id; //All spheres have a unique ID number
-	t_tuple				center;
-	t_fl				radius;
-	t_matrix			transform; // Translation, scaling or shearing from its original locaiton
-}						t_sphere;
+	t_vec				*objects;
+	t_vec				*xs;
+	//more
+}						t_scene;
 
 typedef struct	s_object
 {
@@ -115,13 +115,6 @@ typedef struct	s_object
 		t_plane			*plane;
 	};
 }						t_object;
-
-typedef struct	s_scene
-{
-	t_vec				*objects;
-	t_vec				*xs;
-	//more
-}						t_scene;
 
 typedef struct s_xs
 {
@@ -134,4 +127,11 @@ typedef struct s_xs
 	t_fl				t;
 }						t_xs;
 
+typedef struct	s_sphere
+{
+	size_t				id; //All spheres have a unique ID number
+	t_tuple				center;
+	t_fl				radius;
+	t_matrix			transform; // Translation, scaling or shearing from its original locaiton
+}						t_sphere;
 #endif

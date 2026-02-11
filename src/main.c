@@ -32,12 +32,35 @@ int	program_exit(t_tree *t)
 	return (SUCCESS);
 }
 
+int	scene_init(t_tree *t)
+{
+	t_scene	*new;
+	t_vec	*objects;
+	t_vec	*xs;
+
+	new = NULL;
+	objects = NULL;
+	xs = NULL;
+	if (ft_arena_alloc(t->a_buf, (void **)&new, sizeof(t_scene)) != SUCCESS
+		|| ft_memset(new, 0, sizeof(t_scene)) == NULL
+		|| vec_alloc(&objects, t->a_buf) != SUCCESS
+		|| vec_new(objects, 0, sizeof(t_object)) != SUCCESS
+		|| vec_alloc(&xs, t->a_buf) !=  SUCCESS
+		|| vec_new(xs, 0, sizeof(t_xs)) != SUCCESS)
+		return (ft_error(EINHERIT, "scene_init"));
+	new->objects = objects;
+	new->xs = xs;
+	t->scene = new;
+	return (SUCCESS);
+}
+
 int	main(int ac, char **av)
 {
 	t_tree	tree;
 
 	(void)av;
 	program_init(&tree);
+	scene_init(&tree);
 	if (ac == 2)
 	{
 		//test_matrix();
