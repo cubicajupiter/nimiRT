@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trio_scale.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:06:13 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 14:23:27 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:51:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,15 @@ int	trio_divide_apply(t_trio dst, t_trio c)
 	dst[0] /= c[0];
 	dst[1] /= c[1];
 	dst[2] /= c[2];
+	return (SUCCESS);
+}
+
+int	trio_multiply_scalar_get(t_trio dst, t_fl scalar, t_trio src)
+{
+	if (!dst || !src)
+		return (ft_error(EINVAL, "trio_multiply_get"));
+	dst[0] = src[0] * scalar;
+	dst[1] = src[1] * scalar;
+	dst[2] = src[2] * scalar;
 	return (SUCCESS);
 }

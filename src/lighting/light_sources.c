@@ -6,13 +6,14 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 14:31:03 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 14:31:04 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:19:19 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	point_light(t_tuple pos, t_trio intensity)
+int	point_light_new(t_light *dst, t_tuple position, t_trio intensity)
 {
-	;
+	tuple_copy(dst->pos, position);
+	color_copy(dst->intensity, intensity);
 }

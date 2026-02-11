@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 14:06:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 14:54:47 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/11 15:39:40 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	reflection_specular(t_tuple dst, t_tuple in, t_tuple normal)
 
 int	material_new(t_material *dst)
 {
-	color_new(dst->color);
 	dst->ambient = 0.1;
 	dst->diffuse = 0.9;
 	dst->specular = 0.9;

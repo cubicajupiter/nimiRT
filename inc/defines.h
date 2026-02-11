@@ -6,11 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/02/10 18:00:19 by jvalkama         ###   ########.fr       */
-=======
-/*   Updated: 2026/02/10 17:22:46 by thblack-         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2026/02/11 17:14:53 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +117,14 @@ typedef struct	s_object
 		t_plane			*plane;
 	};
 	t_material			*material;
+	// t_???			texture;
 }						t_object;
+
+typedef struct	s_light
+{
+	t_tuple				pos;
+	t_trio				intensity;
+}						t_light;
 
 typedef struct s_xs
 {
@@ -132,14 +135,16 @@ typedef struct s_xs
 		t_plane			*plane;
 	};
 	t_fl				t;
+	
 }						t_xs;
 
 typedef struct	s_material
 {
+	t_trio				color;
+	t_fl				shininess;
 	t_fl				ambient;
 	t_fl				diffuse;
 	t_fl				specular;
-	t_fl				shininess;
 }						t_material;
 
 typedef struct	s_sphere

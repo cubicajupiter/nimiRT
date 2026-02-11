@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/11 14:04:15 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/11 16:28:10 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 // Lighting
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 
+// Reflections
+int		material_new(t_material *dst);
+int		reflection(t_tuple dst, t_tuple in, t_tuple normal);
+int		reflection_ambient(t_tuple dst, t_tuple in, t_tuple normal);
+int		reflection_diffuse(t_tuple dst, t_tuple in, t_tuple normal);
+int		reflection_specular(t_tuple dst, t_tuple in, t_tuple normal);
+
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
 int		vector_new(t_tuple tuple, float x, float y, float z);
@@ -112,12 +119,26 @@ int		vector_dot(float *dot, t_tuple a, t_tuple b);
 int		vector_cross(t_tuple dst, t_tuple a, t_tuple b);
 
 // Color
+int		color_new(t_trio c, t_fl r, t_fl g, t_fl b);
+int		color_copy(t_trio dst, t_trio src);
 int		color_trio_to_uint(uint32_t *color, t_trio c);
 
 // Utilities
 int		ft_error(int code, const char *message);
+int		color_print(t_trio src);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
+
+// Trios
+int		trio_multiply_get(t_trio dst, t_trio a, t_trio b);
+int		trio_multiply_apply(t_trio dst, t_trio c);
+int		trio_multiply_scalar_get(t_trio dst, t_fl scalar, t_trio src);
+int		trio_divide_get(t_trio dst, t_trio a, t_trio b);
+int		trio_divide_apply(t_trio dst, t_trio c);
+int		trio_add_get(t_trio dst, t_trio a, t_trio b);
+int		trio_add_apply(t_trio dst, t_trio c);
+int		trio_minus_get(t_trio dst, t_trio a, t_trio b);
+int		trio_minus_apply(t_trio dst, t_trio c);
 
 #endif
