@@ -18,6 +18,8 @@ A 42-project implementing a minimal ray tracer.
   - Cylinder
 - Object transformations:
   - Translation
+  - Scaling
+  - Shearing
   - Rotation (except spheres and lights)
 - Lighting:
   - Ambient lighting
