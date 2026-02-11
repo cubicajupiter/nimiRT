@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:38:36 by thblack-          #+#    #+#             */
-/*   Updated: 2025/10/06 13:41:03 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/11 16:05:01 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ bool	ft_naf(const char *nptr)
 		nptr++;
 	if (*nptr == '.')
 		nptr++;
-	while (ft_isdigit(*nptr))
-		nptr++;
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr)
-		return (false);
-	else
+	if (ft_isdigit(*nptr))
 		return (true);
+	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:32:41 by thblack-          #+#    #+#             */
-/*   Updated: 2025/11/19 22:34:50 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/11 14:42:05 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ typedef struct s_vec
 // ASCII
 // Checks if input int 'c' is alphabetic character in ascii
 int		ft_isalpha(int c);
+// Checks if input int 'c' is an uppercase alphabetic character in ascii
+int		ft_isupper(int c);
+// Checks if input int 'c' is a lowercase alphabetic character in ascii
+int		ft_islower(int c);
 // Checks if input int 'c' is numeric character in ascii
 int		ft_isdigit(int c);
 // Checks if input int 'c' is numeric character or sign in ascii

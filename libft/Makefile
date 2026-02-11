@@ -6,7 +6,7 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2025/11/19 22:35:11 by thblack-         ###   ########.fr        #
+#    Updated: 2026/02/11 14:42:24 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ MSG_DIR			= messages
 ASCII_FILES	= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			  ft_isprint.c ft_toupper.c ft_tolower.c ft_isspace.c ft_isnum.c \
 			  ft_isstr.c ft_isarr.c ft_isfloat.c ft_strisnum.c \
-			  ft_strisfloat.c ft_isleadingzero.c ft_issign.c
+			  ft_strisfloat.c ft_isleadingzero.c ft_issign.c ft_isupper.c \
+			  ft_islower.c
 ASCII		= $(addprefix $(ASCII_DIR)/, $(ASCII_FILES))
 
 # GNL
