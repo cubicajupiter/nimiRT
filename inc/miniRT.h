@@ -111,10 +111,13 @@ int		vector_dot(float *dot, t_tuple a, t_tuple b);
 int		vector_cross(t_tuple dst, t_tuple a, t_tuple b);
 
 // Color
+int		color_new(t_trio c, t_fl r, t_fl g, t_fl b);
+int		color_copy(t_trio dst, t_trio src);
 int		color_trio_to_uint(uint32_t *color, t_trio c);
 
 // Utilities
 int		ft_error(int code, const char *message);
+int		color_print(t_trio src);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);

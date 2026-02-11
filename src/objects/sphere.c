@@ -24,12 +24,13 @@ int	sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t)
 	if (!pos || !t)
 		return (ft_error(EINVAL, "sphere_new"));
 	sphere = NULL;
-	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS)
+	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
+		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
 	object.obj_type = SPHERE;
 	object.sphere = sphere;
-	object.sphere->id = t->scene->objects->len;
-	object.sphere->radius = radius;
+	sphere->id = t->scene->objects->len;
+	sphere->radius = radius;
 	if (point_new(sphere->center, 0, 0, 0) != SUCCESS
 		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)

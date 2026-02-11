@@ -21,3 +21,13 @@ int	color_new(t_trio c, t_fl r, t_fl g, t_fl b)
 	c[B] = b;
 	return (SUCCESS);
 }
+
+int	color_copy(t_trio dst, t_trio src)
+{
+	if (!dst || !src)
+		return (ft_error(EINVAL, "trio_copy"));
+	dst[R] = src[R];
+	dst[G] = src[G];
+	dst[B] = src[B];
+	return (SUCCESS);
+}

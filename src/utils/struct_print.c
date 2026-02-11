@@ -35,6 +35,28 @@ static int	float_print(t_fl fl)
 	return (SUCCESS);
 }
 
+int	color_print(t_trio src)
+{
+	int	i;
+
+	if (!src)
+		return (ft_error(EINVAL, "color_print"));
+	if (printf("color") < 0)
+		return (ft_error(0, "printf"));
+	i = 0;
+	while (i < 3)
+	{
+		if (printf("\t") < 0)
+			return (ft_error(0, "printf"));
+		if (float_print(src[i]) != SUCCESS)
+			return (ERROR);
+		i++;
+	}
+	if (printf("\n") < 0)
+		return (ft_error(0, "printf"));
+	return (SUCCESS);
+}
+
 int	tuple_print(t_tuple src)
 {
 	int	i;
