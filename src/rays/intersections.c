@@ -42,7 +42,7 @@ static int	sort_ascending(void *a, void *b)
 
 // Loops through all objects in the scene, gets and pushes all intersections to
 // the scene->xs vector array, then sorts in ascending order.
-// FIXME: UNTESTED!
+// FIXME: LIMITED TESTING!
 int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 {
 	size_t		i;
