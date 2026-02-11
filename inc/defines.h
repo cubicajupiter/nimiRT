@@ -114,6 +114,9 @@ typedef struct	s_object
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
+	t_trio				color;
+	// t_???			texture;
+	// t_???			material;
 }						t_object;
 
 typedef struct s_xs
