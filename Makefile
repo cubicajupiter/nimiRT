@@ -42,7 +42,7 @@ DEPS		= $(OBJ:.o=.d)
 
 # TOOLS
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 CGENERAL	= -O2
 CDEBUG		= -g3 -O0
 MAKE_QUIET	= --no-print-directory

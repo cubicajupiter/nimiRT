@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/09 19:54:26 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/10 17:22:46 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ files.
 // Epsilon for float margin of error.
 # define EPSILON 1e-5 // NOTE: This margin of error might cause bugs later.
 
+// Initial assumed number of intersections per array
+# define INIT_XS 4
+
 // PI
 # define PI 3.14159
 
@@ -71,7 +74,7 @@ typedef t_tuple			t_ray[2];
 typedef float			t_cylinder[4];
 typedef float			t_plane[2];
 
-typedef enum e_obj_t		t_obj_t;
+typedef enum e_obj		t_obj;
 
 typedef struct s_tree		t_tree;
 typedef struct s_scene		t_scene;
@@ -79,52 +82,56 @@ typedef struct s_sphere		t_sphere;
 typedef struct s_intersect	t_intersect;
 typedef struct s_xs			t_xs;
 
-enum e_obj_t
+enum	e_obj
 {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
 };
 
 // Structs
-struct s_tree
+typedef struct	s_tree
 {
 	mlx_t				*window;
 	mlx_image_t			*image;
-};
+	t_arena				*a_sys;
+	t_arena				*a_buf;
+	t_scene				*scene;
+}						t_tree;
 
-struct s_sphere
+typedef struct	s_scene
 {
-	int					id; //All spheres have a unique ID number
-	t_tuple				center;
-	t_fl				radius;
-	t_matrix			transform; // Translation, scaling or shearing from its original locaiton
-};
-
-struct s_scene
-{
-	void				*object_array;
-	t_xs				*intersections;
+	t_vec				*objects;
+	t_vec				*xs;
 	//more
-};
+}						t_scene;
 
-struct s_intersect
+typedef struct	s_object
 {
-	t_obj_t				obj_type;
+	t_obj				obj_type;
+	union {
+		t_sphere		*sphere;
+		t_cylinder		*cylinder;
+		t_plane			*plane;
+	};
+}						t_object;
+
+typedef struct s_xs
+{
+	t_obj				obj_type;
 	union {
 		t_sphere		*sphere;
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
 	t_fl				t;
-};
+}						t_xs;
 
-struct s_xs
+typedef struct	s_sphere
 {
-	t_intersect			data;
-	t_xs				*next;
-};
-
-
-
+	size_t				id; //All spheres have a unique ID number
+	t_tuple				center;
+	t_fl				radius;
+	t_matrix			transform; // Translation, scaling or shearing from its original locaiton
+}						t_sphere;
 #endif
