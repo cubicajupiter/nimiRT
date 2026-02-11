@@ -1,8 +1,7 @@
 *.json
 *.supp
-/obj
-/libft/obj
+*obj/
 .cache
 *.a
 miniRT
-/MLX42
+MLX42/
