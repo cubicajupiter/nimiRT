@@ -20,11 +20,7 @@ bool	ft_naf(const char *nptr)
 		nptr++;
 	if (!ft_isdigit(*nptr) && *nptr != '.')
 		return (false);
-	while (ft_isdigit(*nptr))
-		nptr++;
-	if (*nptr == '.')
-		nptr++;
-	if (ft_isdigit(*nptr))
-		return (true);
-	return (false);
+	if (*nptr == '.' && (!nptr[1] || !ft_isdigit(nptr[1])))
+		return (false);
+	return (true);
 }
