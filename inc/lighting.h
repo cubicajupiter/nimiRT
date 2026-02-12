@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:56:38 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 15:57:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 10:54:50 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 
 # define EYE 0
 # define NORMAL 1
+
+
 
 #endif

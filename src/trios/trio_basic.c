@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:58:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/11 16:49:51 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 12:05:29 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	trio_minus_apply(t_trio dst, t_trio c)
 	return (SUCCESS);
 }
 
-int	trio_chain3_add_get(t_trio dst, t_trio a, t_trio b, t_trio c)
+int	trio_add3(t_trio dst, t_trio a, t_trio b, t_trio c)
 {
 	t_trio		sum;
 

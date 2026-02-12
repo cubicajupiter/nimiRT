@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 17:14:53 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 12:11:48 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,17 +135,26 @@ typedef struct s_xs
 		t_plane			*plane;
 	};
 	t_fl				t;
-	
 }						t_xs;
 
 typedef struct	s_material
 {
+	t_shader			*cs;
 	t_trio				color;
-	t_fl				shininess;
-	t_fl				ambient;
-	t_fl				diffuse;
-	t_fl				specular;
+	t_fl				shine;
+	t_fl				ambi_l;
+	t_fl				diff_l;
+	t_fl				spec_l;
 }						t_material;
+
+typedef struct	s_shader
+{
+	t_trio				ambi;
+	t_trio				diff;
+	t_trio				spec;
+	t_trio				comb;
+	t_trio				eff_color;
+}						t_shader;
 
 typedef struct	s_sphere
 {

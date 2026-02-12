@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light_sources.c                                    :+:      :+:    :+:   */
+/*   materials.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/11 14:31:03 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 17:16:18 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/12 10:49:12 by jvalkama          #+#    #+#             */
+/*   Updated: 2026/02/12 11:11:21 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	point_light_new(t_light *dst, t_tuple position, t_trio intensity)
+int	material_new(t_material *dst)
 {
-	tuple_copy(dst->pos, position);
-	color_copy(dst->intensity, intensity);
+	//alloc material object
+	//dst->shader = alloc shader object
+	dst->ambient_light = 0.1;
+	dst->diffuse_light = 0.9;
+	dst->specular_light = 0.9;
+	dst->shininess = 200.0;
 }
