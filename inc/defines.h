@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 12:11:48 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:13:32 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,20 +139,20 @@ typedef struct s_xs
 
 typedef struct	s_material
 {
-	t_shader			*cs;
+	t_shader			*shader;
 	t_trio				color;
 	t_fl				shine;
-	t_fl				ambi_l;
-	t_fl				diff_l;
-	t_fl				spec_l;
+	t_fl				ambi_light;
+	t_fl				diff_light;
+	t_fl				spec_light;
 }						t_material;
 
 typedef struct	s_shader
 {
-	t_trio				ambi;
-	t_trio				diff;
-	t_trio				spec;
-	t_trio				comb;
+	t_trio				ambi_refl;
+	t_trio				diff_refl;
+	t_trio				spec_refl;
+	t_trio				combined;
 	t_trio				eff_color;
 }						t_shader;
 
