@@ -134,6 +134,7 @@ int		color_print(t_trio src);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
+int		scene_data_print(t_tree *t);
 
 // Trios
 int		trio_multiply_get(t_trio dst, t_trio a, t_trio b);
