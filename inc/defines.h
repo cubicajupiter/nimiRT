@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 14:13:32 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:33:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,7 @@ typedef struct	s_light
 typedef struct s_xs
 {
 	t_obj				obj_type;
-	union {
-		t_sphere		*sphere;
-		t_cylinder		*cylinder;
-		t_plane			*plane;
-	};
+	t_object			*object;
 	t_fl				t;
 }						t_xs;
 

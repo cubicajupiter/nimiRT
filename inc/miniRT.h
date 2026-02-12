@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/11 17:16:22 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:20:11 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,10 @@ int		chain3_apply(t_matrix dst, t_matrix a, t_matrix b);
 int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 
 // Lighting
+int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
-
-// Reflections
 int		material_new(t_material *dst);
-int		reflection(t_tuple dst, t_tuple in, t_tuple normal);
-int		reflection_ambient(t_tuple dst, t_tuple in, t_tuple normal);
-int		reflection_diffuse(t_tuple dst, t_tuple in, t_tuple normal);
-int		reflection_specular(t_tuple dst, t_tuple in, t_tuple normal);
+int		lighting(t_material *mat, t_tuple point, t_light *light, t_tuple *vectors);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:57:03 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 14:16:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 16:22:55 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
 	if (light)
 	{
 		scalar = mat->spec_light * pow(eye_dot, mat->shine);
-		trio_multiply_scalar_get(mat->shader->spec_refl, scalar, light->intensity);
+		trio_multiply_scalar_get(mat->shader->spec_refl, \
+scalar, light->intensity);
 	}
 	else
 		color_new(mat->shader->spec_refl, 0, 0, 0);
@@ -55,5 +56,6 @@ void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
 
 void	reflecton_ambient(t_material *mat, t_light *light)
 {
-	trio_multiply_get(mat->shader->ambi_refl, mat->shader->eff_color, mat->ambi_light);
+	trio_multiply_get(mat->shader->ambi_refl, \
+mat->shader->eff_color, mat->ambi_light);
 }
