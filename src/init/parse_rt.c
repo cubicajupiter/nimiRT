@@ -16,10 +16,14 @@ static int	parse_line(t_tree *t, char *line)
 {
 	while (ft_isspace(*line))
 		line++;
-	if (ft_isupper(*line))
+	if (!line)
+		return (SUCCESS);
+	else if (ft_isupper(*line))
 		return (parse_main_vars(t, line));
 	else if (ft_islower(*line))
 		return (parse_objects(t, line));
+	else
+		return (FAIL);
 	return (SUCCESS); // FIXME: Delete after other functions created
 }
 

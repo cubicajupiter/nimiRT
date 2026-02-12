@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/10 14:20:02 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:39:50 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t)
 // Inverts the sphere transform matrix and multiplies the result with the ray,
 // then runs sphere_intersect_math() fetching the two intersections (always
 // two even if ray is tangential to edge of sphere).
-int	sphere_intersect_get(t_vec *xs, t_sphere *sphere, t_ray ray)
+int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 {
 	t_ray		ray2;
 	t_matrix	inversion;
@@ -60,16 +60,16 @@ int	sphere_intersect_get(t_vec *xs, t_sphere *sphere, t_ray ray)
 	t_xs		tmp1;
 	t_xs		tmp2;
 
-	matrix_invert(inversion, sphere->transform);
+	matrix_invert(inversion, object->sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (sphere_intersect_math(time, sphere, ray2))
+	if (sphere_intersect_math(time, object->sphere, ray2))
 	{
 		tmp1.t = time[0];
-		tmp1.sphere = sphere;
+		tmp1.object = object;
 		if (vec_push(xs, &tmp1) != SUCCESS)
 			return (ft_error(EINHERIT, "intersect_get"));
 		tmp2.t = time[1];
-		tmp2.sphere = sphere;
+		tmp2.object = object;
 		if (vec_push(xs, &tmp2) != SUCCESS)
 			return (ft_error(EINHERIT, "intersect_get"));
 	}

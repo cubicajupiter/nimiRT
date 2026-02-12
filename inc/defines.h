@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 14:09:47 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:37:10 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ files.
 typedef float			t_fl; // Custom float type
 typedef uint32_t		t_uint; // Custom uint type
 typedef int_fast16_t	t_fastint; // For performance critical things.
-typedef float			t_tuple[4];
-typedef float			t_trio[3];
-typedef float			t_matrix[4][4];
-typedef float			t_matrix2[2][2];
-typedef float			t_matrix3[3][3];
+typedef t_fl			t_tuple[4];
+typedef t_fl			t_trio[3];
+typedef t_fl			t_matrix[4][4];
+typedef t_fl			t_matrix2[2][2];
+typedef t_fl			t_matrix3[3][3];
 typedef t_tuple			t_ray[2];
-typedef float			t_cylinder[4];
-typedef float			t_plane[2];
+typedef t_fl			t_cylinder[4];
+typedef t_fl			t_plane[2];
 
 typedef enum e_obj		t_obj;
 
@@ -100,7 +100,7 @@ typedef struct	s_input
 	t_trio				amb_color;
 	t_tuple				cam_point;
 	t_tuple				cam_vector;
-	t_fastint			cam_fov;
+	int					cam_fov;
 	t_tuple				lig_point;
 	t_fl				lig_ratio;
 	t_trio				lig_color;
@@ -121,7 +121,7 @@ typedef struct	s_tree
 typedef struct	s_camera
 {
 	t_ray				ray;
-	t_fastint			fov;
+	int					fov;
 }						t_camera;
 
 typedef struct	s_light
@@ -161,12 +161,7 @@ typedef struct	s_object
 
 typedef struct s_xs
 {
-	t_obj				obj_type;
-	union {
-		t_sphere		*sphere;
-		t_cylinder		*cylinder;
-		t_plane			*plane;
-	};
+	t_object			*object;
 	t_fl				t;
 }						t_xs;
 

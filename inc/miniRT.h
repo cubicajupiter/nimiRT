@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/11 16:21:09 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:38:50 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	commands(void *data);
 // Geometry
 int		sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
-int		sphere_intersect_get(t_vec *xs, t_sphere *sphere, t_ray ray);
+int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 
 // Rays
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
@@ -125,6 +125,7 @@ int		color_uint_to_trio(t_trio c, int *color);
 // Utilities
 int		ft_error(int code, const char *message);
 int		ft_atotrio(t_trio dst, const char *nptr);
+int		ft_atotuple(t_tuple dst, const char *nptr);
 int		color_print(t_trio src);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
