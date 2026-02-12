@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 13:39:22 by thblack-          #+#    #+#             */
-/*   Updated: 2025/10/06 13:40:45 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/11 16:05:37 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,7 @@ bool	ft_nan(const char *nptr)
 		nptr++;
 	if (ft_issign(*nptr))
 		nptr++;
-	if (!ft_isdigit(*nptr))
-		return (false);
-	while (ft_isdigit(*nptr))
-		nptr++;
-	while (ft_isspace(*nptr))
-		nptr++;
-	if (*nptr)
-		return (false);
-	else
+	if (ft_isdigit(*nptr))
 		return (true);
+	return (false);
 }

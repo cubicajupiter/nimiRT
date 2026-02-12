@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:33:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:50:47 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,22 @@ files.
 typedef float			t_fl; // Custom float type
 typedef uint32_t		t_uint; // Custom uint type
 typedef int_fast16_t	t_fastint; // For performance critical things.
-typedef float			t_tuple[4];
-typedef float			t_trio[3];
-typedef float			t_matrix[4][4];
-typedef float			t_matrix2[2][2];
-typedef float			t_matrix3[3][3];
+typedef t_fl			t_tuple[4];
+typedef t_fl			t_trio[3];
+typedef t_fl			t_matrix[4][4];
+typedef t_fl			t_matrix2[2][2];
+typedef t_fl			t_matrix3[3][3];
 typedef t_tuple			t_ray[2];
-typedef float			t_cylinder[4];
-typedef float			t_plane[2];
+typedef t_fl			t_cylinder[4];
+typedef t_fl			t_plane[2];
 
 typedef enum e_obj		t_obj;
 
 typedef struct s_tree		t_tree;
 typedef struct s_scene		t_scene;
+typedef struct s_camera		t_camera;
+typedef struct s_light		t_light;
+typedef struct s_ambient	t_ambient;
 typedef struct s_sphere		t_sphere;
 typedef struct s_intersect	t_intersect;
 typedef struct s_xs			t_xs;
@@ -92,6 +95,20 @@ enum	e_obj
 };
 
 // Structs
+// Input, filled with data from the *.rt file or assumptions
+typedef struct	s_input
+{
+	t_fl				amb_ratio;
+	t_trio				amb_color;
+	t_tuple				cam_point;
+	t_tuple				cam_vector;
+	int					cam_fov;
+	t_tuple				lig_point;
+	t_fl				lig_ratio;
+	t_trio				lig_color;
+}						t_input;
+
+// Tree, used to pass around all the data we need to create the image
 typedef struct	s_tree
 {
 	mlx_t				*window;
@@ -101,11 +118,34 @@ typedef struct	s_tree
 	t_scene				*scene;
 }						t_tree;
 
+// Scene, the lighting, viewpoint, objects and intersections from both camera
+// and light rays
+typedef struct	s_camera
+{
+	t_ray				ray;
+	int					fov;
+}						t_camera;
+
+typedef struct	s_light
+{
+	t_tuple				point;
+	t_fl				brightness;
+	// t_trio			color; // Bonus feature
+}						t_light;
+
+typedef struct	s_ambient
+{
+	t_fl				brightness;
+	t_trio				color;
+}						t_ambient;
+
 typedef struct	s_scene
 {
+	t_camera			camera;
+	t_light				light;
+	t_ambient			ambient;
 	t_vec				*objects;
 	t_vec				*xs;
-	//more
 }						t_scene;
 
 typedef struct	s_object
@@ -116,7 +156,7 @@ typedef struct	s_object
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
-	t_material			*material;
+	t_material			material;
 	// t_???			texture;
 }						t_object;
 
@@ -128,14 +168,13 @@ typedef struct	s_light
 
 typedef struct s_xs
 {
-	t_obj				obj_type;
 	t_object			*object;
 	t_fl				t;
 }						t_xs;
 
 typedef struct	s_material
 {
-	t_shader			*shader;
+	t_shader			shader;
 	t_trio				color;
 	t_fl				shine;
 	t_fl				ambi_light;
@@ -154,9 +193,10 @@ typedef struct	s_shader
 
 typedef struct	s_sphere
 {
-	size_t				id; //All spheres have a unique ID number
+	size_t				id;
 	t_tuple				center;
 	t_fl				radius;
-	t_matrix			transform; // Translation, scaling or shearing from its original locaiton
+	t_matrix			transform;
 }						t_sphere;
+
 #endif

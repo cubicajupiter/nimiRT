@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 16:32:46 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:41:32 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:53:20 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	sphere_and_shade(t_tree *tree)
 	t_sphere	*sphere;	sphere_new(&sphere, center, 1.0, tree);
 	t_object 	*obj = vec_get(tree->scene->objects, sphere->id);
 
-	color_new(obj->material->color, 1, 0.2, 1);
+	color_new(obj->material.color, 1, 0.2, 1);
 	
 	t_tuple		light_pos; 		point_new(light_pos, -10, 10, -10);
 	t_trio		light_color; 	color_new(light_color, 1, 1, 1);
@@ -67,7 +67,7 @@ static int	sphere_and_shade(t_tree *tree)
 				normal_sphere_get(normal_v, hit_ptr->object->sphere, point);
 				vector_negate(eye_v, ray);
 				vectors[0] = normal_v; vectors[1] = eye_v;
-				lighting(hit_ptr->object->material, point, light, );
+				lighting(hit_ptr->object->material, point, light, ;
 
 				if (hit_ptr)
 					pixel_put(tree->image, x, y, hit_ptr->object->material->shader->combined);

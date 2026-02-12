@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 21:44:44 by thblack-          #+#    #+#             */
-/*   Updated: 2025/04/25 16:58:58 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/11 13:49:30 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	*ft_memset(void *s, int c, size_t n)
 {
 	unsigned char	*ptr;
 
+	if (!s)
+	{
+		ft_liberror(EINVAL, "ft_memset");
+		return (NULL);
+	}
 	ptr = s;
 	if (n == 0)
 		return (s);
