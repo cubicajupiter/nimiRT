@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 09:58:49 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:30:42 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@ int		lighting_test(t_tree *t);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);
-int		parse_rt(t_tree *t, char *rt_file);
-int		parse_main_vars(t_tree *t, char *line);
-int		parse_objects(t_tree *t, char *line);
+int		rt_parse(t_tree *t, char *rt_file);
+int		main_info_parse(t_tree *t, char *line);
+int		objects_parse(t_tree *t, char *line);
+bool		valid_rt_data(char *line);
+int		next_var_get(char **line, int (*increment_beyond_type)(int));
+int		ft_atotrio(t_trio dst, const char *nptr);
+int		ft_atopoint(t_tuple dst, const char *nptr);
+int		ft_atovector(t_tuple dst, const char *nptr);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
@@ -41,7 +46,8 @@ bool	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
 // Geometry
-int		sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t);
+int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);
+int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 
 // Rays
@@ -128,13 +134,16 @@ int		color_uint_to_trio(t_trio c, int *color);
 
 // Utilities
 int		ft_error(int code, const char *message);
-int		ft_atotrio(t_trio dst, const char *nptr);
-int		ft_atotuple(t_tuple dst, const char *nptr);
+int		float_print(t_fl fl);
+int		int_print(int nbr);
+int		float_formatted_print(char *name, t_fl value);
+int		int_formatted_print(char *name, int value);
 int		color_print(t_trio src);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
 int		scene_data_print(t_tree *t);
+int		objects_print(t_scene *s);
 
 // Trios
 int		trio_multiply_get(t_trio dst, t_trio a, t_trio b);

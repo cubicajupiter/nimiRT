@@ -1,23 +1,70 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atotuple.c                                      :+:      :+:    :+:   */
+/*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/12 14:11:02 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/12 14:14:55 by thblack-         ###   ########.fr       */
+/*   Created: 2026/02/13 14:20:02 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/13 14:40:01 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 static const char	*next_csv_get(const char *nptr);
+static int	ft_atotuple_helper(t_fl *dst, const char *nptr);
 
-int	ft_atotuple(t_tuple dst, const char *nptr)
+bool	valid_rt_data(char *line)
+{
+	while (*line)
+	{
+		if (!ft_isfloat(*line) && !ft_isspace(*line) && *line != ',')
+			return (false);
+		line++;
+	}
+	return (true);
+}
+
+int	next_var_get(char **line, int (*increment_beyond_type)(int))
+{
+	char	*tmp;
+
+	if (!line)
+		return (ft_error(EINVAL, "next_var_get"));
+	tmp = *line;
+	if (increment_beyond_type)
+		while (*tmp && (increment_beyond_type(*tmp) || *tmp == ','))
+			tmp++;
+	while (*tmp && ft_isspace(*tmp))
+		tmp++;
+	if (!tmp)
+		return (FAIL);
+	*line = tmp;
+	return (SUCCESS);
+}
+
+int	ft_atopoint(t_tuple dst, const char *nptr)
+{
+	t_fl	xyz[3];
+
+	if (ft_atotuple_helper(xyz, nptr) != SUCCESS)
+		return (ft_error(EINHERIT, "ft_atopoint"));
+	return (point_new(dst, xyz[X], xyz[Y], xyz[Z]));
+}
+
+int	ft_atovector(t_tuple dst, const char *nptr)
+{
+	t_fl	xyz[3];
+
+	if (ft_atotuple_helper(xyz, nptr) != SUCCESS)
+		return (ft_error(EINHERIT, "ft_atopoint"));
+	return (vector_new(dst, xyz[X], xyz[Y], xyz[Z]));
+}
+
+static int	ft_atotuple_helper(t_fl *dst, const char *nptr)
 {
 	const char	*ptr[3];
-	t_fl		position[3];
 
 	if (!dst || !nptr)
 		return (ft_error(EINVAL, "ft_atotuple"));
@@ -30,11 +77,11 @@ int	ft_atotuple(t_tuple dst, const char *nptr)
 	if (!nptr)
 		return (FAIL);
 	ptr[2] = nptr;
-	if (ft_atof(ptr[0], &position[X]) != SUCCESS
-		|| ft_atof(ptr[1], &position[Y]) != SUCCESS
-		|| ft_atof(ptr[2], &position[Z]) != SUCCESS)
+	if (ft_atof(ptr[0], &dst[X]) != SUCCESS
+		|| ft_atof(ptr[1], &dst[Y]) != SUCCESS
+		|| ft_atof(ptr[2], &dst[Z]) != SUCCESS)
 		return (ft_error(EINHERIT, "ft_atotuple"));
-	return (point_new(dst, position[X], position[Y], position[Z]));
+	return (SUCCESS);
 }
 
 int	ft_atotrio(t_trio dst, const char *nptr)

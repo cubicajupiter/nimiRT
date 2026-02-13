@@ -6,11 +6,12 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 09:20:22 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:29:35 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "messages.h"
 #include "miniRT.h"
 
 // static void    instruct(void);
@@ -22,12 +23,48 @@ int	program_exit(t_tree *t)
 	return (SUCCESS);
 }
 
+// static void    instruct(void)
+// {
+//     printf("\nUsage:\n\t./miniRT <scene description as a .rt <file>\n");
+// }
+
+int	rt_invalid(char c)
+{
+	ft_putendl_fd("Error\n", 2);
+	if (c)
+	{
+		ft_putstr_fd("Syntax error near '", 2);
+		ft_putchar_fd(c, 2);
+		ft_putendl_fd("'\n", 2);
+	}
+	ft_putendl_fd(MSG_INVALID_RT, 2);
+	return (1);
+}
+
+int	rt_missing(void)
+{
+	ft_putendl_fd("Error\n", 2);
+	ft_putendl_fd(MSG_MISSING_RT, 2);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_tree	tree;
+	int		flag;
 
 	(void)av;
-	init(&tree, av[1]);
+	if (ac < 2)
+		return (rt_missing());
+	flag = init(&tree, av[1]);
+	if (flag == FAIL)
+		return (rt_invalid(0));
+	else if (flag == ERROR)
+	{
+		if (errno)
+			ft_perror();
+		return (errno);
+	}
 	if (ac == 2)
 	{
 		lighting_test(&tree);
@@ -58,11 +95,6 @@ int	main(int ac, char **av)
 	program_exit(&tree);
 	return (0);
 }
-
-// static void    instruct(void)
-// {
-//     printf("\nUsage:\n\t./miniRT <scene description as a .rt <file>\n");
-// }
 
 // static void    trace(void)
 // {

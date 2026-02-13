@@ -1,39 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_print.c                                      :+:      :+:    :+:   */
+/*   struct_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 14:25:36 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 14:51:47 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.h"
 #include "miniRT.h"
-
-/*
- * float_print() aligns numbers regardless of sign (minus or positive)
-*/
-
-static int	float_print(t_fl fl)
-{
-	if (is_float_equal(fl, 0.0f))
-	{
-		if (printf(" %f", 0.0f) < 0)
-			return (ft_error(0, "printf"));
-	}
-	else if (fl < 0.0f)
-	{
-		if (printf("%f", fl) < 0)
-			return (ft_error(0, "printf"));
-	}
-	else
-		if (printf(" %f", fl) < 0)
-			return (ft_error(0, "printf"));
-	return (SUCCESS);
-}
 
 int	color_print(t_trio src)
 {
@@ -41,7 +19,7 @@ int	color_print(t_trio src)
 
 	if (!src)
 		return (ft_error(EINVAL, "color_print"));
-	if (printf("color") < 0)
+	if (printf("%15s", "color") < 0)
 		return (ft_error(0, "printf"));
 	i = 0;
 	while (i < 3)
@@ -64,10 +42,10 @@ int	tuple_print(t_tuple src)
 	if (!src)
 		return (ft_error(EINVAL, "tuple_print"));
 	if (src[W] == POINT)
-		if (printf("point") < 0)
+		if (printf("%15s", "point") < 0)
 			return (ft_error(0, "printf"));
 	if (src[W] == VECTOR)
-		if (printf("vector") < 0)
+		if (printf("%15s", "vector") < 0)
 			return (ft_error(0, "printf"));
 	i = 0;
 	while (i < 3)
@@ -90,11 +68,14 @@ int	matrix_print(t_matrix src)
 
 	if (!src)
 		return (ft_error(EINVAL, "matrix_print"));
-	if (printf("matrix") < 0)
+	if (printf("%15s", "matrix") < 0)
 		return (ft_error(0, "printf"));
 	i = 0;
 	while (i < 4)
 	{
+		if (i > 0)
+			if (printf("\t") < 0)
+				return (ft_error(0, "printf"));
 		j = 0;
 		while (j < 4)
 		{

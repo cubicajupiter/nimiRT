@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 11:25:47 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:29:53 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ typedef struct	s_material
 
 typedef struct	s_object
 {
-	t_obj				obj_type;
+	t_obj				type;
 	union {
 		t_sphere		*sphere;
 		t_cylinder		*cylinder;
