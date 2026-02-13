@@ -169,15 +169,15 @@ int    test_rays(t_tree *t)
 	
 	t_ray		ray4;
 	t_matrix	transformation4;
-	t_sphere	*sphere2;
-	sphere2 = NULL;
+	t_object	*object;
+	object = NULL;
 	printf("Intersecting a transformed sphere with a ray:\n");
 	point_new(point2, 0, 0, -5);
 	vector_new(vector2, 0, 0, 1);
 	ray_new(ray4, point2, vector2);
 	scaling(transformation4, 2, 2, 2);
-	sphere_new(&sphere2, (t_trio){0, 0, 0}, 1.0f, t);
-	matrix_copy(sphere2->transform, transformation4);
+	sphere_new(&object, (t_trio){0, 0, 0}, 1.0f, t);
+	matrix_copy(object->sphere->transform, transformation4);
 	intersections_get(NULL, ray4, t);
 
 	t_xs	*hit;

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 11:10:52 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 14:53:53 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:33:49 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ int	sphere_print(t_sphere *sphere)
 	return (SUCCESS);
 }
 
-int	object_surface_variables_print(t_object *object)
+int	object_material_print(t_material *material)
 {
-	(void)object;
+	if (!material)
+		return (ft_error(EINVAL, "object_material_print"));
+	if (color_print(material->color) != SUCCESS)
+		return (ft_error(EINHERIT, "object_material_print"));
 	return (SUCCESS);
 }
 
@@ -44,9 +47,10 @@ int	objects_print(t_scene *s)
 	{
 		object = vec_get(s->objects, i);
 		if (object->type == SPHERE)
-			if (sphere_print(object->sphere) != SUCCESS
-				|| object_surface_variables_print(object) != SUCCESS)
+			if (sphere_print(object->sphere) != SUCCESS)
 				return (ft_error(EINHERIT, "objects_print"));
+		if (object_material_print(&object->material) != SUCCESS)
+			return (ft_error(EINHERIT, "objects_print"));
 		i++;
 	}
 	return (SUCCESS);

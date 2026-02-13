@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:19:43 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 11:10:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 15:30:07 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	int_formatted_print(char *name, int value)
 
 int	main_variables_print(t_scene *s)
 {
+	if (!s)
+		return (ft_error(EINVAL, "main_variables_print"));
 	if (printf("SCENE DATA\n") < 0
 		|| printf("-AMBIENT\n") < 0
 		|| float_formatted_print("brightness", s->ambient.brightness) != SUCCESS
@@ -68,6 +70,7 @@ int	main_variables_print(t_scene *s)
 int	scene_data_print(t_tree *t)
 {
 	t_scene	*s;
+
 	if (!t || !t->scene)
 		return (ft_error(EINVAL, "scene_data_print"));
 	s = t->scene;

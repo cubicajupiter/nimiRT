@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 17:29:35 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:32:45 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (rt_missing());
 	flag = init(&tree, av[1]);
-	if (flag == FAIL)
-		return (rt_invalid(0));
-	else if (flag == ERROR)
+	if (flag != SUCCESS)
 	{
 		if (errno)
 			ft_perror();
