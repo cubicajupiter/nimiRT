@@ -44,6 +44,7 @@ void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot) //specul
 {
 	t_fl	scalar;
 
+	printf("Eye dot: %f\n", eye_dot);
 	if (light)	//or it somehow triggers wrong condition ?
 	{
 		scalar = mat->spec_light * pow(eye_dot, mat->shine); // or calculated wrong ?
@@ -54,7 +55,7 @@ scalar, light->intensity);
 		color_new(mat->shader.spec_refl, 0, 0, 0);
 }
 
-void	reflection_ambient(t_material *mat) //ambient is 0.1, 0.9, 0.9 when it should be 0.1, 0.1, 0.1
+void	reflection_ambient(t_material *mat)
 {
 	trio_multiply_scalar_get(mat->shader.ambi_refl, mat->ambi_light, \
 mat->shader.eff_color);

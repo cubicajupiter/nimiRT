@@ -139,9 +139,9 @@ int	lighting_test(t_tree *tree)
 	lighting(&m, &light2, pos, (t_tuple *[2]){&eye_v3, &norm_v3});
 	color_print(m.shader.combined);
 
-	//light and camera in 45 degree angle
+	//light and camera in 45 degree angle 
 	t_tuple			eye_v4;		vector_new(eye_v4, 0, -sqrtf(2)/2, -sqrtf(2)/2);
-	t_tuple			norm_v4;	vector_new(norm_v4, 0, 0, 1);
+	t_tuple			norm_v4;	vector_new(norm_v4, 0, 0, -1);
 	lighting(&m, &light2, pos, (t_tuple *[2]){&eye_v4, &norm_v4});
 	color_print(m.shader.combined);
 
