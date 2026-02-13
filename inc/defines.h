@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 11:25:47 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:34:14 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ typedef t_tuple			t_ray[2];
 typedef t_fl			t_cylinder[4];
 typedef t_fl			t_plane[2];
 
-typedef enum e_obj		t_obj;
+typedef enum e_obj_type		t_obj_type;
+typedef enum e_run_mode		t_run_mode;
 
 typedef struct s_tree		t_tree;
 typedef struct s_scene		t_scene;
@@ -89,11 +90,18 @@ typedef struct s_xs			t_xs;
 typedef struct s_material	t_material;
 typedef struct s_shader		t_shader;
 
-enum	e_obj
+enum	e_obj_type
 {
 	SPHERE,
 	CYLINDER,
 	PLANE,
+};
+
+enum	e_run_mode
+{
+	NORMAL,
+	INPUT_DEBUG,
+	FULL_DEBUG,
 };
 
 // Structs
@@ -137,9 +145,10 @@ typedef struct	s_camera
 
 typedef struct	s_light
 {
-	t_tuple				pos;
-	t_trio				intensity;
-}						light;
+	t_tuple				point;
+	t_fl				brightness;
+	t_trio				color;
+}						t_light;
 
 typedef struct	s_ambient
 {
@@ -177,7 +186,7 @@ typedef struct	s_material
 
 typedef struct	s_object
 {
-	t_obj				obj_type;
+	t_obj_type				type;
 	union {
 		t_sphere		*sphere;
 		t_cylinder		*cylinder;
