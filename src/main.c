@@ -30,7 +30,8 @@ int	main(int ac, char **av)
 	init(&tree, av[1]);
 	if (ac == 2)
 	{
-		lighting_test(&tree);
+		sphere_shader_test(&tree);
+		//lighting_test(&tree);
 		//test_matrix();
 		//test_rays();
 		//test_draw_sphere(&tree);

@@ -44,7 +44,6 @@ void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot) //specul
 {
 	t_fl	scalar;
 
-	printf("Eye dot: %f\n", eye_dot);
 	if (light)	//or it somehow triggers wrong condition ?
 	{
 		scalar = mat->spec_light * pow(eye_dot, mat->shine); // or calculated wrong ?

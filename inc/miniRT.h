@@ -24,6 +24,7 @@ int		projectile_test(t_tree *t);
 int		transformation_test(t_tree *t);
 void	test_draw_sphere(t_tree *tree);
 int		lighting_test(t_tree *t);
+void	sphere_shader_test(t_tree *tree);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);

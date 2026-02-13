@@ -43,7 +43,6 @@ int	lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[])
 	else
 	{
 		eye_dot = eye_vec_dp(light_v, neglight_v, refl_v, vectors);
-		printf("Eye dot: %f\n", eye_dot);
 		if (eye_dot <= 0)
 			reflection_specular(mat, NULL, eye_dot);
 		else
