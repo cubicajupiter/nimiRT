@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 11:58:54 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:41:08 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[])
 
 	if (!mat || !light || !point || !vectors)
 		return (ft_error(EINVAL, "lighting"));
-	trio_multiply_get(mat->shader.eff_color, mat->color, light->intensity);
+	trio_multiply_get(mat->shader.eff_color, mat->color, light->color);
 	light_vector_get(light_v, light, point);
 	reflection_ambient(mat);
 	vector_dot(&light_dot, light_v, *vectors[NORMAL]);
@@ -56,7 +56,7 @@ mat->shader.ambi_refl, mat->shader.diff_refl, mat->shader.spec_refl);
 
 static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
 {
-	tuple_minus_get(dst, light->pos, point);
+	tuple_minus_get(dst, light->point, point);
 	normalize_apply(dst);
 }
 
