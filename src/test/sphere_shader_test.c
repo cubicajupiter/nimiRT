@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 16:32:46 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 09:20:00 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:35:00 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int	sphere_and_shade(t_tree *tree)
 
 	color_new(obj->material.color, 1, 0.2, 1);
 	
-	t_tuple		light_pos; 		point_new(light_pos, -10, 10, -10);
-	t_trio		light_color; 	color_new(light_color, 1, 1, 1);
-	t_light 	*light; 		point_light_new(light, light_pos, light_color);
+	t_tuple			light_pos; 		point_new(light_pos, -10, 10, -10);
+	t_trio			light_color; 	color_new(light_color, 1, 1, 1);
+	t_light 		*light; 		point_light_new(light, light_pos, light_color);
 
 	t_tuple		point;			
 	t_tuple		normal_v;

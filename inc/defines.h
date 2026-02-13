@@ -86,6 +86,8 @@ typedef struct s_ambient	t_ambient;
 typedef struct s_sphere		t_sphere;
 typedef struct s_intersect	t_intersect;
 typedef struct s_xs			t_xs;
+typedef struct s_material	t_material;
+typedef struct s_shader		t_shader;
 
 enum	e_obj
 {
@@ -126,12 +128,18 @@ typedef struct	s_camera
 	int					fov;
 }						t_camera;
 
+// typedef struct	s_light
+// {
+// 	t_tuple				point;
+// 	t_fl				brightness;
+// 	// t_trio			color; // Bonus feature
+// }						t_light;
+
 typedef struct	s_light
 {
-	t_tuple				point;
-	t_fl				brightness;
-	// t_trio			color; // Bonus feature
-}						t_light;
+	t_tuple				pos;
+	t_trio				intensity;
+}						light;
 
 typedef struct	s_ambient
 {
@@ -148,6 +156,25 @@ typedef struct	s_scene
 	t_vec				*xs;
 }						t_scene;
 
+typedef struct	s_shader
+{
+	t_trio				ambi_refl;
+	t_trio				diff_refl;
+	t_trio				spec_refl;
+	t_trio				combined;
+	t_trio				eff_color;
+}						t_shader;
+
+typedef struct	s_material
+{
+	t_shader			shader;
+	t_trio				color;
+	t_fl				shine;
+	t_fl				ambi_light;
+	t_fl				diff_light;
+	t_fl				spec_light;
+}						t_material;
+
 typedef struct	s_object
 {
 	t_obj				obj_type;
@@ -160,36 +187,13 @@ typedef struct	s_object
 	// t_???			texture;
 }						t_object;
 
-typedef struct	s_light
-{
-	t_tuple				pos;
-	t_trio				intensity;
-}						t_light;
+
 
 typedef struct s_xs
 {
 	t_object			*object;
 	t_fl				t;
 }						t_xs;
-
-typedef struct	s_material
-{
-	t_shader			shader;
-	t_trio				color;
-	t_fl				shine;
-	t_fl				ambi_light;
-	t_fl				diff_light;
-	t_fl				spec_light;
-}						t_material;
-
-typedef struct	s_shader
-{
-	t_trio				ambi_refl;
-	t_trio				diff_refl;
-	t_trio				spec_refl;
-	t_trio				combined;
-	t_trio				eff_color;
-}						t_shader;
 
 typedef struct	s_sphere
 {

@@ -93,7 +93,7 @@ int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 int		material_new(t_material *dst);
-int		lighting(t_material *mat, t_tuple point, t_light *light, t_tuple *vectors);
+int		lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);

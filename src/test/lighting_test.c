@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 16:46:14 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 09:58:53 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 11:58:53 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ int	lighting_test(t_tree *tree)
 
 	printf("\n[ LIGHT SOURCE ]\n");
 	//Point light attributes
-	t_trio		color; 		color_new(color, 1, 1, 1);
-	t_tuple		location;	point_new(location, 0, 0, 0);
-	t_light		light;		point_light_new(&light, location, color);
+	t_trio			color; 		color_new(color, 1, 1, 1);
+	t_tuple			location;	point_new(location, 0, 0, 0);
+	t_light			light;		point_light_new(&light, location, color);
 	tuple_print(light.pos);
 	color_print(light.intensity);
 
@@ -121,36 +121,46 @@ int	lighting_test(t_tree *tree)
 	printf("ambient light after assigning: %f\n", object->material.ambi_light);
 
 
-	//Lighting
+	printf("\n[ LIGHTING ]\n");
 	t_material		m;			material_new(&m);
 	t_tuple			pos;		point_new(pos, 0, 0, 0);
 
+	//light directly behind camera
 	t_tuple			eye_v1;		vector_new(eye_v1, 0, 0, -1);
 	t_tuple			norm_v1;	vector_new(norm_v1, 0, 0, -1);
 	t_tuple			location1;	point_new(location1, 0, 0, -10);
 	t_trio			color;		color_new(color, 1, 1, 1);
 	t_light			light;		point_light_new(&light, location1, color);
-	lighting(m, );
+	lighting(&m, &light, pos, (t_tuple *[2]){eye_v1, norm_v1});
+	color_print(m.shader.combined);
 
+	//camera in 45 degree angle
 	t_tuple			eye_v2;		vector_new(eye_v2, 0, sqrtf(2)/2, -sqrtf(2)/2);
 	t_tuple			norm_v2;	vector_new(norm_v2, 0, 0, -1);
-	lighting();
+	lighting(&m, &light, pos, (t_tuple *[2]){eye_v2, norm_v2});
+	color_print(m.shader.combined);
 
+	//light in 45 degree angle
 	t_tuple			eye_v3;		vector_new(eye_v3, 0, 0, -1);
 	t_tuple			norm_v3;	vector_new(norm_v3, 0, 0, -1);
 	t_tuple			location2;	point_new(location2, 0, 10, -10);
 	tuple_copy(light.pos, location2);
-	lighting();
+	lighting(&m, &light, pos, (t_tuple *[2]){eye_v3, norm_v3});
+	color_print(m.shader.combined);
 
+	//light and camera in 45 degree angle
 	t_tuple			eye_v4;		vector_new(eye_v4, 0, -sqrtf(2)/2, -sqrtf(2)/2);
 	t_tuple			norm_v4;	vector_new(norm_v4, 0, 0, 1);
-	lighting();
+	lighting(&m, &light, pos, (t_tuple *[2]){eye_v4, norm_v4});
+	color_print(m.shader.combined);
 
+	//light is behind the object
 	t_tuple			eye_v5;		vector_new(eye_v5, 0, 0, -1);
 	t_tuple			norm_v5;	vector_new(norm_v5, 0, 0, -1);
 	t_tuple			location3;	point_new(location3, 0, 0, 10);
 	tuple_copy(light.pos, location3);
-	lighting();
+	lighting(&m, &light, pos, (t_tuple *[2]){eye_v5, norm_v5});
+	color_print(m.shader.combined);
 
 
 	return 0;

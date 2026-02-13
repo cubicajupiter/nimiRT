@@ -6,13 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 13:28:18 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 09:47:38 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 11:47:38 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	normal_objpoint_transform(t_tuple dst, t_sphere *sphere, t_tuple world_point);
+static int	normal_objpoint_get(t_tuple dst, t_sphere *sphere, t_tuple world_point);
 static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_normal);
 
 /*
@@ -32,7 +32,7 @@ int	normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 
 	if (!dst || !sphere || !point)
 		return (ft_error(EINVAL, "normal_sphere_get"));
-	normal_objpoint_transform(obj_point, sphere, point);
+	normal_objpoint_get(obj_point, sphere, point);
 	tuple_minus_get(obj_normal, obj_point, sphere->center);
 	normal_worldvector_get(dst, sphere, obj_normal);
 	normalize_apply(dst);
@@ -43,7 +43,7 @@ int	normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 	Gets a normal vector's object point from its world point.
 	Object point is the product of the world point and the inverse of the object's transformation.
 */
-static int	normal_objpoint_transform(t_tuple dst, t_sphere *sphere, t_tuple world_point)
+static int	normal_objpoint_get(t_tuple dst, t_sphere *sphere, t_tuple world_point)
 {
 	t_matrix	inverse;
 
