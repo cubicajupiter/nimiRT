@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:39:50 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:31:16 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray);
 
-int	sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t)
+int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 {
 	t_sphere	*sphere;
 	t_object	object;
@@ -27,8 +27,9 @@ int	sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t)
 	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
-	object.obj_type = SPHERE;
+	object.type = SPHERE;
 	object.sphere = sphere;
+	material_new(&object.material);
 	sphere->id = t->scene->objects->len;
 	sphere->radius = radius;
 	if (point_new(sphere->center, 0, 0, 0) != SUCCESS
@@ -37,7 +38,7 @@ int	sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t)
 		return (ft_error(EINHERIT, "sphere_new"));
 	tmp = vec_get(t->scene->objects, sphere->id);
 	if (dst)
-		*dst = tmp->sphere;
+		*dst = tmp;
 	return (SUCCESS);
 }
 

@@ -6,13 +6,12 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:40:10 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:31:29 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "miniRT.h"
-#include "intersections.h"
 
 // Loops through all intersections in the scene, then returns the first
 // (lowest t value) intersection.
@@ -72,7 +71,7 @@ int	intersect_get(t_vec *xs, t_object *obj, t_ray ray)
 {
 	if (!xs || !obj || !ray)
 		return (ft_error(EINVAL, "intersect_get"));
-	if (obj->obj_type == SPHERE)
+	if (obj->type == SPHERE)
 		if (!sphere_intersect_get(xs, obj, ray))
 			return (FALSE);
 	// if (obj->obj_type == PLANE)

@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_new.c                                        :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 10:38:40 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/11 14:55:41 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/13 17:08:43 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/13 17:12:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	color_new(t_trio c, t_fl r, t_fl g, t_fl b)
+int	memory_free(t_tree *t)
 {
-	if (!c)
-		return (ft_error(EINVAL, "color_new"));
-	c[R] = r;
-	c[G] = g;
-	c[B] = b;
+	if (t)
+	{
+		if (t->window && t->image)
+			window_destroy(t->window, t->image);
+		if (t->a_sys)
+			ft_arena_free(&t->a_sys);
+		if (t->a_buf)
+			ft_arena_free(&t->a_buf);
+	}
 	return (SUCCESS);
 }
 
-int	color_copy(t_trio dst, t_trio src)
+int	error_exit(int flag, t_tree *t)
 {
-	if (!dst || !src)
-		return (ft_error(EINVAL, "trio_copy"));
-	dst[R] = src[R];
-	dst[G] = src[G];
-	dst[B] = src[B];
-	return (SUCCESS);
+	memory_free(t);
+	if (errno)
+	{
+		ft_perror();
+		return (errno);
+	}
+	if (flag == FAIL)
+		return (EXIT_FAILURE);
+	return (ERROR);
 }

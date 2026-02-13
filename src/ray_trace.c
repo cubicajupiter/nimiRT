@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_new.c                                        :+:      :+:    :+:   */
+/*   ray_trace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 10:38:40 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/11 14:55:41 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/13 17:22:48 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	color_new(t_trio c, t_fl r, t_fl g, t_fl b)
+int	ray_trace(t_tree *t)
 {
-	if (!c)
-		return (ft_error(EINVAL, "color_new"));
-	c[R] = r;
-	c[G] = g;
-	c[B] = b;
-	return (SUCCESS);
-}
-
-int	color_copy(t_trio dst, t_trio src)
-{
-	if (!dst || !src)
-		return (ft_error(EINVAL, "trio_copy"));
-	dst[R] = src[R];
-	dst[G] = src[G];
-	dst[B] = src[B];
+	(void)t;
+	mlx_loop(t->window);
+	// while (x < image_width)
+	// {
+	// 	while (y < image_height)
+	// 	{
+	// 		ray_generation(); // primary rays(intersects)
+	// 		while (k < n_objects)
+	// 		{
+	// 			intersections();
+	// 			shading(); // secondary rays(diffuse)
+	// 		}
+	// 	}
+	// }
 	return (SUCCESS);
 }

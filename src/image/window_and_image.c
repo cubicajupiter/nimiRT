@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   window_and_image.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:49:39 by thblack-          #+#    #+#             */
 /*   Updated: 2026/02/06 12:00:19 by thblack-         ###   ########.fr       */
