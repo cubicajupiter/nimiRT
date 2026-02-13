@@ -54,7 +54,7 @@ scalar, light->color);
 		color_new(mat->shader.spec_refl, 0, 0, 0);
 }
 
-void	reflection_ambient(t_material *mat) //ambient is 0.1, 0.9, 0.9 when it should be 0.1, 0.1, 0.1
+void	reflection_ambient(t_material *mat)
 {
 	trio_multiply_scalar_get(mat->shader.ambi_refl, mat->ambi_light, \
 mat->shader.eff_color);

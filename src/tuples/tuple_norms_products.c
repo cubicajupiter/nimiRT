@@ -25,8 +25,9 @@ int	magnitude_get(t_fl *magnitude, const t_tuple vector)
 {
 	if (!magnitude || !vector)
 		return (ft_error(EINVAL, "magnitude_get"));
-	*magnitude = sqrtf(vector[X] * vector[X] + vector[Y] * vector[Y] + vector[Z]
-			* vector[Z]);
+	*magnitude = sqrtf(vector[X] * vector[X] 
+					+ vector[Y] * vector[Y] 
+					+ vector[Z] * vector[Z]);
 	return (SUCCESS);
 }
 

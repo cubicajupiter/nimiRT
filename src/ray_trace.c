@@ -15,7 +15,6 @@
 int	ray_trace(t_tree *t)
 {
 	(void)t;
-	mlx_loop(t->window);
 	// while (x < image_width)
 	// {
 	// 	while (y < image_height)

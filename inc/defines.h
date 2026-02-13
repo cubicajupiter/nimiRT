@@ -27,8 +27,8 @@ files.
 // Window & Image
 // # define WIDTH 2000
 // # define HEIGHT 1600
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 400
+# define HEIGHT 400
 
 // Tuples
 // Ray data indexes
