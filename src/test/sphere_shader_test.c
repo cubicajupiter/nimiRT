@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 16:32:46 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 09:35:00 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:40:26 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int	sphere_and_shade(t_tree *tree)
 	t_tuple		direction;
 
 	t_tuple		center;		point_new(center, 0, 0, 0); 
-	t_sphere	*sphere;	sphere_new(&sphere, center, 1.0, tree);
-	t_object 	*obj = vec_get(tree->scene->objects, sphere->id);
+	t_object 	*obj;
+	sphere_new(&obj, center, 1.0, tree);
 
 	color_new(obj->material.color, 1, 0.2, 1);
 	
