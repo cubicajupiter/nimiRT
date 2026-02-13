@@ -6,14 +6,14 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 13:28:18 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 17:16:11 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:47:38 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 static int	normal_objpoint_transform(t_tuple dst, t_sphere *sphere, t_tuple world_point);
-static int	normal_worldvec_transform(t_tuple dst, t_sphere *sphere, t_tuple obj_normal);
+static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_normal);
 
 /*
 	The NORMAL vector of an object is a UNIT VECTOR that is PERPENDICULAR to the object's surface.
@@ -34,7 +34,7 @@ int	normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 		return (ft_error(EINVAL, "normal_sphere_get"));
 	normal_objpoint_transform(obj_point, sphere, point);
 	tuple_minus_get(obj_normal, obj_point, sphere->center);
-	normal_worldvec_transfrom(dst, sphere, obj_normal);
+	normal_worldvector_get(dst, sphere, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }
@@ -61,7 +61,7 @@ static int	normal_objpoint_transform(t_tuple dst, t_sphere *sphere, t_tuple worl
 	3. Applies the transposed inverse to the normal in object space (converting it to world space normal.)
 	4. Normalises the world space vector.
 */
-static int	normal_worldvec_transform(t_tuple dst, t_sphere *sphere, t_tuple obj_normal)
+static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_normal)
 {
 	t_matrix	inverse;
 	t_matrix	transposed_inverse;

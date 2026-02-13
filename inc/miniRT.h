@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/02/12 16:20:11 by jvalkama         ###   ########.fr       */
-=======
-/*   Updated: 2026/02/12 17:38:50 by thblack-         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2026/02/13 09:58:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +23,7 @@ int		test_rays(t_tree *t);
 int		projectile_test(t_tree *t);
 int		transformation_test(t_tree *t);
 void	test_draw_sphere(t_tree *tree);
+int		lighting_test(t_tree *t);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);

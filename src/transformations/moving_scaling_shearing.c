@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   moving_scaling_shearing.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 11:36:21 by thblack-          #+#    #+#             */
 /*   Updated: 2026/02/10 09:26:49 by jvalkama         ###   ########.fr       */

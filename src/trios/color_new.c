@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   color_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:38:40 by thblack-          #+#    #+#             */
 /*   Updated: 2026/02/11 14:55:41 by jvalkama         ###   ########.fr       */

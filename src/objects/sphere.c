@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:53:49 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:19:59 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t)
 		return (ft_error(EINHERIT, "sphere_new"));
 	object.obj_type = SPHERE;
 	object.sphere = sphere;
-	material_new(object.material);
+	material_new(&object.material);
 	sphere->id = t->scene->objects->len;
 	sphere->radius = radius;
 	if (point_new(sphere->center, 0, 0, 0) != SUCCESS

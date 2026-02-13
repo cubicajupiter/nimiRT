@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   trio_basic.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:58:23 by thblack-          #+#    #+#             */
 /*   Updated: 2026/02/12 12:05:29 by jvalkama         ###   ########.fr       */

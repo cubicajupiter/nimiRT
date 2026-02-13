@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 16:32:46 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:53:20 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:20:00 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static int	sphere_and_shade(t_tree *tree)
 	t_ray		ray;
 	t_tuple		direction;
 
-	canvas_put(tree->image, (t_trio){0});
-
 	t_tuple		center;		point_new(center, 0, 0, 0); 
 	t_sphere	*sphere;	sphere_new(&sphere, center, 1.0, tree);
 	t_object 	*obj = vec_get(tree->scene->objects, sphere->id);
@@ -46,8 +44,9 @@ static int	sphere_and_shade(t_tree *tree)
 	t_tuple		point;			
 	t_tuple		normal_v;
 	t_tuple		eye_v;
-	t_tuple		vectors[2];
+	t_tuple		*vectors[2];
 
+	canvas_put(tree->image, (t_trio){0});
 	y = 0;
 	while (y < HEIGHT) {
 		world_y = half - pixel_size * y;
@@ -67,10 +66,10 @@ static int	sphere_and_shade(t_tree *tree)
 				normal_sphere_get(normal_v, hit_ptr->object->sphere, point);
 				vector_negate(eye_v, ray);
 				vectors[0] = normal_v; vectors[1] = eye_v;
-				lighting(hit_ptr->object->material, point, light, ;
+				lighting(&hit_ptr->object->material, point, light, vectors);
 
 				if (hit_ptr)
-					pixel_put(tree->image, x, y, hit_ptr->object->material->shader->combined);
+					pixel_put(tree->image, x, y, hit_ptr->object->material.shader.combined);
 				hit_ptr = NULL;
 			}
 			x++;

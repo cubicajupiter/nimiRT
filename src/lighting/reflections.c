@@ -6,14 +6,14 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:57:03 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 16:22:55 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:58:55 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "lighting.h"
 
-int	reflection(t_tuple dst, t_tuple in, t_tuple normal)
+int	reflection_get(t_tuple dst, t_tuple in, t_tuple normal)
 {
 	t_tuple		new_normal;
 	t_fl		dot_product;

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 14:15:04 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:58:54 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static t_fl	eye_vec_dp(t_tuple l_v, t_tuple nl_v, t_tuple r_v, t_tuple *ini_vs);
 
 /*
 	Parameters:
-	the material, (right now t_object containing material)
-	the point being illuminated, 
-	the light source,
-	the eye and normal vectors from the Phong reflection model
+	- the material,
+	- the point being illuminated, 
+	- the light source,
+	- the eye and normal vectors as a pointer array[2]
 */
 int	lighting(t_material *mat, t_tuple point, t_light *light, t_tuple *vectors)
 {

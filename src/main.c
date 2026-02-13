@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:55:29 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:20:22 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av)
 	init(&tree, av[1]);
 	if (ac == 2)
 	{
-		sphere_shader_test(&tree);
+		lighting_test(&tree);
 		//test_matrix();
 		//test_rays();
 		//test_draw_sphere(&tree);

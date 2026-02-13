@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   trio_scale.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:06:13 by thblack-          #+#    #+#             */
 /*   Updated: 2026/02/11 15:51:49 by jvalkama         ###   ########.fr       */
