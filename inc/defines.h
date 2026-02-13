@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 17:29:53 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:32:13 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
 typedef struct s_ambient	t_ambient;
 typedef struct s_sphere		t_sphere;
+typedef struct s_material	t_material;
 typedef struct s_intersect	t_intersect;
 typedef struct s_xs			t_xs;
 typedef struct s_material	t_material;
