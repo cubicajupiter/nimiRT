@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:58:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 14:23:21 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:05:29 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,14 @@ int	trio_minus_apply(t_trio dst, t_trio c)
 	dst[0] -= c[0];
 	dst[1] -= c[1];
 	dst[2] -= c[2];
+	return (SUCCESS);
+}
+
+int	trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c)
+{
+	if (!dst || !a || !b || !c)
+		return (ft_error(EINVAL, "trio_add3_get"));
+	trio_add_get(dst, a, b);
+	trio_add_apply(dst, c);
 	return (SUCCESS);
 }

@@ -6,13 +6,12 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:40:10 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/12 17:53:38 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "miniRT.h"
-#include "intersections.h"
 
 // Loops through all intersections in the scene, then returns the first
 // (lowest t value) intersection.

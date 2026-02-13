@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersections.h                                    :+:      :+:    :+:   */
+/*   materials.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 11:32:55 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/06 09:27:12 by jvalkama         ###   ########.fr       */
+/*   Created: 2026/02/12 10:49:12 by jvalkama          #+#    #+#             */
+/*   Updated: 2026/03/12 11:50:03 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERSECTIONS_H
-# define INTERSECTIONS_H
+#include "miniRT.h"
 
-// Intersection dot product indexes for returning and accessing in arrays. DISCR = discriminant.
-# define FIRST 0
-# define SECOND 1
-# define DISCR 2
-
-#endif
+int	material_new(t_material *dst)
+{
+	if (!dst)
+		return (ft_error(EINVAL, "material_new"));
+	color_new(dst->color, 1, 1, 1);
+	dst->ambi_light = 0.1;
+	dst->diff_light = 0.9;
+	dst->spec_light = 0.9;
+	dst->shine = 200.0;
+	return (SUCCESS);
+}

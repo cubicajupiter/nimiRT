@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/11 14:14:52 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:20:22 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ int	main(int ac, char **av)
 	init(&tree, av[1]);
 	if (ac == 2)
 	{
+		lighting_test(&tree);
 		//test_matrix();
-		test_rays(&tree);
+		//test_rays();
+		//test_draw_sphere(&tree);
+		//test_rays(&tree);
 		// parse();    //      -> check & fetch scene
 		// initialise();   //  -> wrap up a handy struct(s)
 		// trace();    //      -> the BIG LOOP(S) OF MATHS.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/12 17:38:50 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 09:58:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		test_matrix(void);
 int		test_rays(t_tree *t);
 int		projectile_test(t_tree *t);
 int		transformation_test(t_tree *t);
+void	test_draw_sphere(t_tree *tree);
+int		lighting_test(t_tree *t);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);
@@ -40,7 +42,6 @@ void	commands(void *data);
 
 // Geometry
 int		sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t);
-int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 
 // Rays
@@ -88,7 +89,10 @@ int		chain3_apply(t_matrix dst, t_matrix a, t_matrix b);
 int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 
 // Lighting
+int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
+int		material_new(t_material *dst);
+int		lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[]);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
@@ -130,5 +134,17 @@ int		color_print(t_trio src);
 int		tuple_print(t_tuple src);
 int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
+
+// Trios
+int		trio_multiply_get(t_trio dst, t_trio a, t_trio b);
+int		trio_multiply_apply(t_trio dst, t_trio c);
+int		trio_multiply_scalar_get(t_trio dst, t_fl scalar, t_trio src);
+int		trio_divide_get(t_trio dst, t_trio a, t_trio b);
+int		trio_divide_apply(t_trio dst, t_trio c);
+int		trio_add_get(t_trio dst, t_trio a, t_trio b);
+int		trio_add_apply(t_trio dst, t_trio c);
+int		trio_minus_get(t_trio dst, t_trio a, t_trio b);
+int		trio_minus_apply(t_trio dst, t_trio c);
+int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/12 17:37:10 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 11:25:47 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ files.
 # include "libft.h"
 
 // Window & Image
-# define WIDTH 2000
-# define HEIGHT 1600
+// # define WIDTH 2000
+// # define HEIGHT 1600
+# define WIDTH 1000
+# define HEIGHT 1000
 
 // Tuples
 // Ray data indexes
@@ -84,6 +86,8 @@ typedef struct s_ambient	t_ambient;
 typedef struct s_sphere		t_sphere;
 typedef struct s_intersect	t_intersect;
 typedef struct s_xs			t_xs;
+typedef struct s_material	t_material;
+typedef struct s_shader		t_shader;
 
 enum	e_obj
 {
@@ -124,12 +128,18 @@ typedef struct	s_camera
 	int					fov;
 }						t_camera;
 
+// typedef struct	s_light
+// {
+// 	t_tuple				point;
+// 	t_fl				brightness;
+// 	// t_trio			color; // Bonus feature
+// }						t_light;
+
 typedef struct	s_light
 {
-	t_tuple				point;
-	t_fl				brightness;
-	// t_trio			color; // Bonus feature
-}						t_light;
+	t_tuple				pos;
+	t_trio				intensity;
+}						light;
 
 typedef struct	s_ambient
 {
@@ -146,6 +156,25 @@ typedef struct	s_scene
 	t_vec				*xs;
 }						t_scene;
 
+typedef struct	s_shader
+{
+	t_trio				ambi_refl;
+	t_trio				diff_refl;
+	t_trio				spec_refl;
+	t_trio				combined;
+	t_trio				eff_color;
+}						t_shader;
+
+typedef struct	s_material
+{
+	t_shader			shader;
+	t_trio				color;
+	t_fl				shine;
+	t_fl				ambi_light;
+	t_fl				diff_light;
+	t_fl				spec_light;
+}						t_material;
+
 typedef struct	s_object
 {
 	t_obj				obj_type;
@@ -154,10 +183,11 @@ typedef struct	s_object
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
-	t_trio				color;
-	// t_???			texture; // Bonus feature
-	// t_???			material; // Bonus feature
+	t_material			material;
+	// t_???			texture;
 }						t_object;
+
+
 
 typedef struct s_xs
 {
