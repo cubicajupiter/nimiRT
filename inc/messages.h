@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 13:39:24 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 14:13:50 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:11:25 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ Examples of elements and the order of their data:\n\
 - Cylinder: cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255\n\
   (ID, XYZ position [float], XYZ axis vector [float], diameter [float]\n\
   height [float], RGB color [0-255])\n"
+# define MSG_MODE_PROMPT "\
+miniRT can be run in different modes by running a flag as the 2nd argument\n\
+Example usage: ./miniRT scene.rt -d\n\
+Available flags: -i (input debug) -f (full debug)\n"
 
 /*
 // NOTE: Add for bonus

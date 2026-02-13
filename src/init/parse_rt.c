@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:12:51 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 15:14:00 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:16:23 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ int	rt_parse(t_tree *t, char *rt_file)
 		line = gnl(fd);
 	}
 	free(line);
-	scene_data_print(t);
 	return (SUCCESS);
 }
