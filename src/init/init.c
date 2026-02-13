@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_init.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 13:40:02 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 15:10:47 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:08:06 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 static int	program_init(t_tree *t);
 static int	scene_init(t_tree *t);
+static int	window_and_image_init(t_tree *t);
 
 int	init(t_tree *t, char *rt_file)
 {
@@ -23,7 +24,8 @@ int	init(t_tree *t, char *rt_file)
 		return (ft_error(EINVAL, "init"));
 	if (program_init(t) != SUCCESS
 		|| scene_init(t) != SUCCESS
-		|| rt_parse(t, rt_file) != SUCCESS)
+		|| rt_parse(t, rt_file) != SUCCESS
+		|| window_and_image_init(t) != SUCCESS)
 		return (ft_error(EINHERIT, "init"));
 	return (SUCCESS);
 }
@@ -61,5 +63,12 @@ static int	scene_init(t_tree *t)
 	new->objects = objects;
 	new->xs = xs;
 	t->scene = new;
+	return (SUCCESS);
+}
+
+static int	window_and_image_init(t_tree *t)
+{
+	window_init(&t->window, &t->image);
+	mlx_loop_hook(t->window, commands, t);
 	return (SUCCESS);
 }
