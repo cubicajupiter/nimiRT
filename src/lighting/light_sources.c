@@ -14,6 +14,9 @@
 
 int	point_light_new(t_light *dst, t_tuple position, t_trio intensity)
 {
+	if (!dst || !position || !intensity)
+		return (ft_error(EINVAL, "point_light_new"));
 	tuple_copy(dst->pos, position);
 	color_copy(dst->intensity, intensity);
+	return (SUCCESS);
 }

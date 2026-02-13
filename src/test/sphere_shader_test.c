@@ -39,7 +39,7 @@ static int	sphere_and_shade(t_tree *tree)
 	
 	t_tuple			light_pos; 		point_new(light_pos, -10, 10, -10);
 	t_trio			light_color; 	color_new(light_color, 1, 1, 1);
-	t_light 		*light; 		point_light_new(light, light_pos, light_color);
+	t_light 		light; 			point_light_new(&light, light_pos, light_color);
 
 	t_tuple		point;			
 	t_tuple		normal_v;
@@ -58,15 +58,15 @@ static int	sphere_and_shade(t_tree *tree)
 			tuple_minus_get(direction, pos, origin);
 			normalize_apply(direction);
 			ray_new(ray, origin, direction);
-			if (intersections_get(tree->scene->xs, &sphere, ray))
+			if (intersections_get(&tree->scene->xs, ray, tree))
 			{
 				hit(&hit_ptr, tree->scene->xs);
 
-				position_get(point, &ray, hit_ptr->t);	//These three calls compute arguments for the call to lighting()
+				position_get(point, ray, hit_ptr->t);	//These three calls compute arguments for the call to lighting()
 				normal_sphere_get(normal_v, hit_ptr->object->sphere, point);
-				vector_negate(eye_v, ray);
-				vectors[0] = normal_v; vectors[1] = eye_v;
-				lighting(&hit_ptr->object->material, point, light, vectors);
+				vector_negate(eye_v, ray[DIRECTION]);
+				vectors[0] = &normal_v; vectors[1] = &eye_v;
+				lighting(&hit_ptr->object->material, &light, point, vectors);
 
 				if (hit_ptr)
 					pixel_put(tree->image, x, y, hit_ptr->object->material.shader.combined);

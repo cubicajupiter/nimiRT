@@ -12,7 +12,6 @@
 
 #include "libft.h"
 #include "miniRT.h"
-#include "intersections.h"
 
 // Loops through all intersections in the scene, then returns the first
 // (lowest t value) intersection.

@@ -40,13 +40,13 @@ scalar, mat->shader.eff_color);
 	}
 }
 
-void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
+void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot) //specular stored wrong ?
 {
 	t_fl	scalar;
 
-	if (light)
+	if (light)	//or it somehow triggers wrong condition ?
 	{
-		scalar = mat->spec_light * pow(eye_dot, mat->shine);
+		scalar = mat->spec_light * pow(eye_dot, mat->shine); // or calculated wrong ?
 		trio_multiply_scalar_get(mat->shader.spec_refl, \
 scalar, light->intensity);
 	}
@@ -54,8 +54,8 @@ scalar, light->intensity);
 		color_new(mat->shader.spec_refl, 0, 0, 0);
 }
 
-void	reflecton_ambient(t_material *mat, t_light *light)
+void	reflection_ambient(t_material *mat) //ambient is 0.1, 0.9, 0.9 when it should be 0.1, 0.1, 0.1
 {
-	trio_multiply_get(mat->shader.ambi_refl, \
-mat->shader.eff_color, &mat->ambi_light);
+	trio_multiply_scalar_get(mat->shader.ambi_refl, mat->ambi_light, \
+mat->shader.eff_color);
 }

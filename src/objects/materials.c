@@ -14,8 +14,12 @@
 
 int	material_new(t_material *dst)
 {
+	if (!dst)
+		return (ft_error(EINVAL, "material_new"));
+	color_new(dst->color, 1, 1, 1);
 	dst->ambi_light = 0.1;
 	dst->diff_light = 0.9;
 	dst->spec_light = 0.9;
 	dst->shine = 200.0;
+	return (SUCCESS);
 }

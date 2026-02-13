@@ -42,7 +42,6 @@ void	commands(void *data);
 
 // Geometry
 int		sphere_new(t_sphere **dst, t_trio pos, t_fl radius, t_tree *t);
-int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 
 // Rays
@@ -93,7 +92,7 @@ int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 int		material_new(t_material *dst);
-int		lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors);
+int		lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[]);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);
@@ -146,5 +145,6 @@ int		trio_add_get(t_trio dst, t_trio a, t_trio b);
 int		trio_add_apply(t_trio dst, t_trio c);
 int		trio_minus_get(t_trio dst, t_trio a, t_trio b);
 int		trio_minus_apply(t_trio dst, t_trio c);
+int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 
 #endif
