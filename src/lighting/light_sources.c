@@ -14,6 +14,6 @@
 
 int	point_light_new(t_light *dst, t_tuple position, t_trio intensity)
 {
-	tuple_copy(dst->point, position);
-	color_copy(dst->brightness, intensity);
+	tuple_copy(dst->pos, position);
+	color_copy(dst->intensity, intensity);
 }

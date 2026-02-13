@@ -194,24 +194,24 @@ int    test_rays(t_tree *t)
 	// intersect[1].t = 0.0f;
 	// printf("T1: %f	T2: %f\n", intersect[0].data.t, intersect[1].data.t);	
 
-	printf("\n[ TRANSLATED RAY INTERSECTION (WORKS) ]\n");
-	t_tuple		point3;
-	t_tuple		vector3;
-	t_ray		ray5;
-	t_matrix	transformation5;
-	t_sphere	sphere3;
-	t_xs		intersect2[2];
-	intersect2[0].data.t = 0.0;
-	intersect2[1].data.t = 0.0;
-	point_new(point3, 0, 0, -5);
-	vector_new(vector3, 0, 0, 1);
-	ray_new(ray5, point3, vector3);
-	translation(transformation5, 5, 0, 0);
-	sphere_new(&sphere3, (t_trio){0, 0, 0}, 1.0f, t);
-	sphere_transform_set(&sphere3, transformation5);
+	// printf("\n[ TRANSLATED RAY INTERSECTION (WORKS) ]\n");
+	// t_tuple		point3;
+	// t_tuple		vector3;
+	// t_ray		ray5;
+	// t_matrix	transformation5;
+	// t_sphere	sphere3;
+	// t_xs		intersect2[2];
+	// intersect2[0].data.t = 0.0;
+	// intersect2[1].data.t = 0.0;
+	// point_new(point3, 0, 0, -5);
+	// vector_new(vector3, 0, 0, 1);
+	// ray_new(ray5, point3, vector3);
+	// translation(transformation5, 5, 0, 0);
+	// sphere_new(&sphere3, (t_trio){0, 0, 0}, 1.0f, t);
+	// sphere_transform_set(&sphere3, transformation5);
 
-	intersect_get(intersect2, &sphere3, ray5);
-	printf("T1: %f	T2: %f\n", intersect2[0].data.t, intersect2[1].data.t);
+	// intersect_get(intersect2, &sphere3, ray5);
+	// printf("T1: %f	T2: %f\n", intersect2[0].data.t, intersect2[1].data.t);
 
 	
 	return 0;

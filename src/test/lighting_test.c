@@ -15,7 +15,7 @@
 
 int	lighting_test(t_tree *tree)
 {
-	t_tuple		c;		point_new(&c, 0, 0, 0);
+	t_tuple		c;		point_new(c, 0, 0, 0);
 	t_fl		ra	= 	1.0;
 	t_sphere	*s;		sphere_new(&s, c, ra, tree);
 
@@ -23,43 +23,42 @@ int	lighting_test(t_tree *tree)
 
 	printf("\n[ NORMALS ]\n");
 	t_tuple		point;
-	
-	point_new(s.center, 0.0, 0.0, 0.0);
+
 	point_new(point, 1, 0, 0);
 
 	t_tuple		normal;
-	normal_sphere_get(normal, &s, point);
+	normal_sphere_get(normal, s, point);
 	tuple_print(normal);
 
 	printf("\n");
 
 	point_new(point, 0, 1, 0);
-	normal_sphere_get(normal, &s, point);
+	normal_sphere_get(normal, s, point);
 	tuple_print(normal);
 
 	printf("\n");
 
 	point_new(point, 0, 0, 1);
-	normal_sphere_get(normal, &s, point);
+	normal_sphere_get(normal, s, point);
 	tuple_print(normal);
 
 	printf("\n");
 
 	point_new(point, 0, 0, 1);
-	normal_sphere_get(normal, &s, point);
+	normal_sphere_get(normal, s, point);
 	tuple_print(normal);
 
 	printf("\n");
 
 	point_new(point, sqrtf(3)/3, sqrtf(3)/3, sqrtf(3)/3);
-	normal_sphere_get(normal, &s, point);
+	normal_sphere_get(normal, s, point);
 	tuple_print(normal);
 
 	printf("\n");
 
 	t_tuple	*normalized = &normal;
 	normalize_apply(*normalized);
-	normal_sphere_get(normal, &s, point);
+	normal_sphere_get(normal, s, point);
 	tuple_print(normal);
 	tuple_print(*normalized);
 
@@ -89,14 +88,14 @@ int	lighting_test(t_tree *tree)
 	printf("\n[ BASIC REFLECTIONS ]\n");
 	//45 angle
 	t_tuple		v;		vector_new(v, 1, -1, 0);
-	t_tuple		n;		vector_new(n, 0, 1, 0);
-	t_tuple		r;		reflection_get(r, v, n);
+	t_tuple		n2;		vector_new(n2, 0, 1, 0);
+	t_tuple		r;		reflection_get(r, v, n2);
 	tuple_print(r);
 
 	//slanted surface
 	vector_new(v, 0, -1, 0);
-	vector_new(n, sqrtf(2)/2, sqrtf(2)/2, 0);
-	reflection(r, v, n);
+	vector_new(n2, sqrtf(2)/2, sqrtf(2)/2, 0);
+	reflection_get(r, v, n2);
 	tuple_print(r);
 
 
@@ -115,7 +114,7 @@ int	lighting_test(t_tree *tree)
 	color_print(mat.color);
 	printf("Default material values: %f \t %f \t %f \t %f\n", mat.ambi_light, mat.diff_light, mat.ambi_light, mat.shine);
 
-	t_sphere		*sphere;		sphere_new(sphere, (t_trio){0}, 1.0, tree);
+	t_sphere		*sphere;		sphere_new(&sphere, (t_trio){0}, 1.0, tree);
 	t_object		*object = 		vec_get(tree->scene->objects, 1);	//get the second initialised sphere (the first one to be initialised was s)
 	object->material.ambi_light = 	1.0;
 	printf("ambient light after assigning: %f\n", object->material.ambi_light);
