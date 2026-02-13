@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:19:43 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 15:30:07 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:43:05 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	main_variables_print(t_scene *s)
 		|| int_formatted_print("field-of-view", s->camera.fov) != SUCCESS
 		|| printf("-LIGHT\n") < 0
 		|| tuple_print(s->light.point) != SUCCESS
-		|| float_formatted_print("brightness", s->light.brightness) != SUCCESS)
-		// || color_print(s->light.color) != SUCCESS // NOTE: Add this for bonus
+		|| float_formatted_print("brightness", s->light.brightness) != SUCCESS
+		|| color_print(s->light.color) != SUCCESS)
 		return (ft_error(EINHERIT, "main_variables_print"));
 	return (SUCCESS);
 }

@@ -6,11 +6,12 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:12:51 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 16:16:23 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:32:32 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "messages.h"
 
 static int	line_parse(t_tree *t, char *line)
 {
@@ -51,4 +52,17 @@ int	rt_parse(t_tree *t, char *rt_file)
 	}
 	free(line);
 	return (SUCCESS);
+}
+
+int	rt_invalid(char c)
+{
+	ft_putendl_fd("Error\n", 2);
+	if (c)
+	{
+		ft_putstr_fd("Syntax error near '", 2);
+		ft_putchar_fd(c, 2);
+		ft_putendl_fd("'\n", 2);
+	}
+	ft_putendl_fd(MSG_INVALID_RT, 2);
+	return (1);
 }

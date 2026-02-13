@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 17:32:55 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:34:14 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,10 @@ typedef struct	s_camera
 
 typedef struct	s_light
 {
-	t_tuple				pos;
-	t_trio				intensity;
-}						light;
+	t_tuple				point;
+	t_fl				brightness;
+	t_trio				color;
+}						t_light;
 
 typedef struct	s_ambient
 {

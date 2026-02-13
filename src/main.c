@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 17:33:15 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 17:33:31 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,11 @@
 #include "messages.h"
 #include "miniRT.h"
 
-// static void    instruct(void);
-
 int	program_exit(t_tree *t)
 {
 	ft_arena_free(&t->a_sys);
 	ft_arena_free(&t->a_buf);
 	return (SUCCESS);
-}
-
-// static void    instruct(void)
-// {
-//     printf("\nUsage:\n\t./miniRT <scene description as a .rt <file>\n");
-// }
-
-int	rt_invalid(char c)
-{
-	ft_putendl_fd("Error\n", 2);
-	if (c)
-	{
-		ft_putstr_fd("Syntax error near '", 2);
-		ft_putchar_fd(c, 2);
-		ft_putendl_fd("'\n", 2);
-	}
-	ft_putendl_fd(MSG_INVALID_RT, 2);
-	return (1);
 }
 
 int	rt_missing(void)

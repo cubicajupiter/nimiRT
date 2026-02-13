@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:13:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 15:12:54 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:46:35 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,16 @@ static int	camera_parse(t_tree *t, char *line)
 	return (flag);
 }
 
-// if (flag != SUCCESS) // NOTE: Add to end of parse_light() for bonus
+// NOTE: Add to end of parse_light() for bonus and scale for brightness
+// if (flag != SUCCESS)
 // 	return (flag);
 // if (next_var_get(&line, ft_isfloat) != SUCCESS)
 // 	return (FAIL);
 // flag = ft_atotrio(t->scene->light.color, line);
 static int	light_parse(t_tree *t, char *line)
 {
-	int	flag;
+	t_fl	tmp;
+	int		flag;
 
 	if (!t || !line)
 		return (ft_error(EINVAL, "light_parse"));
@@ -95,6 +97,11 @@ static int	light_parse(t_tree *t, char *line)
 		return (flag);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS)
 		return (FAIL);
-	flag = ft_atof(line, &t->scene->light.brightness);
+	flag = ft_atof(line, &tmp);
+	if (flag != SUCCESS)
+		return (flag);
+	t->scene->light.brightness = tmp;
+	if (color_new(t->scene->light.color, tmp, tmp, tmp) != SUCCESS)
+		return (ft_error(EINHERIT, "light_parse"));
 	return (flag);
 }
