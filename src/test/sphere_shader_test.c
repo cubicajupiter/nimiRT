@@ -41,7 +41,7 @@ static int	sphere_and_shade(t_tree *tree)
 	t_trio			light_color; 	color_new(light_color, 1, 1, 1);
 	t_light 		light; 			point_light_new(&light, light_pos, light_color);
 
-	t_tuple		point;			
+	t_tuple		point;
 	t_tuple		normal_v;
 	t_tuple		eye_v;
 	t_tuple		*vectors[2];
@@ -58,6 +58,7 @@ static int	sphere_and_shade(t_tree *tree)
 			tuple_minus_get(direction, pos, origin);
 			normalize_apply(direction);
 			ray_new(ray, origin, direction);
+			// printf("loop at [%d][%d]\n", x, y);
 			if (intersections_get(&tree->scene->xs, ray, tree))
 			{
 				hit(&hit_ptr, tree->scene->xs);
@@ -67,11 +68,13 @@ static int	sphere_and_shade(t_tree *tree)
 				vector_negate(eye_v, ray[DIRECTION]);
 				vectors[0] = &normal_v; vectors[1] = &eye_v;
 				lighting(&hit_ptr->object->material, &light, point, vectors);
-
 				if (hit_ptr)
+				{
 					pixel_put(tree->image, x, y, hit_ptr->object->material.shader.combined);
+				}
 				hit_ptr = NULL;
 			}
+			vec_reset(tree->scene->xs);
 			x++;
 		}
 		y++;
@@ -81,9 +84,6 @@ static int	sphere_and_shade(t_tree *tree)
 
 void	sphere_shader_test(t_tree *tree)
 {
-	window_init(&tree->window, &tree->image);
-	mlx_loop_hook(tree->window, commands, tree);
 	sphere_and_shade(tree);
 	mlx_loop(tree->window);
-	window_destroy(tree->window, tree->image);
 }

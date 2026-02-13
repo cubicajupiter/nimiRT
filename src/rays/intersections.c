@@ -47,6 +47,7 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 	size_t		i;
 	t_object	*obj;
 	t_scene		*scene;
+	//object//xs	current_smallest_positive_t;
 
 	if (!ray || !t)
 		return (ft_error(EINVAL, "intersections_get"));
@@ -58,11 +59,16 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 		intersect_get(scene->xs, obj, ray);
 		i++;
 	}
+	if (scene->xs->len == 0)
+		return (FALSE);
 	if (vec_sort(scene->xs, sort_ascending) != SUCCESS)
+	{
+		ft_perror();
 		return (ft_error(EINHERIT, "intersections_get"));
+	}
 	if (dst)
 		*dst = scene->xs;
-	return (SUCCESS);
+	return (TRUE);
 }
 
 // Checks the object for which type it is then calls object-specific

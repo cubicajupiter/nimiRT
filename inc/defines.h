@@ -6,11 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/02/13 11:26:11 by jvalkama         ###   ########.fr       */
-=======
 /*   Updated: 2026/02/13 17:34:14 by thblack-         ###   ########.fr       */
->>>>>>> 5e9d6a13feb9e9ce4a233c1bef46f20c9f23b2f1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +27,8 @@ files.
 // Window & Image
 // # define WIDTH 2000
 // # define HEIGHT 1600
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 400
+# define HEIGHT 400
 
 // Tuples
 // Ray data indexes
