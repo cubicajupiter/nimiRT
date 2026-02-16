@@ -20,14 +20,18 @@ static int	window_and_image_init(t_tree *t);
 
 int	init(t_tree *t, char *rt_file)
 {
+	int	flag;
+
 	if (!t || !rt_file)
 		return (ft_error(EINVAL, "init"));
 	if (program_init(t) != SUCCESS
 		|| scene_init(t) != SUCCESS
-		// || rt_parse(t, rt_file) != SUCCESS
 		|| window_and_image_init(t) != SUCCESS)
 		return (ft_error(EINHERIT, "init"));
-	return (SUCCESS);
+	flag = rt_parse(t, rt_file);
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "init"));
+	return (flag);
 }
 
 static int	program_init(t_tree *t)

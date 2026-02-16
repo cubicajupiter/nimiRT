@@ -37,6 +37,8 @@ int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
 int		ft_atopoint(t_tuple dst, const char *nptr);
 int		ft_atovector(t_tuple dst, const char *nptr);
+int		parser_atof(t_fl *nbr, char *line);
+int		parser_atoi(int *nbr, char *line);
 
 // Ray Trace
 int		ray_trace(t_tree *t);

@@ -20,7 +20,10 @@ bool	valid_rt_data(char *line)
 	while (*line)
 	{
 		if (!ft_isfloat(*line) && !ft_isspace(*line) && *line != ',')
+		{
+			rt_invalid(*line);
 			return (false);
+		}
 		line++;
 	}
 	return (true);
@@ -116,4 +119,32 @@ static const char	*next_csv_get(const char *nptr)
 			return (nptr + 1);
 	}
 	return (NULL);
+}
+
+int	parser_atof(t_fl *nbr, char *line)
+{
+	int	flag;
+
+	if (!nbr || !line)
+		return (ft_error(EINVAL, "parser_atoi"));
+	flag = ft_atof(line, nbr);
+	if (flag == FAIL)
+		return (rt_invalid(*line));
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "parser_atoi"));
+	return (SUCCESS);
+}
+
+int	parser_atoi(int	*nbr, char *line)
+{
+	int	flag;
+
+	if (!nbr || !line)
+		return (ft_error(EINVAL, "parser_atoi"));
+	flag = ft_atoi(line, nbr);
+	if (flag == FAIL)
+		return (rt_invalid(*line));
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "parser_atoi"));
+	return (SUCCESS);
 }
