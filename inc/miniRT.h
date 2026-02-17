@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 17:34:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:47:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,18 @@ int		rt_parse(t_tree *t, char *rt_file);
 int		rt_invalid(char c);
 int		main_info_parse(t_tree *t, char *line);
 int		objects_parse(t_tree *t, char *line);
+int		cylinder_parse(t_object **object, t_tree *t, char *line);
+int		color_parse(t_object *object, t_tree *t, char *line);
 bool		valid_rt_data(char *line);
+bool		valid_01_float(t_fl nbr, char *value);
+bool		valid_color(t_trio color, char *value);
 int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
 int		ft_atopoint(t_tuple dst, const char *nptr);
 int		ft_atovector(t_tuple dst, const char *nptr);
+int		parser_atof(t_fl *nbr, char *line);
+int		parser_atoi(int *nbr, char *line);
+bool		values_within_limits(t_scene *s);
 
 // Ray Trace
 int		ray_trace(t_tree *t);
@@ -50,10 +57,13 @@ int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 bool	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
-// Geometry
+// Objects
 int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
+int		plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t);
+int		cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t);
+int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
 
 // Rays
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
@@ -138,7 +148,6 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		color_uint_to_trio(t_trio c, int *color);
 
 // Utilities
-int		ft_error(int code, const char *message);
 int		debug(t_tree *t, t_run_mode mode);
 int		float_print(t_fl fl);
 int		int_print(int nbr);
@@ -167,5 +176,8 @@ int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 // Exit
 int		memory_free(t_tree *t);
 int		error_exit(int flag, t_tree *t);
+int		rt_invalid(char c);
+bool		rt_out_of_limits(char *value);
+int		ft_error(int code, const char *message);
 
 #endif

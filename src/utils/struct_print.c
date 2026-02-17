@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 14:51:47 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:05:03 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,15 @@ int	matrix_print(t_matrix src)
 	i = 0;
 	while (i < 4)
 	{
-		if (i > 0)
-			if (printf("\t") < 0)
+		if (i > 0 && printf("\t") < 0)
 				return (ft_error(0, "printf"));
 		j = 0;
 		while (j < 4)
 		{
 			if (printf("\t") < 0)
 				return (ft_error(0, "printf"));
-			if (float_print(src[i][j]) != SUCCESS)
+			if (float_print(src[i][j++]) != SUCCESS)
 				return (ERROR);
-			j++;
 		}
 		if (printf("\n") < 0)
 			return (ft_error(0, "printf"));

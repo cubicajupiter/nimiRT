@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:13:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 16:46:35 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:49:17 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,85 +23,119 @@ int	main_info_parse(t_tree *t, char *line)
 
 	if (!t || !line)
 		return (ft_error(EINVAL, "main_info_parse"));
-	if (!line[1] || (!ft_strncmp(line, "A ", 2) && !ft_strncmp(line, "C ", 2)
-		&& !ft_strncmp(line, "L ", 2)))
-		return (FAIL);
+	if (!line[1] || (*line != 'A' && *line != 'C' && *line != 'L'))
+		return (rt_invalid(*line));
 	element_info = line + 1;
 	if (!valid_rt_data(element_info))
 		return (FAIL);
-	if (*line == 'A')
+	if (*line == 'A' && t->scene->ambient.set == false)
 		return (ambient_parse(t, element_info));
-	else if (*line == 'C')
+	else if (*line == 'C' && t->scene->camera.set == false)
 		return (camera_parse(t, element_info));
-	else if (*line == 'L')
+	else if (*line == 'L' && t->scene->light.set == false)
 		return (light_parse(t, element_info));
-	return (FAIL);
+	else
+		return (rt_invalid(*line));
+	return (SUCCESS);
 }
 
 static int	ambient_parse(t_tree *t, char *line)
 {
-	int	flag;
+	t_fl	brightness;
+	t_trio	color;
+	int		flag;
 
 	if (!t || !line)
 		return (ft_error(EINVAL, "ambient_parse"));
-	if (next_var_get(&line, NULL) != SUCCESS)
-		return (FAIL);
-	flag = ft_atof(line, &t->scene->ambient.brightness);
-	if (flag != SUCCESS)
+	if (next_var_get(&line, NULL) != SUCCESS || !*line)
+		return (rt_invalid(*line));
+	flag = parser_atof(&brightness, line);
+	if (flag != SUCCESS || !valid_01_float(brightness, "ambient brightness"))
 		return (flag);
-	if (next_var_get(&line, ft_isfloat) != SUCCESS)
+	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
+		return (rt_invalid(*line));
+	flag = ft_atotrio(color, line);
+	if (flag == FAIL)
+		return (rt_invalid(*line));
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "ambient_parse"));
+	if (!valid_color(color, "ambient color"))
 		return (FAIL);
-	flag = ft_atotrio(t->scene->ambient.color, line);
-	return (flag);
+	if (trio_multiply_scalar_get(t->scene->ambient.color,
+			brightness, color) != SUCCESS)
+		return (ft_error(EINHERIT, "ambient_parse"));
+	t->scene->ambient.set = true;
+	return (SUCCESS);
 }
 
 static int	camera_parse(t_tree *t, char *line)
 {
+	int	fov_degrees;
 	int	flag;
 
 	if (!t || !line)
 		return (ft_error(EINVAL, "camera_parse"));
-	if (next_var_get(&line, NULL) != SUCCESS)
-		return (FAIL);
+	if (next_var_get(&line, NULL) != SUCCESS || !*line)
+		return (rt_invalid(*line));
 	flag = ft_atopoint(t->scene->camera.ray[ORIGIN], line);
 	if (flag != SUCCESS)
 		return (flag);
-	if (next_var_get(&line, ft_isfloat) != SUCCESS)
-		return (FAIL);
+	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
+		return (rt_invalid(*line));
 	flag = ft_atovector(t->scene->camera.ray[DIRECTION], line);
 	if (flag != SUCCESS)
 		return (flag);
-	if (next_var_get(&line, ft_isfloat) != SUCCESS)
-		return (FAIL);
-	flag = ft_atoi(line, &t->scene->camera.fov);
+	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
+		return (rt_invalid(*line));
+	flag = parser_atoi(&fov_degrees, line);
+	if (flag != SUCCESS)
+		return (flag);
+	flag = ft_dtor(&t->scene->camera.fov, fov_degrees);
+	if (flag == SUCCESS)
+		t->scene->camera.set = true;
 	return (flag);
 }
 
-// NOTE: Add to end of parse_light() for bonus and scale for brightness
-// if (flag != SUCCESS)
-// 	return (flag);
-// if (next_var_get(&line, ft_isfloat) != SUCCESS)
-// 	return (FAIL);
-// flag = ft_atotrio(t->scene->light.color, line);
+static int	light_parse_helper(t_tree *t, char *line)
+{
+	t_fl	brightness;
+	t_trio	color;
+	int		flag;
+
+	flag = parser_atof(&brightness, line);
+	if (flag != SUCCESS || !valid_01_float(brightness, "light brightness"))
+		return (flag);
+	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
+		return (rt_invalid(*line));
+	flag = ft_atotrio(color, line);
+	if (flag == FAIL)
+		return (rt_invalid(*line));
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "light_parse"));
+	if (!valid_color(color, "light color"))
+		return (FAIL);
+	if (trio_multiply_scalar_get(t->scene->light.color,
+			brightness, color) != SUCCESS)
+		return (ft_error(EINHERIT, "light_parse"));
+	return (SUCCESS);
+}
+
 static int	light_parse(t_tree *t, char *line)
 {
-	t_fl	tmp;
 	int		flag;
 
 	if (!t || !line)
 		return (ft_error(EINVAL, "light_parse"));
-	if (next_var_get(&line, NULL) != SUCCESS)
-		return (FAIL);
+	if (next_var_get(&line, NULL) != SUCCESS || !*line)
+		return (rt_invalid(*line));
 	flag = ft_atopoint(t->scene->light.point, line);
 	if (flag != SUCCESS)
 		return (flag);
-	if (next_var_get(&line, ft_isfloat) != SUCCESS)
-		return (FAIL);
-	flag = ft_atof(line, &tmp);
+	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
+		return (rt_invalid(*line));
+	flag = light_parse_helper(t, line);
 	if (flag != SUCCESS)
 		return (flag);
-	t->scene->light.brightness = tmp;
-	if (color_new(t->scene->light.color, tmp, tmp, tmp) != SUCCESS)
-		return (ft_error(EINHERIT, "light_parse"));
-	return (flag);
+	t->scene->light.set = true;
+	return (SUCCESS);
 }
