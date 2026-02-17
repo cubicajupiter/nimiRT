@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 11:00:01 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 	if (!pos || !t)
 		return (ft_error(EINVAL, "sphere_new"));
 	sphere = NULL;
+	ft_memset(&object, 0, sizeof(t_object));
 	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
 	object.type = SPHERE;
 	object.sphere = sphere;
-	material_new(&object.material);
+	material_default(&object.material);
 	sphere->id = t->scene->objects->len;
 	if (ft_dtor(&sphere->radius, radius) != SUCCESS
 		|| point_new(sphere->center, 0, 0, 0) != SUCCESS

@@ -69,6 +69,6 @@ static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_nor
 	matrix_invert(inverse, sphere->transform);
 	matrix_transpose(transposed_inverse, inverse);
 	matrix_tuple_multiply_get(dst, transposed_inverse, obj_normal);
-	dst[W] = 0;
+	dst[W] = VECTOR;
 	return (SUCCESS);
 }

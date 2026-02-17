@@ -6,13 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:49:12 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 14:02:09 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	material_new(t_material *dst)
+int	material_default(t_material *dst)
 {
 	if (!dst)
 		return (ft_error(EINVAL, "material_new"));

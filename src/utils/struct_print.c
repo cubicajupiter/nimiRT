@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:05:03 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 18:01:14 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,29 @@ int	matrix_print(t_matrix src)
 			return (ft_error(0, "printf"));
 		i++;
 	}
+	return (SUCCESS);
+}
+
+int	material_print(t_material *m)
+{
+	if (!m)
+		return (ft_error(EINVAL, "materials_print"));
+	if (printf("-MATERIAL\n") < 0
+		|| color_print(m->color) != SUCCESS
+		|| printf("%15s", "shine\t") < 0
+		|| float_print(m->shine) != SUCCESS
+		|| printf("\n") < 0
+		|| printf("%15s", "ambi_light\t") < 0
+		|| float_print(m->ambi_light) != SUCCESS
+		|| printf("\n") < 0
+		|| printf("%15s", "diff_light\t") < 0
+		|| float_print(m->ambi_light) != SUCCESS
+		|| printf("\n") < 0
+		|| printf("%15s", "spec_light\t") < 0
+		|| float_print(m->ambi_light) != SUCCESS
+		|| printf("\n") < 0
+		|| color_print(m->shader.ambi_refl) != SUCCESS
+		|| printf("\n") < 0)
+		return (ft_error(0, "printf"));
 	return (SUCCESS);
 }

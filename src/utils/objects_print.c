@@ -12,6 +12,31 @@
 
 #include "miniRT.h"
 
+int	objects_print(t_scene *s)
+{
+	size_t		i;
+	t_object	*object;
+
+	i = 0;
+	while (i < s->objects->len)
+	{
+		object = vec_get(s->objects, i);
+		if (object->type == SPHERE)
+			if (sphere_print(object->sphere) != SUCCESS)
+				return (ft_error(EINHERIT, "objects_print"));
+		if (object->type == PLANE)
+			if (plane_print(object->plane) != SUCCESS)
+				return (ft_error(EINHERIT, "objects_print"));
+		if (object->type == CYLINDER)
+			if (cylinder_print(object->cylinder) != SUCCESS)
+				return (ft_error(EINHERIT, "objects_print"));
+		if (object_material_print(&object->material) != SUCCESS)
+			return (ft_error(EINHERIT, "objects_print"));
+		i++;
+	}
+	return (SUCCESS);
+}
+
 int	sphere_print(t_sphere *sphere)
 {
 	t_matrix	*tmp;
@@ -68,30 +93,5 @@ int	object_material_print(t_material *material)
 		return (ft_error(EINVAL, "object_material_print"));
 	if (color_print(material->color) != SUCCESS)
 		return (ft_error(EINHERIT, "object_material_print"));
-	return (SUCCESS);
-}
-
-int	objects_print(t_scene *s)
-{
-	size_t		i;
-	t_object	*object;
-
-	i = 0;
-	while (i < s->objects->len)
-	{
-		object = vec_get(s->objects, i);
-		if (object->type == SPHERE)
-			if (sphere_print(object->sphere) != SUCCESS)
-				return (ft_error(EINHERIT, "objects_print"));
-		if (object->type == PLANE)
-			if (plane_print(object->plane) != SUCCESS)
-				return (ft_error(EINHERIT, "objects_print"));
-		if (object->type == CYLINDER)
-			if (cylinder_print(object->cylinder) != SUCCESS)
-				return (ft_error(EINHERIT, "objects_print"));
-		if (object_material_print(&object->material) != SUCCESS)
-			return (ft_error(EINHERIT, "objects_print"));
-		i++;
-	}
 	return (SUCCESS);
 }

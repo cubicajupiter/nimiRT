@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:56:59 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:57:41 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		parser_atof(t_fl *nbr, char *line);
 int		parser_atoi(int *nbr, char *line);
 bool		values_within_limits(t_scene *s);
 bool		values_make_sense(t_scene *s);
+int		materials_set(t_scene *s);
 
 // Ray Trace
 int		ray_trace(t_tree *t);
@@ -73,6 +74,12 @@ int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		hit(t_xs **hit, t_vec *xs);
 int		intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		intersect_get(t_vec *xs, t_object *obj, t_ray ray);
+
+// Lighting
+void		reflection_ambient(t_material *mat, t_scene *s);
+void		reflection_diffuse(t_material *m, t_fl light_dot);
+void		reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
+int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
 
 // Primitives
 bool	is_float_equal(t_fl a, t_fl b);
@@ -113,7 +120,7 @@ int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 // Lighting
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
-int		material_new(t_material *dst);
+int		material_default(t_material *dst);
 int		lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[]);
 
 // Tuples
@@ -136,7 +143,7 @@ int		vector_divide_get(t_tuple dst, const float scalar, t_tuple vector);
 int		vector_divide_apply(t_tuple dst, const float scalar);
 
 // Normlisation and Products
-int		magnitude_get(float *magn, const t_tuple vector);
+int		magnitude_get(float *magn, t_tuple vector);
 int		normalize_get(t_tuple dst, t_tuple vector);
 int		normalize_apply(t_tuple vector);
 int		vector_dot(float *dot, t_tuple a, t_tuple b);
@@ -160,6 +167,11 @@ int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
 int		scene_data_print(t_tree *t);
 int		objects_print(t_scene *s);
+int		sphere_print(t_sphere *sphere);
+int		plane_print(t_plane *plane);
+int		cylinder_print(t_cylinder *cylinder);
+int		object_material_print(t_material *material);
+int		material_print(t_material *m);
 
 // Trios
 int		trio_multiply_get(t_trio dst, t_trio a, t_trio b);

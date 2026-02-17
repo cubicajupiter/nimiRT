@@ -15,7 +15,7 @@
 
 static uint8_t	color_float_to_8bit(t_fl c)
 {
-	return ((uint8_t)c * 255);
+	return ((uint8_t)(c * 255.0f));
 }
 
 static t_fl	color_8bit_to_float(int c)

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 17:41:08 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 18:12:11 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[])
 
 	if (!mat || !light || !point || !vectors)
 		return (ft_error(EINVAL, "lighting"));
-	trio_multiply_get(mat->shader.eff_color, mat->color, light->color);
+	// trio_multiply_get(mat->shader.eff_color, mat->color, light->color);
 	light_vector_get(light_v, light, point);
-	reflection_ambient(mat);
+	// reflection_ambient(mat, s);
 	vector_dot(&light_dot, light_v, *vectors[NORMAL]);
 	if (light_dot < 0)
 		reflection_specular(mat, NULL, 0.0);
@@ -73,12 +73,14 @@ t_tuple light_v, t_tuple neglight_v, t_tuple *initial_vectors[])
 
 static void	combine_reflections(t_material *mat)
 {
-	// t_fl		scalar;
+	t_trio	ambient_tmp;
+	t_trio	diffuse_tmp;
+	t_trio	specular_tmp;
+	t_fl	scalar;
 
-	// scalar = 0.3333333333333333333333f;
-	// trio_multiply_scalar_apply(mat->shader.ambi_refl, scalar);
-	// trio_multiply_scalar_apply(mat->shader.diff_refl, scalar);
-	// trio_multiply_scalar_apply(mat->shader.spec_refl, scalar);
-	trio_add3_get(mat->shader.combined, \
-mat->shader.ambi_refl, mat->shader.diff_refl, mat->shader.spec_refl);
+	scalar = 0.3333333333333333333333f;
+	trio_multiply_scalar_get(ambient_tmp, scalar, mat->shader.ambi_refl);
+	trio_multiply_scalar_get(diffuse_tmp, scalar, mat->shader.diff_refl);
+	trio_multiply_scalar_get(specular_tmp, scalar, mat->shader.spec_refl);
+	trio_add3_get(mat->shader.combined, ambient_tmp, diffuse_tmp, specular_tmp);
 }

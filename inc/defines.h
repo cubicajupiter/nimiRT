@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 14:17:30 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:23:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ files.
 // Window & Image
 // # define WIDTH 2000
 // # define HEIGHT 1600
-# define WIDTH 400
-# define HEIGHT 400
+# define WIDTH 300
+# define HEIGHT 300
 
 // Tuples
 // Ray data indexes
@@ -62,6 +62,10 @@ files.
 
 // PI
 # define PI 3.14159
+
+// Lighting
+# define EYE 0
+# define NORMAL 1
 
 // Types (custom types allow for easy switching later)
 typedef float			t_fl; // Custom float type
@@ -101,7 +105,7 @@ enum	e_obj_type
 
 enum	e_run_mode
 {
-	NORMAL,
+	RELEASE,
 	INPUT_DEBUG,
 	FULL_DEBUG,
 };

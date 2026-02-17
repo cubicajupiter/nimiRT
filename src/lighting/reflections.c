@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:57:03 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 17:41:17 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:18:49 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
 		color_new(mat->shader.spec_refl, 0, 0, 0);
 }
 
-void	reflection_ambient(t_material *mat)
+void	reflection_ambient(t_material *mat, t_scene *s)
 {
-	trio_multiply_scalar_get(mat->shader.ambi_refl, mat->ambi_light, \
+	trio_multiply_get(mat->shader.ambi_refl, s->ambient.color, \
 mat->shader.eff_color);
+	// color_print(mat->shader.ambi_refl);
 }
