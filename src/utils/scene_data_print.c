@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:19:43 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 16:43:05 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 10:58:15 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main_variables_print(t_scene *s)
 		|| printf("-CAMERA\n") < 0
 		|| tuple_print(s->camera.ray[ORIGIN]) != SUCCESS
 		|| tuple_print(s->camera.ray[DIRECTION]) != SUCCESS
-		|| int_formatted_print("field-of-view", s->camera.fov) != SUCCESS
+		|| float_formatted_print("field-of-view", s->camera.fov) != SUCCESS
 		|| printf("-LIGHT\n") < 0
 		|| tuple_print(s->light.point) != SUCCESS
 		|| float_formatted_print("brightness", s->light.brightness) != SUCCESS

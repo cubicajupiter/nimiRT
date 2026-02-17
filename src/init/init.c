@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 13:40:02 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 17:08:06 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:24:27 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	init(t_tree *t, char *rt_file)
 	flag = rt_parse(t, rt_file);
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "init"));
-	return (flag);
+	if (flag == FAIL || !values_within_limits(t->scene))
+		return (FAIL);
+	return (SUCCESS);
 }
 
 static int	program_init(t_tree *t)

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 14:20:02 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 15:41:38 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 11:20:29 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ static int	ft_atotuple_helper(t_fl *dst, const char *nptr)
 	ptr[0] = nptr;
 	nptr = next_csv_get(nptr);
 	if (!nptr)
-		return (FAIL);
+		return (rt_invalid((*ptr)[0]));
 	ptr[1] = nptr;
 	nptr = next_csv_get(nptr);
 	if (!nptr)
-		return (FAIL);
+		return (rt_invalid((*ptr)[1]));
 	ptr[2] = nptr;
 	if (ft_atof(ptr[0], &dst[X]) != SUCCESS
 		|| ft_atof(ptr[1], &dst[Y]) != SUCCESS
@@ -97,11 +97,11 @@ int	ft_atotrio(t_trio dst, const char *nptr)
 	ptr[0] = nptr;
 	nptr = next_csv_get(nptr);
 	if (!nptr)
-		return (FAIL);
+		return (rt_invalid((*ptr)[0]));
 	ptr[1] = nptr;
 	nptr = next_csv_get(nptr);
 	if (!nptr)
-		return (FAIL);
+		return (rt_invalid((*ptr)[0]));
 	ptr[2] = nptr;
 	if (ft_atoi(ptr[0], &color[R]) != SUCCESS
 		|| ft_atoi(ptr[1], &color[G]) != SUCCESS
@@ -115,7 +115,7 @@ static const char	*next_csv_get(const char *nptr)
 	while (*nptr && ft_isfloat(*nptr))
 	{
 		nptr++;
-		if (*nptr == ',' && nptr[1])
+		if (*nptr == ',' && ft_isfloat(nptr[1]))
 			return (nptr + 1);
 	}
 	return (NULL);
@@ -148,3 +148,4 @@ int	parser_atoi(int	*nbr, char *line)
 		return (ft_error(EINHERIT, "parser_atoi"));
 	return (SUCCESS);
 }
+

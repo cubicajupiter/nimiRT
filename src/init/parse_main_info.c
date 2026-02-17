@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:13:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 16:46:35 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:49:15 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ int	main_info_parse(t_tree *t, char *line)
 	element_info = line + 1;
 	if (!valid_rt_data(element_info))
 		return (FAIL);
-	if (*line == 'A')
+	if (*line == 'A' && t->scene->ambient.set == false)
 		return (ambient_parse(t, element_info));
-	else if (*line == 'C')
+	else if (*line == 'C' && t->scene->camera.set == false)
 		return (camera_parse(t, element_info));
-	else if (*line == 'L')
+	else if (*line == 'L' && t->scene->light.set == false)
 		return (light_parse(t, element_info));
-	return (FAIL);
+	else
+		return (rt_invalid(*line));
+	return (SUCCESS);
 }
 
 static int	ambient_parse(t_tree *t, char *line)
@@ -51,11 +53,17 @@ static int	ambient_parse(t_tree *t, char *line)
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
 	flag = ft_atotrio(t->scene->ambient.color, line);
-	return (flag);
+	if (flag == FAIL)
+		return (rt_invalid(*line));
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "ambient_parse"));
+	t->scene->ambient.set = true;
+	return (SUCCESS);
 }
 
 static int	camera_parse(t_tree *t, char *line)
 {
+	int	fov_degrees;
 	int	flag;
 
 	if (!t || !line)
@@ -72,7 +80,12 @@ static int	camera_parse(t_tree *t, char *line)
 		return (flag);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
-	flag = parser_atoi(&t->scene->camera.fov, line);
+	flag = parser_atoi(&fov_degrees, line);
+	if (flag != SUCCESS)
+		return (flag);
+	flag = ft_dtor(&t->scene->camera.fov, fov_degrees);
+	if (flag == SUCCESS)
+		t->scene->camera.set = true;
 	return (flag);
 }
 
@@ -102,5 +115,6 @@ static int	light_parse(t_tree *t, char *line)
 	t->scene->light.brightness = tmp;
 	if (color_new(t->scene->light.color, tmp, tmp, tmp) != SUCCESS)
 		return (ft_error(EINHERIT, "light_parse"));
+	t->scene->light.set = true;
 	return (flag);
 }
