@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:47:19 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:56:59 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		ft_atovector(t_tuple dst, const char *nptr);
 int		parser_atof(t_fl *nbr, char *line);
 int		parser_atoi(int *nbr, char *line);
 bool		values_within_limits(t_scene *s);
+bool		values_make_sense(t_scene *s);
 
 // Ray Trace
 int		ray_trace(t_tree *t);
