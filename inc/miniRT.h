@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:00:21 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:47:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		objects_parse(t_tree *t, char *line);
 int		cylinder_parse(t_object **object, t_tree *t, char *line);
 int		color_parse(t_object *object, t_tree *t, char *line);
 bool		valid_rt_data(char *line);
+bool		valid_01_float(t_fl nbr, char *value);
+bool		valid_color(t_trio color, char *value);
 int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
 int		ft_atopoint(t_tuple dst, const char *nptr);
