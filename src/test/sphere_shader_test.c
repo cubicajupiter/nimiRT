@@ -46,6 +46,16 @@ static int	sphere_and_shade(t_tree *tree)
 	t_tuple		eye_v;
 	t_tuple		*vectors[2];
 
+	printf("Light position:");tuple_print(light.point);
+	printf("Light color:");color_print(light.color);
+
+	printf("Material color:");color_print(obj->material.color);
+	printf("Ambient level: %f\n", obj->material.ambi_light);
+	printf("Diffuse level: %f\n", obj->material.diff_light);
+	printf("Speceular level: %f\n", obj->material.spec_light);
+	printf("Shine level: %f\n", obj->material.shine);
+
+
 	canvas_put(tree->image, (t_trio){0});
 	y = 0;
 	while (y < HEIGHT) {
@@ -54,11 +64,12 @@ static int	sphere_and_shade(t_tree *tree)
 		while (x < WIDTH)
 		{
 			world_x = -half + pixel_size * x;
+
 			point_new(pos, world_x, world_y, wall_z);
 			tuple_minus_get(direction, pos, origin);
 			normalize_apply(direction);
 			ray_new(ray, origin, direction);
-			// printf("loop at [%d][%d]\n", x, y);
+
 			if (intersections_get(&tree->scene->xs, ray, tree))
 			{
 				hit(&hit_ptr, tree->scene->xs);
@@ -66,7 +77,7 @@ static int	sphere_and_shade(t_tree *tree)
 				position_get(point, ray, hit_ptr->t);	//These three calls compute arguments for the call to lighting()
 				normal_sphere_get(normal_v, hit_ptr->object->sphere, point);
 				vector_negate(eye_v, ray[DIRECTION]);
-				vectors[0] = &normal_v; vectors[1] = &eye_v;
+				vectors[1] = &normal_v; vectors[0] = &eye_v;
 				lighting(&hit_ptr->object->material, &light, point, vectors);
 				if (hit_ptr)
 				{

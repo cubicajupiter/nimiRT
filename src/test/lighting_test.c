@@ -121,12 +121,14 @@ int	lighting_test(t_tree *tree)
 	t_trio			color2;		color_new(color2, 1, 1, 1);
 	t_light			light2;		point_light_new(&light2, location1, color2);
 	lighting(&m, &light2, pos, (t_tuple *[2]){&eye_v1, &norm_v1});
+	printf("\n[ light directly behind camera ]\n");
 	color_print(m.shader.combined);
 
 	//camera in 45 degree angle
 	t_tuple			eye_v2;		vector_new(eye_v2, 0, sqrtf(2)/2, -sqrtf(2)/2);
 	t_tuple			norm_v2;	vector_new(norm_v2, 0, 0, -1);
 	lighting(&m, &light2, pos, (t_tuple *[2]){&eye_v2, &norm_v2});
+	printf("\n[ camera in 45 degree angle ]\n");
 	color_print(m.shader.combined);
 
 	//light in 45 degree angle
@@ -135,12 +137,14 @@ int	lighting_test(t_tree *tree)
 	t_tuple			location2;	point_new(location2, 0, 10, -10);
 	tuple_copy(light2.point, location2);
 	lighting(&m, &light2, pos, (t_tuple *[2]){&eye_v3, &norm_v3});
+	printf("\n[ light in 45 degree angle ]\n");
 	color_print(m.shader.combined);
 
 	//light and camera in 45 degree angle 
 	t_tuple			eye_v4;		vector_new(eye_v4, 0, -sqrtf(2)/2, -sqrtf(2)/2);
 	t_tuple			norm_v4;	vector_new(norm_v4, 0, 0, -1);
 	lighting(&m, &light2, pos, (t_tuple *[2]){&eye_v4, &norm_v4});
+	printf("\n[ light and camera in 45 degree angle  ]\n");
 	color_print(m.shader.combined);
 
 	//light is behind the object
@@ -149,6 +153,7 @@ int	lighting_test(t_tree *tree)
 	t_tuple			location3;	point_new(location3, 0, 0, 10);
 	tuple_copy(light2.point, location3);
 	lighting(&m, &light2, pos, (t_tuple *[2]){&eye_v5, &norm_v5});
+	printf("\n[ light is behind the object ]\n");
 	color_print(m.shader.combined);
 
 

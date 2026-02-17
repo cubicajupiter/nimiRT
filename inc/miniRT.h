@@ -155,6 +155,7 @@ int		objects_print(t_scene *s);
 int		trio_multiply_get(t_trio dst, t_trio a, t_trio b);
 int		trio_multiply_apply(t_trio dst, t_trio c);
 int		trio_multiply_scalar_get(t_trio dst, t_fl scalar, t_trio src);
+int		trio_multiply_scalar_apply(t_trio dst, t_fl scalar);
 int		trio_divide_get(t_trio dst, t_trio a, t_trio b);
 int		trio_divide_apply(t_trio dst, t_trio c);
 int		trio_add_get(t_trio dst, t_trio a, t_trio b);

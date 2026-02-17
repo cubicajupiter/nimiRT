@@ -23,8 +23,6 @@ static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_nor
 	That direction vector is basically the normal vector,
 	which is normalised to get a unit vector.
 */
-
-
 int	normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 {
 	t_tuple		obj_point;
@@ -48,7 +46,7 @@ static int	normal_objpoint_get(t_tuple dst, t_sphere *sphere, t_tuple world_poin
 	t_matrix	inverse;
 
 	if (!dst || !sphere || !world_point)
-		return (ft_error(EINVAL, "normal_opoint_transform"));
+		return (ft_error(EINVAL, "normal_objpoint_get"));
 	matrix_invert(inverse, sphere->transform);
 	matrix_tuple_multiply_get(dst, inverse, world_point);
 	return (SUCCESS);
@@ -67,11 +65,10 @@ static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_nor
 	t_matrix	transposed_inverse;
 
 	if (!dst || !sphere || !obj_normal)
-		return (ft_error(EINVAL, "normal_wvector_transform"));
+		return (ft_error(EINVAL, "normal_worldvector_get"));
 	matrix_invert(inverse, sphere->transform);
 	matrix_transpose(transposed_inverse, inverse);
 	matrix_tuple_multiply_get(dst, transposed_inverse, obj_normal);
-	normalize_apply(dst);
 	dst[W] = 0;
 	return (SUCCESS);
 }

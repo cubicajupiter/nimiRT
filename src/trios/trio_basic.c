@@ -52,7 +52,7 @@ int	trio_minus_apply(t_trio dst, t_trio c)
 	return (SUCCESS);
 }
 
-int	trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c)
+int	trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c) //INVESTIGATE
 {
 	if (!dst || !a || !b || !c)
 		return (ft_error(EINVAL, "trio_add3_get"));

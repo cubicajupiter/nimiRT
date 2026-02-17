@@ -28,28 +28,28 @@ int	reflection_get(t_tuple dst, t_tuple in, t_tuple normal)
 
 void	reflection_diffuse(t_material *mat, t_fl light_dot)
 {
-	t_fl	scalar;
+	t_trio		weight;
 
-	if (light_dot < 0)
-		color_new(mat->shader.diff_refl, 0, 0, 0);
-	else
+	if (light_dot >= 0)
 	{
-		scalar = light_dot * mat->diff_light;
-		trio_multiply_scalar_get(mat->shader.diff_refl, \
-scalar, mat->shader.eff_color);
+		trio_multiply_scalar_get(weight, mat->diff_light, mat->shader.eff_color);
+		trio_multiply_scalar_get(mat->shader.diff_refl, light_dot, weight);
 	}
+	else
+		color_new(mat->shader.diff_refl, 0, 0, 0);
 }
 
-void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot) //specular stored wrong ?
+void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
 {
-	t_fl	scalar;
+	t_trio		weight;
+	t_fl		factor;
 
-	if (light)	//or it somehow triggers wrong condition ?
+	if (light)
 	{
-		scalar = mat->spec_light * pow(eye_dot, mat->shine); // or calculated wrong ?
-		trio_multiply_scalar_get(mat->shader.spec_refl, \
-scalar, light->color);
-	}
+		factor = pow(eye_dot, mat->shine);
+		trio_multiply_scalar_get(weight, mat->spec_light, light->color);
+		trio_multiply_scalar_get(mat->shader.spec_refl, factor, weight);
+	} 
 	else
 		color_new(mat->shader.spec_refl, 0, 0, 0);
 }
