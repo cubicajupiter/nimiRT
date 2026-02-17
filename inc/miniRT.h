@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 11:26:49 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:00:21 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		rt_invalid(char c);
 int		main_info_parse(t_tree *t, char *line);
 int		objects_parse(t_tree *t, char *line);
 int		cylinder_parse(t_object **object, t_tree *t, char *line);
+int		color_parse(t_object *object, t_tree *t, char *line);
 bool		valid_rt_data(char *line);
 int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
@@ -145,7 +146,6 @@ int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		color_uint_to_trio(t_trio c, int *color);
 
 // Utilities
-int		ft_error(int code, const char *message);
 int		debug(t_tree *t, t_run_mode mode);
 int		float_print(t_fl fl);
 int		int_print(int nbr);
@@ -173,5 +173,8 @@ int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 // Exit
 int		memory_free(t_tree *t);
 int		error_exit(int flag, t_tree *t);
+int		rt_invalid(char c);
+bool		rt_out_of_limits(char *value);
+int		ft_error(int code, const char *message);
 
 #endif

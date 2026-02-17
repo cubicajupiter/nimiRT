@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 11:01:17 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:02:39 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 		return (ft_error(EINVAL, "cylinder_new"));
 	cylinder = NULL;
 	if (ft_arena_alloc(t->a_buf, (void **)&cylinder,
-		sizeof(t_cylinder)) != SUCCESS
+			sizeof(t_cylinder)) != SUCCESS
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "cylinder_new"));
 	object.type = CYLINDER;
@@ -41,7 +41,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	return (SUCCESS);
 }
 
-int cylinder_resize(t_object *dst, t_fl radius, t_fl height)
+int	cylinder_resize(t_object *dst, t_fl radius, t_fl height)
 {
 	t_cylinder	*cylinder;
 

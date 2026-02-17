@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:12:51 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 13:27:18 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:56:29 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,5 @@ static int	rt_parse_exit(int fd, char *line, int flag)
 		return (ft_error(EINHERIT, "rt_parse_exit"));
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "rt_parse"));
-	return (FAIL);
-}
-
-/*
-rt_invlid()
-Prints a custom error message letting the user know where an *.rt file might
-contain a bad syntax.
-*/
-int	rt_invalid(char c)
-{
-	ft_putendl_fd("Error\n", 2);
-	if (c)
-	{
-		ft_putstr_fd("Syntax error near '", 2);
-		ft_putchar_fd(c, 2);
-		ft_putendl_fd("'\n", 2);
-	}
-	ft_putendl_fd(MSG_INVALID_RT, 2);
 	return (FAIL);
 }

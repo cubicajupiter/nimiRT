@@ -6,15 +6,14 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:14:28 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 13:40:14 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:00:32 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int sphere_parse(t_object **object, t_tree *t, char *line);
-static int plane_parse(t_object **object, t_tree *t, char *line);
-static int color_parse(t_object *object, t_tree *t, char *line);
+static int	sphere_parse(t_object **object, t_tree *t, char *line);
+static int	plane_parse(t_object **object, t_tree *t, char *line);
 
 static int	objects_parse_helper(t_tree *t, char *line)
 {
@@ -49,7 +48,7 @@ int	objects_parse(t_tree *t, char *line)
 	if (!t || !line)
 		return (ft_error(EINVAL, "objects_parse"));
 	if (!line[2] || (!ft_strncmp(line, "sp", 2) && !ft_strncmp(line, "pl", 2)
-		&& !ft_strncmp(line, "cy", 2)))
+			&& !ft_strncmp(line, "cy", 2)))
 		return (rt_invalid(*line));
 	if (!valid_rt_data(line + 2))
 		return (FAIL);
@@ -61,43 +60,7 @@ int	objects_parse(t_tree *t, char *line)
 	return (SUCCESS);
 }
 
-static int	var_count_get(int *var_count, t_object *object)
-{
-	int	tmp;
-
-	if (!var_count || !object)
-		return (ft_error(EINVAL, "var_count_get"));
-	tmp = 0;
-	if (object->type == SPHERE || object->type == PLANE)
-		tmp = 3;
-	if (object->type == CYLINDER)
-		tmp = 5;
-	*var_count = tmp;
-	return (SUCCESS);
-}
-
-static int color_parse(t_object *object, t_tree *t, char *line)
-{
-	int	var_count;
-	int	flag;
-
-	if (!object || !t || !line)
-		return (ft_error(EINVAL, "color_parse"));
-	var_count_get(&var_count, object);
-	while (var_count-- > 0)
-	{
-		if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
-			return (rt_invalid(*line));
-	}
-	flag = ft_atotrio(object->material.color, line);
-	if (flag == FAIL)
-		return (rt_invalid(*line));
-	if (flag == ERROR)
-		return (ft_error(EINHERIT, "objects_parse"));
-	return (SUCCESS);
-}
-
-static int sphere_parse(t_object **object, t_tree *t, char *line)
+static int	sphere_parse(t_object **object, t_tree *t, char *line)
 {
 	t_tuple		position;
 	t_fl		diameter;
@@ -120,7 +83,7 @@ static int sphere_parse(t_object **object, t_tree *t, char *line)
 	return (SUCCESS);
 }
 
-static int plane_parse(t_object **object, t_tree *t, char *line)
+static int	plane_parse(t_object **object, t_tree *t, char *line)
 {
 	t_tuple		point;
 	t_tuple		vector;

@@ -6,14 +6,12 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:23:47 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 13:23:41 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:56:11 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "messages.h"
-
-static bool	rt_out_of_limits(char *value);
 
 static bool	valid_01_float(t_fl nbr, char *value)
 {
@@ -79,22 +77,4 @@ bool	values_within_limits(t_scene *s)
 		i++;
 	}
 	return (true);
-}
-
-/*
-rt_out_of_limits()
-Prints a custom error message letting the user know where an *.rt file might
-contain a bad syntax.
-*/
-static bool	rt_out_of_limits(char *value)
-{
-	ft_putendl_fd("Error\n", 2);
-	if (value)
-	{
-		ft_putstr_fd("Value of ", 2);
-		ft_putstr_fd(value, 2);
-		ft_putendl_fd(" outside of limits", 2);
-	}
-	ft_putendl_fd(MSG_INVALID_RT, 2);
-	return (false);
 }

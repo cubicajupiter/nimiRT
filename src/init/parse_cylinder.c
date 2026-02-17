@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 10:16:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 10:26:08 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:50:53 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	cylinder_main_parse(t_tuple position, t_tuple axis, char **line);
 static int	cylinder_size_parse(t_fl *radius, t_fl *height, char **line);
 
-int cylinder_parse(t_object **object, t_tree *t, char *line)
+int	cylinder_parse(t_object **object, t_tree *t, char *line)
 {
 	t_tuple		position;
 	t_tuple		axis;
