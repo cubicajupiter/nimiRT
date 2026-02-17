@@ -42,13 +42,13 @@ long long	ft_super_atoi(const char *nptr)
 
 int	ft_atoi(const char *nptr, int *nbr)
 {
-	int	res;
+	long long	res;
 
 	if (!ft_nan(nptr))
 		return (ft_liberror(EINVAL, "ft_atoi"));
 	res = ft_super_atoi(nptr);
 	if (res > INT_MAX || res < INT_MIN)
-		return (ft_liberror(EOVERFLOW, "ft_atoi"));
-	*nbr = res;
+		return (FAIL);
+	*nbr = (int)res;
 	return (SUCCESS);
 }

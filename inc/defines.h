@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/13 17:34:14 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:42:03 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef t_fl			t_matrix[4][4];
 typedef t_fl			t_matrix2[2][2];
 typedef t_fl			t_matrix3[3][3];
 typedef t_tuple			t_ray[2];
-typedef t_fl			t_cylinder[4];
-typedef t_fl			t_plane[2];
+// typedef t_fl			t_cylinder[4];
+// typedef t_fl			t_plane[2];
 
 typedef enum e_obj_type		t_obj_type;
 typedef enum e_run_mode		t_run_mode;
@@ -85,6 +85,8 @@ typedef struct s_camera		t_camera;
 typedef struct s_light		t_light;
 typedef struct s_ambient	t_ambient;
 typedef struct s_sphere		t_sphere;
+typedef struct s_plane		t_plane;
+typedef struct s_cylinder	t_cylinder;
 typedef struct s_intersect	t_intersect;
 typedef struct s_xs			t_xs;
 typedef struct s_material	t_material;
@@ -133,27 +135,23 @@ typedef struct	s_tree
 typedef struct	s_camera
 {
 	t_ray				ray;
-	int					fov;
+	t_fl				fov;
+	bool				set;
 }						t_camera;
-
-// typedef struct	s_light
-// {
-// 	t_tuple				point;
-// 	t_fl				brightness;
-// 	// t_trio			color; // Bonus feature
-// }						t_light;
 
 typedef struct	s_light
 {
 	t_tuple				point;
 	t_fl				brightness;
 	t_trio				color;
+	bool				set;
 }						t_light;
 
 typedef struct	s_ambient
 {
 	t_fl				brightness;
 	t_trio				color;
+	bool				set;
 }						t_ambient;
 
 typedef struct	s_scene
@@ -211,5 +209,23 @@ typedef struct	s_sphere
 	t_fl				radius;
 	t_matrix			transform;
 }						t_sphere;
+
+typedef struct	s_plane
+{
+	size_t				id;
+	t_tuple				point;
+	t_tuple				vector;
+	t_matrix			transform;
+}						t_plane;
+
+typedef struct	s_cylinder
+{
+	size_t				id;
+	t_tuple				center;
+	t_tuple				axis;
+	t_fl				radius;
+	t_fl				height;
+	t_matrix			transform;
+}						t_cylinder;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 13:40:02 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 17:08:06 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:54:22 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@ static int	window_and_image_init(t_tree *t);
 
 int	init(t_tree *t, char *rt_file)
 {
+	int	flag;
+
 	if (!t || !rt_file)
 		return (ft_error(EINVAL, "init"));
 	if (program_init(t) != SUCCESS
 		|| scene_init(t) != SUCCESS
-		// || rt_parse(t, rt_file) != SUCCESS
 		|| window_and_image_init(t) != SUCCESS)
 		return (ft_error(EINHERIT, "init"));
+	flag = rt_parse(t, rt_file);
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "init"));
+	if (flag == FAIL || !values_within_limits(t->scene))
+		return (FAIL);
 	return (SUCCESS);
 }
 
@@ -57,7 +63,7 @@ static int	scene_init(t_tree *t)
 		|| ft_memset(new, 0, sizeof(t_scene)) == NULL
 		|| vec_alloc(&objects, t->a_buf) != SUCCESS
 		|| vec_new(objects, 0, sizeof(t_object)) != SUCCESS
-		|| vec_alloc(&xs, t->a_buf) !=  SUCCESS
+		|| vec_alloc(&xs, t->a_buf) != SUCCESS
 		|| vec_new(xs, 0, sizeof(t_xs)) != SUCCESS)
 		return (ft_error(EINHERIT, "scene_init"));
 	new->objects = objects;
