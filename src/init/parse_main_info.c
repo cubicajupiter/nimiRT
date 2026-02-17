@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:13:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 13:49:15 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:49:17 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,28 @@ int	main_info_parse(t_tree *t, char *line)
 
 static int	ambient_parse(t_tree *t, char *line)
 {
-	int	flag;
+	t_fl	brightness;
+	t_trio	color;
+	int		flag;
 
 	if (!t || !line)
 		return (ft_error(EINVAL, "ambient_parse"));
 	if (next_var_get(&line, NULL) != SUCCESS || !*line)
 		return (rt_invalid(*line));
-	flag = parser_atof(&t->scene->ambient.brightness, line);
-	if (flag != SUCCESS)
+	flag = parser_atof(&brightness, line);
+	if (flag != SUCCESS || !valid_01_float(brightness, "ambient brightness"))
 		return (flag);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
-	flag = ft_atotrio(t->scene->ambient.color, line);
+	flag = ft_atotrio(color, line);
 	if (flag == FAIL)
 		return (rt_invalid(*line));
 	if (flag == ERROR)
+		return (ft_error(EINHERIT, "ambient_parse"));
+	if (!valid_color(color, "ambient color"))
+		return (FAIL);
+	if (trio_multiply_scalar_get(t->scene->ambient.color,
+			brightness, color) != SUCCESS)
 		return (ft_error(EINHERIT, "ambient_parse"));
 	t->scene->ambient.set = true;
 	return (SUCCESS);
@@ -89,15 +96,32 @@ static int	camera_parse(t_tree *t, char *line)
 	return (flag);
 }
 
-// NOTE: Add to end of parse_light() for bonus and scale for brightness
-// if (flag != SUCCESS)
-// 	return (flag);
-// if (next_var_get(&line, ft_isfloat) != SUCCESS)
-// 	return (FAIL);
-// flag = ft_atotrio(t->scene->light.color, line);
+static int	light_parse_helper(t_tree *t, char *line)
+{
+	t_fl	brightness;
+	t_trio	color;
+	int		flag;
+
+	flag = parser_atof(&brightness, line);
+	if (flag != SUCCESS || !valid_01_float(brightness, "light brightness"))
+		return (flag);
+	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
+		return (rt_invalid(*line));
+	flag = ft_atotrio(color, line);
+	if (flag == FAIL)
+		return (rt_invalid(*line));
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "light_parse"));
+	if (!valid_color(color, "light color"))
+		return (FAIL);
+	if (trio_multiply_scalar_get(t->scene->light.color,
+			brightness, color) != SUCCESS)
+		return (ft_error(EINHERIT, "light_parse"));
+	return (SUCCESS);
+}
+
 static int	light_parse(t_tree *t, char *line)
 {
-	t_fl	tmp;
 	int		flag;
 
 	if (!t || !line)
@@ -109,12 +133,9 @@ static int	light_parse(t_tree *t, char *line)
 		return (flag);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
-	flag = parser_atof(&tmp, line);
+	flag = light_parse_helper(t, line);
 	if (flag != SUCCESS)
 		return (flag);
-	t->scene->light.brightness = tmp;
-	if (color_new(t->scene->light.color, tmp, tmp, tmp) != SUCCESS)
-		return (ft_error(EINHERIT, "light_parse"));
 	t->scene->light.set = true;
-	return (flag);
+	return (SUCCESS);
 }
