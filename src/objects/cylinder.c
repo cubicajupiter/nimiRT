@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:02:39 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 		return (ft_error(EINHERIT, "cylinder_new"));
 	object.type = CYLINDER;
 	object.cylinder = cylinder;
-	material_new(&object.material);
+	material_default(&object.material);
 	cylinder->id = t->scene->objects->len;
 	if (vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| point_new(cylinder->center, 0, 0, 0) != SUCCESS

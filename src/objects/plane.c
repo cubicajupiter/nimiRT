@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 10:35:05 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 		return (ft_error(EINHERIT, "plane_new"));
 	object.type = PLANE;
 	object.plane = plane;
-	material_new(&object.material);
+	material_default(&object.material);
 	plane->id = t->scene->objects->len;
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
 		|| vector_new(plane->vector, vector[X], vector[Y], vector[Z]) != SUCCESS

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 10:37:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 17:24:00 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	main(int ac, char **av)
 	flag = init(&tree, av[1]);
 	if (flag != SUCCESS)
 		return (error_exit(flag, &tree));
-	if (mode != NORMAL)
+	if (mode != RELEASE)
 		debug(&tree, mode);
 	// sphere_shader_test(&tree);
-	// if (ray_trace(&tree) != SUCCESS)
-	// 	return (error_exit(flag, &tree));
-	if (errno)
-		ft_perror();
+	if (ray_trace(&tree) != SUCCESS)
+		return (error_exit(flag, &tree));
+	// if (errno)
+	// 	ft_perror();
 	memory_free(&tree);
 	return (EXIT_SUCCESS);
 }

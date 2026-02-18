@@ -178,7 +178,7 @@ int    test_rays(t_tree *t)
 	scaling(transformation4, 2, 2, 2);
 	sphere_new(&object, (t_trio){0, 0, 0}, 1.0f, t);
 	matrix_copy(object->sphere->transform, transformation4);
-	intersections_get(NULL, ray4, t);
+	scene_intersections_get(NULL, ray4, t);
 
 	t_xs	*hit;
 	size_t	i;

@@ -12,14 +12,18 @@
 
 #include "miniRT.h"
 
-static int	normal_objpoint_get(t_tuple dst, t_sphere *sphere, t_tuple world_point);
-static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_normal);
+static int	normal_object_point_get(t_tuple dst, t_sphere *sphere,
+				t_tuple world_point);
+static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere,
+				t_tuple obj_normal);
 
 /*
-	The NORMAL vector of an object is a UNIT VECTOR that is PERPENDICULAR to the object's surface.
+	The NORMAL vector of an object is a UNIT VECTOR that is PERPENDICULAR to
+	the object's surface.
 	Point is the point of intersection.
 	The point resides on the circumference of the sphere.
-	The direction vector from the sphere's origin to this point is perpendicular to the sphere's surface.
+	The direction vector from the sphere's origin to this point is
+	perpendicular to the sphere's surface.
 	That direction vector is basically the normal vector,
 	which is normalised to get a unit vector.
 */
@@ -30,7 +34,7 @@ int	normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 
 	if (!dst || !sphere || !point)
 		return (ft_error(EINVAL, "normal_sphere_get"));
-	normal_objpoint_get(obj_point, sphere, point);
+	normal_object_point_get(obj_point, sphere, point);
 	tuple_minus_get(obj_normal, obj_point, sphere->center);
 	normal_worldvector_get(dst, sphere, obj_normal);
 	normalize_apply(dst);
@@ -39,9 +43,11 @@ int	normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 
 /*
 	Gets a normal vector's object point from its world point.
-	Object point is the product of the world point and the inverse of the object's transformation.
+	Object point is the product of the world point and the inverse of the
+	object's transformation.
 */
-static int	normal_objpoint_get(t_tuple dst, t_sphere *sphere, t_tuple world_point)
+static int	normal_object_point_get(t_tuple dst, t_sphere *sphere,
+				t_tuple world_point)
 {
 	t_matrix	inverse;
 
@@ -56,10 +62,12 @@ static int	normal_objpoint_get(t_tuple dst, t_sphere *sphere, t_tuple world_poin
 	Transform a normal in object space to world space.
 	1. Inverts the transformation.
 	2. Transposes the inverse.
-	3. Applies the transposed inverse to the normal in object space (converting it to world space normal.)
+	3. Applies the transposed inverse to the normal in object space (converting
+	it to world space normal.)
 	4. Normalises the world space vector.
 */
-static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_normal)
+static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere,
+				t_tuple obj_normal)
 {
 	t_matrix	inverse;
 	t_matrix	transposed_inverse;
@@ -69,6 +77,6 @@ static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere, t_tuple obj_nor
 	matrix_invert(inverse, sphere->transform);
 	matrix_transpose(transposed_inverse, inverse);
 	matrix_tuple_multiply_get(dst, transposed_inverse, obj_normal);
-	dst[W] = 0;
+	dst[W] = VECTOR;
 	return (SUCCESS);
 }
