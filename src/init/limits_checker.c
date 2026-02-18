@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:23:47 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:49:40 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/17 14:54:32 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ bool	values_within_limits(t_scene *s)
 			return (false);
 		i++;
 	}
+	if (!values_make_sense(s))
+		return (false);
 	return (true);
 }

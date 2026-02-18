@@ -12,6 +12,7 @@
 
 #include "defines.h"
 #include "miniRT.h"
+#include <asm-generic/errno.h>
 
 /*
 Magnitude is how far you would travel in a straight line if you were to go
@@ -21,7 +22,7 @@ Pythagoras's a^2 + b^2 = c^2 but in the 3D plane i.e. magnitude becomes d in
 a^2 + b^2 + c^2 = d^2.
 */
 
-int	magnitude_get(t_fl *magnitude, const t_tuple vector)
+int	magnitude_get(t_fl *magnitude, t_tuple vector)
 {
 	if (!magnitude || !vector)
 		return (ft_error(EINVAL, "magnitude_get"));
@@ -50,7 +51,10 @@ int	normalize_apply(t_tuple vector)
 
 	if (!vector)
 		return (ft_error(EINVAL, "normalize_apply"));
+	magnitude = 0.0f;
 	magnitude_get(&magnitude, vector);
+	if (is_float_equal(magnitude, EPSILON))
+		return (ft_error(EOVERFLOW, "normalize_apply"));
 	vector[X] /= magnitude;
 	vector[Y] /= magnitude;
 	vector[Z] /= magnitude;

@@ -12,6 +12,7 @@
 
 #include "miniRT.h"
 
+// FIXME: Do we need this? We will be inputting point lights from *.rt
 int	point_light_new(t_light *dst, t_tuple position, t_trio intensity)
 {
 	if (!dst || !position || !intensity)
