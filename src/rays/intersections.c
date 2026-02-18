@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 09:53:16 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int	hit(t_xs **hit, t_vec *xs)
 	return (SUCCESS);
 }
 
-static int	sort_ascending(void *a, void *b)
-{
-	return ((long)*(int *)a - *(int *)b);
-}
+// static int	sort_ascending(void *a, void *b)
+// {
+// 	return ((long)*(float *)a - *(float *)b);
+// }
 
 // Loops through all objects in the scene, gets and pushes all intersections to
 // the scene->xs vector array, then sorts in ascending order.
@@ -47,7 +47,6 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 	size_t		i;
 	t_object	*obj;
 	t_scene		*scene;
-	//object//xs	current_smallest_positive_t;
 
 	if (!ray || !t)
 		return (ft_error(EINVAL, "intersections_get"));
@@ -61,11 +60,8 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 	}
 	if (scene->xs->len == 0)
 		return (FALSE);
-	if (vec_sort(scene->xs, sort_ascending) != SUCCESS)
-	{
-		ft_perror();
+	if (intersections_sort(scene->xs) != SUCCESS)
 		return (ft_error(EINHERIT, "intersections_get"));
-	}
 	if (dst)
 		*dst = scene->xs;
 	return (TRUE);

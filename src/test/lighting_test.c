@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "lighting.h"
 
 // int	lighting_test(t_tree *tree)
 // {

@@ -62,6 +62,8 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 	t_xs		tmp1;
 	t_xs		tmp2;
 
+	if (!xs || !object || !ray)
+		return (ft_error(EINVAL, "sphere_intersect_get"));
 	matrix_invert(inversion, object->sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
 	if (sphere_intersect_math(time, object->sphere, ray2))
@@ -91,6 +93,8 @@ static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 	t_fl		b;
 	t_fl		c;
 
+	if (!time || !sphere || !ray)
+		return (ft_error(EINVAL, "sphere_intersect_math"));
 	tuple_minus_get(sphere_to_ray, ray[ORIGIN], sphere->center);
 	vector_dot(&a, ray[DIRECTION], ray[DIRECTION]);
 	vector_dot(&b, ray[DIRECTION], sphere_to_ray);

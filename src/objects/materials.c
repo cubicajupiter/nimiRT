@@ -15,7 +15,7 @@
 int	material_default(t_material *dst)
 {
 	if (!dst)
-		return (ft_error(EINVAL, "material_new"));
+		return (ft_error(EINVAL, "material_default"));
 	color_new(dst->color, 1, 1, 1);
 	dst->ambi_light = 0.1;
 	dst->diff_light = 0.9;

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 17:57:41 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 09:45:41 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		hit(t_xs **hit, t_vec *xs);
 int		intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		intersect_get(t_vec *xs, t_object *obj, t_ray ray);
+int		intersections_sort(t_vec *src);
 
 // Lighting
 void		reflection_ambient(t_material *mat, t_scene *s);

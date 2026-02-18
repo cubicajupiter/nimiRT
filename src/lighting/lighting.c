@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "lighting.h"
 
 static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);
-static t_fl	eye_vec_dp(\
+static t_fl	eye_vec_dot_product(\
 t_tuple light_v, t_tuple neglight_v, t_tuple *initial_vectors[]);
-static void	combine_reflections(t_material *mat);
+static void	reflections_combine(t_material *mat);
 
 /*
 	Parameters:
@@ -42,14 +41,14 @@ int	lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[])
 		reflection_specular(mat, NULL, 0.0);
 	else
 	{
-		eye_dot = eye_vec_dp(light_v, neglight_v, vectors);
+		eye_dot = eye_vec_dot_product(light_v, neglight_v, vectors);
 		if (eye_dot <= 0)
 			reflection_specular(mat, NULL, eye_dot);
 		else
 			reflection_specular(mat, light, eye_dot);
 	}
 	reflection_diffuse(mat, light_dot);
-	combine_reflections(mat);
+	reflections_combine(mat);
 	return (SUCCESS);
 }
 
@@ -59,19 +58,19 @@ static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
 	normalize_apply(dst);
 }
 
-static t_fl	eye_vec_dp(\
+static t_fl	eye_vec_dot_product(\
 t_tuple light_v, t_tuple neglight_v, t_tuple *initial_vectors[])
 {
 	t_fl		eye_dot_product;
 	t_tuple		refl_v;
- 
+
 	vector_negate(neglight_v, light_v);
 	reflection_get(refl_v, neglight_v, *initial_vectors[NORMAL]);
 	vector_dot(&eye_dot_product, refl_v, *initial_vectors[EYE]);
 	return (eye_dot_product);
 }
 
-static void	combine_reflections(t_material *mat)
+static void	reflections_combine(t_material *mat)
 {
 	t_trio	ambient_tmp;
 	t_trio	diffuse_tmp;

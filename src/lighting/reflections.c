@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "lighting.h"
 
 int	reflection_get(t_tuple dst, t_tuple in, t_tuple normal)
 {
@@ -32,7 +31,8 @@ void	reflection_diffuse(t_material *mat, t_fl light_dot)
 
 	if (light_dot >= 0)
 	{
-		trio_multiply_scalar_get(weight, mat->diff_light, mat->shader.eff_color);
+		trio_multiply_scalar_get(weight, mat->diff_light,
+			mat->shader.eff_color);
 		trio_multiply_scalar_get(mat->shader.diff_refl, light_dot, weight);
 	}
 	else
@@ -49,7 +49,7 @@ void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
 		factor = pow(eye_dot, mat->shine);
 		trio_multiply_scalar_get(weight, mat->spec_light, light->color);
 		trio_multiply_scalar_get(mat->shader.spec_refl, factor, weight);
-	} 
+	}
 	else
 		color_new(mat->shader.spec_refl, 0, 0, 0);
 }

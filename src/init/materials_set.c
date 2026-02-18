@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lighting.h"
 #include "miniRT.h"
 
 int	materials_set(t_scene *s)
