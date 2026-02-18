@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 09:53:42 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:58:07 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	ray_trace(t_tree *t)
 	t_fl	world_y;
 	t_tuple	direction;
 	t_ray	ray;
-	t_xs	*hit_ptr = NULL;
 	t_tuple	point;
 	t_tuple	normal_v;
 	t_tuple	eye_v;
 	t_tuple	*vectors[2];
+	t_xs	hit;
 
 	s = t->scene;
 	vectors[1] = &normal_v;
@@ -48,18 +48,14 @@ int	ray_trace(t_tree *t)
 			tuple_minus_get(direction, pos, s->camera.ray[ORIGIN]);
 			normalize_apply(direction);
 			ray_new(ray, s->camera.ray[ORIGIN], direction);
-			if (intersections_get(&t->scene->xs, ray, t))
+			if (scene_hit_get(&hit, ray, t->scene))
 			{
-				hit(&hit_ptr, t->scene->xs);
-				position_get(point, ray, hit_ptr->t);	//These three calls compute arguments for the call to lighting()
-				normal_sphere_get(normal_v, hit_ptr->object->sphere, point);
+				position_get(point, ray, hit.t);	//These three calls compute arguments for the call to lighting()
+				normal_sphere_get(normal_v, hit.object->sphere, point);
 				vector_negate(eye_v, ray[DIRECTION]);
-				lighting(&hit_ptr->object->material, &s->light, point, vectors);
-				if (hit_ptr)
-					pixel_put(t->image, x, y, hit_ptr->object->material.shader.combined);
-				hit_ptr = NULL;
+				lighting(&hit.object->material, &s->light, point, vectors);
+				pixel_put(t->image, x, y, hit.object->material.shader.combined);
 			}
-			vec_reset(t->scene->xs);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 09:53:16 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:19:41 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // Loops through all intersections in the scene, then returns the first
 // (lowest t value) intersection.
 // FIXME: UNTESTED!
-int	hit(t_xs **hit, t_vec *xs)
+int	first_intersection_get(t_xs **hit, t_vec *xs)
 {
 	t_xs	*tmp;
 	size_t	i;
@@ -45,7 +45,7 @@ int	hit(t_xs **hit, t_vec *xs)
 int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 {
 	size_t		i;
-	t_object	*obj;
+	t_object	*object;
 	t_scene		*scene;
 
 	if (!ray || !t)
@@ -54,8 +54,8 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 	i = 0;
 	while (i < scene->objects->len)
 	{
-		obj = vec_get(scene->objects, i);
-		intersect_get(scene->xs, obj, ray);
+		object = vec_get(scene->objects, i);
+		intersect_get(scene->xs, object, ray);
 		i++;
 	}
 	if (scene->xs->len == 0)
@@ -69,12 +69,12 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 
 // Checks the object for which type it is then calls object-specific
 // intersection_get function
-int	intersect_get(t_vec *xs, t_object *obj, t_ray ray)
+int	intersect_get(t_vec *xs, t_object *object, t_ray ray)
 {
-	if (!xs || !obj || !ray)
+	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "intersect_get"));
-	if (obj->type == SPHERE)
-		if (!sphere_intersect_get(xs, obj, ray))
+	if (object->type == SPHERE)
+		if (!sphere_intersect_get(xs, object, ray))
 			return (FALSE);
 	// if (obj->obj_type == PLANE)
 	// if (obj->obj_type == CYLINDER)

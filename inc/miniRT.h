@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 09:45:41 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:47:28 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	commands(void *data);
 
 // Objects
 int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);
+int		sphere_hit_get(t_fl *dst, t_object *object, t_ray ray);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t);
@@ -71,7 +72,8 @@ int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
-int		hit(t_xs **hit, t_vec *xs);
+int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
+int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		intersect_get(t_vec *xs, t_object *obj, t_ray ray);
 int		intersections_sort(t_vec *src);

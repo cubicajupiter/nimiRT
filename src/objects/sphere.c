@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 11:45:24 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,38 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 // 	matrix_copy(sphere->transform, transformation);
 // 	return (SUCCESS);
 // }
+
+// Inverts the sphere transform matrix and multiplies the result with the ray,
+// then runs sphere_intersect_math() fetching the two intersections (always
+// two even if ray is tangential to edge of sphere).
+int	sphere_hit_get(t_fl *dst, t_object *object, t_ray ray)
+{
+	t_ray		ray2;
+	t_matrix	inversion;
+	t_fl		time[2];
+
+	if (!dst || !object || !ray)
+		return (ft_error(EINVAL, "sphere_intersect_get"));
+	matrix_invert(inversion, object->sphere->transform);
+	ray_transform_get(ray2, ray, inversion);
+	if (sphere_intersect_math(time, object->sphere, ray2))
+	{
+		if (time[0] > 0.0f && time[1] > 0.0f)
+		{
+			if (time[0] < time[1])
+				*dst = time[0];
+			else
+				*dst = time[1];
+		}
+		else if (time[0] > 0.0f)
+			*dst = time[0];
+		else if (time[1] > 0.0f)
+			*dst = time[1];
+	}
+	else
+		return (FALSE);
+	return (TRUE);
+}
 
 // Inverts the sphere transform matrix and multiplies the result with the ray,
 // then runs sphere_intersect_math() fetching the two intersections (always
