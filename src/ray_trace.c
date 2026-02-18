@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 14:12:45 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:23:46 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	ray_trace(t_tree *t)
 			ray_new(ray, s->camera.ray[ORIGIN], direction);
 			if (scene_hit_get(&hit, ray, t->scene))
 			{
+				// hit_shade(hit, scene)
+				// NOTE: Add this later for multiple light souces?! Would need to iterate over all lights in world
 				intersection_compute(&hit, ray);
 				lighting(&hit, &s->light);
 				pixel_put(t->image, x, y, hit.object->material.shader.combined);

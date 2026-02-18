@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 12:22:51 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:55:48 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,41 @@ int	object_intersections_get(t_vec *xs, t_object *object, t_ray ray)
 {
 	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "intersect_get"));
+	// NOTE: AABB logic might fit here or somewhere else to simplify when objects
+	// intersect one another
 	if (object->type == SPHERE)
 		if (!sphere_intersect_get(xs, object, ray))
 			return (FALSE);
 	// if (obj->obj_type == PLANE)
 	// if (obj->obj_type == CYLINDER)
 	return (TRUE);
+}
+
+/*
+	intersection_compute()
+	Computes data about an intersection point on a object including the position
+	the vector back to the camera, the vector of the normal at that point on the
+	object and whether the camera is inside the object or not.
+*/
+int	intersection_compute(t_xs *hit, t_ray ray)
+{
+	t_fl	dot;
+
+	if (!hit || !ray)
+		return (ft_error(EINVAL, "intersection_compute"));
+	if (position_get(hit->point, ray, hit->t) != SUCCESS
+		|| vector_negate(hit->camera_vector, ray[DIRECTION]) != SUCCESS
+		|| normal_sphere_get(hit->normal_vector,
+			hit->object->sphere, hit->point) != SUCCESS
+		|| vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS)
+		return (ft_error(EINHERIT, "intersection_compute"));
+	if (dot < 0)
+	{
+		hit->inside = true;
+		if (vector_negate(hit->normal_vector, hit->normal_vector) != SUCCESS)
+			return (ft_error(EINHERIT, "intersection_compute"));
+	}
+	else
+		hit->inside = false;
+	return (SUCCESS);
 }
