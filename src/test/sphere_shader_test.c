@@ -77,8 +77,11 @@ static int	sphere_and_shade(t_tree *tree)
 				position_get(point, ray, hit_ptr->t);	//These three calls compute arguments for the call to lighting()
 				normal_sphere_get(normal_v, hit_ptr->object->sphere, point);
 				vector_negate(eye_v, ray[DIRECTION]);
+
 				vectors[1] = &normal_v; vectors[0] = &eye_v;
 				lighting(&hit_ptr->object->material, &light, point, vectors);
+				printf("X: %d	Y: %d\n", x, y);
+				color_print(hit_ptr->object->material.shader.combined);
 				if (hit_ptr)
 				{
 					pixel_put(tree->image, x, y, hit_ptr->object->material.shader.combined);

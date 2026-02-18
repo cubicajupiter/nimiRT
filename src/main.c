@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 		return (error_exit(flag, &tree));
 	if (mode != NORMAL)
 		debug(&tree, mode);
-	// sphere_shader_test(&tree);
+	sphere_shader_test(&tree);
 	// if (ray_trace(&tree) != SUCCESS)
 	// 	return (error_exit(flag, &tree));
 	if (errno)
