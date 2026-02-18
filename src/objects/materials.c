@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 10:49:12 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 12:21:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	material_default(t_material *dst)
 	if (!dst)
 		return (ft_error(EINVAL, "material_default"));
 	color_new(dst->color, 1, 1, 1);
-	dst->ambi_light = 0.1;
+	dst->ambi_light = 1.0;
 	dst->diff_light = 0.9;
 	dst->spec_light = 0.9;
 	dst->shine = 200.0;

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 11:47:28 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 12:22:50 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
 int		first_intersection_get(t_xs **hit, t_vec *xs);
-int		intersections_get(t_vec **dst, t_ray ray, t_tree *t);
-int		intersect_get(t_vec *xs, t_object *obj, t_ray ray);
+int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
+int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
 int		intersections_sort(t_vec *src);
 
 // Lighting

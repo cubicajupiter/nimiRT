@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 11:19:41 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 12:22:51 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	first_intersection_get(t_xs **hit, t_vec *xs)
 // Loops through all objects in the scene, gets and pushes all intersections to
 // the scene->xs vector array, then sorts in ascending order.
 // FIXME: LIMITED TESTING!
-int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
+int	scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 {
 	size_t		i;
 	t_object	*object;
@@ -55,7 +55,7 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 	while (i < scene->objects->len)
 	{
 		object = vec_get(scene->objects, i);
-		intersect_get(scene->xs, object, ray);
+		object_intersections_get(scene->xs, object, ray);
 		i++;
 	}
 	if (scene->xs->len == 0)
@@ -69,7 +69,7 @@ int	intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 
 // Checks the object for which type it is then calls object-specific
 // intersection_get function
-int	intersect_get(t_vec *xs, t_object *object, t_ray ray)
+int	object_intersections_get(t_vec *xs, t_object *object, t_ray ray)
 {
 	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "intersect_get"));

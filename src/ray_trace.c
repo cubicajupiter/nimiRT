@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 11:58:07 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 12:21:51 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ray_trace(t_tree *t)
 	s = t->scene;
 	vectors[1] = &normal_v;
 	vectors[0] = &eye_v;
-	canvas_put(t->image, (t_trio){0});
+	canvas_put(t->image, (t_trio){1, 1, 1});
 	y = 0;
 	while (y < HEIGHT) {
 		world_y = half - pixel_size * y;
