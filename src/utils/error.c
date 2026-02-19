@@ -34,7 +34,7 @@ int	rt_invalid(char c)
 	{
 		ft_putstr_fd("Syntax error near '", 2);
 		ft_putchar_fd(c, 2);
-		ft_putendl_fd("'\n", 2);
+		ft_putstr_fd("'\n\n", 2);
 	}
 	ft_putendl_fd(MSG_INVALID_RT, 2);
 	return (FAIL);
@@ -52,7 +52,7 @@ bool	rt_out_of_limits(char *value)
 	{
 		ft_putstr_fd("Value of ", 2);
 		ft_putstr_fd(value, 2);
-		ft_putendl_fd(" outside of limits", 2);
+		ft_putstr_fd(" outside of limits\n\n", 2);
 	}
 	ft_putendl_fd(MSG_INVALID_RT, 2);
 	return (false);
