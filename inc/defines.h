@@ -112,17 +112,17 @@ enum	e_run_mode
 
 // Structs
 // Input, filled with data from the *.rt file or assumptions
-typedef struct	s_input
-{
-	t_fl				amb_ratio;
-	t_trio				amb_color;
-	t_tuple				cam_point;
-	t_tuple				cam_vector;
-	int					cam_fov;
-	t_tuple				lig_point;
-	t_fl				lig_ratio;
-	t_trio				lig_color;
-}						t_input;
+// typedef struct	s_input
+// {
+// 	t_fl				amb_ratio;
+// 	t_trio				amb_color;
+// 	t_tuple				cam_point;
+// 	t_tuple				cam_vector;
+// 	int					cam_fov;
+// 	t_tuple				lig_point;
+// 	t_fl				lig_ratio;
+// 	t_trio				lig_color;
+// }						t_input;
 
 // Tree, used to pass around all the data we need to create the image
 typedef struct	s_tree
@@ -207,6 +207,10 @@ typedef struct s_xs
 {
 	t_object			*object;
 	t_fl				t;
+	t_tuple				point;
+	t_tuple				camera_vector;
+	t_tuple				normal_vector;
+	bool				inside;
 }						t_xs;
 
 typedef struct	s_sphere

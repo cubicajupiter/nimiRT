@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 12:22:50 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:12:03 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
 int		intersections_sort(t_vec *src);
+int		intersection_compute(t_xs *hit, t_ray ray);
 
 // Lighting
 void		reflection_ambient(t_material *mat, t_scene *s);
@@ -124,7 +125,7 @@ int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 int		material_default(t_material *dst);
-int		lighting(t_material *mat, t_light *light, t_tuple point, t_tuple *vectors[]);
+int		lighting(t_xs *hit, t_light *light);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);

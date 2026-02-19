@@ -16,20 +16,24 @@ static int	var_count_get(int *var_count, t_object *object);
 
 int	color_parse(t_object *object, t_tree *t, char *line)
 {
-	int	var_count;
-	int	flag;
+	int		var_count;
+	int		flag;
+	char	*nptr;
 
 	if (!object || !t || !line)
 		return (ft_error(EINVAL, "color_parse"));
+	nptr = line;
 	var_count_get(&var_count, object);
 	while (var_count-- > 0)
 	{
-		if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
+		if (next_var_get(&nptr, ft_isfloat) != SUCCESS)
+			return (rt_invalid(*nptr));
+		if (!*nptr)
 			return (rt_invalid(*line));
 	}
-	flag = ft_atotrio(object->material.color, line);
+	flag = ft_atotrio(object->material.color, nptr);
 	if (flag == FAIL)
-		return (rt_invalid(*line));
+		return (rt_invalid(*nptr));
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "objects_parse"));
 	return (SUCCESS);

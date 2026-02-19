@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 12:21:51 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 14:23:46 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ray_trace(t_tree *t)
 	t_fl	world_y;
 	t_tuple	direction;
 	t_ray	ray;
-	t_tuple	point;
 	t_tuple	normal_v;
 	t_tuple	eye_v;
 	t_tuple	*vectors[2];
@@ -50,10 +49,10 @@ int	ray_trace(t_tree *t)
 			ray_new(ray, s->camera.ray[ORIGIN], direction);
 			if (scene_hit_get(&hit, ray, t->scene))
 			{
-				position_get(point, ray, hit.t);	//These three calls compute arguments for the call to lighting()
-				normal_sphere_get(normal_v, hit.object->sphere, point);
-				vector_negate(eye_v, ray[DIRECTION]);
-				lighting(&hit.object->material, &s->light, point, vectors);
+				// hit_shade(hit, scene)
+				// NOTE: Add this later for multiple light souces?! Would need to iterate over all lights in world
+				intersection_compute(&hit, ray);
+				lighting(&hit, &s->light);
 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
 			}
 			x++;

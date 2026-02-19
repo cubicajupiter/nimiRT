@@ -50,16 +50,16 @@ static int	ambient_parse(t_tree *t, char *line)
 	if (next_var_get(&line, NULL) != SUCCESS || !*line)
 		return (rt_invalid(*line));
 	flag = parser_atof(&brightness, line);
-	if (flag != SUCCESS || !valid_01_float(brightness, "ambient brightness"))
+	if (flag != SUCCESS)
 		return (flag);
+	if (!valid_01_float(brightness, "ambient brightness"))
+		return (FAIL);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
 	flag = ft_atotrio(color, line);
-	if (flag == FAIL)
-		return (rt_invalid(*line));
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "ambient_parse"));
-	if (!valid_color(color, "ambient color"))
+	if (flag == FAIL || !valid_color(color, "ambient color"))
 		return (FAIL);
 	if (trio_multiply_scalar_get(t->scene->ambient.color,
 			brightness, color) != SUCCESS)
@@ -103,8 +103,10 @@ static int	light_parse_helper(t_tree *t, char *line)
 	int		flag;
 
 	flag = parser_atof(&brightness, line);
-	if (flag != SUCCESS || !valid_01_float(brightness, "light brightness"))
+	if (flag != SUCCESS)
 		return (flag);
+	if (!valid_01_float(brightness, "light brightness"))
+		return (FAIL);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
 	flag = ft_atotrio(color, line);

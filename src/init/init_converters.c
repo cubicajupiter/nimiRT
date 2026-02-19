@@ -18,8 +18,12 @@ static int			ft_atotuple_helper(t_fl *dst, const char *nptr);
 int	ft_atopoint(t_tuple dst, const char *nptr)
 {
 	t_fl	xyz[3];
+	int		flag;
 
-	if (ft_atotuple_helper(xyz, nptr) != SUCCESS)
+	flag = ft_atotuple_helper(xyz, nptr);
+	if (flag == FAIL)
+		return (FAIL);
+	if (flag == ERROR)
 		return (ft_error(EINHERIT, "ft_atopoint"));
 	return (point_new(dst, xyz[X], xyz[Y], xyz[Z]));
 }
@@ -27,9 +31,13 @@ int	ft_atopoint(t_tuple dst, const char *nptr)
 int	ft_atovector(t_tuple dst, const char *nptr)
 {
 	t_fl	xyz[3];
+	int		flag;
 
-	if (ft_atotuple_helper(xyz, nptr) != SUCCESS)
-		return (ft_error(EINHERIT, "ft_atopoint"));
+	flag = ft_atotuple_helper(xyz, nptr);
+	if (flag == FAIL)
+		return (FAIL);
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "ft_atovector"));
 	return (vector_new(dst, xyz[X], xyz[Y], xyz[Z]));
 }
 
@@ -59,6 +67,7 @@ int	ft_atotrio(t_trio dst, const char *nptr)
 {
 	const char	*ptr[3];
 	int			color[3];
+	int			flag;
 
 	if (!dst || !nptr)
 		return (ft_error(EINVAL, "ft_atotrio"));
@@ -75,7 +84,10 @@ int	ft_atotrio(t_trio dst, const char *nptr)
 		|| ft_atoi(ptr[1], &color[G]) != SUCCESS
 		|| ft_atoi(ptr[2], &color[B]) != SUCCESS)
 		return (ft_error(EINHERIT, "ft_atotrio"));
-	return (color_uint_to_trio(dst, color));
+	flag = color_uint_to_trio(dst, color);
+	if (flag == FAIL)
+		rt_out_of_limits("color");
+	return (flag);
 }
 
 static const char	*next_csv_get(const char *nptr)

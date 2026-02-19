@@ -10,13 +10,33 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 BOLD='\033[1m'
+DIM='\033[2m'
 
 # Counters
 total_tests=0
 passed_tests=0
 failed_tests=0
+
+# Verbose mode flag
+VERBOSE=false
+
+# Parse command-line arguments
+while getopts "v" opt; do
+    case $opt in
+        v)
+            VERBOSE=true
+            ;;
+        \?)
+            echo "Usage: $0 [-v]"
+            echo "  -v    Verbose mode (show stdout and stderr)"
+            exit 1
+            ;;
+    esac
+done
 
 # Function to run a single test
 run_test() {
@@ -26,9 +46,10 @@ run_test() {
     
     total_tests=$((total_tests + 1))
     
-    # Run the binary and capture stderr
+    # Run the binary and capture both stdout and stderr
+    stdout_output=$(mktemp)
     stderr_output=$(mktemp)
-    "$BINARY" "$input_file" 2>"$stderr_output" >/dev/null
+    "$BINARY" "$input_file" >"$stdout_output" 2>"$stderr_output"
     exit_code=$?
     
     # Check if "Error" (with or without \n) is in stderr
@@ -59,13 +80,43 @@ run_test() {
         fi
     fi
     
+    # Show verbose output if requested
+    if [ "$VERBOSE" = true ]; then
+        echo -e "${DIM}  Exit code: $exit_code${NC}"
+        
+        # Show stdout
+        if [ -s "$stdout_output" ]; then
+            echo -e "${CYAN}  STDOUT:${NC}"
+            while IFS= read -r line; do
+                echo -e "${DIM}    $line${NC}"
+            done < "$stdout_output"
+        else
+            echo -e "${DIM}  STDOUT: (empty)${NC}"
+        fi
+        
+        # Show stderr
+        if [ -s "$stderr_output" ]; then
+            echo -e "${MAGENTA}  STDERR:${NC}"
+            while IFS= read -r line; do
+                echo -e "${DIM}    $line${NC}"
+            done < "$stderr_output"
+        else
+            echo -e "${DIM}  STDERR: (empty)${NC}"
+        fi
+        
+        echo ""
+    fi
+    
     # Clean up
-    rm -f "$stderr_output"
+    rm -f "$stdout_output" "$stderr_output"
 }
 
 # Main script
 echo -e "${BOLD}======================================${NC}"
-echo -e "${BOLD}  miniRT Test Suite${NC}"
+echo -e "${BOLD}  Binary Test Suite${NC}"
+if [ "$VERBOSE" = true ]; then
+    echo -e "${BOLD}  (Verbose Mode)${NC}"
+fi
 echo -e "${BOLD}======================================${NC}"
 echo ""
 

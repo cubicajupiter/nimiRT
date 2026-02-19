@@ -74,7 +74,7 @@ int	vector_dot(t_fl *dot, t_tuple a, t_tuple b)
 
 int	vector_cross(t_tuple dst, t_tuple a, t_tuple b)
 {
-	if (!dst || !a || !b)
+	if (!dst || !a || !b || a[W] > VECTOR || b[W] > VECTOR)
 		return (ft_error(EINVAL, "vector_cross"));
 	dst[X] = a[Y] * b[Z] - a[Z] * b[Y];
 	dst[Y] = a[Z] * b[X] - a[X] * b[Z];
