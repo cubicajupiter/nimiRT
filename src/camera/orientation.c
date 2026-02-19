@@ -23,21 +23,23 @@ t_matrix dst, t_tuple left_v, t_tuple true_up_v, t_tuple forward_v);
 - with left, true_up and forward vectors, constructs a matrix representing the view orientation
 - applies a translation to the matrix to move the view.
 */
-int	viewport_get(t_matrix dst, t_tuple from, t_tuple to, t_tuple up)
+int	viewport_get(t_matrix dst, t_tuple from_p, t_tuple to_p, t_tuple up_v)
 {
 	t_tuple		forward_v;
 	t_tuple		left_v;
 	t_tuple		true_up_v;
 	t_matrix	translate;
 
-	tuple_minus_get(forward_v, to, from);
+	if (!dst || !from_p || !to_p || !up_v
+		|| from_p[W] < POINT || to_p[W] < POINT || up_v[W] > VECTOR)
+		return (ft_error(EINVAL, "view_transform"));
+	tuple_minus_get(forward_v, to_p, from_p);
 	normalize_apply(forward_v);
-	vector_cross(left_v, forward_v, up);
-	left_v[W] = 0.0;
+	normalize_apply(up_v);
+	vector_cross(left_v, forward_v, up_v);
 	vector_cross(true_up_v, left_v, forward_v);
-	true_up_v[W] = 0.0;
 	orientation_get(dst, left_v, true_up_v, forward_v);
-	translation(translate, -from[X], -from[Y], -from[Z]);
+	translation(translate, -from_p[X], -from_p[Y], -from_p[Z]);
 	matrix_multiply_apply(dst, translate);
 	return (SUCCESS);
 }

@@ -12,4 +12,8 @@
 
 #include "miniRT.h"
 
-
+int	inside_outside_test(t_tree *t)
+{
+	(void)t;
+	return (SUCCESS);
+}
