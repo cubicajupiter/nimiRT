@@ -73,11 +73,11 @@ static void	reflections_combine(t_material *mat)
 	t_trio	ambient_tmp;
 	t_trio	diffuse_tmp;
 	t_trio	specular_tmp;
-	t_fl	scalar;
+	// t_fl	scalar;
 
-	scalar = 0.3333333333333333333333f;
-	trio_multiply_scalar_get(ambient_tmp, scalar, mat->shader.ambi_refl);
-	trio_multiply_scalar_get(diffuse_tmp, scalar, mat->shader.diff_refl);
-	trio_multiply_scalar_get(specular_tmp, scalar, mat->shader.spec_refl);
+	// scalar = 0.3333333333333333333333f;
+	trio_multiply_scalar_get(ambient_tmp, 0.1f, mat->shader.ambi_refl);
+	trio_multiply_scalar_get(diffuse_tmp, 0.7f, mat->shader.diff_refl);
+	trio_multiply_scalar_get(specular_tmp, 0.2f, mat->shader.spec_refl);
 	trio_add3_get(mat->shader.combined, ambient_tmp, diffuse_tmp, specular_tmp);
 }
