@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 11:53:52 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/18 15:20:56 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,10 @@ typedef struct	s_tree
 typedef struct	s_camera
 {
 	t_ray				ray;
+	int					width;
+	int					height;
 	t_fl				fov;
+	t_matrix			orientation;
 	bool				set;
 }						t_camera;
 
