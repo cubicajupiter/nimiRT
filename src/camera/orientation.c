@@ -36,9 +36,10 @@ int	viewport_get(t_matrix dst, t_tuple from, t_tuple to, t_tuple up)
 	left_v[W] = 0.0;
 	vector_cross(true_up_v, left_v, forward_v);
 	true_up_v[W] = 0.0;
-	orientation_set(dst, left_v, true_up_v, forward_v);
+	orientation_get(dst, left_v, true_up_v, forward_v);
 	translation(translate, -from[X], -from[Y], -from[Z]);
 	matrix_multiply_apply(dst, translate);
+	return (SUCCESS);
 }
 
 static int	orientation_get(\
@@ -57,4 +58,5 @@ t_matrix dst, t_tuple left_v, t_tuple true_up_v, t_tuple forward_v)
 	dst[2][X] = neg_forward_v[X];
 	dst[2][Y] = neg_forward_v[Y];
 	dst[2][Z] = neg_forward_v[Z];
+	return (SUCCESS);
 }
