@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:41:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 15:20:32 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/20 14:10:27 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	orientation_get(\
 t_matrix dst, t_tuple left_v, t_tuple true_up_v, t_tuple forward_v);
 
 /*
-- !normalize the UP vector param!
+- !normalize the UP vector param before passing to viewport_get!
 - computes the forward vector by suctracting 'from' from 'to'. normalizes the result
 - computes the left vector by taking the cross product of forward and the normalized up vector
 - computes the true_up vector by taking the cross product of left and forward.
@@ -44,6 +44,9 @@ int	viewport_get(t_matrix dst, t_tuple from_p, t_tuple to_p, t_tuple up_v)
 	return (SUCCESS);
 }
 
+/*
+	A point of potential optimization.
+*/
 static int	orientation_get(\
 t_matrix dst, t_tuple left_v, t_tuple true_up_v, t_tuple forward_v)
 {

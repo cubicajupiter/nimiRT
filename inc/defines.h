@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 15:20:56 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:32:20 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct	s_material
 	t_fl				ambi_light;
 	t_fl				diff_light;
 	t_fl				spec_light;
+	bool				in_shadow;
 }						t_material;
 
 typedef struct	s_object
@@ -208,8 +209,10 @@ typedef struct s_xs
 	t_object			*object;
 	t_fl				t;
 	t_tuple				point;
+	t_tuple				over_point;
 	t_tuple				camera_vector;
 	t_tuple				normal_vector;
+	t_tuple				light_vector;
 	bool				inside;
 }						t_xs;
 
