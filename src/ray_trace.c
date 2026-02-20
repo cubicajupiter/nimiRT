@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_trace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 14:23:46 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/20 13:31:37 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ray_trace(t_tree *t)
 	t_fl	world_x;
 	t_fl	world_y;
 	t_tuple	direction;
-	t_ray	ray;
+	t_ray	camera;
 	t_tuple	normal_v;
 	t_tuple	eye_v;
 	t_tuple	*vectors[2];
@@ -46,12 +46,13 @@ int	ray_trace(t_tree *t)
 			point_new(pos, world_x, world_y, wall_z);
 			tuple_minus_get(direction, pos, s->camera.ray[ORIGIN]);
 			normalize_apply(direction);
-			ray_new(ray, s->camera.ray[ORIGIN], direction);
-			if (scene_hit_get(&hit, ray, t->scene))
+			camera_new(camera, s->camera.ray[ORIGIN], direction);
+			if (scene_hit_get(&hit, camera, t->scene))
 			{
 				// hit_shade(hit, scene)
-				// NOTE: Add this later for multiple light souces?! Would need to iterate over all lights in world
-				intersection_compute(&hit, ray);
+				// NOTE: Add this later for multiple light sources?! Would need to iterate over all lights in world
+				intersection_compute(&hit, camera);
+				is_shadowed();
 				lighting(&hit, &s->light);
 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
 			}

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 15:20:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:37:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	lighting(t_xs *hit, t_light *light)
 
 	if (!hit || !light)
 		return (ft_error(EINVAL, "lighting"));
+	// Is this next light vector get redundant if coomputing shadow previous to this call?
+	// can save the light vector from is_shadow in the t_xs struct and reuse here
 	light_vector_get(light_v, light, hit->point);
 	vector_dot(&light_dot, light_v, hit->normal_vector);
 	if (light_dot < 0)
@@ -73,9 +75,7 @@ static void	reflections_combine(t_material *mat)
 	t_trio	ambient_tmp;
 	t_trio	diffuse_tmp;
 	t_trio	specular_tmp;
-	// t_fl	scalar;
 
-	// scalar = 0.3333333333333333333333f;
 	trio_multiply_scalar_get(ambient_tmp, 0.1f, mat->shader.ambi_refl);
 	trio_multiply_scalar_get(diffuse_tmp, 0.7f, mat->shader.diff_refl);
 	trio_multiply_scalar_get(specular_tmp, 0.2f, mat->shader.spec_refl);
