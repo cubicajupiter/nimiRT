@@ -133,6 +133,9 @@ static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 	b *= 2.0f;
 	vector_dot(&c, sphere_to_ray, sphere_to_ray);
 	// c -= 1.0f;
+	// FIXME: Temporarilly changed this constant to the sphere radius but the
+	// measurements seem to be funky, too small in relation to the space.
+	// Needs further investigation!
 	c -= sphere->radius;
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
