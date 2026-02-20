@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:18:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/20 15:35:48 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/20 15:52:11 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	is_shadowed(t_scene *scene, t_tuple hit_p)
 	normalize_apply(direction_v);
 	ray_new(light_ray_v, hit_p, direction_v);
 	if (is_shadow_hit(light_ray_v, scene, distance))
+	{
+		tuple_copy(scene->xs->light_vector, light_ray_v);
 		return (TRUE);
+	}
 	return (FALSE);
 }
 
