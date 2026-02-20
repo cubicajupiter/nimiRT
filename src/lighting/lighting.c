@@ -34,6 +34,7 @@ int	lighting(t_xs *hit, t_light *light)
 		return (ft_error(EINVAL, "lighting"));
 	light_vector_get(light_v, light, hit->point);
 	vector_dot(&light_dot, light_v, hit->normal_vector);
+	// printf("light dot: %f\n", light_dot);
 	if (light_dot < 0)
 		reflection_specular(&hit->object->material, NULL, 0.0);
 	else

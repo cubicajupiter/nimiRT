@@ -55,9 +55,9 @@ static int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
 	if (!t || !object || !ray)
 		return (ft_error(EINVAL, "object_hit_get"));
 	if (object->type == SPHERE)
-		if (!sphere_hit_get(t, object, ray))
-			return (FALSE);
+		if (sphere_hit_get(t, object, ray))
+			return (TRUE);
 	// if (obj->obj_type == PLANE)
 	// if (obj->obj_type == CYLINDER)
-	return (TRUE);
+	return (FALSE);
 }

@@ -39,11 +39,11 @@ int	main(int ac, char **av)
 		return (error_exit(flag, &tree));
 	if (mode != RELEASE)
 		debug(&tree, mode);
-	// sphere_shader_test(&tree);
 	if (ray_trace(&tree) != SUCCESS)
 		return (error_exit(flag, &tree));
-	// if (errno)
-	// 	ft_perror();
+	mlx_loop(tree.window);
+	if (errno)
+		ft_perror();
 	memory_free(&tree);
 	return (EXIT_SUCCESS);
 }

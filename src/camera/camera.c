@@ -12,6 +12,19 @@
 
 #include "miniRT.h"
 
+int	camera_compute(t_camera *camera)
+{
+	t_tuple	up_v;
+
+	if (!camera)
+		return (ft_error(EINVAL, "camera_compute"));
+	vector_new(up_v, 0.0, 1.0, 0.0);
+	view_transform_get(camera->orientation, camera->ray[ORIGIN],
+		camera->ray[DIRECTION], up_v);
+	camera_pixel_size_compute(camera);
+	return (SUCCESS);
+}
+
 int	camera_pixel_size_compute(t_camera *camera)
 {
 	t_fl	half_view;
@@ -35,6 +48,11 @@ int	camera_pixel_size_compute(t_camera *camera)
 	return (SUCCESS);
 }
 
+/*
+	Get the point on the viewport of the camera that we are looking at. Z axis
+	of the viewport is set at -1 as we are always looking in the same direction
+	and the world moves around us.
+*/
 static void	camera_viewport_point_get(t_tuple viewport_point, t_camera *camera,
 				int x, int y)
 {
@@ -43,8 +61,8 @@ static void	camera_viewport_point_get(t_tuple viewport_point, t_camera *camera,
 	t_fl		xscene;
 	t_fl		yscene;
 
-	xoffset = ((t_fl)x + 0.5 * camera->pixel_size);
-	yoffset = ((t_fl)y + 0.5 * camera->pixel_size);
+	xoffset = ((t_fl)x + 0.5) * camera->pixel_size;
+	yoffset = ((t_fl)y + 0.5) * camera->pixel_size;
 	xscene = camera->half_width - xoffset;
 	yscene = camera->half_height - yoffset;
 	point_new(viewport_point, xscene, yscene, -1.0f);

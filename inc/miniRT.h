@@ -60,8 +60,11 @@ bool	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
 // Camera
+int		camera_compute(t_camera *camera);
 int		camera_pixel_size_compute(t_camera *camera);
 int		pixel_ray_get(t_ray pixel_ray, t_camera *camera, int x, int y);
+int		view_transform_get(t_matrix dst, t_tuple forward_v,
+			t_tuple to_p, t_tuple up_v);
 
 // Objects
 int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);
