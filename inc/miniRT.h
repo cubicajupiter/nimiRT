@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 14:12:03 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/20 12:04:47 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
 int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 bool	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
+
+// Camera
+int		camera_pixel_size_compute(t_camera *camera);
+int		pixel_ray_get(t_ray pixel_ray, t_camera *camera, int x, int y);
 
 // Objects
 int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);

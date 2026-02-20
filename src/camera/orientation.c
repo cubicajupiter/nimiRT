@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:41:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 15:20:32 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/20 11:45:12 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_matrix dst, t_tuple left_v, t_tuple true_up_v, t_tuple forward_v);
 - with left, true_up and forward vectors, constructs a matrix representing the view orientation
 - applies a translation to the matrix to move the view.
 */
-int	viewport_get(t_matrix dst, t_tuple from_p, t_tuple to_p, t_tuple up_v)
+int	view_transform_get(t_matrix dst, t_tuple from_p, t_tuple to_p, t_tuple up_v)
 {
 	t_tuple		forward_v;
 	t_tuple		left_v;
