@@ -32,8 +32,8 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 	object.sphere = sphere;
 	material_default(&object.material);
 	sphere->id = t->scene->objects->len;
-	if (ft_dtor(&sphere->radius, radius) != SUCCESS
-		|| point_new(sphere->center, 0, 0, 0) != SUCCESS
+	sphere->radius = radius;
+	if (point_new(sphere->center, 0, 0, 0) != SUCCESS
 		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
@@ -127,16 +127,16 @@ static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 
 	if (!time || !sphere || !ray)
 		return (ft_error(EINVAL, "sphere_intersect_math"));
-	tuple_minus_get(sphere_to_ray, ray[ORIGIN], sphere->center);
+	tuple_minus_get(sphere_to_ray, sphere->center, ray[ORIGIN]);
 	vector_dot(&a, ray[DIRECTION], ray[DIRECTION]);
 	vector_dot(&b, ray[DIRECTION], sphere_to_ray);
-	b *= 2.0f;
+	b *= -2.0f;
 	vector_dot(&c, sphere_to_ray, sphere_to_ray);
 	// c -= 1.0f;
 	// FIXME: Temporarilly changed this constant to the sphere radius but the
 	// measurements seem to be funky, too small in relation to the space.
 	// Needs further investigation!
-	c -= sphere->radius;
+	c -= sphere->radius * sphere->radius;
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
