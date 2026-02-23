@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 17:23:26 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:03:02 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,13 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 // intersection_get function
 int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
 {
-	t_ray		ray2;
-	t_matrix	inversion;
-
 	if (!t || !object || !ray)
 		return (ft_error(EINVAL, "object_hit_get"));
-	matrix_invert(inversion, object->transform);
-	ray_transform_get(ray2, ray, inversion);
 	if (object->type == SPHERE)
-		if (sphere_hit_get(t, object, ray2))
+		if (sphere_hit_get(t, object->sphere, ray))
 			return (TRUE);
 	if (object->type == PLANE)
-		if (plane_hit_get(t, object, ray2))
+		if (plane_hit_get(t, object->plane, ray))
 			return (TRUE);
 	// if (obj->obj_type == CYLINDER)
 	return (FALSE);

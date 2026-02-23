@@ -6,14 +6,14 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 17:09:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:09:11 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.h"
 #include "miniRT.h"
 
-static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);
+// static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);	light_vector already computed in is_shadowed
 static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 				t_tuple eye_vector, t_tuple normal_vector);
 static void	reflections_combine(t_material *mat);
@@ -49,12 +49,15 @@ int	lighting(t_xs *hit, t_light *light)
 	return (SUCCESS);
 }
 
-//light_vector is already computed in is_shadowed()
+
+// NOTE: light_vector is already computed in is_shadowed()
+
 // static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
 // {
 // 	tuple_minus_get(dst, light->point, point);
 // 	normalize_apply(dst);
 // }
+
 
 static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 				t_tuple eye_vector, t_tuple normal_vector)

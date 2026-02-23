@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 17:13:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:12:54 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,38 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	return (SUCCESS);
 }
 
+int	plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray)
+{
+	t_fl		time;
+	t_ray		ray2;
+	t_matrix	inversion;
+
+	if (!dst || !plane || !ray)
+		return (ft_error(EINVAL, "plane_hit_get"));
+	matrix_invert(inversion, plane->transform);
+	ray_transform_get(ray2, ray, inversion);
+	if (plane_intersect_math(&time, plane, ray))
+	{
+		if (time > 0.0f)
+			*dst = time;
+	}
+	else
+		return (FALSE);
+	return (TRUE);
+}
+
 int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 {
 	t_fl		time;
 	t_xs		tmp;
+	t_ray		ray2;
+	t_matrix	inversion;
 
 	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "plane_intersect_get"));
-	if (plane_intersect_math(&time, object->sphere, ray))
+	matrix_invert(inversion, object->plane->transform);
+	ray_transform_get(ray2, ray, inversion);
+	if (plane_intersect_math(&time, object->plane, ray))
 	{
 		tmp.t = time;
 		tmp.object = object;
@@ -60,20 +84,12 @@ int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 	return (TRUE);
 }
 
-	// if ray is parallel to plane, 
-		// then they will never intersect
-	// if ray is coplanar with the plane (ray origin is on the plane and direction parallel to plane),
-		// then we consider the ray to have missed.
-		// Otherwise, there would be infinite intersections
-		// but a plane is infinitely thin, so it must invisible.
-	//  if ray origin is above the plane
-	// if ray origin is below the plane
 static int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray)
 {
 	if (!time || !plane || !ray)
 		return (ft_error(EINVAL, "plane_intersect_math"));
 	if (fabsf(ray[DIRECTION][Y]) < EPSILON)
 		return (FALSE);
-
-	;
+	*time = -ray[ORIGIN][Y] / ray[DIRECTION][Y];
+	return (TRUE);
 }

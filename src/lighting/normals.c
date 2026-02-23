@@ -6,15 +6,15 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 13:28:18 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 16:42:45 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:04:32 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	normal_object_point_get(t_tuple dst, t_sphere *sphere,
+static int	normal_object_point_get(t_tuple dst, t_matrix transform,
 				t_tuple world_point);
-static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere,
+static int	normal_worldvector_get(t_tuple dst, t_matrix transform,
 				t_tuple obj_normal);
 
 /*
@@ -27,45 +27,45 @@ static int	normal_worldvector_get(t_tuple dst, t_sphere *sphere,
 	That direction vector is basically the normal vector,
 	which is normalised to get a unit vector.
 */
-int	normal_sphere_get(t_tuple dst, t_object *object, t_tuple point)
+int	normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 {
 	t_tuple		obj_point;
 	t_tuple		obj_normal;
 
-	if (!dst || !object || !point)
+	if (!dst || !sphere || !point)
 		return (ft_error(EINVAL, "normal_sphere_get"));
-	normal_object_point_get(obj_point, object->transform, point);
+	normal_object_point_get(obj_point, sphere->transform, point);
 	tuple_minus_get(obj_normal, obj_point, sphere->center);
-	normal_worldvector_get(dst, object->transform, obj_normal);
+	normal_worldvector_get(dst, sphere->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }
 
-int	normal_plane_get(t_tuple dst, t_object *object, t_tuple point)
+// NOTE: no plane specific logic needed (?)
+int	normal_plane_get(t_tuple dst, t_plane *plane, t_tuple point)
 {
 	t_tuple		obj_point;
 	t_tuple		obj_normal;
 
-	if (!dst || !object || !point)
+	if (!dst || !plane || !point)
 		return (ft_error(EINVAL, "normal_plane_get"));
-	normal_object_point_get(obj_point, object->transform, point);
-	
-	normal_worldvector_get(dst, object->transform, obj_normal);
+	normal_object_point_get(obj_point, plane->transform, point);
+	normal_worldvector_get(dst, plane->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }
 
 // THE CYLINDER VERSION FOR GETTING NORMALS.
-int	normal_cylinder_get(t_tuple dst, t_object *object, t_tuple point)
+int	normal_cylinder_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
 {
 	t_tuple		obj_point;
 	t_tuple		obj_normal;
 
-	if (!dst || !object || !point)
+	if (!dst || !cylinder || !point)
 		return (ft_error(EINVAL, "normal_cylinder_get"));
-	normal_object_point_get(obj_point, object->transform, point);
-	// CYLINDER-SPECIFIC LOGIC GOES HERE
-	normal_worldvector_get(dst, object->transform, obj_normal);
+	normal_object_point_get(obj_point, cylinder->transform, point);
+	//cylinder specific logic would probably go here
+	normal_worldvector_get(dst, cylinder->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 15:53:17 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:55:20 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,6 @@ typedef struct	s_object
 		t_plane			*plane;
 	};
 	t_material			material;
-	t_matrix			transform; //moved here from t_sphere, since it's an attribute of every object type.
 	// t_???			texture;
 }						t_object;
 
@@ -227,6 +226,7 @@ typedef struct	s_sphere
 	size_t				id;
 	t_tuple				center;
 	t_fl				radius;
+	t_matrix			transform;
 }						t_sphere;
 
 typedef struct	s_plane

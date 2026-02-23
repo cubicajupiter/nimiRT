@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 17:22:38 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:06:54 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 	sphere->id = t->scene->objects->len;
 	if (ft_dtor(&sphere->radius, radius) != SUCCESS
 		|| point_new(sphere->center, 0, 0, 0) != SUCCESS
-		|| translation(object.transform, pos[X], pos[Y], pos[Z]) != SUCCESS
+		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
 	tmp = vec_get(t->scene->objects, sphere->id);
@@ -54,15 +54,17 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 // Inverts the sphere transform matrix and multiplies the result with the ray,
 // then runs sphere_intersect_math() fetching the two intersections (always
 // two even if ray is tangential to edge of sphere).
-int	sphere_hit_get(t_fl *dst, t_object *object, t_ray ray)
+int	sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray)
 {
-
 	t_fl		time[2];
+	t_ray		ray2;
+	t_matrix	inversion;
 
-	if (!dst || !object || !ray)
-		return (ft_error(EINVAL, "sphere_intersect_get"));
-
-	if (sphere_intersect_math(time, object->sphere, ray2))
+	if (!dst || !sphere || !ray)
+		return (ft_error(EINVAL, "sphere_hit_get"));
+	matrix_invert(inversion, sphere->transform);
+	ray_transform_get(ray2, ray, inversion);
+	if (sphere_intersect_math(time, sphere, ray))
 	{
 		if (time[0] > 0.0f && time[1] > 0.0f)
 		{
@@ -89,9 +91,13 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 	t_fl		time[2];
 	t_xs		tmp1;
 	t_xs		tmp2;
+	t_ray		ray2;
+	t_matrix	inversion;
 
 	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "sphere_intersect_get"));
+	matrix_invert(inversion, object->sphere->transform);
+	ray_transform_get(ray2, ray, inversion);
 	if (sphere_intersect_math(time, object->sphere, ray))
 	{
 		tmp1.t = time[0];
