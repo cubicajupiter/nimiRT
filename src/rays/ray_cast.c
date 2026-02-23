@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 15:30:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 14:28:34 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 11:58:58 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ray_new(t_ray dst, t_tuple origin, t_tuple direction)
 {
 	int		i;
 
-	if (!origin || !direction || origin[W] != POINT || direction[W] != VECTOR)
+	if (!dst || !origin || !direction)
 		return (ft_error(EINVAL, "ray_new"));
 	i = 0;
 	while (i < 4)

@@ -6,10 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 15:20:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 12:07:04 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "defines.h"
 #include "miniRT.h"
 
 static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);
@@ -34,7 +35,6 @@ int	lighting(t_xs *hit, t_light *light)
 		return (ft_error(EINVAL, "lighting"));
 	light_vector_get(light_v, light, hit->point);
 	vector_dot(&light_dot, light_v, hit->normal_vector);
-	// printf("light dot: %f\n", light_dot);
 	if (light_dot < 0)
 		reflection_specular(&hit->object->material, NULL, 0.0);
 	else
@@ -71,14 +71,12 @@ static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 
 static void	reflections_combine(t_material *mat)
 {
-	t_trio	ambient_tmp;
-	t_trio	diffuse_tmp;
-	t_trio	specular_tmp;
-	// t_fl	scalar;
+	t_trio	ambient;
+	t_trio	diffuse;
+	t_trio	specular;
 
-	// scalar = 0.3333333333333333333333f;
-	trio_multiply_scalar_get(ambient_tmp, 0.1f, mat->shader.ambi_refl);
-	trio_multiply_scalar_get(diffuse_tmp, 0.7f, mat->shader.diff_refl);
-	trio_multiply_scalar_get(specular_tmp, 0.2f, mat->shader.spec_refl);
-	trio_add3_get(mat->shader.combined, ambient_tmp, diffuse_tmp, specular_tmp);
+	trio_multiply_scalar_get(ambient, AMBIENT_RATIO, mat->shader.ambi_refl);
+	trio_multiply_scalar_get(diffuse, DIFFUSE_RATIO, mat->shader.diff_refl);
+	trio_multiply_scalar_get(specular, SPECULAR_RATIO, mat->shader.spec_refl);
+	trio_add3_get(mat->shader.combined, ambient, diffuse, specular);
 }

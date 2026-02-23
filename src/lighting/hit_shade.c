@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_trace.c                                        :+:      :+:    :+:   */
+/*   hit_shade.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 11:45:25 by thblack-         ###   ########.fr       */
+/*   Created: 2026/02/23 11:44:31 by thblack-          #+#    #+#             */
+/*   Updated: 2026/02/23 12:06:26 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	ray_trace(t_tree *t)
+int	hit_shade(t_xs *hit, t_ray ray, t_scene *scene)
 {
-	t_xs	hit;
-	t_ray	ray;
-	int		x;
-	int		y;
-
-	camera_compute(&t->scene->camera);
-	y = 0;
-	while (y < HEIGHT)
+	if (!hit || !ray || !scene)
+		return (ft_error(EINVAL, "hit_shade"));
+	if (is_shadowed(hit, scene) == FALSE)
 	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			pixel_ray_get(ray, &t->scene->camera, x, y);
-			if (scene_hit_get(&hit, ray, t->scene))
-			{
-				hit_shade(&hit, ray, t->scene);
-				pixel_put(t->image, x, y, hit.object->material.shader.combined);
-			}
-			x++;
-		}
-		y++;
+		intersection_compute(hit, ray);
+		lighting(hit, &scene->light);
 	}
 	return (SUCCESS);
 }

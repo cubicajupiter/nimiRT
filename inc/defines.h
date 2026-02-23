@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/20 11:38:19 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 11:49:58 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ files.
 
 // Epsilon for float margin of error.
 # define EPSILON 1e-5 // NOTE: This margin of error might cause bugs later.
+
+// Weighting for Phong lighting components
+# define AMBIENT_RATIO 0.1f
+# define DIFFUSE_RATIO 0.7f
+# define SPECULAR_RATIO 0.2f
 
 // Initial assumed number of intersections per array
 # define INIT_XS 4

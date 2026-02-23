@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:18:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/20 15:52:11 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 11:58:13 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 	return (FALSE);
 }
 
-int	overpoint_get(t_xs *hit)
-{
-	t_tuple		offset_v;
-
-	if (!hit)
-		return (ft_error(EINVAL, "overpoint_get"));
-	vector_multiply_get(offset_v, EPSILON, hit->normal_vector);
-	tuple_add_get(hit->over_point, hit->point, offset_v);
-	return (SUCCESS);
-}
+// int	overpoint_get(t_xs *hit)
+// {
+// 	t_tuple		offset_v;
+//
+// 	if (!hit)
+// 		return (ft_error(EINVAL, "overpoint_get"));
+// 	vector_multiply_get(offset_v, EPSILON, hit->normal_vector);
+// 	tuple_add_get(hit->over_point, hit->point, offset_v);
+// 	return (SUCCESS);
+// }
 
 int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 {

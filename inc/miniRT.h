@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/20 12:04:47 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 11:47:06 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,12 @@ int		intersections_sort(t_vec *src);
 int		intersection_compute(t_xs *hit, t_ray ray);
 
 // Lighting
+int		hit_shade(t_xs *hit, t_ray ray, t_scene *scene);
 void		reflection_ambient(t_material *mat, t_scene *s);
 void		reflection_diffuse(t_material *m, t_fl light_dot);
 void		reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
 int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
+int		is_shadowed(t_xs *hit, t_scene *scene);
 
 // Primitives
 bool	is_float_equal(t_fl a, t_fl b);
