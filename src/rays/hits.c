@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hits.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 12:03:49 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:03:02 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,31 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 	return (TRUE);
 }
 
+
+// OLD VERSION OF IS_SHADOW_HIT() :
+
+// int	is_shadow_hit(t_ray ray, t_scene *s, t_fl distance)
+// {
+// 	t_object	*object;
+// 	t_fl		t;
+// 	size_t		i;
+
+// 	if (!ray || !s)
+// 		return (ft_error(EINVAL, "is_shadow_hit"));
+// 	i = 0;
+// 	while (i < s->objects->len)
+// 	{
+// 		object = vec_get(s->objects, i++);
+// 		if (object_hit_get(&t, object, ray))
+// 		{
+// 			if (t < distance)
+// 				return (TRUE);
+// 		}
+// 	}
+// 	return (FALSE);
+// }
+
+
 // Checks the object for which type it is then calls object-specific
 // intersection_get function
 int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
@@ -61,9 +86,11 @@ int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
 	if (!t || !object || !ray)
 		return (ft_error(EINVAL, "object_hit_get"));
 	if (object->type == SPHERE)
-		if (sphere_hit_get(t, object, ray))
+		if (sphere_hit_get(t, object->sphere, ray))
 			return (TRUE);
-	// if (obj->obj_type == PLANE)
+	if (object->type == PLANE)
+		if (plane_hit_get(t, object->plane, ray))
+			return (TRUE);
 	// if (obj->obj_type == CYLINDER)
 	return (FALSE);
 }

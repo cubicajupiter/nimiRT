@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 14:55:48 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:08:19 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ int	object_intersections_get(t_vec *xs, t_object *object, t_ray ray)
 	if (object->type == SPHERE)
 		if (!sphere_intersect_get(xs, object, ray))
 			return (FALSE);
-	// if (obj->obj_type == PLANE)
+	if (object->type == PLANE)
+		if (!plane_intersect_get(xs, object, ray))
+			return (FALSE);
 	// if (obj->obj_type == CYLINDER)
 	return (TRUE);
 }

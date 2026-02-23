@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:18:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 11:58:13 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:15:44 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 	{
 		// hit->shadow = true;
 		// overpoint_get(hit); TODO: Add overpoint functionality
+		//TODO: optimization: put light_ray somewhere in t_xs so it can be reused in lighting(), which atm computes the same vector again
 		return (TRUE);
 	}
 	return (FALSE);

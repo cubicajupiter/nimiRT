@@ -6,14 +6,14 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 12:07:04 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:09:11 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.h"
 #include "miniRT.h"
 
-static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);
+// static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);	light_vector already computed in is_shadowed
 static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 				t_tuple eye_vector, t_tuple normal_vector);
 static void	reflections_combine(t_material *mat);
@@ -28,18 +28,16 @@ int	lighting(t_xs *hit, t_light *light)
 {
 	t_fl		light_dot;
 	t_fl		eye_dot;
-	t_tuple		light_v;
 	t_tuple		neglight_v;
 
 	if (!hit || !light)
 		return (ft_error(EINVAL, "lighting"));
-	light_vector_get(light_v, light, hit->point);
-	vector_dot(&light_dot, light_v, hit->normal_vector);
+	vector_dot(&light_dot, hit->light_vector, hit->normal_vector);
 	if (light_dot < 0)
 		reflection_specular(&hit->object->material, NULL, 0.0);
 	else
 	{
-		eye_dot = eye_vec_dot_product(light_v, neglight_v,
+		eye_dot = eye_vec_dot_product(hit->light_vector, neglight_v,
 					hit->camera_vector, hit->normal_vector);
 		if (eye_dot <= 0)
 			reflection_specular(&hit->object->material, NULL, eye_dot);
@@ -51,11 +49,15 @@ int	lighting(t_xs *hit, t_light *light)
 	return (SUCCESS);
 }
 
-static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
-{
-	tuple_minus_get(dst, light->point, point);
-	normalize_apply(dst);
-}
+
+// NOTE: light_vector is already computed in is_shadowed()
+
+// static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
+// {
+// 	tuple_minus_get(dst, light->point, point);
+// 	normalize_apply(dst);
+// }
+
 
 static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 				t_tuple eye_vector, t_tuple normal_vector)

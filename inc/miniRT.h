@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 12:46:56 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 18:11:38 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ int		view_transform_get(t_matrix dst, t_tuple forward_v,
 
 // Objects
 int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);
-int		sphere_hit_get(t_fl *dst, t_object *object, t_ray ray);
+int		sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t);
+int		plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray);
+int		plane_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t);
 int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
 
