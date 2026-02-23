@@ -6,11 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 15:15:36 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:13:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+static int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray);
 
 int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 {
@@ -37,4 +39,41 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);
+}
+
+int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
+{
+	t_fl		time;
+	t_xs		tmp;
+
+	if (!xs || !object || !ray)
+		return (ft_error(EINVAL, "plane_intersect_get"));
+	if (plane_intersect_math(&time, object->sphere, ray))
+	{
+		tmp.t = time;
+		tmp.object = object;
+		if (vec_push(xs, &tmp) != SUCCESS)
+			return (ft_error(EINHERIT, "plane_intersect_get"));
+	}
+	else
+		return (FALSE);
+	return (TRUE);
+}
+
+	// if ray is parallel to plane, 
+		// then they will never intersect
+	// if ray is coplanar with the plane (ray origin is on the plane and direction parallel to plane),
+		// then we consider the ray to have missed.
+		// Otherwise, there would be infinite intersections
+		// but a plane is infinitely thin, so it must invisible.
+	//  if ray origin is above the plane
+	// if ray origin is below the plane
+static int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray)
+{
+	if (!time || !plane || !ray)
+		return (ft_error(EINVAL, "plane_intersect_math"));
+	if (fabsf(ray[DIRECTION][Y]) < EPSILON)
+		return (FALSE);
+
+	;
 }

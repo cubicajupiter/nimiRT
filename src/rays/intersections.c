@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 14:55:48 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:14:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,22 @@ int	scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t)
 // intersection_get function
 int	object_intersections_get(t_vec *xs, t_object *object, t_ray ray)
 {
+	t_ray		ray2;
+	t_matrix	inversion;
+
 	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "intersect_get"));
+
 	// NOTE: AABB logic might fit here or somewhere else to simplify when objects
 	// intersect one another
+	matrix_invert(inversion, object->transform);
+	ray_transform_get(ray2, ray, inversion);
 	if (object->type == SPHERE)
-		if (!sphere_intersect_get(xs, object, ray))
+		if (!sphere_intersect_get(xs, object, ray2))
 			return (FALSE);
-	// if (obj->obj_type == PLANE)
+	if (object->type == PLANE)
+		if (!plane_intersect_get(xs, object, ray2))
+			return (FALSE);
 	// if (obj->obj_type == CYLINDER)
 	return (TRUE);
 }

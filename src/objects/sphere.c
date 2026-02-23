@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 15:15:43 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 17:22:38 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,12 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 // two even if ray is tangential to edge of sphere).
 int	sphere_hit_get(t_fl *dst, t_object *object, t_ray ray)
 {
-	t_ray		ray2;
-	t_matrix	inversion;
+
 	t_fl		time[2];
 
 	if (!dst || !object || !ray)
 		return (ft_error(EINVAL, "sphere_intersect_get"));
-	matrix_invert(inversion, object->transform);
-	ray_transform_get(ray2, ray, inversion);
+
 	if (sphere_intersect_math(time, object->sphere, ray2))
 	{
 		if (time[0] > 0.0f && time[1] > 0.0f)
@@ -88,26 +86,22 @@ int	sphere_hit_get(t_fl *dst, t_object *object, t_ray ray)
 // two even if ray is tangential to edge of sphere).
 int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 {
-	t_ray		ray2;
-	t_matrix	inversion;
 	t_fl		time[2];
 	t_xs		tmp1;
 	t_xs		tmp2;
 
 	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "sphere_intersect_get"));
-	matrix_invert(inversion, object->transform);
-	ray_transform_get(ray2, ray, inversion);
-	if (sphere_intersect_math(time, object->sphere, ray2))
+	if (sphere_intersect_math(time, object->sphere, ray))
 	{
 		tmp1.t = time[0];
 		tmp1.object = object;
 		if (vec_push(xs, &tmp1) != SUCCESS)
-			return (ft_error(EINHERIT, "intersect_get"));
+			return (ft_error(EINHERIT, "sphere_intersect_get"));
 		tmp2.t = time[1];
 		tmp2.object = object;
 		if (vec_push(xs, &tmp2) != SUCCESS)
-			return (ft_error(EINHERIT, "intersect_get"));
+			return (ft_error(EINHERIT, "sphere_intersect_get"));
 	}
 	else
 		return (FALSE);
