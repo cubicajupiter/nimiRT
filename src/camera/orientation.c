@@ -65,6 +65,5 @@ t_matrix dst, t_tuple left_v, t_tuple true_up_v, t_tuple forward_v)
 	dst[2][X] = neg_forward_v[X];
 	dst[2][Y] = neg_forward_v[Y];
 	dst[2][Z] = neg_forward_v[Z];
-	matrix_print(dst);
 	return (SUCCESS);
 }
