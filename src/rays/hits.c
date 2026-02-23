@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-static int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
+int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
 
 // hit_get()
 // Casts a ray, loops through all world objects and finds intersections. If a
@@ -50,7 +50,7 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 
 // Checks the object for which type it is then calls object-specific
 // intersection_get function
-static int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
+int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
 {
 	if (!t || !object || !ray)
 		return (ft_error(EINVAL, "object_hit_get"));

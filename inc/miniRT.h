@@ -80,6 +80,7 @@ int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
+int		object_hit_get(t_fl *t, t_object *object, t_ray ray);
 int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);

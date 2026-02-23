@@ -209,8 +209,11 @@ typedef struct s_xs
 	t_object			*object;
 	t_fl				t;
 	t_tuple				point;
+	// t_tuple				over_point;
 	t_tuple				camera_vector;
 	t_tuple				normal_vector;
+	// t_tuple				light_vector;
+	bool				shadow;
 	bool				inside;
 }						t_xs;
 
