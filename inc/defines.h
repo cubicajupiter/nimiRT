@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/20 15:32:20 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:07:15 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,10 +199,9 @@ typedef struct	s_object
 		t_plane			*plane;
 	};
 	t_material			material;
+	t_matrix			transform;
 	// t_???			texture;
 }						t_object;
-
-
 
 typedef struct s_xs
 {
@@ -221,7 +220,6 @@ typedef struct	s_sphere
 	size_t				id;
 	t_tuple				center;
 	t_fl				radius;
-	t_matrix			transform;
 }						t_sphere;
 
 typedef struct	s_plane

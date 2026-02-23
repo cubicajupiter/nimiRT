@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/20 15:37:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:51:33 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	lighting(t_xs *hit, t_light *light)
 
 	if (!hit || !light)
 		return (ft_error(EINVAL, "lighting"));
-	// Is this next light vector get redundant if coomputing shadow previous to this call?
+	// Is this redundant if coomputing shadow previous to this call?
 	// can save the light vector from is_shadow in the t_xs struct and reuse here
-	light_vector_get(light_v, light, hit->point);
+	light_vector_get(light_v, light, hit->point); //would make it more optimized
 	vector_dot(&light_dot, light_v, hit->normal_vector);
 	if (light_dot < 0)
 		reflection_specular(&hit->object->material, NULL, 0.0);

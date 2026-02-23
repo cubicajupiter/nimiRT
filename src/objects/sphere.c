@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/18 14:31:49 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:09:15 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 	sphere->id = t->scene->objects->len;
 	if (ft_dtor(&sphere->radius, radius) != SUCCESS
 		|| point_new(sphere->center, 0, 0, 0) != SUCCESS
-		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
+		|| translation(object.transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
 	tmp = vec_get(t->scene->objects, sphere->id);
@@ -62,7 +62,7 @@ int	sphere_hit_get(t_fl *dst, t_object *object, t_ray ray)
 
 	if (!dst || !object || !ray)
 		return (ft_error(EINVAL, "sphere_intersect_get"));
-	matrix_invert(inversion, object->sphere->transform);
+	matrix_invert(inversion, object->transform);
 	ray_transform_get(ray2, ray, inversion);
 	if (sphere_intersect_math(time, object->sphere, ray2))
 	{
@@ -96,7 +96,7 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 
 	if (!xs || !object || !ray)
 		return (ft_error(EINVAL, "sphere_intersect_get"));
-	matrix_invert(inversion, object->sphere->transform);
+	matrix_invert(inversion, object->transform);
 	ray_transform_get(ray2, ray, inversion);
 	if (sphere_intersect_math(time, object->sphere, ray2))
 	{

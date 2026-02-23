@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/20 11:34:30 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:57:15 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,30 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 	return (TRUE);
 }
 
-int	is_shadow_hit(t_ray ray, t_scene *s, t_fl distance)
-{
-	t_object	*object;
-	t_fl		t;
-	size_t		i;
 
-	if (!ray || !s)
-		return (ft_error(EINVAL, "is_shadow_hit"));
-	i = 0;
-	while (i < s->objects->len)
-	{
-		object = vec_get(s->objects, i++);
-		if (object_hit_get(&t, object, ray))
-		{
-			if (t < distance)
-				return (TRUE);
-		}
-	}
-	return (FALSE);
-}
+// OLD VERSION OF IS_SHADOW_HIT() :
+
+// int	is_shadow_hit(t_ray ray, t_scene *s, t_fl distance)
+// {
+// 	t_object	*object;
+// 	t_fl		t;
+// 	size_t		i;
+
+// 	if (!ray || !s)
+// 		return (ft_error(EINVAL, "is_shadow_hit"));
+// 	i = 0;
+// 	while (i < s->objects->len)
+// 	{
+// 		object = vec_get(s->objects, i++);
+// 		if (object_hit_get(&t, object, ray))
+// 		{
+// 			if (t < distance)
+// 				return (TRUE);
+// 		}
+// 	}
+// 	return (FALSE);
+// }
+
 
 // Checks the object for which type it is then calls object-specific
 // intersection_get function
