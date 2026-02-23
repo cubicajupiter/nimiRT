@@ -24,7 +24,7 @@ int	vector_multiply_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 	dst[X] = vector[X] * scalar;
 	dst[Y] = vector[Y] * scalar;
 	dst[Z] = vector[Z] * scalar;
-	dst[X] = vector[X] * scalar;
+	dst[W] = vector[W] * scalar;
 	return (SUCCESS);
 }
 
@@ -35,7 +35,7 @@ int	vector_divide_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 	dst[X] = vector[X] / scalar;
 	dst[Y] = vector[Y] / scalar;
 	dst[Z] = vector[Z] / scalar;
-	dst[X] = vector[X] / scalar;
+	dst[W] = vector[W] / scalar;
 	return (SUCCESS);
 }
 
@@ -46,7 +46,7 @@ int	vector_multiply_apply(t_tuple dst, const t_fl scalar)
 	dst[X] *= scalar;
 	dst[Y] *= scalar;
 	dst[Z] *= scalar;
-	dst[X] *= scalar;
+	dst[W] *= scalar;
 	return (SUCCESS);
 }
 
@@ -57,6 +57,6 @@ int	vector_divide_apply(t_tuple dst, const t_fl scalar)
 	dst[X] /= scalar;
 	dst[Y] /= scalar;
 	dst[Z] /= scalar;
-	dst[X] /= scalar;
+	dst[W] /= scalar;
 	return (SUCCESS);
 }

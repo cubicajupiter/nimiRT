@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 11:45:25 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:15:59 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ int	ray_trace(t_tree *t)
 {
 	t_xs	hit;
 	t_ray	ray;
-	int		x;
-	int		y;
+	size_t	x;
+	size_t	y;
+
 
 	camera_compute(&t->scene->camera);
 	y = 0;
+	ft_memset(&hit, 0, sizeof(t_xs));
+	ft_memset(&ray, 0, sizeof(t_ray));
 	while (y < HEIGHT)
 	{
 		x = 0;

@@ -28,6 +28,7 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (rt_missing());
+	mode = RELEASE;
 	if (ac > 2)
 	{
 		flag = mode_parse(&mode, av[2]);

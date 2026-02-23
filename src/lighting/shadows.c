@@ -33,7 +33,7 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 	ray_new(light_ray, hit->point, direction_v);
 	if (is_shadow_hit(hit, distance, light_ray, scene->objects))
 	{
-		hit->shadow = true;
+		// hit->shadow = true;
 		// overpoint_get(hit); TODO: Add overpoint functionality
 		return (TRUE);
 	}

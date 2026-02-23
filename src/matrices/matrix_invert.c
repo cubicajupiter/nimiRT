@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:20:21 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/07 16:15:45 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:22:09 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	matrix_invert(t_matrix dst, t_matrix src)
 {
 	t_fl	det;
 	t_fl	cof;
-	int		i;
-	int		j;
+	size_t		i;
+	size_t		j;
 
 	if (!dst || !src)
 		return (ft_error(EINVAL, "matrix_invert"));

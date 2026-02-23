@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 11:47:06 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 12:46:56 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,9 +145,9 @@ int		vector_negate(t_tuple dst, t_tuple src);
 int		tuple_copy(t_tuple dst, t_tuple src);
 
 // Basic
-int		tuple_add_get(t_tuple new, t_tuple const a, const t_tuple b);
+int		tuple_add_get(t_tuple new, const t_tuple a, const t_tuple b);
 int		tuple_add_apply(t_tuple dst, const t_tuple increment);
-int		tuple_minus_get(t_tuple new, t_tuple a, const t_tuple b);
+int		tuple_minus_get(t_tuple new, const t_tuple a, const t_tuple b);
 int		tuple_minus_apply(t_tuple dst, const t_tuple decrement);
 
 // Scale
@@ -171,12 +171,12 @@ int		color_uint_to_trio(t_trio c, int *color);
 
 // Utilities
 int		debug(t_tree *t, t_run_mode mode);
-int		float_print(t_fl fl);
+int		float_print(const t_fl fl);
 int		int_print(int nbr);
 int		float_formatted_print(char *name, t_fl value);
 int		int_formatted_print(char *name, int value);
 int		color_print(t_trio src);
-int		tuple_print(t_tuple src);
+int		tuple_print(const t_tuple src);
 int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
 int		scene_data_print(t_tree *t);
