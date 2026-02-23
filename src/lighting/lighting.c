@@ -6,10 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 15:21:41 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 14:51:33 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:56:16 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "defines.h"
 #include "miniRT.h"
 
 static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);
@@ -27,20 +28,16 @@ int	lighting(t_xs *hit, t_light *light)
 {
 	t_fl		light_dot;
 	t_fl		eye_dot;
-	t_tuple		light_v;
 	t_tuple		neglight_v;
 
 	if (!hit || !light)
 		return (ft_error(EINVAL, "lighting"));
-	// Is this redundant if coomputing shadow previous to this call?
-	// can save the light vector from is_shadow in the t_xs struct and reuse here
-	light_vector_get(light_v, light, hit->point); //would make it more optimized
-	vector_dot(&light_dot, light_v, hit->normal_vector);
+	vector_dot(&light_dot, hit->light_vector, hit->normal_vector);
 	if (light_dot < 0)
 		reflection_specular(&hit->object->material, NULL, 0.0);
 	else
 	{
-		eye_dot = eye_vec_dot_product(light_v, neglight_v,
+		eye_dot = eye_vec_dot_product(hit->light_vector, neglight_v,
 					hit->camera_vector, hit->normal_vector);
 		if (eye_dot <= 0)
 			reflection_specular(&hit->object->material, NULL, eye_dot);
@@ -52,11 +49,12 @@ int	lighting(t_xs *hit, t_light *light)
 	return (SUCCESS);
 }
 
-static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
-{
-	tuple_minus_get(dst, light->point, point);
-	normalize_apply(dst);
-}
+//light_vector is already computed in is_shadowed()
+// static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
+// {
+// 	tuple_minus_get(dst, light->point, point);
+// 	normalize_apply(dst);
+// }
 
 static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 				t_tuple eye_vector, t_tuple normal_vector)
@@ -72,12 +70,12 @@ static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 
 static void	reflections_combine(t_material *mat)
 {
-	t_trio	ambient_tmp;
-	t_trio	diffuse_tmp;
-	t_trio	specular_tmp;
+	t_trio	ambient;
+	t_trio	diffuse;
+	t_trio	specular;
 
-	trio_multiply_scalar_get(ambient_tmp, 0.1f, mat->shader.ambi_refl);
-	trio_multiply_scalar_get(diffuse_tmp, 0.7f, mat->shader.diff_refl);
-	trio_multiply_scalar_get(specular_tmp, 0.2f, mat->shader.spec_refl);
-	trio_add3_get(mat->shader.combined, ambient_tmp, diffuse_tmp, specular_tmp);
+	trio_multiply_scalar_get(ambient, AMBIENT_RATIO, mat->shader.ambi_refl);
+	trio_multiply_scalar_get(diffuse, DIFFUSE_RATIO, mat->shader.diff_refl);
+	trio_multiply_scalar_get(specular, SPECULAR_RATIO, mat->shader.spec_refl);
+	trio_add3_get(mat->shader.combined, ambient, diffuse, specular);
 }

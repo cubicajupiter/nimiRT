@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:55:38 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/20 14:22:20 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:15:58 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	vector_multiply_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 	dst[X] = vector[X] * scalar;
 	dst[Y] = vector[Y] * scalar;
 	dst[Z] = vector[Z] * scalar;
+	dst[W] = vector[W] * scalar;
 	return (SUCCESS);
 }
 
@@ -34,6 +35,7 @@ int	vector_divide_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 	dst[X] = vector[X] / scalar;
 	dst[Y] = vector[Y] / scalar;
 	dst[Z] = vector[Z] / scalar;
+	dst[W] = vector[W] / scalar;
 	return (SUCCESS);
 }
 
@@ -44,6 +46,7 @@ int	vector_multiply_apply(t_tuple dst, const t_fl scalar)
 	dst[X] *= scalar;
 	dst[Y] *= scalar;
 	dst[Z] *= scalar;
+	dst[W] *= scalar;
 	return (SUCCESS);
 }
 
@@ -54,5 +57,6 @@ int	vector_divide_apply(t_tuple dst, const t_fl scalar)
 	dst[X] /= scalar;
 	dst[Y] /= scalar;
 	dst[Z] /= scalar;
+	dst[W] /= scalar;
 	return (SUCCESS);
 }

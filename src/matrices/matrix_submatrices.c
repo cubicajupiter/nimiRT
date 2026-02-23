@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:35:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/04 15:43:25 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:25:14 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@
 
 void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column)
 {
-	int	i;
-	int	j;
-	int	r;
-	int	c;
+	size_t	i;
+	size_t	j;
+	size_t	r;
+	size_t	c;
 
 	i = 0;
 	r = 0;
 	while (i < 4)
 	{
-		if (i != row)
+		if ((int)i != row)
 		{
 			j = 0;
 			c = 0;
 			while (j < 4)
 			{
-				if (j != column)
+				if ((int)j != column)
 					dst[r][c++] = src[i][j];
 				j++;
 			}
@@ -48,22 +48,22 @@ void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column)
 
 void	submatrix2(t_matrix2 dst, t_matrix3 src, int row, int column)
 {
-	int	i;
-	int	j;
-	int	r;
-	int	c;
+	size_t	i;
+	size_t	j;
+	size_t	r;
+	size_t	c;
 
 	i = 0;
 	r = 0;
 	while (i < 3)
 	{
-		if (i != row)
+		if ((int)i != row)
 		{
 			j = 0;
 			c = 0;
 			while (j < 3)
 			{
-				if (j != column)
+				if ((int)j != column)
 					dst[r][c++] = src[i][j];
 				j++;
 			}

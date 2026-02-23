@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:23:56 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/06 12:04:13 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:23:02 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	matrix_multiply_get(t_matrix dst, t_matrix a, t_matrix b)
 {
 	t_fl	result;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "matrix_multiply"));
@@ -42,8 +42,8 @@ int	matrix_multiply_get(t_matrix dst, t_matrix a, t_matrix b)
 int	matrix_tuple_multiply_get(t_tuple dst, t_matrix a, t_tuple b)
 {
 	t_fl	result;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "matrix_tuple_multiply"));
@@ -67,8 +67,8 @@ int	matrix_multiply_apply(t_matrix dst, t_matrix a)
 {
 	t_matrix	b;
 	t_fl		result;
-	int			i;
-	int			j;
+	size_t		i;
+	size_t		j;
 
 	if (!dst || !a)
 		return (ft_error(EINVAL, "matrix_multiply"));
@@ -96,8 +96,8 @@ int	matrix_tuple_multiply_apply(t_tuple dst, t_matrix a)
 {
 	t_tuple	b;
 	t_fl	result;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	if (!dst || !a)
 		return (ft_error(EINVAL, "matrix_tuple_multiply"));

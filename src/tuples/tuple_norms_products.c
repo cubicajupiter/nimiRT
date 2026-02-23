@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/20 10:53:25 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:49:31 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int	vector_cross(t_tuple dst, t_tuple a, t_tuple b)
 	dst[X] = a[Y] * b[Z] - a[Z] * b[Y];
 	dst[Y] = a[Z] * b[X] - a[X] * b[Z];
 	dst[Z] = a[X] * b[Y] - a[Y] * b[X];
+	dst[W] = VECTOR;
 	return (SUCCESS);
 }

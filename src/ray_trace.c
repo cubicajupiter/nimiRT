@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/20 13:31:37 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/23 15:56:31 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,29 @@
 
 int	ray_trace(t_tree *t)
 {
-	t_scene	*s;
-	t_tuple	pos;
-	int		x;
-	int		y;
-	// TODO: Calculate wall position in relation to camera later from input
-	t_fl	wall_z 		= 	10.0;
-	t_fl	wall_size 	= 	7.0;
-	t_fl	pixel_size 	= 	wall_size / HEIGHT;
-	t_fl	half 		= 	wall_size / 2;
-	t_fl	world_x;
-	t_fl	world_y;
-	t_tuple	direction;
-	t_ray	camera;
-	t_tuple	normal_v;
-	t_tuple	eye_v;
-	t_tuple	*vectors[2];
 	t_xs	hit;
+	t_ray	ray;
+	size_t	x;
+	size_t	y;
 
-	s = t->scene;
-	vectors[1] = &normal_v;
-	vectors[0] = &eye_v;
-	canvas_put(t->image, (t_trio){1, 1, 1});
+	camera_compute(&t->scene->camera);
 	y = 0;
-	while (y < HEIGHT) {
-		world_y = half - pixel_size * y;
+	ft_memset(&hit, 0, sizeof(t_xs));
+	ft_memset(&ray, 0, sizeof(t_ray));
+	while (y < HEIGHT)
+	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			world_x = -half + pixel_size * x;
-			point_new(pos, world_x, world_y, wall_z);
-			tuple_minus_get(direction, pos, s->camera.ray[ORIGIN]);
-			normalize_apply(direction);
-			camera_new(camera, s->camera.ray[ORIGIN], direction);
-			if (scene_hit_get(&hit, camera, t->scene))
+			pixel_ray_get(ray, &t->scene->camera, x, y);
+			if (scene_hit_get(&hit, ray, t->scene))
 			{
-				// hit_shade(hit, scene)
-				// NOTE: Add this later for multiple light sources?! Would need to iterate over all lights in world
-				intersection_compute(&hit, camera);
-				is_shadowed();
-				lighting(&hit, &s->light);
+				hit_shade(&hit, ray, t->scene);
 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
 			}
 			x++;
 		}
 		y++;
 	}
-	mlx_loop(t->window);
 	return (SUCCESS);
 }
