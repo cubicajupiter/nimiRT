@@ -14,13 +14,6 @@
 
 int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
 
-static void	scene_hit_get_init(t_xs *hit, t_xs *result)
-{
-	hit->shadow = false;
-	result->t = -1.0f;
-	result->object = NULL;
-}
-
 // scene_hit_get()
 // Casts a ray, loops through all world objects and finds intersections. If a
 // found intersection has a lower t value (closer to the ray origin) then the
@@ -35,7 +28,8 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 
 	if (!hit || !ray || !s)
 		return (ft_error(EINVAL, "scene_hit_get"));
-	scene_hit_get_init(hit, &result);
+	result.t = -1.0f;
+	result.object = NULL;
 	i = 0;
 	while (i < s->objects->len)
 	{

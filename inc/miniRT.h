@@ -96,6 +96,11 @@ void		reflection_diffuse(t_material *m, t_fl light_dot);
 void		reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
 int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
 int		is_shadowed(t_xs *hit, t_scene *scene);
+int		overpoint_get(t_xs *hit);
+int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
+int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
+int		material_default(t_material *dst);
+int		lighting(t_xs *hit, t_light *light);
 
 // Primitives
 bool	is_float_equal(t_fl a, t_fl b);
@@ -132,12 +137,6 @@ int		chain2_apply(t_matrix dst, t_matrix a);
 int		chain3_get(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
 int		chain3_apply(t_matrix dst, t_matrix a, t_matrix b);
 int		chain4_apply(t_matrix dst, t_matrix a, t_matrix b, t_matrix c);
-
-// Lighting
-int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
-int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
-int		material_default(t_material *dst);
-int		lighting(t_xs *hit, t_light *light);
 
 // Tuples
 int		point_new(t_tuple tuple, float x, float y, float z);

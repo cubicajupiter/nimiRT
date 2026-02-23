@@ -13,6 +13,8 @@
 #include "defines.h"
 #include "miniRT.h"
 
+static void	shadow(t_xs *hit);
+
 int	hit_shade(t_xs *hit, t_ray ray, t_scene *scene)
 {
 	if (!hit || !ray || !scene)
@@ -23,8 +25,13 @@ int	hit_shade(t_xs *hit, t_ray ray, t_scene *scene)
 	// TODO: Maybe have a separate function wrapper for the trio_multiply_scalar_get
 	// to make this bit of code more readible
 	else
-		trio_multiply_scalar_get(hit->object->material.shader.combined,
-						   AMBIENT_RATIO,
-						   hit->object->material.shader.ambi_refl);
+		shadow(hit);
 	return (SUCCESS);
+}
+
+static void	shadow(t_xs *hit)
+{
+	trio_multiply_scalar_get(hit->object->material.shader.combined,
+							AMBIENT_RATIO,
+							hit->object->material.shader.ambi_refl);
 }

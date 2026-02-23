@@ -49,16 +49,6 @@ int	lighting(t_xs *hit, t_light *light)
 	return (SUCCESS);
 }
 
-
-// NOTE: light_vector is already computed in is_shadowed()
-
-// static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point)
-// {
-// 	tuple_minus_get(dst, light->point, point);
-// 	normalize_apply(dst);
-// }
-
-
 static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 				t_tuple eye_vector, t_tuple normal_vector)
 {

@@ -10,7 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "defines.h"
 #include "miniRT.h"
+
+static int	pointing_up(t_tuple camera_ray)
+{
+	if (!camera_ray)
+		return (ft_error(EINVAL, "camera_ray"));
+	if (camera_ray[X] < EPSILON
+		&& camera_ray[Z] < EPSILON
+		&& camera_ray[Y] >= EPSILON)
+		return (TRUE);
+	return (FALSE);
+}
 
 int	camera_compute(t_camera *camera)
 {
@@ -18,7 +30,10 @@ int	camera_compute(t_camera *camera)
 
 	if (!camera)
 		return (ft_error(EINVAL, "camera_compute"));
-	vector_new(up_v, 0.0, 1.0, 0.0);
+	if (pointing_up(camera->ray[DIRECTION]))
+		vector_new(up_v, 0.0, 0.0, 1.0);
+	else
+		vector_new(up_v, 0.0, 1.0, 0.0);
 	view_transform_get(camera->orientation, camera->ray[ORIGIN],
 		camera->ray[DIRECTION], up_v);
 	camera_pixel_size_compute(camera);
