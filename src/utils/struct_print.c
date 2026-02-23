@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 17:55:48 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 18:01:14 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:19:28 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	color_print(t_trio src)
 {
-	int	i;
+	size_t	i;
 
 	if (!src)
 		return (ft_error(EINVAL, "color_print"));
@@ -35,9 +35,9 @@ int	color_print(t_trio src)
 	return (SUCCESS);
 }
 
-int	tuple_print(t_tuple src)
+int	tuple_print(const t_tuple src)
 {
-	int	i;
+	size_t	i;
 
 	if (!src)
 		return (ft_error(EINVAL, "tuple_print"));
@@ -63,8 +63,8 @@ int	tuple_print(t_tuple src)
 
 int	matrix_print(t_matrix src)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	if (!src)
 		return (ft_error(EINVAL, "matrix_print"));

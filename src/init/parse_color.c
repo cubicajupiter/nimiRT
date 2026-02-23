@@ -6,17 +6,17 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 13:59:52 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 17:55:18 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:26:11 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	var_count_get(int *var_count, t_object *object);
+static int	var_count_get(size_t *var_count, t_object *object);
 
 int	color_parse(t_object *object, t_tree *t, char *line)
 {
-	int		var_count;
+	size_t	var_count;
 	int		flag;
 	char	*nptr;
 
@@ -39,9 +39,9 @@ int	color_parse(t_object *object, t_tree *t, char *line)
 	return (SUCCESS);
 }
 
-static int	var_count_get(int *var_count, t_object *object)
+static int	var_count_get(size_t *var_count, t_object *object)
 {
-	int	tmp;
+	size_t	tmp;
 
 	if (!var_count || !object)
 		return (ft_error(EINVAL, "var_count_get"));

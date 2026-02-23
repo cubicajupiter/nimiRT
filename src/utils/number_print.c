@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 10:20:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 10:51:46 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 12:46:45 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * float_print() aligns numbers regardless of sign (minus or positive)
 */
 
-int	float_print(t_fl fl)
+int	float_print(const t_fl fl)
 {
 	if (is_float_equal(fl, 0.0f))
 	{

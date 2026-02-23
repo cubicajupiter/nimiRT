@@ -6,15 +6,22 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 11:56:08 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 12:03:49 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
+int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
 
-// hit_get()
+static void	scene_hit_get_init(t_xs *hit, t_xs *result)
+{
+	hit->shadow = false;
+	result->t = -1.0f;
+	result->object = NULL;
+}
+
+// scene_hit_get()
 // Casts a ray, loops through all world objects and finds intersections. If a
 // found intersection has a lower t value (closer to the ray origin) then the
 // result is updated.
@@ -28,8 +35,7 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 
 	if (!hit || !ray || !s)
 		return (ft_error(EINVAL, "scene_hit_get"));
-	result.t = -1.0f;
-	result.object = NULL;
+	scene_hit_get_init(hit, &result);
 	i = 0;
 	while (i < s->objects->len)
 	{
@@ -50,14 +56,14 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 
 // Checks the object for which type it is then calls object-specific
 // intersection_get function
-static int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
+int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
 {
 	if (!t || !object || !ray)
 		return (ft_error(EINVAL, "object_hit_get"));
 	if (object->type == SPHERE)
-		if (!sphere_hit_get(t, object, ray))
-			return (FALSE);
+		if (sphere_hit_get(t, object, ray))
+			return (TRUE);
 	// if (obj->obj_type == PLANE)
 	// if (obj->obj_type == CYLINDER)
-	return (TRUE);
+	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:56:20 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/04 17:14:13 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 14:23:12 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	matrix_copy(t_matrix dst, t_matrix src)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	if (!dst || ! src)
 		return (ft_error(EINVAL, "matrix_new"));
@@ -35,8 +35,8 @@ int	matrix_copy(t_matrix dst, t_matrix src)
 
 int	id_matrix(t_matrix dst)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	if (!dst)
 		return (ft_error(EINVAL, "matrix_id_get"));

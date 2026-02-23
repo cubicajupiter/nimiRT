@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 14:32:41 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/13 14:23:18 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/20 11:05:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ int		ft_power(int base, int exponent);
 int		ft_digitcount(unsigned int n, unsigned int base);
 double	ft_sin(double x);
 double	ft_cos(double x);
+double	ft_tan(double x);
 double	ft_sqrt(double nbr);
 bool	ft_naf(const char *nptr);
 bool	ft_nan(const char *nptr);

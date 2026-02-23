@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/18 14:12:03 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/23 12:46:56 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 bool	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
+// Camera
+int		camera_compute(t_camera *camera);
+int		camera_pixel_size_compute(t_camera *camera);
+int		pixel_ray_get(t_ray pixel_ray, t_camera *camera, int x, int y);
+int		view_transform_get(t_matrix dst, t_tuple forward_v,
+			t_tuple to_p, t_tuple up_v);
+
 // Objects
 int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);
 int		sphere_hit_get(t_fl *dst, t_object *object, t_ray ray);
@@ -73,6 +80,7 @@ int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
+int		object_hit_get(t_fl *t, t_object *object, t_ray ray);
 int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
@@ -80,10 +88,12 @@ int		intersections_sort(t_vec *src);
 int		intersection_compute(t_xs *hit, t_ray ray);
 
 // Lighting
+int		hit_shade(t_xs *hit, t_ray ray, t_scene *scene);
 void		reflection_ambient(t_material *mat, t_scene *s);
 void		reflection_diffuse(t_material *m, t_fl light_dot);
 void		reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
 int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
+int		is_shadowed(t_xs *hit, t_scene *scene);
 
 // Primitives
 bool	is_float_equal(t_fl a, t_fl b);
@@ -135,9 +145,9 @@ int		vector_negate(t_tuple dst, t_tuple src);
 int		tuple_copy(t_tuple dst, t_tuple src);
 
 // Basic
-int		tuple_add_get(t_tuple new, t_tuple const a, const t_tuple b);
+int		tuple_add_get(t_tuple new, const t_tuple a, const t_tuple b);
 int		tuple_add_apply(t_tuple dst, const t_tuple increment);
-int		tuple_minus_get(t_tuple new, t_tuple a, const t_tuple b);
+int		tuple_minus_get(t_tuple new, const t_tuple a, const t_tuple b);
 int		tuple_minus_apply(t_tuple dst, const t_tuple decrement);
 
 // Scale
@@ -161,12 +171,12 @@ int		color_uint_to_trio(t_trio c, int *color);
 
 // Utilities
 int		debug(t_tree *t, t_run_mode mode);
-int		float_print(t_fl fl);
+int		float_print(const t_fl fl);
 int		int_print(int nbr);
 int		float_formatted_print(char *name, t_fl value);
 int		int_formatted_print(char *name, int value);
 int		color_print(t_trio src);
-int		tuple_print(t_tuple src);
+int		tuple_print(const t_tuple src);
 int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
 int		scene_data_print(t_tree *t);

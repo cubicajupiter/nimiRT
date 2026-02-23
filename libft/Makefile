@@ -6,7 +6,7 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2026/02/11 14:42:24 by thblack-         ###   ########.fr        #
+#    Updated: 2026/02/20 11:05:38 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ MEMORY		= $(addprefix $(MEMORY_DIR)/, $(MEMORY_FILES))
 
 # NUMBERS
 NUMBERS_FILES = ft_atoi.c ft_atof.c ft_itoa.c ft_digitcount.c ft_power.c \
-				ft_sin.c ft_cos.c ft_sqrt.c ft_nan.c ft_naf.c
+				ft_sin.c ft_cos.c ft_tan.c ft_sqrt.c ft_nan.c ft_naf.c
 NUMBERS		= $(addprefix $(NUMBERS_DIR)/, $(NUMBERS_FILES))
 
 # PRINTING

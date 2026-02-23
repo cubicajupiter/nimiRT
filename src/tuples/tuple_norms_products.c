@@ -79,5 +79,6 @@ int	vector_cross(t_tuple dst, t_tuple a, t_tuple b)
 	dst[X] = a[Y] * b[Z] - a[Z] * b[Y];
 	dst[Y] = a[Z] * b[X] - a[X] * b[Z];
 	dst[Z] = a[X] * b[Y] - a[Y] * b[X];
+	dst[W] = VECTOR;
 	return (SUCCESS);
 }

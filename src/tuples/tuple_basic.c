@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-int	tuple_add_get(t_tuple dst, t_tuple const a, const t_tuple b)
+int	tuple_add_get(t_tuple dst, const t_tuple a, const t_tuple b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "tuple_add"));
@@ -23,7 +23,7 @@ int	tuple_add_get(t_tuple dst, t_tuple const a, const t_tuple b)
 	return (SUCCESS);
 }
 
-int	tuple_minus_get(t_tuple dst, t_tuple a, const t_tuple b)
+int	tuple_minus_get(t_tuple dst, const t_tuple a, const t_tuple b)
 {
 	if (!dst || !a || !b)
 		return (ft_error(EINVAL, "tuple_subtract"));
