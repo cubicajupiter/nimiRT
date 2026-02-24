@@ -64,7 +64,7 @@ int	sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray)
 		return (ft_error(EINVAL, "sphere_hit_get"));
 	matrix_invert(inversion, sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (sphere_intersect_math(time, sphere, ray))
+	if (sphere_intersect_math(time, sphere, ray2))
 	{
 		if (time[0] > 0.0f && time[1] > 0.0f)
 		{

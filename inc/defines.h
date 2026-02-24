@@ -55,7 +55,8 @@ files.
 # define COLUMN 1
 
 // Epsilon for float margin of error.
-# define EPSILON 1e-5 // NOTE: This margin of error might cause bugs later.
+# define EPSILON 1e-4 // NOTE: This margin of error might cause bugs later.
+// # define EPSILON 1e-5 // NOTE: Was this value, but made bigger to remove spottiness.
 
 // Weighting for Phong lighting components
 # define AMBIENT_RATIO 0.1f
@@ -198,14 +199,13 @@ typedef struct	s_material
 
 typedef struct	s_object
 {
-	t_obj_type				type;
+	t_obj_type			type;
 	union {
 		t_sphere		*sphere;
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
 	t_material			material;
-	// t_???			texture;
 }						t_object;
 
 typedef struct s_xs

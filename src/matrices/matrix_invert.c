@@ -38,8 +38,8 @@ int	matrix_invert(t_matrix dst, t_matrix src)
 {
 	t_fl	det;
 	t_fl	cof;
-	size_t		i;
-	size_t		j;
+	size_t	i;
+	size_t	j;
 
 	if (!dst || !src)
 		return (ft_error(EINVAL, "matrix_invert"));
