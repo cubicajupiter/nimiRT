@@ -58,15 +58,16 @@ int	normal_plane_get(t_tuple dst, t_plane *plane, t_tuple point)
 // THE CYLINDER VERSION FOR GETTING NORMALS.
 int	normal_cylinder_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
 {
-	t_tuple		obj_point;
-	t_tuple		obj_normal;
+	// t_tuple		obj_point;
+	// t_tuple		obj_normal;
 
 	if (!dst || !cylinder || !point)
 		return (ft_error(EINVAL, "normal_cylinder_get"));
-	normal_object_point_get(obj_point, cylinder->transform, point);
+	vector_new(dst, point[X], 0.0f, point[Z]);
+	// normal_object_point_get(obj_point, cylinder->transform, point);
 	//cylinder specific logic would probably go here
-	normal_worldvector_get(dst, cylinder->transform, obj_normal);
-	normalize_apply(dst);
+	// normal_worldvector_get(dst, cylinder->transform, obj_normal);
+	// normalize_apply(dst);
 	return (SUCCESS);
 }
 

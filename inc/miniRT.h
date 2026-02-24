@@ -25,6 +25,8 @@ int		transformation_test(t_tree *t);
 void	test_draw_sphere(t_tree *tree);
 int		lighting_test(t_tree *t);
 void	sphere_shader_test(t_tree *tree);
+int		cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray);
+int		cylinder_intersect_test(t_tree *t);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);
@@ -34,17 +36,17 @@ int		main_info_parse(t_tree *t, char *line);
 int		objects_parse(t_tree *t, char *line);
 int		cylinder_parse(t_object **object, t_tree *t, char *line);
 int		color_parse(t_object *object, t_tree *t, char *line);
-bool		valid_rt_data(char *line);
-bool		valid_01_float(t_fl nbr, char *value);
-bool		valid_color(t_trio color, char *value);
+bool	valid_rt_data(char *line);
+bool	valid_01_float(t_fl nbr, char *value);
+bool	valid_color(t_trio color, char *value);
 int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
 int		ft_atopoint(t_tuple dst, const char *nptr);
 int		ft_atovector(t_tuple dst, const char *nptr);
 int		parser_atof(t_fl *nbr, char *line);
 int		parser_atoi(int *nbr, char *line);
-bool		values_within_limits(t_scene *s);
-bool		values_make_sense(t_scene *s);
+bool	values_within_limits(t_scene *s);
+bool	values_make_sense(t_scene *s);
 int		materials_set(t_scene *s);
 
 // Ray Trace
@@ -91,14 +93,15 @@ int		intersection_compute(t_xs *hit, t_ray ray);
 
 // Lighting
 int		hit_shade(t_xs *hit, t_ray ray, t_scene *scene);
-void		reflection_ambient(t_material *mat, t_scene *s);
-void		reflection_diffuse(t_material *m, t_fl light_dot);
-void		reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
+void	reflection_ambient(t_material *mat, t_scene *s);
+void	reflection_diffuse(t_material *m, t_fl light_dot);
+void	reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
 int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
 int		is_shadowed(t_xs *hit, t_scene *scene);
 int		overpoint_get(t_xs *hit);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
+int		normal_cylinder_get(t_tuple dst, t_cylinder *cylinder, t_tuple point);
 int		material_default(t_material *dst);
 int		lighting(t_xs *hit, t_light *light);
 
@@ -205,7 +208,7 @@ int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 int		memory_free(t_tree *t);
 int		error_exit(int flag, t_tree *t);
 int		rt_invalid(char c);
-bool		rt_out_of_limits(char *value);
+bool	rt_out_of_limits(char *value);
 int		ft_error(int code, const char *message);
 
 #endif

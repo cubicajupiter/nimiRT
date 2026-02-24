@@ -6,12 +6,14 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:55:50 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "miniRT.h"
+
+// static int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray);
 
 int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 {
@@ -29,27 +31,82 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	object.type = CYLINDER;
 	object.cylinder = cylinder;
 	material_default(&object.material);
-	cylinder->id = t->scene->objects->len;
 	if (vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| point_new(cylinder->center, 0, 0, 0) != SUCCESS
 		|| translation(cylinder->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "cylinder_new"));
-	tmp = vec_get(t->scene->objects, cylinder->id);
+	tmp = vec_get(t->scene->objects, t->scene->objects->len - 1);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);
 }
 
-int	cylinder_resize(t_object *dst, t_fl radius, t_fl height)
+// Inverts the cylinder transform matrix and multiplies the result with the ray,
+// then runs cylinder_intersect_math() fetching the two intersections (always
+// two even if ray is tangential to edge of cylinder).
+int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 {
-	t_cylinder	*cylinder;
+	t_fl		time[2];
+	t_ray		ray2;
+	t_matrix	inversion;
 
-	if (!dst)
-		return (ft_error(EINVAL, "cylinder_resize"));
-	cylinder = dst->cylinder;
-	if (ft_dtor(&cylinder->radius, radius) != SUCCESS)
-		return (ft_error(EINHERIT, "cylinder_resize"));
-	cylinder->height = height;
-	return (SUCCESS);
+	if (!dst || !cylinder || !ray)
+		return (ft_error(EINVAL, "cylinder_hit_get"));
+	matrix_invert(inversion, cylinder->transform);
+	ray_transform_get(ray2, ray, inversion);
+	if (cylinder_intersect_math(time, cylinder, ray2))
+	{
+		if (time[0] > 0.0f && time[1] > 0.0f)
+		{
+			if (time[0] < time[1])
+				*dst = time[0];
+			else
+				*dst = time[1];
+		}
+		else if (time[0] > 0.0f)
+			*dst = time[0];
+		else if (time[1] > 0.0f)
+			*dst = time[1];
+	}
+	else
+		return (FALSE);
+	return (TRUE);
+}
+
+// Calculates mathss of intersections. Further reading required to fully
+// understand. If discriminant is less than 0 then ray misses the cylinder and
+// the function returns FALSE.
+int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
+{
+	t_fl		discriminant;
+	t_fl		a;
+	t_fl		b;
+	t_fl		c;
+
+	if (!time || !cylinder || !ray)
+		return (ft_error(EINVAL, "cylinder_intersect_math"));
+	a = (ray[DIRECTION][X] * ray[DIRECTION][X])
+		+ (ray[DIRECTION][Z] * ray[DIRECTION][Z]);
+	if (is_float_equal(a, 0.0))
+	{
+		ft_printf("No hit :(\n");
+		return (FALSE);
+	}
+	b = (2.0 * ray[ORIGIN][X] * ray[DIRECTION][X])
+		+ (2.0 * ray[ORIGIN][Z]* ray[DIRECTION][Z]);
+	c = (ray[ORIGIN][X] * ray [ORIGIN][X])
+		+ (ray[ORIGIN][Z] * ray[ORIGIN][Z])
+		// NOTE: Not sure about this line of code, as before with sphere, need to include radius. Previously this was a constant -1.0
+		- (cylinder->radius * cylinder->radius);
+	discriminant = (b * b) - (4.0f * a * c);
+	if (discriminant < 0.0f)
+	{
+		ft_printf("No hit :(\n");
+		return (FALSE);
+	}
+	time[0] = (-b - sqrt(discriminant)) / (2 * a);
+	time[1] = (-b + sqrt(discriminant)) / (2 * a);
+	ft_printf("Hit! :)\n");
+	return (TRUE);
 }
