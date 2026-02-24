@@ -198,14 +198,13 @@ typedef struct	s_material
 
 typedef struct	s_object
 {
-	t_obj_type				type;
+	t_obj_type			type;
 	union {
 		t_sphere		*sphere;
 		t_cylinder		*cylinder;
 		t_plane			*plane;
 	};
 	t_material			material;
-	// t_???			texture;
 }						t_object;
 
 typedef struct s_xs
