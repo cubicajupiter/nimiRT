@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 18:12:54 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:41:37 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	tmp = vec_get(t->scene->objects, plane->id);
 	if (dst)
 		*dst = tmp;
+	return (SUCCESS);
+}
+
+// NOTE: no plane specific logic needed (?)
+int	plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point)
+{
+	t_tuple		obj_point;
+	t_tuple		obj_normal;
+
+	if (!dst || !plane || !point)
+		return (ft_error(EINVAL, "normal_plane_get"));
+	normal_object_point_get(obj_point, plane->transform, point);
+	normal_worldvector_get(dst, plane->transform, obj_normal);
+	normalize_apply(dst);
 	return (SUCCESS);
 }
 

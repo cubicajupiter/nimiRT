@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 18:06:54 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:41:59 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,20 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 	return (SUCCESS);
 }
 
+int	sphere_normal_get(t_tuple dst, t_sphere *sphere, t_tuple point)
+{
+	t_tuple		obj_point;
+	t_tuple		obj_normal;
+
+	if (!dst || !sphere || !point)
+		return (ft_error(EINVAL, "normal_sphere_get"));
+	normal_object_point_get(obj_point, sphere->transform, point);
+	tuple_minus_get(obj_normal, obj_point, sphere->center);
+	normal_worldvector_get(dst, sphere->transform, obj_normal);
+	normalize_apply(dst);
+	return (SUCCESS);
+}
+
 // int	sphere_transform_set(t_sphere *sphere, t_matrix transformation)
 // {
 // 	if (!sphere || !transformation)
@@ -64,7 +78,7 @@ int	sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray)
 		return (ft_error(EINVAL, "sphere_hit_get"));
 	matrix_invert(inversion, sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (sphere_intersect_math(time, sphere, ray))
+	if (sphere_intersect_math(time, sphere, ray2))
 	{
 		if (time[0] > 0.0f && time[1] > 0.0f)
 		{
