@@ -29,6 +29,7 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
 	object.type = SPHERE;
+	object.id = t->scene->objects->len;
 	object.sphere = sphere;
 	material_default(&object.material);
 	sphere->radius = radius;
@@ -36,7 +37,7 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
-	tmp = vec_get(t->scene->objects, t->scene->objects->len - 1);
+	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);

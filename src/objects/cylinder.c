@@ -29,6 +29,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "cylinder_new"));
 	object.type = CYLINDER;
+	object.id = t->scene->objects->len;
 	object.cylinder = cylinder;
 	material_default(&object.material);
 	if (vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
@@ -36,7 +37,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 		|| translation(cylinder->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "cylinder_new"));
-	tmp = vec_get(t->scene->objects, t->scene->objects->len - 1);
+	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);

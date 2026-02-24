@@ -22,13 +22,13 @@ int	objects_print(t_scene *s)
 	{
 		object = vec_get(s->objects, i);
 		if (object->type == SPHERE)
-			if (sphere_print(object->sphere, i) != SUCCESS)
+			if (sphere_print(object->sphere, object->id) != SUCCESS)
 				return (ft_error(EINHERIT, "objects_print"));
 		if (object->type == PLANE)
-			if (plane_print(object->plane, i) != SUCCESS)
+			if (plane_print(object->plane, object->id) != SUCCESS)
 				return (ft_error(EINHERIT, "objects_print"));
 		if (object->type == CYLINDER)
-			if (cylinder_print(object->cylinder, i) != SUCCESS)
+			if (cylinder_print(object->cylinder, object->id) != SUCCESS)
 				return (ft_error(EINHERIT, "objects_print"));
 		if (object_material_print(&object->material) != SUCCESS)
 			return (ft_error(EINHERIT, "objects_print"));

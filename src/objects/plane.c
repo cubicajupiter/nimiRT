@@ -27,6 +27,7 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "plane_new"));
 	object.type = PLANE;
+	object.id = t->scene->objects->len;
 	object.plane = plane;
 	material_default(&object.material);
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
@@ -35,7 +36,7 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 		|| rotation_full3D(plane->transform, plane->vector) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "plane_new"));
-	tmp = vec_get(t->scene->objects, t->scene->objects->len - 1);
+	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);
