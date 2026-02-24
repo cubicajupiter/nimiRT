@@ -55,7 +55,8 @@ files.
 # define COLUMN 1
 
 // Epsilon for float margin of error.
-# define EPSILON 1e-5 // NOTE: This margin of error might cause bugs later.
+# define EPSILON 1e-4 // NOTE: This margin of error might cause bugs later.
+// # define EPSILON 1e-5 // NOTE: Was this value, but made bigger to remove spottiness.
 
 // Weighting for Phong lighting components
 # define AMBIENT_RATIO 0.1f
