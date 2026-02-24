@@ -109,8 +109,6 @@ int		normal_worldvector_get(t_tuple dst, t_matrix transform,
 int		material_default(t_material *dst);
 int		lighting(t_xs *hit, t_light *light);
 
-
-
 // Primitives
 bool	is_float_equal(t_fl a, t_fl b);
 int		float_cmp(t_fl a, t_fl b);
@@ -140,6 +138,7 @@ int		scaling(t_matrix dst, t_fl x, t_fl y, t_fl z);
 int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
+int		rotation_full3D(t_matrix dst, t_tuple normal);
 int		shearing(t_matrix dst, t_fl src[6]);
 int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
 int		chain2_apply(t_matrix dst, t_matrix a);

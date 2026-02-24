@@ -33,6 +33,7 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
 		|| vector_new(plane->vector, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| translation(plane->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
+		|| rotation_full3D(plane->transform, plane->vector) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "plane_new"));
 	tmp = vec_get(t->scene->objects, object.id);
@@ -49,6 +50,7 @@ int	plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point)
 	if (!dst || !plane || !point)
 		return (ft_error(EINVAL, "plane_normal_get"));
 	normal_object_point_get(obj_point, plane->transform, point);
+	vector_new(obj_normal, 0, 1, 0);
 	normal_worldvector_get(dst, plane->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
@@ -103,6 +105,6 @@ static int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray)
 		return (ft_error(EINVAL, "plane_intersect_math"));
 	if (fabsf(ray[DIRECTION][Y]) < EPSILON)
 		return (FALSE);
-	*time = -ray[ORIGIN][Y] / ray[DIRECTION][Y];
+	*time = -ray[ORIGIN][Y] / ray[DIRECTION][Y]; //issue might be here
 	return (TRUE);
 }

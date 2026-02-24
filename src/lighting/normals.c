@@ -12,11 +12,6 @@
 
 #include "miniRT.h"
 
-int	normal_object_point_get(t_tuple dst, t_matrix transform,
-				t_tuple world_point);
-int	normal_worldvector_get(t_tuple dst, t_matrix transform,
-				t_tuple obj_normal);
-
 /*
 	The NORMAL vector of an object is a UNIT VECTOR that is PERPENDICULAR to
 	the object's surface.

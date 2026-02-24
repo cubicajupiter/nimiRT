@@ -27,7 +27,7 @@ files.
 // Window & Image
 // # define WIDTH 2000
 // # define HEIGHT 1600
-# define WIDTH 1000
+# define WIDTH 1200
 # define HEIGHT 1000
 
 // Tuples
