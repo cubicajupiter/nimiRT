@@ -27,30 +27,26 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 
 	if (!hit || !scene)
 		return (ft_error(EINVAL, "is_shadowed"));
-	tuple_minus_get(direction_v, scene->light.point, hit->point);
+	tuple_minus_get(direction_v, scene->light.point, hit->over_point);
 	magnitude_get(&distance, direction_v);
 	normalize_apply(direction_v);
-	ray_new(light_ray, hit->point, direction_v);
+	ray_new(light_ray, hit->over_point, direction_v);
 	if (is_shadow_hit(hit, distance, light_ray, scene->objects))
-	{
-		// hit->shadow = true;
-		// overpoint_get(hit); TODO: Add overpoint functionality
-		//TODO: optimization: put light_ray somewhere in t_xs so it can be reused in lighting(), which atm computes the same vector again
 		return (TRUE);
-	}
+	tuple_copy(hit->light_vector, direction_v);
 	return (FALSE);
 }
 
-// int	overpoint_get(t_xs *hit)
-// {
-// 	t_tuple		offset_v;
-//
-// 	if (!hit)
-// 		return (ft_error(EINVAL, "overpoint_get"));
-// 	vector_multiply_get(offset_v, EPSILON, hit->normal_vector);
-// 	tuple_add_get(hit->over_point, hit->point, offset_v);
-// 	return (SUCCESS);
-// }
+int	overpoint_get(t_xs *hit)
+{
+	t_tuple		offset_v;
+
+	if (!hit)
+		return (ft_error(EINVAL, "overpoint_get"));
+	vector_multiply_get(offset_v, EPSILON, hit->normal_vector);
+	tuple_add_get(hit->over_point, hit->point, offset_v);
+	return (SUCCESS);
+}
 
 int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 {

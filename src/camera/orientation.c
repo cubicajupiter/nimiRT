@@ -28,19 +28,21 @@ int	view_transform_get(t_matrix dst, t_tuple from_p, t_tuple forward_v,
 {
 	t_tuple		left_v;
 	t_tuple		true_up_v;
+	t_matrix	orientation;
 	t_matrix	move_scene_translation;
 
 	if (!dst || !from_p || !forward_v || !up_v
 		|| from_p[W] < POINT || forward_v[W] > VECTOR || up_v[W] > VECTOR)
 		return (ft_error(EINVAL, "view_transform_get"));
+	normalize_apply(forward_v);
 	normalize_apply(up_v);
 	vector_cross(left_v, forward_v, up_v);
 	vector_cross(true_up_v, left_v, forward_v);
-	orientation_get(dst, left_v, true_up_v, forward_v);
+	orientation_get(orientation, left_v, true_up_v, forward_v);
 	// Not sure about these next two lines, example test in book gives different
 	// results than the ones produced by these lines
 	translation(move_scene_translation, -from_p[X], -from_p[Y], -from_p[Z]);
-	matrix_multiply_apply(dst, move_scene_translation);
+	matrix_multiply_get(dst, orientation, move_scene_translation);
 	return (SUCCESS);
 }
 
