@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 18:03:02 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/24 09:59:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 	hit->object = result.object;
 	return (TRUE);
 }
-
 
 // OLD VERSION OF IS_SHADOW_HIT() :
 

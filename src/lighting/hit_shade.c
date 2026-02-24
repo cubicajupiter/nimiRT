@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   hit_shade.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/23 11:44:31 by thblack-          #+#    #+#             */
 /*   Updated: 2026/02/23 17:09:06 by jvalkama         ###   ########.fr       */

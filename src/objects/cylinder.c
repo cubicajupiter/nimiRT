@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 17:57:43 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:56:56 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,28 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	object.type = CYLINDER;
 	object.cylinder = cylinder;
 	material_default(&object.material);
-	cylinder->id = t->scene->objects->len;
+	object.id = t->scene->objects->len;
 	if (vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| point_new(cylinder->center, 0, 0, 0) != SUCCESS
 		|| translation(cylinder->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "cylinder_new"));
-	tmp = vec_get(t->scene->objects, cylinder->id);
+	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
 		*dst = tmp;
+	return (SUCCESS);
+}
+
+int	cylinder_normal_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
+{
+	t_tuple		obj_point;
+	t_tuple		obj_normal;
+
+	if (!dst || !cylinder || !point)
+		return (ft_error(EINVAL, "normal_cylinder_get"));
+	normal_object_point_get(obj_point, cylinder->transform, point);
+	normal_worldvector_get(dst, cylinder->transform, obj_normal);
+	normalize_apply(dst);
 	return (SUCCESS);
 }
 
