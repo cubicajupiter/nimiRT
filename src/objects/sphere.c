@@ -65,7 +65,7 @@ int	sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray)
 		return (ft_error(EINVAL, "sphere_hit_get"));
 	matrix_invert(inversion, sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (sphere_intersect_math(time, sphere, ray))
+	if (sphere_intersect_math(time, sphere, ray2))
 	{
 		if (time[0] > 0.0f && time[1] > 0.0f)
 		{
@@ -115,41 +115,6 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 	return (TRUE);
 }
 
-// Calculates mathss of intersections. Further reading required to fully
-// understand. If discriminant is less than 0 then ray misses the sphere and
-// the function returns FALSE.
-static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
-{
-	t_fl		discriminant;
-	t_tuple		sphere_to_ray;
-	t_fl		a;
-	t_fl		b;
-	t_fl		c;
-
-	if (!time || !sphere || !ray)
-		return (ft_error(EINVAL, "sphere_intersect_math"));
-	tuple_minus_get(sphere_to_ray, ray[ORIGIN], sphere->center);
-	vector_dot(&a, ray[DIRECTION], ray[DIRECTION]);
-	vector_dot(&b, ray[DIRECTION], sphere_to_ray);
-	b *= 2.0f;
-	vector_dot(&c, sphere_to_ray, sphere_to_ray);
-	c -= 1.0f;
-	// FIXME: Temporarilly changed this constant to the sphere radius but the
-	// measurements seem to be funky, too small in relation to the space.
-	// Needs further investigation!
-	// c -= sphere->radius;
-	discriminant = (b * b) - (4.0f * a * c);
-	if (discriminant < 0.0f)
-		return (FALSE);
-	time[0] = (-b - sqrtf(discriminant)) / (2.0f * a);
-	time[1] = (-b + sqrtf(discriminant)) / (2.0f * a);
-	// This next check for time being positive may be a problem for other
-	// calculations later, but for now it suits our logic
-	if (time[0] < 0.0 && time[1] < 0.0)
-		return (FALSE);
-	return (TRUE);
-}
-
 // // Calculates mathss of intersections. Further reading required to fully
 // // understand. If discriminant is less than 0 then ray misses the sphere and
 // // the function returns FALSE.
@@ -163,16 +128,16 @@ static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 //
 // 	if (!time || !sphere || !ray)
 // 		return (ft_error(EINVAL, "sphere_intersect_math"));
-// 	tuple_minus_get(sphere_to_ray, sphere->center, ray[ORIGIN]);
+// 	tuple_minus_get(sphere_to_ray, ray[ORIGIN], sphere->center);
 // 	vector_dot(&a, ray[DIRECTION], ray[DIRECTION]);
 // 	vector_dot(&b, ray[DIRECTION], sphere_to_ray);
-// 	b *= -2.0f;
+// 	b *= 2.0f;
 // 	vector_dot(&c, sphere_to_ray, sphere_to_ray);
-// 	// c -= 1.0f;
+// 	c -= 1.0f;
 // 	// FIXME: Temporarilly changed this constant to the sphere radius but the
 // 	// measurements seem to be funky, too small in relation to the space.
 // 	// Needs further investigation!
-// 	c -= sphere->radius * sphere->radius;
+// 	// c -= sphere->radius;
 // 	discriminant = (b * b) - (4.0f * a * c);
 // 	if (discriminant < 0.0f)
 // 		return (FALSE);
@@ -184,3 +149,38 @@ static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 // 		return (FALSE);
 // 	return (TRUE);
 // }
+
+// Calculates mathss of intersections. Further reading required to fully
+// understand. If discriminant is less than 0 then ray misses the sphere and
+// the function returns FALSE.
+static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
+{
+	t_fl		discriminant;
+	t_tuple		sphere_to_ray;
+	t_fl		a;
+	t_fl		b;
+	t_fl		c;
+
+	if (!time || !sphere || !ray)
+		return (ft_error(EINVAL, "sphere_intersect_math"));
+	tuple_minus_get(sphere_to_ray, sphere->center, ray[ORIGIN]);
+	vector_dot(&a, ray[DIRECTION], ray[DIRECTION]);
+	vector_dot(&b, ray[DIRECTION], sphere_to_ray);
+	b *= -2.0f;
+	vector_dot(&c, sphere_to_ray, sphere_to_ray);
+	// c -= 1.0f;
+	// FIXME: Temporarilly changed this constant to the sphere radius but the
+	// measurements seem to be funky, too small in relation to the space.
+	// Needs further investigation!
+	c -= sphere->radius * sphere->radius;
+	discriminant = (b * b) - (4.0f * a * c);
+	if (discriminant < 0.0f)
+		return (FALSE);
+	time[0] = (-b - sqrtf(discriminant)) / (2.0f * a);
+	time[1] = (-b + sqrtf(discriminant)) / (2.0f * a);
+	// This next check for time being positive may be a problem for other
+	// calculations later, but for now it suits our logic
+	if (time[0] < 0.0 && time[1] < 0.0)
+		return (FALSE);
+	return (TRUE);
+}
