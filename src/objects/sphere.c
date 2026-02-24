@@ -31,13 +31,12 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 	object.type = SPHERE;
 	object.sphere = sphere;
 	material_default(&object.material);
-	sphere->id = t->scene->objects->len;
 	sphere->radius = radius;
 	if (point_new(sphere->center, 0, 0, 0) != SUCCESS
 		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
-	tmp = vec_get(t->scene->objects, sphere->id);
+	tmp = vec_get(t->scene->objects, t->scene->objects->len - 1);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);
@@ -65,22 +64,8 @@ int	sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray)
 	matrix_invert(inversion, sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
 	if (sphere_intersect_math(time, sphere, ray2))
-	{
-		if (time[0] > 0.0f && time[1] > 0.0f)
-		{
-			if (time[0] < time[1])
-				*dst = time[0];
-			else
-				*dst = time[1];
-		}
-		else if (time[0] > 0.0f)
-			*dst = time[0];
-		else if (time[1] > 0.0f)
-			*dst = time[1];
-	}
-	else
-		return (FALSE);
-	return (TRUE);
+		return (closest_forward_hit_get(dst, time));
+	return (FALSE);
 }
 
 // Inverts the sphere transform matrix and multiplies the result with the ray,
@@ -109,9 +94,7 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 		if (vec_push(xs, &tmp2) != SUCCESS)
 			return (ft_error(EINHERIT, "sphere_intersect_get"));
 	}
-	else
-		return (FALSE);
-	return (TRUE);
+	return (FALSE);
 }
 
 // Calculates mathss of intersections. Further reading required to fully

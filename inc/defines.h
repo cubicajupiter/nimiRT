@@ -222,7 +222,6 @@ typedef struct s_xs
 
 typedef struct	s_sphere
 {
-	size_t				id;
 	t_tuple				center;
 	t_fl				radius;
 	t_matrix			transform;
@@ -230,7 +229,6 @@ typedef struct	s_sphere
 
 typedef struct	s_plane
 {
-	size_t				id;
 	t_tuple				point;
 	t_tuple				vector;
 	t_matrix			transform;
@@ -238,12 +236,12 @@ typedef struct	s_plane
 
 typedef struct	s_cylinder
 {
-	size_t				id;
 	t_tuple				center;
 	t_tuple				axis;
 	t_fl				radius;
 	t_fl				height;
 	t_matrix			transform;
+	bool				closed;
 }						t_cylinder;
 
 #endif

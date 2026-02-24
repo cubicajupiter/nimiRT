@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "defines.h"
 #include "libft.h"
 #include "miniRT.h"
 
@@ -98,10 +99,17 @@ int	intersection_compute(t_xs *hit, t_ray ray)
 	if (!hit || !ray)
 		return (ft_error(EINVAL, "intersection_compute"));
 	if (position_get(hit->point, ray, hit->t) != SUCCESS
-		|| vector_negate(hit->camera_vector, ray[DIRECTION]) != SUCCESS
-		|| normal_sphere_get(hit->normal_vector,
-			hit->object->sphere, hit->point) != SUCCESS
-		|| vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS
+		|| vector_negate(hit->camera_vector, ray[DIRECTION]) != SUCCESS)
+		return (ft_error(EINHERIT, "intersection_compute"));
+	if (hit->object->type == SPHERE)
+		if (normal_sphere_get(hit->normal_vector,
+			hit->object->sphere, hit->point) != SUCCESS)
+		return (ft_error(EINHERIT, "intersection_compute"));
+	if (hit->object->type == CYLINDER)
+		if (normal_cylinder_get(hit->normal_vector,
+			hit->object->cylinder, hit->point) != SUCCESS)
+		return (ft_error(EINHERIT, "intersection_compute"));
+	if (vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS
 		|| overpoint_get(hit) != SUCCESS)
 		return (ft_error(EINHERIT, "intersection_compute"));
 	if (dot < 0)

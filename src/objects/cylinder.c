@@ -48,30 +48,28 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 {
 	t_fl		time[2];
-	t_ray		ray2;
-	t_matrix	inversion;
+	t_fl		cylinder_ends[2];
+	// t_ray		ray2;
+	// t_matrix	inversion;
 
 	if (!dst || !cylinder || !ray)
 		return (ft_error(EINVAL, "cylinder_hit_get"));
-	matrix_invert(inversion, cylinder->transform);
-	ray_transform_get(ray2, ray, inversion);
-	if (cylinder_intersect_math(time, cylinder, ray2))
+	// matrix_invert(inversion, cylinder->transform);
+	// ray_transform_get(ray2, ray, inversion);
+	// if (cylinder_intersect_math(time, cylinder, ray2))
+	if (cylinder_intersect_math(time, cylinder, ray))
 	{
-		if (time[0] > 0.0f && time[1] > 0.0f)
-		{
-			if (time[0] < time[1])
-				*dst = time[0];
-			else
-				*dst = time[1];
-		}
-		else if (time[0] > 0.0f)
-			*dst = time[0];
-		else if (time[1] > 0.0f)
-			*dst = time[1];
+		cylinder_ends[0] = ray[ORIGIN][Y] + (time[0] * ray[DIRECTION][Y]);
+		cylinder_ends[1] = ray[ORIGIN][Y] + (time[1] * ray[DIRECTION][Y]);
+		if (cylinder_ends[0] < -cylinder->height / 2.0 
+			|| cylinder_ends[0] > cylinder->height / 2.0)
+			time[0] = -1.0f;
+		if (cylinder_ends[1] < -cylinder->height / 2.0 
+			|| cylinder_ends[1] > cylinder->height / 2.0)
+			time[1] = -1.0f;
+		return (closest_forward_hit_get(dst, time));
 	}
-	else
-		return (FALSE);
-	return (TRUE);
+	return (FALSE);
 }
 
 // Calculates mathss of intersections. Further reading required to fully
@@ -89,10 +87,7 @@ int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
 	a = (ray[DIRECTION][X] * ray[DIRECTION][X])
 		+ (ray[DIRECTION][Z] * ray[DIRECTION][Z]);
 	if (is_float_equal(a, 0.0))
-	{
-		ft_printf("No hit :(\n");
 		return (FALSE);
-	}
 	b = (2.0 * ray[ORIGIN][X] * ray[DIRECTION][X])
 		+ (2.0 * ray[ORIGIN][Z]* ray[DIRECTION][Z]);
 	c = (ray[ORIGIN][X] * ray [ORIGIN][X])
@@ -101,12 +96,8 @@ int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
 		- (cylinder->radius * cylinder->radius);
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
-	{
-		ft_printf("No hit :(\n");
 		return (FALSE);
-	}
 	time[0] = (-b - sqrt(discriminant)) / (2 * a);
 	time[1] = (-b + sqrt(discriminant)) / (2 * a);
-	ft_printf("Hit! :)\n");
 	return (TRUE);
 }

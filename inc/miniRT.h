@@ -78,6 +78,7 @@ int		plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray);
 int		plane_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t);
 int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
+int		cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray);
 
 // Rays
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
@@ -85,6 +86,7 @@ int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
 int		object_hit_get(t_fl *t, t_object *object, t_ray ray);
+int		closest_forward_hit_get(t_fl *dst, t_fl *time);
 int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
@@ -185,9 +187,9 @@ int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
 int		scene_data_print(t_tree *t);
 int		objects_print(t_scene *s);
-int		sphere_print(t_sphere *sphere);
-int		plane_print(t_plane *plane);
-int		cylinder_print(t_cylinder *cylinder);
+int		sphere_print(t_sphere *sphere, size_t id);
+int		plane_print(t_plane *plane, size_t id);
+int		cylinder_print(t_cylinder *cylinder, size_t id);
 int		object_material_print(t_material *material);
 int		material_print(t_material *m);
 

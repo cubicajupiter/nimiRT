@@ -107,10 +107,53 @@ static int	normals(t_tree *t)
 	return (SUCCESS);
 }
 
+static int	truncated(t_tree *t)
+{
+	t_ray		ray1;
+	t_ray		ray2;
+	t_ray		ray3;
+	t_ray		ray4;
+	t_ray		ray5;
+	t_ray		ray6;
+	t_object	*object;
+	t_fl		time;
+	size_t		i;
+
+	ray_new(ray1, (t_tuple){0, 1.5, 0, POINT}, (t_tuple){0.1, 0, 1, VECTOR});
+	ray_new(ray2, (t_tuple){0, -2.5, -5, POINT}, (t_tuple){0, 0, 1, VECTOR});
+	ray_new(ray3, (t_tuple){0, -1, -5, POINT}, (t_tuple){0, 0, 1, VECTOR});
+	ray_new(ray4, (t_tuple){0, 0, -5, POINT}, (t_tuple){0, 0, 1, VECTOR});
+	ray_new(ray5, (t_tuple){0, 1, -5, POINT}, (t_tuple){0, 0, 1, VECTOR});
+	ray_new(ray6, (t_tuple){0, 2.5, -2, POINT}, (t_tuple){0, 0, 1, VECTOR});
+	i = 0;
+	while (i < t->scene->objects->len)
+	{
+		object = vec_get(t->scene->objects, i);
+		if (object->type == CYLINDER)
+		{
+			if (cylinder_hit_get(&time, object->cylinder, ray1))
+				printf("ray1 t0: %f\n", time);
+			if (cylinder_hit_get(&time, object->cylinder, ray2))
+				printf("ray2 t0: %f\n", time);
+			if (cylinder_hit_get(&time, object->cylinder, ray3))
+				printf("ray3 t0: %f\n", time);
+			if (cylinder_hit_get(&time, object->cylinder, ray4))
+				printf("ray4 t0: %f\n", time);
+			if (cylinder_hit_get(&time, object->cylinder, ray5))
+				printf("ray5 t0: %f\n", time);
+			if (cylinder_hit_get(&time, object->cylinder, ray6))
+				printf("ray6 t0: %f\n", time);
+		}
+		i++;
+	}
+	return (SUCCESS);
+}
+
 int	cylinder_intersect_test(t_tree *t)
 {
 	no_hits(t);
 	hits(t);
 	normals(t);
+	truncated(t);
 	return (SUCCESS);
 }

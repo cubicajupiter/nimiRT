@@ -29,13 +29,12 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	object.type = PLANE;
 	object.plane = plane;
 	material_default(&object.material);
-	plane->id = t->scene->objects->len;
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
 		|| vector_new(plane->vector, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| translation(plane->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "plane_new"));
-	tmp = vec_get(t->scene->objects, plane->id);
+	tmp = vec_get(t->scene->objects, t->scene->objects->len - 1);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);

@@ -63,7 +63,7 @@ int	normal_cylinder_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
 
 	if (!dst || !cylinder || !point)
 		return (ft_error(EINVAL, "normal_cylinder_get"));
-	vector_new(dst, point[X], 0.0f, point[Z]);
+	vector_new(dst, point[X], 0.0, point[Z]);
 	// normal_object_point_get(obj_point, cylinder->transform, point);
 	//cylinder specific logic would probably go here
 	// normal_worldvector_get(dst, cylinder->transform, obj_normal);
