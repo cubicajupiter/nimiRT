@@ -12,9 +12,9 @@
 
 #include "miniRT.h"
 
-static int	normal_object_point_get(t_tuple dst, t_matrix transform,
+int	normal_object_point_get(t_tuple dst, t_matrix transform,
 				t_tuple world_point);
-static int	normal_worldvector_get(t_tuple dst, t_matrix transform,
+int	normal_worldvector_get(t_tuple dst, t_matrix transform,
 				t_tuple obj_normal);
 
 /*
@@ -47,7 +47,7 @@ int	normal_get(t_tuple dst, t_object *object, t_tuple point)
 	Object point is the product of the world point and the inverse of the
 	object's transformation.
 */
-static int	normal_object_point_get(t_tuple dst, t_matrix transform,
+int	normal_object_point_get(t_tuple dst, t_matrix transform,
 				t_tuple world_point)
 {
 	t_matrix	inverse;
@@ -69,7 +69,7 @@ static int	normal_object_point_get(t_tuple dst, t_matrix transform,
 	it to world space normal.)
 	4. Normalises the world space vector.
 */
-static int	normal_worldvector_get(t_tuple dst, t_matrix transform,
+int	normal_worldvector_get(t_tuple dst, t_matrix transform,
 				t_tuple obj_normal)
 {
 	t_matrix	inverse;

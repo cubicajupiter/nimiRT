@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/24 11:41:37 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:55:55 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,25 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	object.type = PLANE;
 	object.plane = plane;
 	material_default(&object.material);
-	plane->id = t->scene->objects->len;
+	object.id = t->scene->objects->len;
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
 		|| vector_new(plane->vector, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| translation(plane->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "plane_new"));
-	tmp = vec_get(t->scene->objects, plane->id);
+	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);
 }
 
-// NOTE: no plane specific logic needed (?)
 int	plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point)
 {
 	t_tuple		obj_point;
 	t_tuple		obj_normal;
 
 	if (!dst || !plane || !point)
-		return (ft_error(EINVAL, "normal_plane_get"));
+		return (ft_error(EINVAL, "plane_normal_get"));
 	normal_object_point_get(obj_point, plane->transform, point);
 	normal_worldvector_get(dst, plane->transform, obj_normal);
 	normalize_apply(dst);
@@ -65,7 +64,7 @@ int	plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray)
 		return (ft_error(EINVAL, "plane_hit_get"));
 	matrix_invert(inversion, plane->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (plane_intersect_math(&time, plane, ray))
+	if (plane_intersect_math(&time, plane, ray2))
 	{
 		if (time > 0.0f)
 			*dst = time;
@@ -86,7 +85,7 @@ int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 		return (ft_error(EINVAL, "plane_intersect_get"));
 	matrix_invert(inversion, object->plane->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (plane_intersect_math(&time, object->plane, ray))
+	if (plane_intersect_math(&time, object->plane, ray2))
 	{
 		tmp.t = time;
 		tmp.object = object;

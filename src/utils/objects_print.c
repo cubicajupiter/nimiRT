@@ -44,7 +44,7 @@ int	sphere_print(t_sphere *sphere)
 
 	tmp = &sphere->transform;
 	if (printf("-SPHERE\n") < 0
-		|| int_formatted_print("id", sphere->id) != SUCCESS
+		//|| int_formatted_print("id", sphere->id) != SUCCESS
 		|| point_new(position,
 			(*tmp)[0][3], (*tmp)[1][3], (*tmp)[2][3]) != SUCCESS
 		|| tuple_print(position) != SUCCESS
@@ -60,7 +60,7 @@ int	plane_print(t_plane *plane)
 
 	tmp = &plane->transform;
 	if (printf("-plane\n") < 0
-		|| int_formatted_print("id", plane->id) != SUCCESS
+		//|| int_formatted_print("id", plane->id) != SUCCESS
 		|| point_new(position,
 			(*tmp)[0][3], (*tmp)[1][3], (*tmp)[2][3]) != SUCCESS
 		|| tuple_print(position) != SUCCESS
@@ -76,7 +76,7 @@ int	cylinder_print(t_cylinder *cylinder)
 
 	tmp = &cylinder->transform;
 	if (printf("-cylinder\n") < 0
-		|| int_formatted_print("id", cylinder->id) != SUCCESS
+		//|| int_formatted_print("id", cylinder->id) != SUCCESS
 		|| point_new(position,
 			(*tmp)[0][3], (*tmp)[1][3], (*tmp)[2][3]) != SUCCESS
 		|| tuple_print(position) != SUCCESS

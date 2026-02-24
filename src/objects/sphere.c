@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/24 11:41:59 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:56:09 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 	object.type = SPHERE;
 	object.sphere = sphere;
 	material_default(&object.material);
-	sphere->id = t->scene->objects->len;
+	object.id = t->scene->objects->len;
 	sphere->radius = radius;
 	if (point_new(sphere->center, 0, 0, 0) != SUCCESS
 		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
-	tmp = vec_get(t->scene->objects, sphere->id);
+	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
 		*dst = tmp;
 	return (SUCCESS);
@@ -49,7 +49,7 @@ int	sphere_normal_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 	t_tuple		obj_normal;
 
 	if (!dst || !sphere || !point)
-		return (ft_error(EINVAL, "normal_sphere_get"));
+		return (ft_error(EINVAL, "sphere_normal_get"));
 	normal_object_point_get(obj_point, sphere->transform, point);
 	tuple_minus_get(obj_normal, obj_point, sphere->center);
 	normal_worldvector_get(dst, sphere->transform, obj_normal);
@@ -112,7 +112,7 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 		return (ft_error(EINVAL, "sphere_intersect_get"));
 	matrix_invert(inversion, object->sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (sphere_intersect_math(time, object->sphere, ray))
+	if (sphere_intersect_math(time, object->sphere, ray2))
 	{
 		tmp1.t = time[0];
 		tmp1.object = object;

@@ -55,7 +55,7 @@ files.
 # define COLUMN 1
 
 // Epsilon for float margin of error.
-# define EPSILON 1e-4 // NOTE: This margin of error might cause bugs later.
+# define EPSILON 1e-6 // NOTE: Margin made smaller since self-shading (shadow acne) is no longer an issue
 // # define EPSILON 1e-5 // NOTE: Was this value, but made bigger to remove spottiness.
 
 // Weighting for Phong lighting components
@@ -199,6 +199,7 @@ typedef struct	s_material
 
 typedef struct	s_object
 {
+	size_t				id;
 	t_obj_type			type;
 	union {
 		t_sphere		*sphere;
@@ -213,7 +214,6 @@ typedef struct s_xs
 	t_object			*object;
 	t_fl				t;
 	t_tuple				point;
-	t_tuple				over_point;
 	t_tuple				camera_vector;
 	t_tuple				normal_vector;
 	t_tuple				light_vector;
@@ -222,7 +222,6 @@ typedef struct s_xs
 
 typedef struct	s_sphere
 {
-	size_t				id;
 	t_tuple				center;
 	t_fl				radius;
 	t_matrix			transform;
@@ -230,7 +229,6 @@ typedef struct	s_sphere
 
 typedef struct	s_plane
 {
-	size_t				id;
 	t_tuple				point;
 	t_tuple				vector;
 	t_matrix			transform;
@@ -238,7 +236,6 @@ typedef struct	s_plane
 
 typedef struct	s_cylinder
 {
-	size_t				id;
 	t_tuple				center;
 	t_tuple				axis;
 	t_fl				radius;

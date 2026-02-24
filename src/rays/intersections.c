@@ -101,8 +101,7 @@ int	intersection_compute(t_xs *hit, t_ray ray)
 		|| vector_negate(hit->camera_vector, ray[DIRECTION]) != SUCCESS
 		|| normal_get(hit->normal_vector,
 			hit->object, hit->point) != SUCCESS
-		|| vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS
-		|| overpoint_get(hit) != SUCCESS)
+		|| vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS)
 		return (ft_error(EINHERIT, "intersection_compute"));
 	if (dot < 0)
 	{
