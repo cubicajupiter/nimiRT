@@ -27,7 +27,7 @@ files.
 // Window & Image
 // # define WIDTH 2000
 // # define HEIGHT 1600
-# define WIDTH 1000
+# define WIDTH 1200
 # define HEIGHT 1000
 
 // Tuples
@@ -55,7 +55,7 @@ files.
 # define COLUMN 1
 
 // Epsilon for float margin of error.
-# define EPSILON 1e-4 // NOTE: This margin of error might cause bugs later.
+# define EPSILON 1e-6 // NOTE: Margin made smaller since self-shading (shadow acne) is no longer an issue
 // # define EPSILON 1e-5 // NOTE: Was this value, but made bigger to remove spottiness.
 
 // Weighting for Phong lighting components
@@ -199,6 +199,7 @@ typedef struct	s_material
 
 typedef struct	s_object
 {
+	size_t				id;
 	t_obj_type			type;
 	union {
 		t_sphere		*sphere;
@@ -213,7 +214,6 @@ typedef struct s_xs
 	t_object			*object;
 	t_fl				t;
 	t_tuple				point;
-	t_tuple				over_point;
 	t_tuple				camera_vector;
 	t_tuple				normal_vector;
 	t_tuple				light_vector;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/23 18:11:38 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:58:12 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,16 @@ int		view_transform_get(t_matrix dst, t_tuple forward_v,
 
 // Objects
 int		sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t);
+int		sphere_normal_get(t_tuple dst, t_sphere *sphere, t_tuple point);
 int		sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray);
 int		sphere_transform_set(t_sphere *sphere, t_matrix transformation);
 int		sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t);
+int		plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point);
 int		plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray);
 int		plane_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t);
+int		cylinder_normal_get(t_tuple dst, t_cylinder *cylinder, t_tuple point);
 int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
 int		cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray);
 
@@ -102,8 +105,11 @@ int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
 int		is_shadowed(t_xs *hit, t_scene *scene);
 int		overpoint_get(t_xs *hit);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
-int		normal_sphere_get(t_tuple dst, t_sphere *sphere, t_tuple point);
-int		normal_cylinder_get(t_tuple dst, t_cylinder *cylinder, t_tuple point);
+int		normal_get(t_tuple dst, t_object *object, t_tuple point);
+int		normal_object_point_get(t_tuple dst, t_matrix transform,
+				t_tuple world_point);
+int		normal_worldvector_get(t_tuple dst, t_matrix transform,
+				t_tuple obj_normal);
 int		material_default(t_material *dst);
 int		lighting(t_xs *hit, t_light *light);
 
@@ -136,6 +142,7 @@ int		scaling(t_matrix dst, t_fl x, t_fl y, t_fl z);
 int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
+int		rotation_full3D(t_matrix dst, t_tuple normal);
 int		shearing(t_matrix dst, t_fl src[6]);
 int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
 int		chain2_apply(t_matrix dst, t_matrix a);

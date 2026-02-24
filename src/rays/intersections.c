@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 18:08:19 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/02/24 11:51:14 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,10 @@ int	intersection_compute(t_xs *hit, t_ray ray)
 	if (!hit || !ray)
 		return (ft_error(EINVAL, "intersection_compute"));
 	if (position_get(hit->point, ray, hit->t) != SUCCESS
-		|| vector_negate(hit->camera_vector, ray[DIRECTION]) != SUCCESS)
-		return (ft_error(EINHERIT, "intersection_compute"));
-	if (hit->object->type == SPHERE)
-		if (normal_sphere_get(hit->normal_vector,
-			hit->object->sphere, hit->point) != SUCCESS)
-		return (ft_error(EINHERIT, "intersection_compute"));
-	if (hit->object->type == CYLINDER)
-		if (normal_cylinder_get(hit->normal_vector,
-			hit->object->cylinder, hit->point) != SUCCESS)
-		return (ft_error(EINHERIT, "intersection_compute"));
-	if (vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS
-		|| overpoint_get(hit) != SUCCESS)
+		|| vector_negate(hit->camera_vector, ray[DIRECTION]) != SUCCESS
+		|| normal_get(hit->normal_vector,
+			hit->object, hit->point) != SUCCESS
+		|| vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS)
 		return (ft_error(EINHERIT, "intersection_compute"));
 	if (dot < 0)
 	{

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
+#    By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2026/02/23 14:10:34 by thblack-         ###   ########.fr        #
+#    Updated: 2026/02/24 10:07:31 by jvalkama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
