@@ -13,13 +13,13 @@
 #include "defines.h"
 #include "miniRT.h"
 
-static int	pointing_up(t_tuple camera_ray)
+static int	pointing_up_or_down(t_tuple camera_ray)
 {
 	if (!camera_ray)
 		return (ft_error(EINVAL, "camera_ray"));
 	if (camera_ray[X] < EPSILON
 		&& camera_ray[Z] < EPSILON
-		&& camera_ray[Y] >= EPSILON)
+		&& !is_float_equal(camera_ray[Y], 0.0))
 		return (TRUE);
 	return (FALSE);
 }
@@ -30,7 +30,7 @@ int	camera_compute(t_camera *camera)
 
 	if (!camera)
 		return (ft_error(EINVAL, "camera_compute"));
-	if (pointing_up(camera->ray[DIRECTION]))
+	if (pointing_up_or_down(camera->ray[DIRECTION]))
 		vector_new(up_v, 0.0, 0.0, 1.0);
 	else
 		vector_new(up_v, 0.0, 1.0, 0.0);
