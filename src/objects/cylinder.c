@@ -42,6 +42,22 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	return (SUCCESS);
 }
 
+// THE CYLINDER VERSION FOR GETTING NORMALS.
+int	cylinder_normal_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
+{
+	// t_tuple		obj_point;
+	// t_tuple		obj_normal;
+
+	if (!dst || !cylinder || !point)
+		return (ft_error(EINVAL, "normal_cylinder_get"));
+	vector_new(dst, point[X], 0.0, point[Z]);
+	// normal_object_point_get(obj_point, cylinder->transform, point);
+	//cylinder specific logic would probably go here
+	// normal_worldvector_get(dst, cylinder->transform, obj_normal);
+	// normalize_apply(dst);
+	return (SUCCESS);
+}
+
 // Inverts the cylinder transform matrix and multiplies the result with the ray,
 // then runs cylinder_intersect_math() fetching the two intersections (always
 // two even if ray is tangential to edge of cylinder).

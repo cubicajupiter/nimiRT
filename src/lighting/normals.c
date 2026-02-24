@@ -30,8 +30,8 @@ int	normal_get(t_tuple dst, t_object *object, t_tuple point)
 		sphere_normal_get(dst, object->sphere, point);
 	else if (object->type == PLANE)
 		plane_normal_get(dst, object->plane, point);
-	// else if (object->type == CYLINDER)
-	// 	cylinder_normal_get(dst, object->cylinder, point);
+	else if (object->type == CYLINDER)
+		cylinder_normal_get(dst, object->cylinder, point);
 	return (SUCCESS);
 }
 

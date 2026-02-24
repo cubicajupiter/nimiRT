@@ -93,13 +93,13 @@ static int	normals(t_tree *t)
 		object = vec_get(t->scene->objects, i);
 		if (object->type == CYLINDER)
 		{
-			normal_cylinder_get(vector1, object->cylinder, point1);
+			cylinder_normal_get(vector1, object->cylinder, point1);
 			tuple_print(vector1);
-			normal_cylinder_get(vector2, object->cylinder, point2);
+			cylinder_normal_get(vector2, object->cylinder, point2);
 			tuple_print(vector2);
-			normal_cylinder_get(vector3, object->cylinder, point3);
+			cylinder_normal_get(vector3, object->cylinder, point3);
 			tuple_print(vector3);
-			normal_cylinder_get(vector4, object->cylinder, point4);
+			cylinder_normal_get(vector4, object->cylinder, point4);
 			tuple_print(vector4);
 		}
 		i++;
