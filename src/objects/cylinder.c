@@ -46,16 +46,15 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 // THE CYLINDER VERSION FOR GETTING NORMALS.
 int	cylinder_normal_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
 {
-	// t_tuple		obj_point;
-	// t_tuple		obj_normal;
+	t_tuple		obj_point;
+	t_tuple		obj_normal;
 
 	if (!dst || !cylinder || !point)
 		return (ft_error(EINVAL, "normal_cylinder_get"));
-	vector_new(dst, point[X], 0.0, point[Z]);
-	// normal_object_point_get(obj_point, cylinder->transform, point);
-	//cylinder specific logic would probably go here
-	// normal_worldvector_get(dst, cylinder->transform, obj_normal);
-	// normalize_apply(dst);
+	normal_object_point_get(obj_point, cylinder->transform, point);
+	vector_new(obj_normal, obj_point[X], 0.0, obj_point[Z]);
+	normal_worldvector_get(dst, cylinder->transform, obj_normal);
+	normalize_apply(dst);
 	return (SUCCESS);
 }
 
@@ -66,15 +65,15 @@ int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 {
 	t_fl		time[2];
 	t_fl		cylinder_ends[2];
-	// t_ray		ray2;
-	// t_matrix	inversion;
+	t_ray		ray2;
+	t_matrix	inversion;
 
 	if (!dst || !cylinder || !ray)
 		return (ft_error(EINVAL, "cylinder_hit_get"));
-	// matrix_invert(inversion, cylinder->transform);
-	// ray_transform_get(ray2, ray, inversion);
-	// if (cylinder_intersect_math(time, cylinder, ray2))
-	if (cylinder_intersect_math(time, cylinder, ray))
+	matrix_invert(inversion, cylinder->transform);
+	ray_transform_get(ray2, ray, inversion);
+	if (cylinder_intersect_math(time, cylinder, ray2))
+	// if (cylinder_intersect_math(time, cylinder, ray))
 	{
 		cylinder_ends[0] = ray[ORIGIN][Y] + (time[0] * ray[DIRECTION][Y]);
 		cylinder_ends[1] = ray[ORIGIN][Y] + (time[1] * ray[DIRECTION][Y]);
