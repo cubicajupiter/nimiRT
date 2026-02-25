@@ -75,3 +75,20 @@ int	rotation_full3D(t_matrix dst, t_tuple normal)
 	chain3_apply(dst, y_rotate_trans, x_rotate_trans);
 	return (SUCCESS);
 }
+
+int	rotation_xz(t_matrix dst, t_tuple normal)
+{
+	t_matrix	x_rotate_trans;
+	t_matrix	z_rotate_trans;
+	t_fl		pitch;
+	t_fl		roll;
+
+	if (!dst || !normal)
+		return (ft_error(EINVAL, "rotation_xz"));
+	pitch = (t_fl)atan((double)normal[Y] / (double)normal[Z]);
+	roll = (t_fl)atan((double)normal[Y] / (double)normal[X]);
+	rotation_x(x_rotate_trans, pitch);
+	rotation_y(z_rotate_trans, roll);
+	chain3_apply(dst, z_rotate_trans, x_rotate_trans);
+	return (SUCCESS);
+}

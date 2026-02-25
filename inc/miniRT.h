@@ -142,6 +142,7 @@ int		scaling(t_matrix dst, t_fl x, t_fl y, t_fl z);
 int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
+int		rotation_xz(t_matrix dst, t_tuple normal);
 int		rotation_full3D(t_matrix dst, t_tuple normal);
 int		shearing(t_matrix dst, t_fl src[6]);
 int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);

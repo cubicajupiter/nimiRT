@@ -35,6 +35,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	if (vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| point_new(cylinder->center, 0, 0, 0) != SUCCESS
 		|| translation(cylinder->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
+		|| rotation_xz(cylinder->transform, vector) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "cylinder_new"));
 	tmp = vec_get(t->scene->objects, object.id);
