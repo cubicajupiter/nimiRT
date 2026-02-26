@@ -62,7 +62,7 @@ int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 	while (i < objects->len)
 	{
 		object = vec_get(objects, i++);
-		if (hit->object->id == object->id)
+		if (hit->object->id == object->id && object->type != CYLINDER)
 			continue ;
 		if (object_hit_get(&t, object, light_ray)
 			&& t > 0.0 && t < distance)
