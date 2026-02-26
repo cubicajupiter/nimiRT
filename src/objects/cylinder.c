@@ -32,10 +32,11 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	object.id = t->scene->objects->len;
 	object.cylinder = cylinder;
 	material_default(&object.material);
-	if (vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
-		|| point_new(cylinder->center, 0, 0, 0) != SUCCESS
+	if (point_new(cylinder->center, 0, 0, 0) != SUCCESS
 		|| translation(cylinder->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
-		|| rotation_xz(cylinder->transform, vector) != SUCCESS
+		|| vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
+		|| normalize_apply(cylinder->axis) != SUCCESS
+		|| rotation_xz(cylinder->transform, cylinder->axis) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "cylinder_new"));
 	tmp = vec_get(t->scene->objects, object.id);
@@ -74,10 +75,9 @@ int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 	matrix_invert(inversion, cylinder->transform);
 	ray_transform_get(ray2, ray, inversion);
 	if (cylinder_intersect_math(time, cylinder, ray2))
-	// if (cylinder_intersect_math(time, cylinder, ray))
 	{
-		cylinder_ends[0] = ray[ORIGIN][Y] + (time[0] * ray[DIRECTION][Y]);
-		cylinder_ends[1] = ray[ORIGIN][Y] + (time[1] * ray[DIRECTION][Y]);
+		cylinder_ends[0] = ray2[ORIGIN][Y] + (time[0] * ray2[DIRECTION][Y]);
+		cylinder_ends[1] = ray2[ORIGIN][Y] + (time[1] * ray2[DIRECTION][Y]);
 		if (cylinder_ends[0] < -cylinder->height / 2.0 
 			|| cylinder_ends[0] > cylinder->height / 2.0)
 			time[0] = -1.0f;

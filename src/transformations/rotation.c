@@ -85,10 +85,18 @@ int	rotation_xz(t_matrix dst, t_tuple normal)
 
 	if (!dst || !normal)
 		return (ft_error(EINVAL, "rotation_xz"));
-	pitch = (t_fl)atan((double)normal[Y] / (double)normal[Z]);
-	roll = (t_fl)atan((double)normal[Y] / (double)normal[X]);
+	if (is_float_equal(normal[Y], EPSILON)
+		&& is_float_equal(normal[Z], EPSILON))
+			pitch = 0.0f;
+	else
+		pitch = atanf(normal[Z] / normal[Y]);
+	if (is_float_equal(normal[Y], EPSILON)
+		&& is_float_equal(normal[X], EPSILON))
+			roll = 0.0f;
+	else
+		roll = -atanf(normal[X] / normal[Y]);
 	rotation_x(x_rotate_trans, pitch);
-	rotation_y(z_rotate_trans, roll);
+	rotation_z(z_rotate_trans, roll);
 	chain3_apply(dst, z_rotate_trans, x_rotate_trans);
 	return (SUCCESS);
 }
