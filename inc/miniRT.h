@@ -219,6 +219,7 @@ int		memory_free(t_tree *t);
 int		error_exit(int flag, t_tree *t);
 int		rt_invalid(char c);
 bool	rt_out_of_limits(char *value);
+int		rt_zerovector(char *value);
 int		ft_error(int code, const char *message);
 
 #endif
