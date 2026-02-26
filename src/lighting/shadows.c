@@ -30,7 +30,7 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 	tuple_minus_get(direction_v, scene->light.point, hit->point);
 	magnitude_get(&distance, direction_v);
 	normalize_apply(direction_v);
-	if (hit->object->type != CYLINDER)
+	if (hit->object->type == PLANE)
 		ray_new(light_ray, hit->point, direction_v);
 	else
 	{
@@ -50,7 +50,7 @@ int	overpoint_get(t_xs *hit)
 
 	if (!hit)
 		return (ft_error(EINVAL, "overpoint_get"));
-	vector_multiply_get(offset_v, EPSILON, hit->normal_vector);
+	vector_multiply_get(offset_v, EPSILON * 100.0, hit->normal_vector);
 	tuple_add_get(hit->over_point, hit->point, offset_v);
 	return (SUCCESS);
 }
@@ -68,14 +68,14 @@ int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 	while (i < objects->len)
 	{
 		object = vec_get(objects, i++);
-		if (hit->object->id == object->id)
-		{
-			if (hit->object->type != CYLINDER)
-				continue ;
-			else if (object_hit_get(&t, object, light_ray)
-			&& t > 0.0 && t < distance)
-				return (TRUE);
-		}
+		// if (hit->object->id == object->id)
+		// {
+		// 	if (hit->object->type != CYLINDER)
+		// 		continue ;
+		// 	else if (object_hit_get(&t, object, light_ray)
+		// 	&& t > 0.0 && t < distance)
+		// 		return (TRUE);
+		// }
 		if (object_hit_get(&t, object, light_ray)
 			&& t > 0.0 && t < distance)
 				return (TRUE);
