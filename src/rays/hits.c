@@ -79,11 +79,30 @@ int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
 	if (!t || !object || !ray)
 		return (ft_error(EINVAL, "object_hit_get"));
 	if (object->type == SPHERE)
-		if (sphere_hit_get(t, object->sphere, ray))
-			return (TRUE);
+		return (sphere_hit_get(t, object->sphere, ray));
 	if (object->type == PLANE)
-		if (plane_hit_get(t, object->plane, ray))
-			return (TRUE);
-	// if (obj->obj_type == CYLINDER)
+		return (plane_hit_get(t, object->plane, ray));
+	if (object->type == CYLINDER)
+		return (cylinder_hit_get(t, object->cylinder, ray));
 	return (FALSE);
+}
+
+int	closest_forward_hit_get(t_fl *dst, t_fl *time)
+{
+	if (!dst || !time)
+		return (ft_error(EINVAL, "closest_hit_get"));
+	if (time[0] > 0.0f && time[1] > 0.0f)
+	{
+		if (time[0] < time[1])
+			*dst = time[0];
+		else
+			*dst = time[1];
+	}
+	else if (time[0] > 0.0f)
+		*dst = time[0];
+	else if (time[1] > 0.0f)
+		*dst = time[1];
+	else
+		return (FALSE);
+	return (TRUE);
 }

@@ -214,6 +214,7 @@ typedef struct s_xs
 	t_object			*object;
 	t_fl				t;
 	t_tuple				point;
+	t_tuple				over_point;
 	t_tuple				camera_vector;
 	t_tuple				normal_vector;
 	t_tuple				light_vector;
@@ -241,6 +242,7 @@ typedef struct	s_cylinder
 	t_fl				radius;
 	t_fl				height;
 	t_matrix			transform;
+	bool				closed;
 }						t_cylinder;
 
 #endif

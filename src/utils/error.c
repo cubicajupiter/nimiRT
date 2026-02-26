@@ -41,6 +41,24 @@ int	rt_invalid(char c)
 }
 
 /*
+rt_invlid()
+Prints a custom error message letting the user know where an *.rt file might
+contain a bad syntax.
+*/
+int	rt_zerovector(char *value)
+{
+	ft_putendl_fd("Error\n", 2);
+	if (value)
+	{
+		ft_putstr_fd("Value of ", 2);
+		ft_putstr_fd(value, 2);
+		ft_putstr_fd(" vector has an illogical magnitude of zero\n\n", 2);
+	}
+	ft_putendl_fd(MSG_INVALID_RT, 2);
+	return (FAIL);
+}
+
+/*
 rt_out_of_limits()
 Prints a custom error message letting the user know where an *.rt file might
 contain a value that falls outside set limits.

@@ -31,9 +31,11 @@ int	cylinder_parse(t_object **object, t_tree *t, char *line)
 	flag = cylinder_size_parse(&diameter, &height, &line);
 	if (flag != SUCCESS)
 		return (flag);
-	if (cylinder_new(object, position, axis, t) != SUCCESS
-		|| cylinder_resize(*object, diameter / 2.0f, height) != SUCCESS)
+	if (cylinder_new(object, position, axis, t) != SUCCESS)
 		return (ft_error(EINHERIT, "cylinder_parse"));
+	(* object)->cylinder->radius = diameter / 2.0f;
+	(* object)->cylinder->height = height;
+	(* object)->cylinder->closed = true;
 	return (flag);
 }
 

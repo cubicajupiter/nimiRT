@@ -30,7 +30,13 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 	tuple_minus_get(direction_v, scene->light.point, hit->point);
 	magnitude_get(&distance, direction_v);
 	normalize_apply(direction_v);
-	ray_new(light_ray, hit->point, direction_v);
+	if (hit->object->type == PLANE)
+		ray_new(light_ray, hit->point, direction_v);
+	else
+	{
+		overpoint_get(hit);
+		ray_new(light_ray, hit->over_point, direction_v);
+	}
 	if (is_shadow_hit(hit, distance, light_ray, scene->objects))
 		return (TRUE);
 	tuple_copy(hit->light_vector, direction_v);
@@ -38,16 +44,16 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 }
 
 // OPTIMISATION: overpoint no longer needed. now shadows are just never tested against the object itself.
-// int	overpoint_get(t_xs *hit)
-// {
-// 	t_tuple		offset_v;
+int	overpoint_get(t_xs *hit)
+{
+	t_tuple		offset_v;
 
-// 	if (!hit)
-// 		return (ft_error(EINVAL, "overpoint_get"));
-// 	vector_multiply_get(offset_v, EPSILON, hit->normal_vector);
-// 	tuple_add_get(hit->over_point, hit->point, offset_v);
-// 	return (SUCCESS);
-// }
+	if (!hit)
+		return (ft_error(EINVAL, "overpoint_get"));
+	vector_multiply_get(offset_v, EPSILON * 100.0, hit->normal_vector);
+	tuple_add_get(hit->over_point, hit->point, offset_v);
+	return (SUCCESS);
+}
 
 int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 {
@@ -62,8 +68,14 @@ int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 	while (i < objects->len)
 	{
 		object = vec_get(objects, i++);
-		if (hit->object->id == object->id)
-			continue ;
+		// if (hit->object->id == object->id)
+		// {
+		// 	if (hit->object->type != CYLINDER)
+		// 		continue ;
+		// 	else if (object_hit_get(&t, object, light_ray)
+		// 	&& t > 0.0 && t < distance)
+		// 		return (TRUE);
+		// }
 		if (object_hit_get(&t, object, light_ray)
 			&& t > 0.0 && t < distance)
 				return (TRUE);

@@ -25,6 +25,8 @@ int		transformation_test(t_tree *t);
 void	test_draw_sphere(t_tree *tree);
 int		lighting_test(t_tree *t);
 void	sphere_shader_test(t_tree *tree);
+int		cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray);
+int		cylinder_intersect_test(t_tree *t);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);
@@ -34,17 +36,17 @@ int		main_info_parse(t_tree *t, char *line);
 int		objects_parse(t_tree *t, char *line);
 int		cylinder_parse(t_object **object, t_tree *t, char *line);
 int		color_parse(t_object *object, t_tree *t, char *line);
-bool		valid_rt_data(char *line);
-bool		valid_01_float(t_fl nbr, char *value);
-bool		valid_color(t_trio color, char *value);
+bool	valid_rt_data(char *line);
+bool	valid_01_float(t_fl nbr, char *value);
+bool	valid_color(t_trio color, char *value);
 int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
 int		ft_atopoint(t_tuple dst, const char *nptr);
 int		ft_atovector(t_tuple dst, const char *nptr);
 int		parser_atof(t_fl *nbr, char *line);
 int		parser_atoi(int *nbr, char *line);
-bool		values_within_limits(t_scene *s);
-bool		values_make_sense(t_scene *s);
+bool	values_within_limits(t_scene *s);
+bool	values_make_sense(t_scene *s);
 int		materials_set(t_scene *s);
 
 // Ray Trace
@@ -79,6 +81,7 @@ int		plane_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t);
 int		cylinder_normal_get(t_tuple dst, t_cylinder *cylinder, t_tuple point);
 int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
+int		cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray);
 
 // Rays
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
@@ -86,6 +89,7 @@ int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
 int		object_hit_get(t_fl *t, t_object *object, t_ray ray);
+int		closest_forward_hit_get(t_fl *dst, t_fl *time);
 int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
@@ -94,9 +98,9 @@ int		intersection_compute(t_xs *hit, t_ray ray);
 
 // Lighting
 int		hit_shade(t_xs *hit, t_ray ray, t_scene *scene);
-void		reflection_ambient(t_material *mat, t_scene *s);
-void		reflection_diffuse(t_material *m, t_fl light_dot);
-void		reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
+void	reflection_ambient(t_material *mat, t_scene *s);
+void	reflection_diffuse(t_material *m, t_fl light_dot);
+void	reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
 int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
 int		is_shadowed(t_xs *hit, t_scene *scene);
 int		overpoint_get(t_xs *hit);
@@ -138,6 +142,7 @@ int		scaling(t_matrix dst, t_fl x, t_fl y, t_fl z);
 int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
+int		rotation_xz(t_matrix dst, t_tuple normal);
 int		rotation_full3D(t_matrix dst, t_tuple normal);
 int		shearing(t_matrix dst, t_fl src[6]);
 int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
@@ -190,9 +195,9 @@ int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
 int		scene_data_print(t_tree *t);
 int		objects_print(t_scene *s);
-int		sphere_print(t_sphere *sphere);
-int		plane_print(t_plane *plane);
-int		cylinder_print(t_cylinder *cylinder);
+int		sphere_print(t_sphere *sphere, size_t id);
+int		plane_print(t_plane *plane, size_t id);
+int		cylinder_print(t_cylinder *cylinder, size_t id);
 int		object_material_print(t_material *material);
 int		material_print(t_material *m);
 
@@ -213,7 +218,8 @@ int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 int		memory_free(t_tree *t);
 int		error_exit(int flag, t_tree *t);
 int		rt_invalid(char c);
-bool		rt_out_of_limits(char *value);
+bool	rt_out_of_limits(char *value);
+int		rt_zerovector(char *value);
 int		ft_error(int code, const char *message);
 
 #endif

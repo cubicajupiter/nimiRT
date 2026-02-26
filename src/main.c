@@ -40,6 +40,7 @@ int	main(int ac, char **av)
 		return (error_exit(flag, &tree));
 	if (mode != RELEASE)
 		debug(&tree, mode);
+	// cylinder_intersect_test(&tree);
 	if (ray_trace(&tree) != SUCCESS)
 		return (error_exit(flag, &tree));
 	mlx_loop(tree.window);

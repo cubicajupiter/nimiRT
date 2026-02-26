@@ -27,9 +27,9 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "plane_new"));
 	object.type = PLANE;
+	object.id = t->scene->objects->len;
 	object.plane = plane;
 	material_default(&object.material);
-	object.id = t->scene->objects->len;
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
 		|| vector_new(plane->vector, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| translation(plane->transform, pos[X], pos[Y], pos[Z]) != SUCCESS

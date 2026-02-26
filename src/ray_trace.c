@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "defines.h"
 #include "miniRT.h"
 
 int	ray_trace(t_tree *t)
@@ -21,8 +22,8 @@ int	ray_trace(t_tree *t)
 
 	camera_compute(&t->scene->camera);
 	y = 0;
-	ft_memset(&hit, 0, sizeof(t_xs));
-	ft_memset(&ray, 0, sizeof(t_ray));
+	// ft_memset(&hit, 0, sizeof(t_xs));
+	// ft_memset(&ray, 0, sizeof(t_ray));
 	while (y < HEIGHT)
 	{
 		x = 0;
