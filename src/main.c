@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 09:36:32 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:05:07 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "miniRT.h"
 #include <stdlib.h>
 
-static int	rt_missing(void);
 static int	mode_prompt(void);
 static int	mode_parse(t_run_mode *mode, char *flag);
 
@@ -26,8 +25,8 @@ int	main(int ac, char **av)
 	t_run_mode	mode;
 	int			flag;
 
-	if (ac < 2)
-		return (rt_missing());
+	if (ac < 2 || !access_try(av[1], O_RDONLY))
+		return (rt_missing(av[1]));
 	mode = RELEASE;
 	if (ac > 2)
 	{
@@ -47,13 +46,6 @@ int	main(int ac, char **av)
 		ft_perror();
 	memory_free(&tree);
 	return (EXIT_SUCCESS);
-}
-
-static int	rt_missing(void)
-{
-	ft_putendl_fd("Error\n", 2);
-	ft_putendl_fd(MSG_MISSING_RT, 2);
-	return (1);
 }
 
 static int	mode_prompt(void)

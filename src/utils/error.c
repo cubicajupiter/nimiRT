@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 10:05:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 13:56:55 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:04:24 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,24 @@ int	ft_error(int code, const char *message)
 }
 
 /*
-rt_invlid()
+rt_missing()
+Prints a custom error message letting the user know the *.rt file is missing
+*/
+int	rt_missing(char *path)
+{
+	ft_putendl_fd("Error\n", 2);
+	if (path)
+	{
+		ft_putstr_fd("File at path ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(" not accessible or does not exit\n\n", 2);
+	}
+	ft_putendl_fd(MSG_MISSING_RT, 2);
+	return (1);
+}
+
+/*
+rt_invalid()
 Prints a custom error message letting the user know where an *.rt file might
 contain a bad syntax.
 */

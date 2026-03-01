@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 09:46:19 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:02:36 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,9 @@ int		color_copy(t_trio dst, t_trio src);
 int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		color_uint_to_trio(t_trio c, int *color);
 
+// System Calls
+int		access_try(char *path, int mode);
+
 // Utilities
 int		debug(t_tree *t, t_run_mode mode);
 int		float_print(const t_fl fl);
@@ -217,6 +220,7 @@ int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 // Exit
 int		memory_free(t_tree *t);
 int		error_exit(int flag, t_tree *t);
+int		rt_missing(char *path);
 int		rt_invalid(char c);
 bool	rt_out_of_limits(char *value);
 int		rt_zerovector(char *value);
