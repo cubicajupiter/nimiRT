@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 09:28:02 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:50:08 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	sphere_normal_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 		return (ft_error(EINVAL, "sphere_normal_get"));
 	normal_object_point_get(obj_point, sphere->transform, point);
 	tuple_minus_get(obj_normal, obj_point, sphere->center);
-	normal_worldvector_get(dst, sphere->transform, obj_normal);
+	normal_scene_vector_get(dst, sphere->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }

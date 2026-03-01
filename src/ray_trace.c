@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:02:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:22:14 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:39:58 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ray_trace(t_tree *t)
 		while (x < WIDTH)
 		{
 			pixel_ray_get(ray, &t->scene->camera, x, y);
-			if (scene_hit_get(&hit, ray, t->scene))
+			if (ray_to_scene_hit_get(&hit, ray, t->scene))
 			{
 				hit_shade(&hit, ray, t->scene);
 				pixel_put(t->image, x, y, hit.object->material.shader.combined);

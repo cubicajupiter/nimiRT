@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 13:28:18 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/24 11:52:34 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:50:37 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@ int	normal_get(t_tuple dst, t_object *object, t_tuple point)
 	object's transformation.
 */
 int	normal_object_point_get(t_tuple dst, t_matrix transform,
-				t_tuple world_point)
+				t_tuple scene_point)
 {
 	t_matrix	inverse;
 
-	if (!dst || !transform || !world_point)
+	if (!dst || !transform || !scene_point)
 		return (ft_error(EINVAL, "normal_objpoint_get"));
 	matrix_invert(inverse, transform);
-	matrix_tuple_multiply_get(dst, inverse, world_point);
+	matrix_tuple_multiply_get(dst, inverse, scene_point);
 	return (SUCCESS);
 }
 
@@ -64,7 +64,7 @@ int	normal_object_point_get(t_tuple dst, t_matrix transform,
 	it to world space normal.)
 	4. Normalises the world space vector.
 */
-int	normal_worldvector_get(t_tuple dst, t_matrix transform,
+int	normal_scene_vector_get(t_tuple dst, t_matrix transform,
 				t_tuple obj_normal)
 {
 	t_matrix	inverse;

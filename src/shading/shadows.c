@@ -6,13 +6,15 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:18:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 10:28:16 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:46:32 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects);
+static int	overpoint_get(t_xs *hit);
+static int	is_shadow_hit(t_xs *hit, t_fl distance,
+				t_ray light_ray, t_vec *objects);
 
 // specular_refl and diffuse_refl in material.shader can be initialised to just
 // zero, and ambient_refl to 0.1 so if the hit is in shadow, pixel color is
@@ -44,7 +46,7 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 	return (FALSE);
 }
 
-int	overpoint_get(t_xs *hit)
+static int	overpoint_get(t_xs *hit)
 {
 	t_tuple		offset_v;
 
@@ -55,7 +57,8 @@ int	overpoint_get(t_xs *hit)
 	return (SUCCESS);
 }
 
-static int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
+static int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray,
+				t_vec *objects)
 {
 	t_object	*object;
 	size_t		i;

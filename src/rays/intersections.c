@@ -6,38 +6,36 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:26:52 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/24 11:51:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:44:41 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
-#include "libft.h"
 #include "miniRT.h"
+
+// TODO: Deceide whether the following intersections_get() functions and their
+// object specific counterparts are needed or not. Required if we want
+// transparency and/or global lighting. Same applies to intersections_sort()
+// functions.
 
 // Loops through all intersections in the scene, then returns the first
 // (lowest t value) intersection.
-// FIXME: UNTESTED!
-int	first_intersection_get(t_xs **hit, t_vec *xs)
-{
-	t_xs	*tmp;
-	size_t	i;
-
-	if (!hit || !xs)
-		return (ft_error(EINVAL, "hit"));
-	i = 0;
-	while (i < xs->len)
-	{
-		tmp = vec_get(xs, i);
-		if (tmp->t > 0.0f)
-			break ;
-	}
-	*hit = tmp;
-	return (SUCCESS);
-}
-
-// TODO: Deceide whether the following intersect_get functions and their object
-// specific counterparts are needed or not. Required if we want transparency
-// and/or global lighting
+// int	first_intersection_get(t_xs **hit, t_vec *xs)
+// {
+// 	t_xs	*tmp;
+// 	size_t	i;
+//
+// 	if (!hit || !xs)
+// 		return (ft_error(EINVAL, "hit"));
+// 	i = 0;
+// 	while (i < xs->len)
+// 	{
+// 		tmp = vec_get(xs, i);
+// 		if (tmp->t > 0.0f)
+// 			break ;
+// 	}
+// 	*hit = tmp;
+// 	return (SUCCESS);
+// }
 
 // Loops through all objects in the scene, gets and pushes all intersections to
 // the scene->xs vector array, then sorts in ascending order.
@@ -86,32 +84,3 @@ int	first_intersection_get(t_xs **hit, t_vec *xs)
 // 			return (FALSE);
 // 	return (TRUE);
 // }
-
-/*
-	intersection_compute()
-	Computes data about an intersection point on a object including the position
-	the vector back to the camera, the vector of the normal at that point on the
-	object and whether the camera is inside the object or not.
-*/
-int	intersection_compute(t_xs *hit, t_ray ray)
-{
-	t_fl	dot;
-
-	if (!hit || !ray)
-		return (ft_error(EINVAL, "intersection_compute"));
-	if (position_get(hit->point, ray, hit->t) != SUCCESS
-		|| vector_negate(hit->camera_vector, ray[DIRECTION]) != SUCCESS
-		|| normal_get(hit->normal_vector,
-			hit->object, hit->point) != SUCCESS
-		|| vector_dot(&dot, hit->normal_vector, hit->camera_vector) != SUCCESS)
-		return (ft_error(EINHERIT, "intersection_compute"));
-	if (dot < 0)
-	{
-		hit->inside = true;
-		if (vector_negate(hit->normal_vector, hit->normal_vector) != SUCCESS)
-			return (ft_error(EINHERIT, "intersection_compute"));
-	}
-	else
-		hit->inside = false;
-	return (SUCCESS);
-}

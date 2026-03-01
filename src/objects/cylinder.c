@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 09:25:09 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:49:44 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	cylinder_normal_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
 		return (ft_error(EINVAL, "normal_cylinder_get"));
 	normal_object_point_get(obj_point, cylinder->transform, point);
 	vector_new(obj_normal, obj_point[X], 0.0, obj_point[Z]);
-	normal_worldvector_get(dst, cylinder->transform, obj_normal);
+	normal_scene_vector_get(dst, cylinder->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }

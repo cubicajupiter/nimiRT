@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:11:47 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:49:11 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	commands(void *data);
 
 // Camera
 int		camera_compute(t_camera *camera);
-int		camera_pixel_size_compute(t_camera *camera);
 int		pixel_ray_get(t_ray pixel_ray, t_camera *camera, int x, int y);
 int		view_transform_get(t_matrix dst, t_tuple forward_v,
 			t_tuple to_p, t_tuple up_v);
@@ -87,14 +86,13 @@ int		cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray);
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
-int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
+int		ray_to_scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
 int		object_hit_get(t_fl *t, t_object *object, t_ray ray);
 int		closest_forward_hit_get(t_fl *dst, t_fl *time);
 int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
 int		intersections_sort(t_vec *src);
-int		intersection_compute(t_xs *hit, t_ray ray);
 
 // Lighting
 int		hit_shade(t_xs *hit, t_ray ray, t_scene *scene);
@@ -103,12 +101,11 @@ void	reflection_diffuse(t_material *m, t_fl light_dot);
 void	reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
 int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
 int		is_shadowed(t_xs *hit, t_scene *scene);
-int		overpoint_get(t_xs *hit);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_get(t_tuple dst, t_object *object, t_tuple point);
 int		normal_object_point_get(t_tuple dst, t_matrix transform,
-			t_tuple world_point);
-int		normal_worldvector_get(t_tuple dst, t_matrix transform,
+			t_tuple scene_point);
+int		normal_scene_vector_get(t_tuple dst, t_matrix transform,
 			t_tuple obj_normal);
 int		material_default(t_material *dst);
 int		lighting(t_xs *hit, t_light *light);

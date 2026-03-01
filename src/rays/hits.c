@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/24 09:59:49 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:39:58 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
 // Casts a ray, loops through all world objects and finds intersections. If a
 // found intersection has a lower t value (closer to the ray origin) then the
 // result is updated.
-int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
+int	ray_to_scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 {
 	t_object	*object;
 	t_xs		result;
