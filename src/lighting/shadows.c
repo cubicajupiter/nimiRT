@@ -12,13 +12,14 @@
 
 #include "miniRT.h"
 
-int	is_shadow_hit(t_xs *hit, t_fl distance,
-			t_ray light_ray, t_vec *objects);
+int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects);
 
-//specular_refl and diffuse_refl in material.shader can be initialised to just zero, and ambient_refl to 0.1
-//so if the hit is in shadow, pixel color is already set by default.
+// specular_refl and diffuse_refl in material.shader can be initialised to just
+// zero, and ambient_refl to 0.1 so if the hit is in shadow, pixel color is
+// already set by default.
 
-// passing as parameter a pointer to t_scene is likely more optimized than making a local copy of that entire struct
+// passing as parameter a pointer to t_scene is likely more optimized than
+// making a local copy of that entire struct
 int	is_shadowed(t_xs *hit, t_scene *scene)
 {
 	t_fl		distance;
@@ -43,7 +44,6 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 	return (FALSE);
 }
 
-// OPTIMISATION: overpoint no longer needed. now shadows are just never tested against the object itself.
 int	overpoint_get(t_xs *hit)
 {
 	t_tuple		offset_v;
@@ -68,17 +68,9 @@ int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 	while (i < objects->len)
 	{
 		object = vec_get(objects, i++);
-		// if (hit->object->id == object->id)
-		// {
-		// 	if (hit->object->type != CYLINDER)
-		// 		continue ;
-		// 	else if (object_hit_get(&t, object, light_ray)
-		// 	&& t > 0.0 && t < distance)
-		// 		return (TRUE);
-		// }
 		if (object_hit_get(&t, object, light_ray)
 			&& t > 0.0 && t < distance)
-				return (TRUE);
+			return (TRUE);
 	}
 	return (FALSE);
 }
@@ -86,10 +78,12 @@ int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray, t_vec *objects)
 //the following additions are made to hit_shade once it's done.
 // void hit_shade(void) 
 // {
- 	// add over_point in xs.
+// add over_point in xs.
 // 	overpoint_get(&hit);
 
-// 	is_shadowed(scene, hit.over_point); //is_shadowed has to be called with the new over-point.
+// 	is_shadowed(scene, hit.over_point); //is_shadowed has to be called with the
+// 	new over-point.
 
-// 	lighting(); //called with overpoint also. Or perhaps this change is better made inside lighting().
+// 	lighting(); //called with overpoint also. Or perhaps this change is better
+// 	made inside lighting().
 // }

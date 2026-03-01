@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/24 11:56:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:28:02 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,18 +130,12 @@ static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 	vector_dot(&b, ray[DIRECTION], sphere_to_ray);
 	b *= -2.0f;
 	vector_dot(&c, sphere_to_ray, sphere_to_ray);
-	// c -= 1.0f;
-	// FIXME: Temporarilly changed this constant to the sphere radius but the
-	// measurements seem to be funky, too small in relation to the space.
-	// Needs further investigation!
 	c -= sphere->radius * sphere->radius;
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
 	time[0] = (-b - sqrtf(discriminant)) / (2.0f * a);
 	time[1] = (-b + sqrtf(discriminant)) / (2.0f * a);
-	// This next check for time being positive may be a problem for other
-	// calculations later, but for now it suits our logic
 	if (time[0] < 0.0 && time[1] < 0.0)
 		return (FALSE);
 	return (TRUE);

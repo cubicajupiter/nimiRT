@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 17:55:20 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:45:05 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ files.
 # include <stdint.h>
 # include "MLX42.h"
 # include "libft.h"
+# include "prototypes.h"
 
 // Window & Image
-// # define WIDTH 2000
-// # define HEIGHT 1600
 # define WIDTH 1200
 # define HEIGHT 1000
 
@@ -55,8 +54,9 @@ files.
 # define COLUMN 1
 
 // Epsilon for float margin of error.
-# define EPSILON 1e-6 // NOTE: Margin made smaller since self-shading (shadow acne) is no longer an issue
-// # define EPSILON 1e-5 // NOTE: Was this value, but made bigger to remove spottiness.
+# define EPSILON 1e-6
+// # define EPSILON 1e-5
+// // NOTE: Was this value, but made bigger to remove spottiness.
 
 // Weighting for Phong lighting components
 # define AMBIENT_RATIO 0.1f
@@ -83,24 +83,6 @@ typedef t_fl			t_matrix[4][4];
 typedef t_fl			t_matrix2[2][2];
 typedef t_fl			t_matrix3[3][3];
 typedef t_tuple			t_ray[2];
-// typedef t_fl			t_cylinder[4];
-// typedef t_fl			t_plane[2];
-
-typedef enum e_obj_type		t_obj_type;
-typedef enum e_run_mode		t_run_mode;
-
-typedef struct s_tree		t_tree;
-typedef struct s_scene		t_scene;
-typedef struct s_camera		t_camera;
-typedef struct s_light		t_light;
-typedef struct s_ambient	t_ambient;
-typedef struct s_sphere		t_sphere;
-typedef struct s_plane		t_plane;
-typedef struct s_cylinder	t_cylinder;
-typedef struct s_intersect	t_intersect;
-typedef struct s_xs			t_xs;
-typedef struct s_material	t_material;
-typedef struct s_shader		t_shader;
 
 enum	e_obj_type
 {
@@ -117,21 +99,9 @@ enum	e_run_mode
 };
 
 // Structs
-// Input, filled with data from the *.rt file or assumptions
-// typedef struct	s_input
-// {
-// 	t_fl				amb_ratio;
-// 	t_trio				amb_color;
-// 	t_tuple				cam_point;
-// 	t_tuple				cam_vector;
-// 	int					cam_fov;
-// 	t_tuple				lig_point;
-// 	t_fl				lig_ratio;
-// 	t_trio				lig_color;
-// }						t_input;
 
 // Tree, used to pass around all the data we need to create the image
-typedef struct	s_tree
+typedef struct s_tree
 {
 	mlx_t				*window;
 	mlx_image_t			*image;
@@ -142,7 +112,7 @@ typedef struct	s_tree
 
 // Scene, the lighting, viewpoint, objects and intersections from both camera
 // and light rays
-typedef struct	s_camera
+typedef struct s_camera
 {
 	t_ray				ray;
 	t_fl				half_width;
@@ -153,22 +123,20 @@ typedef struct	s_camera
 	bool				set;
 }						t_camera;
 
-typedef struct	s_light
+typedef struct s_light
 {
 	t_tuple				point;
-	// t_fl				brightness;
 	t_trio				color;
 	bool				set;
 }						t_light;
 
-typedef struct	s_ambient
+typedef struct s_ambient
 {
-	// t_fl				brightness;
 	t_trio				color;
 	bool				set;
 }						t_ambient;
 
-typedef struct	s_scene
+typedef struct s_scene
 {
 	t_camera			camera;
 	t_light				light;
@@ -177,7 +145,7 @@ typedef struct	s_scene
 	t_vec				*xs;
 }						t_scene;
 
-typedef struct	s_shader
+typedef struct s_shader
 {
 	t_trio				ambi_refl;
 	t_trio				diff_refl;
@@ -186,7 +154,7 @@ typedef struct	s_shader
 	t_trio				eff_color;
 }						t_shader;
 
-typedef struct	s_material
+typedef struct s_material
 {
 	t_shader			shader;
 	t_trio				color;
@@ -197,11 +165,12 @@ typedef struct	s_material
 	bool				in_shadow;
 }						t_material;
 
-typedef struct	s_object
+typedef struct s_object
 {
 	size_t				id;
 	t_obj_type			type;
-	union {
+	union
+	{
 		t_sphere		*sphere;
 		t_cylinder		*cylinder;
 		t_plane			*plane;
@@ -221,21 +190,21 @@ typedef struct s_xs
 	bool				inside;
 }						t_xs;
 
-typedef struct	s_sphere
+typedef struct s_sphere
 {
 	t_tuple				center;
 	t_fl				radius;
 	t_matrix			transform;
 }						t_sphere;
 
-typedef struct	s_plane
+typedef struct s_plane
 {
 	t_tuple				point;
 	t_tuple				vector;
 	t_matrix			transform;
 }						t_plane;
 
-typedef struct	s_cylinder
+typedef struct s_cylinder
 {
 	t_tuple				center;
 	t_tuple				axis;

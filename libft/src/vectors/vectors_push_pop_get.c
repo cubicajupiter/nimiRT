@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
-#include <asm-generic/errno.h>
 
 int	vec_resize(t_vec *src, size_t target_cap)
 {

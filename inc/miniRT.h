@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/24 11:58:12 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:46:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ int		overpoint_get(t_xs *hit);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_get(t_tuple dst, t_object *object, t_tuple point);
 int		normal_object_point_get(t_tuple dst, t_matrix transform,
-				t_tuple world_point);
+			t_tuple world_point);
 int		normal_worldvector_get(t_tuple dst, t_matrix transform,
-				t_tuple obj_normal);
+			t_tuple obj_normal);
 int		material_default(t_material *dst);
 int		lighting(t_xs *hit, t_light *light);
 
@@ -143,7 +143,7 @@ int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
 int		rotation_xz(t_matrix dst, t_tuple normal);
-int		rotation_full3D(t_matrix dst, t_tuple normal);
+int		rotation_full3d(t_matrix dst, t_tuple normal);
 int		shearing(t_matrix dst, t_fl src[6]);
 int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
 int		chain2_apply(t_matrix dst, t_matrix a);

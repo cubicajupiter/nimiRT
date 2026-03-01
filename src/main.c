@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 17:24:00 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:36:32 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int ac, char **av)
 		return (error_exit(flag, &tree));
 	if (mode != RELEASE)
 		debug(&tree, mode);
-	// cylinder_intersect_test(&tree);
 	if (ray_trace(&tree) != SUCCESS)
 		return (error_exit(flag, &tree));
 	mlx_loop(tree.window);

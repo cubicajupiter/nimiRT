@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/24 11:55:55 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:46:23 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
 		|| vector_new(plane->vector, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| translation(plane->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
-		|| rotation_full3D(plane->transform, plane->vector) != SUCCESS
+		|| rotation_full3d(plane->transform, plane->vector) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "plane_new"));
 	tmp = vec_get(t->scene->objects, object.id);

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
-#include <asm-generic/errno.h>
 
 long long	ft_super_atoi(const char *nptr)
 {

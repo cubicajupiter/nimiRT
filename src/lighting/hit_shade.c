@@ -22,8 +22,6 @@ int	hit_shade(t_xs *hit, t_ray ray, t_scene *scene)
 	intersection_compute(hit, ray);
 	if (is_shadowed(hit, scene) == FALSE)
 		lighting(hit, &scene->light);
-	// TODO: Maybe have a separate function wrapper for the trio_multiply_scalar_get
-	// to make this bit of code more readible
 	else
 		shadow(hit);
 	return (SUCCESS);
@@ -32,6 +30,5 @@ int	hit_shade(t_xs *hit, t_ray ray, t_scene *scene)
 static void	shadow(t_xs *hit)
 {
 	trio_multiply_scalar_get(hit->object->material.shader.combined,
-							AMBIENT_RATIO,
-							hit->object->material.shader.ambi_refl);
+		AMBIENT_RATIO, hit->object->material.shader.ambi_refl);
 }

@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
-#include <asm-generic/errno.h>
-#include <stdint.h>
 
 void	vec_init(t_vec *dst, size_t init_len, size_t elem_size, t_arena *arena)
 {

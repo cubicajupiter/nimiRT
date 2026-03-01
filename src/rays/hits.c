@@ -18,7 +18,6 @@ int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
 // Casts a ray, loops through all world objects and finds intersections. If a
 // found intersection has a lower t value (closer to the ray origin) then the
 // result is updated.
-// FIXME: UNTESTED!
 int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 {
 	t_object	*object;
@@ -37,8 +36,8 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 		if (object_hit_get(&t, object, ray)
 			&& (result.t < 0.0f || t < result.t))
 		{
-				result.object = object;
-				result.t = t;
+			result.object = object;
+			result.t = t;
 		}
 	}
 	if (result.t < 0.0f)
@@ -70,7 +69,6 @@ int	scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 // 	}
 // 	return (FALSE);
 // }
-
 
 // Checks the object for which type it is then calls object-specific
 // intersection_get function

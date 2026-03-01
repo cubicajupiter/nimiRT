@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../inc/libft.h"
-#include <asm-generic/errno.h>
 
 int	ft_big_atof(const char *nptr, float *nbr)
 {

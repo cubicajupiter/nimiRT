@@ -6,20 +6,17 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/24 14:55:50 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:25:09 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "miniRT.h"
 
-// static int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray);
-
 int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 {
 	t_cylinder	*cylinder;
 	t_object	object;
-	t_object	*tmp;
 
 	if (!pos || !vector || !t)
 		return (ft_error(EINVAL, "cylinder_new"));
@@ -32,16 +29,15 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	object.id = t->scene->objects->len;
 	object.cylinder = cylinder;
 	material_default(&object.material);
-	if (point_new(cylinder->center, 0, 0, 0) != SUCCESS
+	if (vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
+		|| point_new(cylinder->center, 0, 0, 0) != SUCCESS
 		|| translation(cylinder->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
-		|| vector_new(cylinder->axis, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| normalize_apply(cylinder->axis) != SUCCESS
 		|| rotation_xz(cylinder->transform, cylinder->axis) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "cylinder_new"));
-	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
-		*dst = tmp;
+		*dst = vec_get(t->scene->objects, object.id);
 	return (SUCCESS);
 }
 
@@ -78,10 +74,10 @@ int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 	{
 		cylinder_ends[0] = ray2[ORIGIN][Y] + (time[0] * ray2[DIRECTION][Y]);
 		cylinder_ends[1] = ray2[ORIGIN][Y] + (time[1] * ray2[DIRECTION][Y]);
-		if (cylinder_ends[0] < -cylinder->height / 2.0 
+		if (cylinder_ends[0] < -cylinder->height / 2.0
 			|| cylinder_ends[0] > cylinder->height / 2.0)
 			time[0] = -1.0f;
-		if (cylinder_ends[1] < -cylinder->height / 2.0 
+		if (cylinder_ends[1] < -cylinder->height / 2.0
 			|| cylinder_ends[1] > cylinder->height / 2.0)
 			time[1] = -1.0f;
 		return (closest_forward_hit_get(dst, time));
@@ -106,10 +102,9 @@ int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
 	if (is_float_equal(a, 0.0))
 		return (FALSE);
 	b = (2.0 * ray[ORIGIN][X] * ray[DIRECTION][X])
-		+ (2.0 * ray[ORIGIN][Z]* ray[DIRECTION][Z]);
+		+ (2.0 * ray[ORIGIN][Z] * ray[DIRECTION][Z]);
 	c = (ray[ORIGIN][X] * ray [ORIGIN][X])
 		+ (ray[ORIGIN][Z] * ray[ORIGIN][Z])
-		// NOTE: Not sure about this line of code, as before with sphere, need to include radius. Previously this was a constant -1.0
 		- (cylinder->radius * cylinder->radius);
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)

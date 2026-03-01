@@ -6,13 +6,12 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 15:49:31 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:29:51 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.h"
 #include "miniRT.h"
-#include <asm-generic/errno.h>
 
 /*
 Magnitude is how far you would travel in a straight line if you were to go
@@ -26,9 +25,9 @@ int	magnitude_get(t_fl *magnitude, t_tuple vector)
 {
 	if (!magnitude || !vector)
 		return (ft_error(EINVAL, "magnitude_get"));
-	*magnitude = sqrtf(vector[X] * vector[X] 
-					+ vector[Y] * vector[Y] 
-					+ vector[Z] * vector[Z]);
+	*magnitude = sqrtf(vector[X] * vector[X]
+			+ vector[Y] * vector[Y]
+			+ vector[Z] * vector[Z]);
 	return (SUCCESS);
 }
 
