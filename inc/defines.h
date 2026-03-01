@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 09:45:05 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:28:36 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ files.
 
 // Epsilon for float margin of error.
 # define EPSILON 1e-6
+# define OVERPOINT_HEIGHT 1e-4
 // # define EPSILON 1e-5
 // // NOTE: Was this value, but made bigger to remove spottiness.
 

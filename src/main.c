@@ -6,13 +6,10 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 10:10:35 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:23:07 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "defines.h"
-#include "libft.h"
-#include "messages.h"
 #include "miniRT.h"
 
 int	main(int ac, char **av)
