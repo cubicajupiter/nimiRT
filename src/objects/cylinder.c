@@ -6,13 +6,23 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:49:44 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 11:17:06 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "miniRT.h"
 
+static int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
+				t_ray ray);
+
+// cylinder_new()
+// Creates a new cylinder object, malloc'ing space on the arena, and
+// and initializing the position and axis vector of the new cylinder to values
+// given at input. Confusingly input position is saved to the cylinder transform
+// matrix and actual position is always zero. Material variables are set to
+// default values. All other values are set to zero. Size variables of cylinders
+// (height and radius) need to be set separately.
 int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 {
 	t_cylinder	*cylinder;
@@ -23,6 +33,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	cylinder = NULL;
 	if (ft_arena_alloc(t->a_buf, (void **)&cylinder,
 			sizeof(t_cylinder)) != SUCCESS
+		|| ft_memset(cylinder, 0, sizeof(t_cylinder)) == NULL
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "cylinder_new"));
 	object.type = CYLINDER;
@@ -88,7 +99,7 @@ int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 // Calculates mathss of intersections. Further reading required to fully
 // understand. If discriminant is less than 0 then ray misses the cylinder and
 // the function returns FALSE.
-int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
+static int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
 {
 	t_fl		discriminant;
 	t_fl		a;

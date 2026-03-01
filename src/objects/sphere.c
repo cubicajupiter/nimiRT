@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 10:50:08 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 11:14:24 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,36 @@
 
 static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray);
 
+// sphere_new()
+// Creates a new sphere object, malloc'ing space on the arena, and
+// and initializing the position and radius of the new sphere to values
+// given at input. Confusingly input position is saved to the sphere transform
+// matrix and actual position is always zero. Material variables are set to
+// default values. All other values are set to zero.
 int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 {
 	t_sphere	*sphere;
 	t_object	object;
-	t_object	*tmp;
 
 	if (!pos || !t)
 		return (ft_error(EINVAL, "sphere_new"));
 	sphere = NULL;
 	ft_memset(&object, 0, sizeof(t_object));
 	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
+		|| ft_memset(sphere, 0, sizeof(t_sphere)) == NULL
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
 	object.type = SPHERE;
 	object.id = t->scene->objects->len;
 	object.sphere = sphere;
-	material_default(&object.material);
 	sphere->radius = radius;
+	material_default(&object.material);
 	if (point_new(sphere->center, 0, 0, 0) != SUCCESS
 		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
-	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
-		*dst = tmp;
+		*dst = vec_get(t->scene->objects, object.id);
 	return (SUCCESS);
 }
 

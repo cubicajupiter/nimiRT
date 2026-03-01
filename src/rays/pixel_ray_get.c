@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 10:38:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:38:23 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:59:15 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ static void	camera_viewport_point_get(t_tuple viewport_point, t_camera *camera,
 	point_new(viewport_point, xscene, yscene, -1.0f);
 }
 
+/*
+	pixel_ray_get()
+	Gets a new ray for every window pixel. The new ray has an origin on camera
+	viewport "surface" and a vector continuing on the same line from the
+	original camera origin onwards into the scene.
+*/
 int	pixel_ray_get(t_ray pixel_ray, t_camera *camera, int x, int y)
 {
 	t_tuple		viewport_point;

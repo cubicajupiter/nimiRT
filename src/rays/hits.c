@@ -6,13 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:39:58 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 11:02:26 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-int	object_hit_get(t_fl *t, t_object *object, t_ray ray);
 
 // scene_hit_get()
 // Casts a ray, loops through all world objects and finds intersections. If a
@@ -47,29 +45,6 @@ int	ray_to_scene_hit_get(t_xs *hit, t_ray ray, t_scene *s)
 	return (TRUE);
 }
 
-// OLD VERSION OF IS_SHADOW_HIT() :
-
-// int	is_shadow_hit(t_ray ray, t_scene *s, t_fl distance)
-// {
-// 	t_object	*object;
-// 	t_fl		t;
-// 	size_t		i;
-
-// 	if (!ray || !s)
-// 		return (ft_error(EINVAL, "is_shadow_hit"));
-// 	i = 0;
-// 	while (i < s->objects->len)
-// 	{
-// 		object = vec_get(s->objects, i++);
-// 		if (object_hit_get(&t, object, ray))
-// 		{
-// 			if (t < distance)
-// 				return (TRUE);
-// 		}
-// 	}
-// 	return (FALSE);
-// }
-
 // Checks the object for which type it is then calls object-specific
 // intersection_get function
 int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
@@ -85,6 +60,11 @@ int	object_hit_get(t_fl *t, t_object *object, t_ray ray)
 	return (FALSE);
 }
 
+// closest_forward_hit_get()
+// Gets the value of the closest hit from 2 provided values t_fl time[2]
+// Useful function for handling objects such as t_sphere and t_cylinder which
+// necessarily return two intersections if hit, but when the API only needs the
+// value with the lowest t value (i.e. closest hit).
 int	closest_forward_hit_get(t_fl *dst, t_fl *time)
 {
 	if (!dst || !time)

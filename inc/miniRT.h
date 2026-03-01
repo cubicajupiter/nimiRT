@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:49:11 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 11:16:36 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		transformation_test(t_tree *t);
 void	test_draw_sphere(t_tree *tree);
 int		lighting_test(t_tree *t);
 void	sphere_shader_test(t_tree *tree);
-int		cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray);
 int		cylinder_intersect_test(t_tree *t);
 
 // Initialization
