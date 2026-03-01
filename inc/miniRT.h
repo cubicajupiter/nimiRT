@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 11:16:36 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 11:36:47 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ int		parser_atoi(int *nbr, char *line);
 bool	values_within_limits(t_scene *s);
 bool	values_make_sense(t_scene *s);
 int		materials_set(t_scene *s);
-
-// Ray Trace
-int		ray_trace(t_tree *t);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
