@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:02:36 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:11:47 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ int		access_try(char *path, int mode);
 
 // Utilities
 int		debug(t_tree *t, t_run_mode mode);
+int		mode_parse(t_run_mode *mode, char *flag);
 int		float_print(const t_fl fl);
 int		int_print(int nbr);
 int		float_formatted_print(char *name, t_fl value);

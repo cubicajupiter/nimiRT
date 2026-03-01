@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 10:05:07 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:10:35 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "libft.h"
 #include "messages.h"
 #include "miniRT.h"
-#include <stdlib.h>
-
-static int	mode_prompt(void);
-static int	mode_parse(t_run_mode *mode, char *flag);
 
 int	main(int ac, char **av)
 {
@@ -46,28 +42,6 @@ int	main(int ac, char **av)
 		ft_perror();
 	memory_free(&tree);
 	return (EXIT_SUCCESS);
-}
-
-static int	mode_prompt(void)
-{
-	ft_putendl_fd("Error\n", 2);
-	ft_putendl_fd(MSG_MODE_PROMPT, 2);
-	return (1);
-}
-
-static int	mode_parse(t_run_mode *mode, char *flag)
-{
-	if (!mode || !flag)
-		return (ft_error(EINVAL, "mode_parse"));
-	if (flag[0] != '-' || !flag[1])
-		return (mode_prompt());
-	if (flag[1] == 'i')
-		*mode = INPUT_DEBUG;
-	else if (flag[1] == 'f')
-		*mode = FULL_DEBUG;
-	else
-		return (mode_prompt());
-	return (SUCCESS);
 }
 
 // OLD TESTS
