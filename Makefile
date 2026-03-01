@@ -39,7 +39,6 @@ OBJ			= $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 OBJ_DIRS	= $(sort $(dir $(OBJ)))
 DEPS		= $(OBJ:.o=.d)
 
-
 # TOOLS
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
@@ -64,6 +63,10 @@ INC			= -I$(INC_DIR) -I$(LIBFT_DIR)/inc -I$(MLX42_DIR)/include/MLX42
 LIBFT		= -L$(LIBFT_DIR) -lft
 MLX42		= -L$(MLX42_DIR)/build -lmlx42
 LIBS		= $(LIBFT) $(MLX42) -lm -lglfw
+
+# MULTITHREADING
+NPROC		= $(shell sh -c 'command -v nproc >/dev/null 2>&1 && nproc || sysctl -n hw.ncpu')
+CFLAGS		+= -DDEFAULT_THREADS=$(NPROC)
 
 # MESSAGES
 START		= @echo "==== THOMASROFF MAKEFILE =============" \

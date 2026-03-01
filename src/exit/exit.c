@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "miniRT.h"
 
 int	memory_free(t_tree *t)
@@ -23,6 +24,10 @@ int	memory_free(t_tree *t)
 		if (t->a_buf)
 			ft_arena_free(&t->a_buf);
 	}
+	if (pthread_mutex_destroy(&t->index_lock))
+		ft_error(EINHERIT, "pthread_mutex_destroy");
+	if (pthread_mutex_destroy(&t->pixel_put_lock))
+		ft_error(EINHERIT, "pthread_mutex_destroy");
 	return (SUCCESS);
 }
 

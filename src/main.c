@@ -13,7 +13,8 @@
 #include "miniRT.h"
 
 static int	input_handle(t_tree *tree, int ac, char **av);
-static void	ray_trace(t_tree *t);
+static int	ray_multithread(t_tree *t);
+// static void	ray_trace(t_tree *t);
 
 int	main(int ac, char **av)
 {
@@ -25,20 +26,18 @@ int	main(int ac, char **av)
 	flag = input_handle(&tree, ac, av);
 	if (flag != SUCCESS)
 		return (error_exit(flag, &tree));
-	
 	//microsecond precision tracking of the performance of ray_trace()
 	#define _GNU_SOURCE
 	#include <time.h>
 	struct timespec ts; 
 	clock_gettime(CLOCK_MONOTONIC, &ts);
 	long long start_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
-
-	ray_trace(&tree);
-
+	// ray_trace(&tree);
+	if (ray_multithread(&tree) != SUCCESS)
+		return (error_exit(flag, &tree));
 	clock_gettime(CLOCK_MONOTONIC, &ts);
 	long long end_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
 	printf("Elapsed time: %lld microseconds\n", end_time - start_time);
-
 	mlx_loop(tree.window);
 	if (errno)
 		ft_perror();
@@ -66,31 +65,58 @@ static int	input_handle(t_tree *tree, int ac, char **av)
 	return (flag);
 }
 
-static void	ray_trace(t_tree *t)
+static int	ray_multithread(t_tree *t)
 {
-	t_xs	hit;
-	t_ray	ray;
-	size_t	x;
-	size_t	y;
-
 	camera_compute(&t->scene->camera);
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			pixel_ray_get(ray, &t->scene->camera, x, y);
-			if (ray_to_scene_hit_get(&hit, ray, t->scene))
-			{
-				hit_shade(&hit, ray, t->scene);
-				pixel_put(t->image, x, y, hit.object->material.shader.combined);
-			}
-			++x;
-		}
-		++y;
-	}
+	if (threads_run(t) != SUCCESS)
+		return (ERROR); // TODO: Build thread error exit
+	return (threads_join(t));
 }
+
+// Optimised loop
+// 	y = 0;
+// 	while (y < HEIGHT)
+// 	{
+// 		x = 0;
+// 		while (x < WIDTH)
+// 		{
+// 			pixel_ray_get(ray, &t->scene->camera, x, y);
+// 			if (ray_to_scene_hit_get(&hit, ray, t->scene))
+// 			{
+// 				hit_shade(&hit, ray, t->scene);
+// 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
+// 			}
+// 			++x;
+// 		}
+// 		++y;
+// 	}
+// }
+
+// static void	ray_trace(t_tree *t)
+// {
+// 	t_xs	hit;
+// 	t_ray	ray;
+// 	size_t	x;
+// 	size_t	y;
+//
+// 	camera_compute(&t->scene->camera);
+// 	y = 0;
+// 	while (y < HEIGHT)
+// 	{
+// 		x = 0;
+// 		while (x < WIDTH)
+// 		{
+// 			pixel_ray_get(ray, &t->scene->camera, x, y);
+// 			if (ray_to_scene_hit_get(&hit, ray, t->scene))
+// 			{
+// 				hit_shade(&hit, ray, t->scene);
+// 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
+// 			}
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
 
 // OLD TESTS
 	// if (ac == 2)

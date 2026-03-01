@@ -57,6 +57,10 @@ int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 inline bool 	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
+// Multithreading
+int		threads_run(t_tree *t);
+int		threads_join(t_tree *t);
+
 // Camera
 int		camera_compute(t_camera *camera);
 int		pixel_ray_get(t_ray pixel_ray, t_camera *camera, int x, int y);

@@ -24,6 +24,7 @@ files.
 # include "MLX42.h"
 # include "libft.h"
 # include "prototypes.h"
+# include <pthread.h>
 
 // Window & Image
 # define WIDTH 1200
@@ -74,6 +75,11 @@ files.
 # define EYE 0
 # define NORMAL 1
 
+// Multithreading
+# ifndef DEFAULT_THREADS
+#  define DEFAULT_THREADS 1
+# endif
+
 // Types (custom types allow for easy switching later)
 typedef float			t_fl; // Custom float type
 typedef uint32_t		t_uint; // Custom uint type
@@ -109,6 +115,11 @@ typedef struct s_tree
 	t_arena				*a_sys;
 	t_arena				*a_buf;
 	t_scene				*scene;
+	pthread_t			*threads;
+	pthread_mutex_t		index_lock;
+	pthread_mutex_t		pixel_put_lock;
+	size_t				thread_count;
+	size_t				thread_index;
 }						t_tree;
 
 // Scene, the lighting, viewpoint, objects and intersections from both camera
