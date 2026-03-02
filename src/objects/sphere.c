@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/24 11:56:09 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 11:14:24 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,36 @@
 
 static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray);
 
+// sphere_new()
+// Creates a new sphere object, malloc'ing space on the arena, and
+// and initializing the position and radius of the new sphere to values
+// given at input. Confusingly input position is saved to the sphere transform
+// matrix and actual position is always zero. Material variables are set to
+// default values. All other values are set to zero.
 int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 {
 	t_sphere	*sphere;
 	t_object	object;
-	t_object	*tmp;
 
 	if (!pos || !t)
 		return (ft_error(EINVAL, "sphere_new"));
 	sphere = NULL;
 	ft_memset(&object, 0, sizeof(t_object));
 	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
+		|| ft_memset(sphere, 0, sizeof(t_sphere)) == NULL
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
 	object.type = SPHERE;
-	object.sphere = sphere;
-	material_default(&object.material);
 	object.id = t->scene->objects->len;
+	object.sphere = sphere;
 	sphere->radius = radius;
+	material_default(&object.material);
 	if (point_new(sphere->center, 0, 0, 0) != SUCCESS
 		|| translation(sphere->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "sphere_new"));
-	tmp = vec_get(t->scene->objects, object.id);
 	if (dst)
-		*dst = tmp;
+		*dst = vec_get(t->scene->objects, object.id);
 	return (SUCCESS);
 }
 
@@ -52,7 +57,7 @@ int	sphere_normal_get(t_tuple dst, t_sphere *sphere, t_tuple point)
 		return (ft_error(EINVAL, "sphere_normal_get"));
 	normal_object_point_get(obj_point, sphere->transform, point);
 	tuple_minus_get(obj_normal, obj_point, sphere->center);
-	normal_worldvector_get(dst, sphere->transform, obj_normal);
+	normal_scene_vector_get(dst, sphere->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }
@@ -79,22 +84,8 @@ int	sphere_hit_get(t_fl *dst, t_sphere *sphere, t_ray ray)
 	matrix_invert(inversion, sphere->transform);
 	ray_transform_get(ray2, ray, inversion);
 	if (sphere_intersect_math(time, sphere, ray2))
-	{
-		if (time[0] > 0.0f && time[1] > 0.0f)
-		{
-			if (time[0] < time[1])
-				*dst = time[0];
-			else
-				*dst = time[1];
-		}
-		else if (time[0] > 0.0f)
-			*dst = time[0];
-		else if (time[1] > 0.0f)
-			*dst = time[1];
-	}
-	else
-		return (FALSE);
-	return (TRUE);
+		return (closest_forward_hit_get(dst, time));
+	return (FALSE);
 }
 
 // Inverts the sphere transform matrix and multiplies the result with the ray,
@@ -123,9 +114,7 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 		if (vec_push(xs, &tmp2) != SUCCESS)
 			return (ft_error(EINHERIT, "sphere_intersect_get"));
 	}
-	else
-		return (FALSE);
-	return (TRUE);
+	return (FALSE);
 }
 
 // Calculates mathss of intersections. Further reading required to fully
@@ -146,18 +135,12 @@ static int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 	vector_dot(&b, ray[DIRECTION], sphere_to_ray);
 	b *= -2.0f;
 	vector_dot(&c, sphere_to_ray, sphere_to_ray);
-	// c -= 1.0f;
-	// FIXME: Temporarilly changed this constant to the sphere radius but the
-	// measurements seem to be funky, too small in relation to the space.
-	// Needs further investigation!
 	c -= sphere->radius * sphere->radius;
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
 	time[0] = (-b - sqrtf(discriminant)) / (2.0f * a);
 	time[1] = (-b + sqrtf(discriminant)) / (2.0f * a);
-	// This next check for time being positive may be a problem for other
-	// calculations later, but for now it suits our logic
 	if (time[0] < 0.0 && time[1] < 0.0)
 		return (FALSE);
 	return (TRUE);

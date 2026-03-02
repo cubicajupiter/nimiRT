@@ -13,7 +13,6 @@
 #include "defines.h"
 #include "miniRT.h"
 
-// static void	light_vector_get(t_tuple dst, t_light *light, t_tuple point);	light_vector already computed in is_shadowed
 static t_fl	eye_vec_dot_product(t_tuple light_v, t_tuple neglight_v,
 				t_tuple eye_vector, t_tuple normal_vector);
 static void	reflections_combine(t_material *mat);
@@ -38,7 +37,7 @@ int	lighting(t_xs *hit, t_light *light)
 	else
 	{
 		eye_dot = eye_vec_dot_product(hit->light_vector, neglight_v,
-					hit->camera_vector, hit->normal_vector);
+				hit->camera_vector, hit->normal_vector);
 		if (eye_dot <= 0)
 			reflection_specular(&hit->object->material, NULL, eye_dot);
 		else

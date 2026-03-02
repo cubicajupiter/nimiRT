@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:12:51 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 13:56:29 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:57:03 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	rt_parse(t_tree *t, char *rt_file)
 
 	if (!t || !rt_file)
 		return (ft_error(EINVAL, "rt_parse"));
-	(void)t;
 	line = NULL;
 	fd = open(rt_file, O_RDONLY);
 	if (fd < 0)
@@ -40,8 +39,7 @@ int	rt_parse(t_tree *t, char *rt_file)
 		flag = line_parse(t, line);
 		if (flag != SUCCESS)
 			return (rt_parse_exit(fd, line, flag));
-		if (line)
-			free(line);
+		free(line);
 		line = gnl(fd);
 	}
 	free(line);

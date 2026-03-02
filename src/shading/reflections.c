@@ -58,5 +58,4 @@ void	reflection_ambient(t_material *mat, t_scene *s)
 {
 	trio_multiply_get(mat->shader.ambi_refl, s->ambient.color, \
 mat->shader.eff_color);
-	// color_print(mat->shader.ambi_refl);
 }

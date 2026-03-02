@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 13:28:18 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/24 11:52:34 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:50:37 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	normal_get(t_tuple dst, t_object *object, t_tuple point)
 		sphere_normal_get(dst, object->sphere, point);
 	else if (object->type == PLANE)
 		plane_normal_get(dst, object->plane, point);
-	// else if (object->type == CYLINDER)
-	// 	cylinder_normal_get(dst, object->cylinder, point);
+	else if (object->type == CYLINDER)
+		cylinder_normal_get(dst, object->cylinder, point);
 	return (SUCCESS);
 }
 
@@ -43,14 +43,14 @@ int	normal_get(t_tuple dst, t_object *object, t_tuple point)
 	object's transformation.
 */
 int	normal_object_point_get(t_tuple dst, t_matrix transform,
-				t_tuple world_point)
+				t_tuple scene_point)
 {
 	t_matrix	inverse;
 
-	if (!dst || !transform || !world_point)
+	if (!dst || !transform || !scene_point)
 		return (ft_error(EINVAL, "normal_objpoint_get"));
 	matrix_invert(inverse, transform);
-	matrix_tuple_multiply_get(dst, inverse, world_point);
+	matrix_tuple_multiply_get(dst, inverse, scene_point);
 	return (SUCCESS);
 }
 
@@ -64,7 +64,7 @@ int	normal_object_point_get(t_tuple dst, t_matrix transform,
 	it to world space normal.)
 	4. Normalises the world space vector.
 */
-int	normal_worldvector_get(t_tuple dst, t_matrix transform,
+int	normal_scene_vector_get(t_tuple dst, t_matrix transform,
 				t_tuple obj_normal)
 {
 	t_matrix	inverse;
@@ -78,3 +78,45 @@ int	normal_worldvector_get(t_tuple dst, t_matrix transform,
 	dst[W] = VECTOR;
 	return (SUCCESS);
 }
+
+// <<<<<<< HEAD
+// 	t_tuple		obj_point;
+// 	t_tuple		obj_normal;
+//
+// 	if (!dst || !sphere || !point)
+// 		return (ft_error(EINVAL, "normal_sphere_get"));
+// 	normal_object_point_get(obj_point, sphere->transform, point);
+// 	tuple_minus_get(obj_normal, obj_point, sphere->center);
+// 	normal_worldvector_get(dst, sphere->transform, obj_normal);
+// 	normalize_apply(dst);
+// 	return (SUCCESS);
+// }
+//
+// // NOTE: no plane specific logic needed (?)
+// int	normal_plane_get(t_tuple dst, t_plane *plane, t_tuple point)
+// {
+// 	t_tuple		obj_point;
+// 	t_tuple		obj_normal;
+//
+// 	if (!dst || !plane || !point)
+// 		return (ft_error(EINVAL, "normal_plane_get"));
+// 	normal_object_point_get(obj_point, plane->transform, point);
+// 	normal_worldvector_get(dst, plane->transform, obj_normal);
+// 	normalize_apply(dst);
+// 	return (SUCCESS);
+// }
+//
+// // THE CYLINDER VERSION FOR GETTING NORMALS.
+// int	normal_cylinder_get(t_tuple dst, t_cylinder *cylinder, t_tuple point)
+// {
+// 	// t_tuple		obj_point;
+// 	// t_tuple		obj_normal;
+//
+// 	if (!dst || !cylinder || !point)
+// 		return (ft_error(EINVAL, "normal_cylinder_get"));
+// 	vector_new(dst, point[X], 0.0, point[Z]);
+// 	// normal_object_point_get(obj_point, cylinder->transform, point);
+// 	//cylinder specific logic would probably go here
+// 	// normal_worldvector_get(dst, cylinder->transform, obj_normal);
+// 	// normalize_apply(dst);
+// =======

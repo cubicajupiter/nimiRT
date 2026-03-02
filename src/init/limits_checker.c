@@ -62,7 +62,7 @@ bool	values_within_limits(t_scene *s)
 	if (!valid_vector(s->camera.ray[DIRECTION], "camera vector"))
 		// || !valid_point(s->light->point) // NOTE: Infinity check??
 		return (false);
-	if (s->camera.fov < 0.0f || s->camera.fov > PI)
+	if (s->camera.fov < 0.0f || s->camera.fov > PI + EPSILON)
 		return (rt_out_of_limits("camera fov"));
 	i = 0;
 	while (i < s->objects->len)

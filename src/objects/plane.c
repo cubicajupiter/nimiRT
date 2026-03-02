@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/24 11:55:55 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:49:59 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "plane_new"));
 	object.type = PLANE;
+	object.id = t->scene->objects->len;
 	object.plane = plane;
 	material_default(&object.material);
-	object.id = t->scene->objects->len;
 	if (point_new(plane->point, 0, 0, 0) != SUCCESS
 		|| vector_new(plane->vector, vector[X], vector[Y], vector[Z]) != SUCCESS
 		|| translation(plane->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
-		|| rotation_full3D(plane->transform, plane->vector) != SUCCESS
+		|| rotation_full3d(plane->transform, plane->vector) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "plane_new"));
 	tmp = vec_get(t->scene->objects, object.id);
@@ -51,7 +51,7 @@ int	plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point)
 		return (ft_error(EINVAL, "plane_normal_get"));
 	normal_object_point_get(obj_point, plane->transform, point);
 	vector_new(obj_normal, 0, 1, 0);
-	normal_worldvector_get(dst, plane->transform, obj_normal);
+	normal_scene_vector_get(dst, plane->transform, obj_normal);
 	normalize_apply(dst);
 	return (SUCCESS);
 }

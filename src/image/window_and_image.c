@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:49:39 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/06 12:00:19 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 10:13:42 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,8 @@ void	commands(void *data)
 
 	t = (t_tree *)data;
 	if (mlx_is_key_down(t->window, MLX_KEY_ESCAPE))
+	{
 		mlx_close_window(t->window);
+		errno = 0;
+	}
 }

@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   mode_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/13 17:08:43 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 11:32:05 by thblack-         ###   ########.fr       */
+/*   Created: 2026/03/01 10:09:22 by thblack-          #+#    #+#             */
+/*   Updated: 2026/03/01 10:12:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+#include "messages.h"
 
-int	memory_free(t_tree *t)
+static int	mode_prompt(void);
+
+int	mode_parse(t_run_mode *mode, char *flag)
 {
-	if (t)
-	{
-		if (t->window && t->image)
-			window_destroy(t->window, t->image);
-		if (t->a_sys)
-			ft_arena_free(&t->a_sys);
-		if (t->a_buf)
-			ft_arena_free(&t->a_buf);
-	}
+	if (!mode || !flag)
+		return (ft_error(EINVAL, "mode_parse"));
+	if (flag[0] != '-' || !flag[1])
+		return (mode_prompt());
+	if (flag[1] == 'i')
+		*mode = INPUT_DEBUG;
+	else if (flag[1] == 'f')
+		*mode = FULL_DEBUG;
+	else
+		return (mode_prompt());
 	return (SUCCESS);
 }
 
-int	error_exit(int flag, t_tree *t)
+static int	mode_prompt(void)
 {
-	memory_free(t);
-	if (errno)
-	{
-		ft_perror();
-		return (errno);
-	}
-	if (flag == FAIL)
-		return (EXIT_FAILURE);
-	return (ERROR);
+	ft_putendl_fd("Error\n", 2);
+	ft_putendl_fd(MSG_MODE_PROMPT, 2);
+	return (1);
 }

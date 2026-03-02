@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/24 11:58:12 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/01 11:36:47 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		transformation_test(t_tree *t);
 void	test_draw_sphere(t_tree *tree);
 int		lighting_test(t_tree *t);
 void	sphere_shader_test(t_tree *tree);
+int		cylinder_intersect_test(t_tree *t);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);
@@ -34,21 +35,18 @@ int		main_info_parse(t_tree *t, char *line);
 int		objects_parse(t_tree *t, char *line);
 int		cylinder_parse(t_object **object, t_tree *t, char *line);
 int		color_parse(t_object *object, t_tree *t, char *line);
-bool		valid_rt_data(char *line);
-bool		valid_01_float(t_fl nbr, char *value);
-bool		valid_color(t_trio color, char *value);
+bool	valid_rt_data(char *line);
+bool	valid_01_float(t_fl nbr, char *value);
+bool	valid_color(t_trio color, char *value);
 int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
 int		ft_atopoint(t_tuple dst, const char *nptr);
 int		ft_atovector(t_tuple dst, const char *nptr);
 int		parser_atof(t_fl *nbr, char *line);
 int		parser_atoi(int *nbr, char *line);
-bool		values_within_limits(t_scene *s);
-bool		values_make_sense(t_scene *s);
+bool	values_within_limits(t_scene *s);
+bool	values_make_sense(t_scene *s);
 int		materials_set(t_scene *s);
-
-// Ray Trace
-int		ray_trace(t_tree *t);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
@@ -61,7 +59,6 @@ void	commands(void *data);
 
 // Camera
 int		camera_compute(t_camera *camera);
-int		camera_pixel_size_compute(t_camera *camera);
 int		pixel_ray_get(t_ray pixel_ray, t_camera *camera, int x, int y);
 int		view_transform_get(t_matrix dst, t_tuple forward_v,
 			t_tuple to_p, t_tuple up_v);
@@ -79,33 +76,33 @@ int		plane_intersect_get(t_vec *xs, t_object *object, t_ray ray);
 int		cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t);
 int		cylinder_normal_get(t_tuple dst, t_cylinder *cylinder, t_tuple point);
 int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
+int		cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray);
 
 // Rays
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
-int		scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
+int		ray_to_scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
 int		object_hit_get(t_fl *t, t_object *object, t_ray ray);
+int		closest_forward_hit_get(t_fl *dst, t_fl *time);
 int		first_intersection_get(t_xs **hit, t_vec *xs);
 int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
 int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
 int		intersections_sort(t_vec *src);
-int		intersection_compute(t_xs *hit, t_ray ray);
 
 // Lighting
 int		hit_shade(t_xs *hit, t_ray ray, t_scene *scene);
-void		reflection_ambient(t_material *mat, t_scene *s);
-void		reflection_diffuse(t_material *m, t_fl light_dot);
-void		reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
+void	reflection_ambient(t_material *mat, t_scene *s);
+void	reflection_diffuse(t_material *m, t_fl light_dot);
+void	reflection_specular(t_material *m, t_light *l, t_fl eye_dot);
 int		reflection_get(t_tuple dst, t_tuple in, t_tuple normal);
 int		is_shadowed(t_xs *hit, t_scene *scene);
-int		overpoint_get(t_xs *hit);
 int		point_light_new(t_light *dst, t_tuple position, t_trio intensity);
 int		normal_get(t_tuple dst, t_object *object, t_tuple point);
 int		normal_object_point_get(t_tuple dst, t_matrix transform,
-				t_tuple world_point);
-int		normal_worldvector_get(t_tuple dst, t_matrix transform,
-				t_tuple obj_normal);
+			t_tuple scene_point);
+int		normal_scene_vector_get(t_tuple dst, t_matrix transform,
+			t_tuple obj_normal);
 int		material_default(t_material *dst);
 int		lighting(t_xs *hit, t_light *light);
 
@@ -138,7 +135,8 @@ int		scaling(t_matrix dst, t_fl x, t_fl y, t_fl z);
 int		rotation_x(t_matrix dst, t_fl radians);
 int		rotation_y(t_matrix dst, t_fl radians);
 int		rotation_z(t_matrix dst, t_fl radians);
-int		rotation_full3D(t_matrix dst, t_tuple normal);
+int		rotation_xz(t_matrix dst, t_tuple normal);
+int		rotation_full3d(t_matrix dst, t_tuple normal);
 int		shearing(t_matrix dst, t_fl src[6]);
 int		chain2_get(t_matrix dst, t_matrix a, t_matrix b);
 int		chain2_apply(t_matrix dst, t_matrix a);
@@ -178,8 +176,12 @@ int		color_copy(t_trio dst, t_trio src);
 int		color_trio_to_uint(uint32_t *color, t_trio c);
 int		color_uint_to_trio(t_trio c, int *color);
 
+// System Calls
+int		access_try(char *path, int mode);
+
 // Utilities
 int		debug(t_tree *t, t_run_mode mode);
+int		mode_parse(t_run_mode *mode, char *flag);
 int		float_print(const t_fl fl);
 int		int_print(int nbr);
 int		float_formatted_print(char *name, t_fl value);
@@ -190,9 +192,9 @@ int		matrix_print(t_matrix src);
 int		insertion_sort(t_xs **dst, t_xs *head);
 int		scene_data_print(t_tree *t);
 int		objects_print(t_scene *s);
-int		sphere_print(t_sphere *sphere);
-int		plane_print(t_plane *plane);
-int		cylinder_print(t_cylinder *cylinder);
+int		sphere_print(t_sphere *sphere, size_t id);
+int		plane_print(t_plane *plane, size_t id);
+int		cylinder_print(t_cylinder *cylinder, size_t id);
 int		object_material_print(t_material *material);
 int		material_print(t_material *m);
 
@@ -212,8 +214,10 @@ int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 // Exit
 int		memory_free(t_tree *t);
 int		error_exit(int flag, t_tree *t);
+int		rt_missing(char *path);
 int		rt_invalid(char c);
-bool		rt_out_of_limits(char *value);
+bool	rt_out_of_limits(char *value);
+int		rt_zerovector(char *value);
 int		ft_error(int code, const char *message);
 
 #endif

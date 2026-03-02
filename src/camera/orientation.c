@@ -17,10 +17,13 @@ t_matrix dst, t_tuple left_v, t_tuple true_up_v, t_tuple forward_v);
 
 /*
 - !normalize the UP vector param before passing to viewport_get!
-- computes the forward vector by suctracting 'from' from 'to'. normalizes the result
-- computes the left vector by taking the cross product of forward and the normalized up vector
+- computes the forward vector by suctracting 'from' from 'to'. normalizes the
+	result
+- computes the left vector by taking the cross product of forward and the
+	normalized up vector
 - computes the true_up vector by taking the cross product of left and forward.
-- with left, true_up and forward vectors, constructs a matrix representing the view orientation
+- with left, true_up and forward vectors, constructs a matrix representing the
+	view orientation
 - applies a translation to the matrix to move the view.
 */
 int	view_transform_get(t_matrix dst, t_tuple from_p, t_tuple forward_v,
@@ -39,8 +42,8 @@ int	view_transform_get(t_matrix dst, t_tuple from_p, t_tuple forward_v,
 	vector_cross(left_v, forward_v, up_v);
 	vector_cross(true_up_v, left_v, forward_v);
 	orientation_get(orientation, left_v, true_up_v, forward_v);
-	// Not sure about these next two lines, example test in book gives different
-	// results than the ones produced by these lines
+	// NOTE: Not sure about these next two lines, example test in book gives
+	// different results than the ones produced by these lines
 	translation(move_scene_translation, -from_p[X], -from_p[Y], -from_p[Z]);
 	matrix_multiply_get(dst, orientation, move_scene_translation);
 	return (SUCCESS);

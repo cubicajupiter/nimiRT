@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 17:19:43 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:38:42 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/01 09:22:32 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int	scene_data_print(t_tree *t)
 	if (main_variables_print(s) != SUCCESS
 		|| objects_print(s) != SUCCESS)
 		return (ft_error(EINHERIT, "scene_data_print"));
-	// TODO: Complete function
 	return (SUCCESS);
 }
