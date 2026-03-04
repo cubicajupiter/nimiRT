@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 09:29:51 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/04 14:44:50 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,6 @@ int	normalize_apply(t_tuple vector)
 	vector[X] /= magnitude;
 	vector[Y] /= magnitude;
 	vector[Z] /= magnitude;
-	return (SUCCESS);
-}
-
-/*
-Dot product calculates the cosine of the angle between two (unit) vectors.
-*/
-int	vector_dot(t_fl *dot, t_tuple a, t_tuple b)
-{
-	if (!dot || !a || !b)
-		return (ft_error(EINVAL, "vector_dot"));
-	*dot = a[X] * b[X] + a[Y] * b[Y] + a[Z] * b[Z] + a[W] * b[W];
 	return (SUCCESS);
 }
 

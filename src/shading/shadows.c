@@ -71,6 +71,8 @@ static int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray,
 	while (i < objects->len)
 	{
 		object = vec_get(objects, i++);
+		if (hit->object->type == PLANE && hit->object->id == object->id)
+			continue ;
 		if (object_hit_get(&t, object, light_ray)
 			&& t > 0.0 && t < distance)
 			return (TRUE);
