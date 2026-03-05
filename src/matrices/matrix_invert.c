@@ -10,29 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-Inverting matrices: Cofactor expansion.
-Relies on these concepts: determinants, submatrices, minors & cofactors.
-Determinants are needed for inverting a matrix.
-Determinants are calculated from 2x2 submatrices.
-2x2 submatrices are made by deleting a row & column from a 4x4 matrix to make
-a 3x3, then again for a 2x2.
-	(This divide-and-conquer submatrix logic is in the file 'submatrix.c')
-The Determinants found in these submatrices are called 'minors'.
-Cofactors are needed to calculate determinants for matrices larger than 2x2.
-	- To calculate the cofactors, you calculate minors from submatrices.
-		-- SO the minors of 4x4 matrices are the determinants of 3x3 matrices,
-		-- and the minors of 3x3 are the determinants of its 2x2 matrices.
-You need a matrix of cofactors,
-	which is then transposed and finally divided by the determinant
-of the original matrix.
-*/
-
-// NOTE: Make sure 4x4 -> 3x3
-// -> 2x2 divide-and-conquer happens correctly!!!!!!!!!!
-
 #include "matrix_invert.h"
 #include "miniRT.h"
+
+static t_fl			minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size);
 
 int	matrix_invert(t_matrix dst, t_matrix src)
 {
@@ -62,7 +43,7 @@ int	matrix_invert(t_matrix dst, t_matrix src)
 	return (SUCCESS);
 }
 
-t_fl	minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size)
+static t_fl	minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size)
 {
 	t_fl		det;
 	t_matrix2	tmp2x2;
@@ -96,7 +77,7 @@ t_fl	cofactor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size)
 	return (det);
 }
 
-bool	is_invertible(t_matrix matrix4)
+inline bool	is_invertible(t_matrix matrix4)
 {
 	t_fl	det;
 

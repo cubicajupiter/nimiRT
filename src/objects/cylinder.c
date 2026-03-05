@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "miniRT.h"
 
-static int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
+static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
 				t_ray ray);
 
 // cylinder_new()
@@ -99,7 +99,7 @@ int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 // Calculates mathss of intersections. Further reading required to fully
 // understand. If discriminant is less than 0 then ray misses the cylinder and
 // the function returns FALSE.
-static int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
+static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
 {
 	t_fl		discriminant;
 	t_fl		a;

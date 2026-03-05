@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 11:37:08 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/05 12:01:54 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,20 @@ int	main(int ac, char **av)
 	flag = input_handle(&tree, ac, av);
 	if (flag != SUCCESS)
 		return (error_exit(flag, &tree));
+	
+	//microsecond precision tracking of the performance of ray_trace()
+	#define _GNU_SOURCE
+	#include <time.h>
+	struct timespec ts; 
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	long long start_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
+
 	ray_trace(&tree);
+
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	long long end_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
+	printf("Elapsed time: %lld microseconds\n", end_time - start_time);
+
 	mlx_loop(tree.window);
 	if (errno)
 		ft_perror();
@@ -78,6 +91,7 @@ static void	ray_trace(t_tree *t)
 		y++;
 	}
 }
+
 // OLD TESTS
 	// if (ac == 2)
 	// {

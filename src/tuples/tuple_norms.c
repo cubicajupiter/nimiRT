@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tuple_norms_products.c                             :+:      :+:    :+:   */
+/*   tuple_norms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/04 14:44:50 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/05 12:19:28 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,4 @@ int	normalize_apply(t_tuple vector)
 	return (SUCCESS);
 }
 
-int	vector_cross(t_tuple dst, t_tuple a, t_tuple b)
-{
-	if (!dst || !a || !b || a[W] > VECTOR || b[W] > VECTOR)
-		return (ft_error(EINVAL, "vector_cross"));
-	dst[X] = a[Y] * b[Z] - a[Z] * b[Y];
-	dst[Y] = a[Z] * b[X] - a[X] * b[Z];
-	dst[Z] = a[X] * b[Y] - a[Y] * b[X];
-	dst[W] = VECTOR;
-	return (SUCCESS);
-}
+

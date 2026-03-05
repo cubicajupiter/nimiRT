@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/17 09:24:23 by thblack-          #+#    #+#             */
+/*   Created: 2026/02/17 09:24:23 by jvalkama          #+#    #+#             */
 /*   Updated: 2026/03/01 10:49:59 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray);
+static inline int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray);
 
 int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 {
@@ -99,12 +99,12 @@ int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 	return (TRUE);
 }
 
-static int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray)
+static inline int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray)
 {
 	if (!time || !plane || !ray)
 		return (ft_error(EINVAL, "plane_intersect_math"));
 	if (fabsf(ray[DIRECTION][Y]) < EPSILON)
 		return (FALSE);
-	*time = -ray[ORIGIN][Y] / ray[DIRECTION][Y]; //issue might be here
+	*time = -ray[ORIGIN][Y] / ray[DIRECTION][Y];
 	return (TRUE);
 }

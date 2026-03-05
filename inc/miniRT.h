@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 11:36:47 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/05 12:17:48 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		window_destroy(mlx_t *window, mlx_image_t *image);
 int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
 int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
-bool	is_pixel_on_image(t_uint x, t_uint y);
+inline bool 	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
 // Camera
@@ -126,7 +126,6 @@ int		matrix_identity_get(t_matrix identity);
 // Matrix Invert
 int		matrix_invert(t_matrix dst, t_matrix src);
 t_fl	cofactor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int width);
-t_fl	minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int width);
 bool	is_invertible(t_matrix matrix4);
 
 // Transformations
@@ -168,6 +167,7 @@ int		magnitude_get(float *magn, t_tuple vector);
 int		normalize_get(t_tuple dst, t_tuple vector);
 int		normalize_apply(t_tuple vector);
 int		vector_dot(float *dot, t_tuple a, t_tuple b);
+int		vector_dot_selective(t_fl *dot, t_tuple a, t_tuple b, int ignore);
 int		vector_cross(t_tuple dst, t_tuple a, t_tuple b);
 
 // Color

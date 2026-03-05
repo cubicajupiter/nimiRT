@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:50:46 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/04 17:06:28 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/05 12:19:13 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,22 @@ int	rotation_full3d(t_matrix dst, t_tuple normal)
 	t_fl		dp_z;
 	t_matrix	z_rotate_transform;
 	t_matrix	x_rotate_transform;
+	t_matrix	y_rotate_transform;
 
 	if (!dst || !normal)
 		return (ft_error(EINVAL, "rotation_full3D"));
-
-	vector_dot_selective(dp_x, normal, (t_tuple){0, 1, 0, 0}, X);
-	vector_dot_selective(dp_y, normal, (t_tuple){0, 1, 0, 0}, Y);
-	vector_dot_selective(dp_z, normal, (t_tuple){0, 1, 0, 0}, Z);
-	printf("X dp: %f\n", dp_x);
-	printf("Y dp: %f\n", dp_y);
-	printf("Z dp: %f\n", dp_z);
-
+	vector_dot_selective(&dp_x, normal, (t_tuple){0, 1, 0, 0}, X); //performance impact of declaring compound literals three times shouldn't be too huge since this is only done at initialisation.
+	vector_dot_selective(&dp_y, normal, (t_tuple){0, 1, 0, 0}, Y);
+	vector_dot_selective(&dp_z, normal, (t_tuple){0, 1, 0, 0}, Z);
 	rotation_x(x_rotate_transform, acos(dp_x));
 	rotation_z(z_rotate_transform, acos(dp_z));
-	chain3_apply(dst, x_rotate_transform, z_rotate_transform);
+	rotation_y(y_rotate_transform, acos(dp_y));
+	//chain3_apply(dst, x_rotate_transform, z_rotate_transform); //TODO: more testing of different dimensions' effect on rotation
+	chain4_apply(dst, x_rotate_transform, z_rotate_transform, y_rotate_transform);
 	return (SUCCESS);
 }
 
-/* Rotation_xz: rotation clockwise in the x dimension (e.g. merry-go-round)
+/* Rotation_xz: rotation clockwise in the x di mension (e.g. merry-go-round)
  * and rotation clockwise in the z dimension (e.g. bikewheels beneath
  * you as the rider) 
 	This function is useful for rotating cylinders and planes as we only need
