@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:35:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/06 11:49:24 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:20:00 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column)
 			{
 				if ((int)j != column)
 					dst[r][c++] = src[i][j];
-				++j;
+				j++;
 			}
-			++r;
+			r++;
 		}
-		++i;
+		i++;
 	}
 }
 
@@ -58,10 +58,10 @@ void	submatrix2(t_matrix2 dst, t_matrix3 src, int row, int column)
 			{
 				if ((int)j != column)
 					dst[r][c++] = src[i][j];
-				++j;
+				j++;
 			}
-			++r;
+			r++;
 		}
-		++i;
+		i++;
 	}
 }

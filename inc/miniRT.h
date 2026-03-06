@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/06 13:52:42 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:36:12 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int		matrix_identity_get(t_matrix identity);
 int		matrix_invert(t_matrix dst, t_matrix src);
 void	cofactor3(t_fl *dst, t_matrix3 matrix3, int coord[2]);
 void	cofactor4(t_fl *dst, t_matrix matrix4, int coord[2]);
-bool	is_invertible(t_fl *det);
+bool	is_invertible(t_fl *determinant);
 void	determinant2(t_fl *dst, t_matrix2 matrix);
 void	determinant3(t_fl *dst, t_matrix3 matrix3);
 void	determinant4(t_fl *dst, t_matrix matrix4);

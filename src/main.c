@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/05 12:01:54 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/06 17:49:14 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ static void	ray_trace(t_tree *t)
 				hit_shade(&hit, ray, t->scene);
 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
 			}
-			x++;
+			++x;
 		}
-		y++;
+		++y;
 	}
 }
 

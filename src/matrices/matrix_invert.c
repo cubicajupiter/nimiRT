@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:20:21 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/06 14:08:51 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:57:14 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	matrix_invert(t_matrix dst, t_matrix src)
 		{
 			cofactor4(&cofactor, src, (int []){i, j});
 			dst[j][i] = cofactor / determinant;	//j and i are reversed because it's an optimised matrix transposition.
-			j++;
+			++j;
 		}
-		i++;
+		++i;
 	}
 	return (SUCCESS);
 }
@@ -55,9 +55,9 @@ void	cofactor4(t_fl *dst, t_matrix matrix4, int coord[2])
 		*dst *= -1;
 }
 
-bool	is_invertible(t_fl *det)
+bool	is_invertible(t_fl *determinant)
 {
-	if (is_float_equal(*det, 0.0))
+	if (is_float_equal(*determinant, 0.0))
 		return (false);
 	return (true);
 }
