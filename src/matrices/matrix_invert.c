@@ -6,36 +6,34 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 15:20:21 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 14:22:09 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:08:51 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "matrix_invert.h"
 #include "miniRT.h"
 
-static t_fl			minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size);
-
 int	matrix_invert(t_matrix dst, t_matrix src)
 {
-	t_fl	det;
-	t_fl	cof;
+	t_fl	determinant;
+	t_fl	cofactor;
 	size_t	i;
 	size_t	j;
 
 	if (!dst || !src)
 		return (ft_error(EINVAL, "matrix_invert"));
-	if (!is_invertible(src))
-		return (1);
+	determinant4(&determinant, src);
+	if (!is_invertible(&determinant))
+		return (FAIL);
 	i = 0;
 	j = 0;
-	determinant(&det, NULL, src, 4);
 	while (i < 4)
 	{
 		j = 0;
 		while (j < 4)
 		{
-			cof = cofactor(src, NULL, (int []){i, j}, 4);
-			dst[j][i] = cof / det;
+			cofactor4(&cofactor, src, (int []){i, j});
+			dst[j][i] = cofactor / determinant;	//j and i are reversed because it's an optimised matrix transposition.
 			j++;
 		}
 		i++;
@@ -43,48 +41,23 @@ int	matrix_invert(t_matrix dst, t_matrix src)
 	return (SUCCESS);
 }
 
-static t_fl	minor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size)
+void	cofactor3(t_fl *dst, t_matrix3 matrix3, int coord[2])
 {
-	t_fl		det;
-	t_matrix2	tmp2x2;
-	t_matrix3	tmp3x3;
-
-	det = 0.0;
-	if (size == 3)
-	{
-		submatrix2(tmp2x2, matrix3, coord[ROW], coord[COLUMN]);
-		determinant2(&det, tmp2x2);
-	}
-	else if (size == 4)
-	{
-		submatrix3(tmp3x3, matrix4, coord[ROW], coord[COLUMN]);
-		determinant(&det, tmp3x3, NULL, 3);
-	}
-	return (det);
-}
-
-t_fl	cofactor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int size)
-{
-	t_fl	det;
-
-	det = 0.0;
-	if (size == 4)
-		det = minor(matrix4, NULL, coord, size);
-	if (size == 3)
-		det = minor(NULL, matrix3, coord, size);
+	minor_determinant3(dst, matrix3, coord);
 	if ((coord[ROW] + coord[COLUMN]) % 2 == 1)
-		det *= -1;
-	return (det);
+		*dst *= -1;
 }
 
-inline bool	is_invertible(t_matrix matrix4)
+void	cofactor4(t_fl *dst, t_matrix matrix4, int coord[2])
 {
-	t_fl	det;
+	minor_determinant4(dst, matrix4, coord);
+	if ((coord[ROW] + coord[COLUMN]) % 2 == 1)
+		*dst *= -1;
+}
 
-	if (!matrix4)
-		return (false);
-	determinant(&det, NULL, matrix4, 4);
-	if (is_float_equal(det, 0.0))
+bool	is_invertible(t_fl *det)
+{
+	if (is_float_equal(*det, 0.0))
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/05 12:17:48 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/06 13:52:42 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,8 +125,16 @@ int		matrix_identity_get(t_matrix identity);
 
 // Matrix Invert
 int		matrix_invert(t_matrix dst, t_matrix src);
-t_fl	cofactor(t_matrix matrix4, t_matrix3 matrix3, int coord[2], int width);
-bool	is_invertible(t_matrix matrix4);
+void	cofactor3(t_fl *dst, t_matrix3 matrix3, int coord[2]);
+void	cofactor4(t_fl *dst, t_matrix matrix4, int coord[2]);
+bool	is_invertible(t_fl *det);
+void	determinant2(t_fl *dst, t_matrix2 matrix);
+void	determinant3(t_fl *dst, t_matrix3 matrix3);
+void	determinant4(t_fl *dst, t_matrix matrix4);
+void	minor_determinant3(t_fl *dst, t_matrix3 matrix3, int coord[2]);
+void	minor_determinant4(t_fl *dst, t_matrix matrix4, int coord[2]);
+void	submatrix2(t_matrix2 dst, t_matrix3 src, int row, int column);
+void	submatrix3(t_matrix3 dst, t_matrix src, int row, int column);
 
 // Transformations
 int		translation(t_matrix dst, t_fl x, t_fl y, t_fl z);
