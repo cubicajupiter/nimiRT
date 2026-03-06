@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/05 12:17:49 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/06 11:16:04 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ files.
 # include "prototypes.h"
 
 // Window & Image
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1200
+# define HEIGHT 1000
 
 // Tuples
 // Ray data indexes
@@ -203,6 +203,8 @@ typedef struct s_plane
 	t_tuple				point;
 	t_tuple				vector;
 	t_matrix			transform;
+	t_tuple				normal;
+	bool				is_normal_set;
 }						t_plane;
 
 typedef struct s_cylinder
