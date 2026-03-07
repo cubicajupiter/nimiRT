@@ -73,25 +73,6 @@ static int	ray_multithread(t_tree *t)
 	return (threads_join(t));
 }
 
-// Optimised loop
-// 	y = 0;
-// 	while (y < HEIGHT)
-// 	{
-// 		x = 0;
-// 		while (x < WIDTH)
-// 		{
-// 			pixel_ray_get(ray, &t->scene->camera, x, y);
-// 			if (ray_to_scene_hit_get(&hit, ray, t->scene))
-// 			{
-// 				hit_shade(&hit, ray, t->scene);
-// 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
-// 			}
-// 			++x;
-// 		}
-// 		++y;
-// 	}
-// }
-
 // static void	ray_trace(t_tree *t)
 // {
 // 	t_xs	hit;
@@ -112,9 +93,9 @@ static int	ray_multithread(t_tree *t)
 // 				hit_shade(&hit, ray, t->scene);
 // 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
 // 			}
-// 			x++;
+// 			++x;
 // 		}
-// 		y++;
+// 		++y;
 // 	}
 // }
 
