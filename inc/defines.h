@@ -216,6 +216,7 @@ typedef struct s_plane
 	t_matrix			transform;
 	t_tuple				normal;
 	bool				is_normal_set;
+	pthread_mutex_t		normal_lock;
 }						t_plane;
 
 typedef struct s_cylinder

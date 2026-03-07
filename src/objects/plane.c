@@ -18,7 +18,6 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 {
 	t_plane		*plane;
 	t_object	object;
-	t_object	*tmp;
 
 	if (!pos || !vector || !t)
 		return (ft_error(EINVAL, "plane_new"));
@@ -38,9 +37,10 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 		|| vector_new(plane->normal, 0, 0, 0) != SUCCESS
 		|| vec_push(t->scene->objects, &object) != SUCCESS)
 		return (ft_error(EINHERIT, "plane_new"));
-	tmp = vec_get(t->scene->objects, object.id);
+	if (pthread_mutex_init(&plane->normal_lock, NULL))
+		return (ft_error(EINHERIT, "pthread_mutex_init"));
 	if (dst)
-		*dst = tmp;
+		*dst = vec_get(t->scene->objects, object.id);
 	return (SUCCESS);
 }
 
@@ -55,12 +55,25 @@ int	plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point)
 		tuple_copy(dst, plane->normal);
 	else
 	{
-		normal_object_point_get(obj_point, plane->transform, point);
-		vector_new(obj_normal, 0, 1, 0);
-		normal_scene_vector_get(dst, plane->transform, obj_normal);
-		normalize_apply(dst);
-		tuple_copy(plane->normal, dst);
-		plane->is_normal_set = true;
+		if (pthread_mutex_lock(&plane->normal_lock))
+			return (ft_error(EINHERIT, "pthread_mutex_lock"));
+		if (plane->is_normal_set == true)
+		{
+			if (pthread_mutex_unlock(&plane->normal_lock))
+				return (ft_error(EINHERIT, "pthread_mutex_unlock"));
+			tuple_copy(dst, plane->normal);
+		}
+		else
+		{
+			normal_object_point_get(obj_point, plane->transform, point);
+			vector_new(obj_normal, 0, 1, 0);
+			normal_scene_vector_get(dst, plane->transform, obj_normal);
+			normalize_apply(dst);
+			tuple_copy(plane->normal, dst);
+			plane->is_normal_set = true;
+			if (pthread_mutex_unlock(&plane->normal_lock))
+				return (ft_error(EINHERIT, "pthread_mutex_unlock"));
+		}
 	}
 	return (SUCCESS);
 }
