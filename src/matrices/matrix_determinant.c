@@ -6,32 +6,56 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:21:44 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 14:21:41 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:35:49 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "matrix_invert.h"
 
-void	determinant2(t_fl *det, t_matrix2 matrix)
+void	determinant2(t_fl *dst, t_matrix2 matrix)
 {
-	*det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+	*dst = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 }
 
-void	determinant(t_fl *det, t_matrix3 matrix3, t_matrix matrix4, int size)
+void	determinant3(t_fl *dst, t_matrix3 matrix3)
 {
-	int	column;
+	t_fl	cofactor;
 
-	*det = 0.0;
-	column = 0;
-	while (column < size)
-	{
-		if (size == 4)
-			*det += matrix4[0][column]
-				* cofactor(matrix4, NULL, (int []){0, column}, size);
-		else if (size == 3)
-			*det += matrix3[0][column]
-				* cofactor(NULL, matrix3, (int []){0, column}, size);
-		column++;
-	}
+	cofactor3(&cofactor, matrix3, (int []){0, 0});
+	*dst = matrix3[0][0] * cofactor;
+	cofactor3(&cofactor, matrix3, (int []){0, 1});
+	*dst += matrix3[0][1] * cofactor;
+	cofactor3(&cofactor, matrix3, (int []){0, 2});
+	*dst += matrix3[0][2] * cofactor;
+}
+
+void	determinant4(t_fl *dst, t_matrix matrix4)
+{
+	t_fl	cofactor;
+
+	cofactor4(&cofactor, matrix4, (int []){0, 0});
+	*dst = matrix4[0][0] * cofactor;
+	cofactor4(&cofactor, matrix4, (int []){0, 1});
+	*dst += matrix4[0][1] * cofactor;
+	cofactor4(&cofactor, matrix4, (int []){0, 2});
+	*dst += matrix4[0][2] * cofactor;
+	cofactor4(&cofactor, matrix4, (int []){0, 3});
+	*dst += matrix4[0][3] * cofactor;
+}
+
+void	minor_determinant3(t_fl *dst, t_matrix3 matrix3, int coord[2])
+{
+	t_matrix2	tmp2x2;
+
+	submatrix2(tmp2x2, matrix3, coord[ROW], coord[COLUMN]);
+	determinant2(dst, tmp2x2);
+}
+
+void	minor_determinant4(t_fl *dst, t_matrix matrix4, int coord[2])
+{
+	t_matrix3	tmp3x3;
+
+	submatrix3(tmp3x3, matrix4, coord[ROW], coord[COLUMN]);
+	determinant3(dst, tmp3x3);
 }

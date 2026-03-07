@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pixel.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:11:05 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 11:22:52 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/06 16:58:23 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.h"
 #include "miniRT.h"
 
-bool	is_pixel_on_image(t_uint x, t_uint y)
+inline bool	is_pixel_on_image(t_uint x, t_uint y)
 {
 	if (x < WIDTH && y < HEIGHT)
 		return (true);

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:18:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 10:46:32 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:39:29 by jvalkama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ static int	is_shadow_hit(t_xs *hit, t_fl distance, t_ray light_ray,
 	while (i < objects->len)
 	{
 		object = vec_get(objects, i++);
+		if (hit->object->type == PLANE && hit->object->id == object->id)
+			continue ;
 		if (object_hit_get(&t, object, light_ray)
 			&& t > 0.0 && t < distance)
 			return (TRUE);

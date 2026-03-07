@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   hits.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 10:56:22 by thblack-          #+#    #+#             */
 /*   Updated: 2026/03/01 11:02:26 by thblack-         ###   ########.fr       */
