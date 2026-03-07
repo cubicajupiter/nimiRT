@@ -13,7 +13,7 @@
 #include "defines.h"
 #include "miniRT.h"
 
-inline bool	is_pixel_on_image(t_uint x, t_uint y)
+static inline bool	is_pixel_on_image(t_uint x, t_uint y)
 {
 	if (x < WIDTH && y < HEIGHT)
 		return (true);

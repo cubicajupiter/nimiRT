@@ -16,8 +16,8 @@
 
 static int	close_thread(pthread_t *t, size_t i);
 static void	*thread_routine(void *data);
-static int	thread_init(size_t *i, t_tree *t);
-static void	ray_trace(t_tree *t, size_t i);
+static int	thread_init(size_t *i, t_scene *s, t_tree *t);
+static void	ray_trace(t_tree *t, t_scene *s, size_t i);
 static int	thread_pixel_put(t_tree *t, t_uint x, t_uint y, t_trio c);
 
 int	threads_run(t_tree *t)
@@ -44,43 +44,52 @@ int	threads_run(t_tree *t)
 static void	*thread_routine(void *data)
 {
 	t_tree	*t;
+	t_scene	s;
 	size_t	i;
 
 	t = data;
-	if (thread_init(&i, t) != SUCCESS)
+	ft_memcpy(&s, t->scene, sizeof(t_scene));
+	if (thread_init(&i, &s, t) != SUCCESS)
 		return ((void *)-1);
-	ray_trace(t, i);
+	ray_trace(t, &s, i);
 	return (NULL);
 }
 
-static int	thread_init(size_t *i, t_tree *t)
+static int	thread_init(size_t *i, t_scene *s, t_tree *t)
 {
+	t_vec	*objects;
+
+	objects = NULL;
 	if (pthread_mutex_lock(&t->index_lock))
 		return (ft_error(EINHERIT, "pthread_mutex_lock"));
 	*i = t->thread_index++;
 	if (pthread_mutex_unlock(&t->index_lock))
 		return (ft_error(EINHERIT, "pthread_mutex_unlock"));
+	vec_alloc(&objects, t->a_buf);
+	vec_new(objects, t->scene->objects->len, sizeof(t_object));
+	vec_copy(objects, t->scene->objects);
+	s->objects = objects;
 	return (SUCCESS);
 }
 
-static void	ray_trace(t_tree *t, size_t i)
+static void	ray_trace(t_tree *t, t_scene *s, size_t i)
 {
 	t_xs	hit;
 	t_ray	ray;
 	size_t	x;
 	size_t	y;
 
-	camera_compute(&t->scene->camera);
+	camera_compute(&s->camera);
 	y = i;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			pixel_ray_get(ray, &t->scene->camera, x, y);
-			if (ray_to_scene_hit_get(&hit, ray, t->scene))
+			pixel_ray_get(ray, &s->camera, x, y);
+			if (ray_to_scene_hit_get(&hit, ray, s))
 			{
-				hit_shade(&hit, ray, t->scene);
+				hit_shade(&hit, ray, s);
 				thread_pixel_put(t, x, y, hit.object->material.shader.combined);
 			}
 			x++;

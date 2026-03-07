@@ -54,7 +54,6 @@ int		window_destroy(mlx_t *window, mlx_image_t *image);
 int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
 int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
-inline bool 	is_pixel_on_image(t_uint x, t_uint y);
 void	commands(void *data);
 
 // Multithreading
