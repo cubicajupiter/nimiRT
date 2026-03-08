@@ -26,8 +26,8 @@ files.
 # include "prototypes.h"
 
 // Window & Image
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1200
+# define HEIGHT 1000
 
 // Tuples
 // Ray data indexes
