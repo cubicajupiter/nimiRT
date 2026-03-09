@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:41:08 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/23 15:49:45 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:07:03 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int	view_transform_get(t_matrix dst, t_tuple from_p, t_tuple forward_v,
 	vector_cross(left_v, forward_v, up_v);
 	vector_cross(true_up_v, left_v, forward_v);
 	orientation_get(orientation, left_v, true_up_v, forward_v);
-	// NOTE: Not sure about these next two lines, example test in book gives
-	// different results than the ones produced by these lines
 	translation(move_scene_translation, -from_p[X], -from_p[Y], -from_p[Z]);
 	matrix_multiply_get(dst, orientation, move_scene_translation);
 	return (SUCCESS);

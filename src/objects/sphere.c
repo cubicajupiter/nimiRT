@@ -6,14 +6,15 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 11:14:24 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:09:52 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "miniRT.h"
 
-static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray);
+static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere,
+						t_ray ray);
 
 // sphere_new()
 // Creates a new sphere object, malloc'ing space on the arena, and
@@ -120,7 +121,8 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 // Calculates mathss of intersections. Further reading required to fully
 // understand. If discriminant is less than 0 then ray misses the sphere and
 // the function returns FALSE.
-static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
+static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere,
+						t_ray ray)
 {
 	t_fl		discriminant;
 	t_tuple		sphere_to_ray;

@@ -6,12 +6,11 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:23:47 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/17 14:54:32 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:24:36 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-#include "messages.h"
 
 bool	valid_01_float(t_fl nbr, char *value)
 {
@@ -60,7 +59,6 @@ bool	values_within_limits(t_scene *s)
 	if (!s)
 		return (false);
 	if (!valid_vector(s->camera.ray[DIRECTION], "camera vector"))
-		// || !valid_point(s->light->point) // NOTE: Infinity check??
 		return (false);
 	if (s->camera.fov < 0.0f || s->camera.fov > PI + EPSILON)
 		return (rt_out_of_limits("camera fov"));

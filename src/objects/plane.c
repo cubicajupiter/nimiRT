@@ -6,14 +6,13 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/06 11:28:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:22:21 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 static void	plane_normal_get_helper(t_tuple dst, t_plane *plane, t_tuple point);
-static inline int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray);
 
 int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 {
@@ -89,45 +88,35 @@ int	plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray)
 		return (ft_error(EINVAL, "plane_hit_get"));
 	matrix_invert(inversion, plane->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (plane_intersect_math(&time, plane, ray2))
-	{
-		if (time > 0.0f)
-			*dst = time;
-	}
+	if (fabsf(ray2[DIRECTION][Y]) < EPSILON)
+		return (FALSE);
+	time = -ray2[ORIGIN][Y] / ray2[DIRECTION][Y];
+	if (time > 0.0f)
+		*dst = time;
 	else
 		return (FALSE);
 	return (TRUE);
 }
 
-int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
-{
-	t_fl		time;
-	t_xs		tmp;
-	t_ray		ray2;
-	t_matrix	inversion;
-
-	if (!xs || !object || !ray)
-		return (ft_error(EINVAL, "plane_intersect_get"));
-	matrix_invert(inversion, object->plane->transform);
-	ray_transform_get(ray2, ray, inversion);
-	if (plane_intersect_math(&time, object->plane, ray2))
-	{
-		tmp.t = time;
-		tmp.object = object;
-		if (vec_push(xs, &tmp) != SUCCESS)
-			return (ft_error(EINHERIT, "plane_intersect_get"));
-	}
-	else
-		return (FALSE);
-	return (TRUE);
-}
-
-static inline int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray)
-{
-	if (!time || !plane || !ray)
-		return (ft_error(EINVAL, "plane_intersect_math"));
-	if (fabsf(ray[DIRECTION][Y]) < EPSILON)
-		return (FALSE);
-	*time = -ray[ORIGIN][Y] / ray[DIRECTION][Y];
-	return (TRUE);
-}
+// int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
+// {
+// 	t_fl		time;
+// 	t_xs		tmp;
+// 	t_ray		ray2;
+// 	t_matrix	inversion;
+//
+// 	if (!xs || !object || !ray)
+// 		return (ft_error(EINVAL, "plane_intersect_get"));
+// 	matrix_invert(inversion, object->plane->transform);
+// 	ray_transform_get(ray2, ray, inversion);
+// 	if (plane_intersect_math(&time, object->plane, ray2))
+// 	{
+// 		tmp.t = time;
+// 		tmp.object = object;
+// 		if (vec_push(xs, &tmp) != SUCCESS)
+// 			return (ft_error(EINHERIT, "plane_intersect_get"));
+// 	}
+// 	else
+// 		return (FALSE);
+// 	return (TRUE);
+// }

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/06 17:49:14 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:30:52 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	input_handle_and_init(t_tree *tree, int ac, char **av);
 static int	ray_multithread(t_tree *t);
-// static void	ray_trace(t_tree *t);
 
 int	main(int ac, char **av)
 {
@@ -26,18 +25,17 @@ int	main(int ac, char **av)
 	flag = input_handle_and_init(&tree, ac, av);
 	if (flag != SUCCESS)
 		return (error_exit(flag, &tree));
-	//microsecond precision tracking of the performance of ray_trace()
-	// #define _GNU_SOURCE
-	// #include <time.h>
-	// struct timespec ts; 
-	// clock_gettime(CLOCK_MONOTONIC, &ts);
-	// long long start_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
-	// ray_trace(&tree);
+	// microsecond precision tracking of the performance of ray_trace()
+	#define _GNU_SOURCE
+	#include <time.h>
+	struct timespec	ts; 
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	long long start_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
 	if (ray_multithread(&tree) != SUCCESS)
 		return (error_exit(flag, &tree));
-	// clock_gettime(CLOCK_MONOTONIC, &ts);
-	// long long end_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
-	// printf("Elapsed time: %lld microseconds\n", end_time - start_time);
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	long long end_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
+	printf("Elapsed time: %lld microseconds\n", end_time - start_time);
 	mlx_loop(tree.window);
 	if (errno && errno != EAGAIN)
 		ft_perror();
@@ -75,53 +73,3 @@ static int	ray_multithread(t_tree *t)
 	}
 	return (threads_join(t));
 }
-
-// static void	ray_trace(t_tree *t)
-// {
-// 	t_xs	hit;
-// 	t_ray	ray;
-// 	size_t	x;
-// 	size_t	y;
-//
-// 	camera_compute(&t->scene->camera);
-// 	y = 0;
-// 	while (y < HEIGHT)
-// 	{
-// 		x = 0;
-// 		while (x < WIDTH)
-// 		{
-// 			pixel_ray_get(ray, &t->scene->camera, x, y);
-// 			if (ray_to_scene_hit_get(&hit, ray, t->scene))
-// 			{
-// 				hit_shade(&hit, ray, t->scene);
-// 				pixel_put(t->image, x, y, hit.object->material.shader.combined);
-// 			}
-// 			++x;
-// 		}
-// 		++y;
-// 	}
-// }
-
-// OLD TESTS
-	// if (ac == 2)
-	// {
-	// 	test_matrix();
-	// 	test_rays(&tree);
-	// 	parse();    //      -> check & fetch scene
-	// 	initialise();   //  -> wrap up a handy struct(s)
-	// 	trace();    //      -> the BIG LOOP(S) OF MATHS.
-	// 	render();   //      -> MLX images
-	// 	cleanup();  //      -> free allocations / mutexes
-	// 	threads/ anything else..
-	// }
-	// else
-	// {
-	// 	transformation_test(&tree);
-	// 	projectile_test(&t);
-	// 	test_matrix();
-	// 	vector_new(a, 1, 2, 3);
-	// 	tuple_print(a);
-	// 	vector_normalise(a, a);
-	// 	tuple_print(a);
-	// 	instruct();
-	// }

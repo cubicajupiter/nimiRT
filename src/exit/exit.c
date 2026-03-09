@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 17:08:43 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 11:32:05 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:29:07 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	free_and_destroy(t_tree *t)
 		if (plane_free(t->scene->objects) != SUCCESS)
 			ft_error(EINHERIT, "memory_free");
 		if (t->window && t->image)
-			window_destroy(t->window, t->image);
+			mlx_delete_image(t->window, t->image);
+		if (t->window)
+			window_destroy(t->window);
 		if (t->arena)
 			ft_arena_free(&t->arena);
 	}
@@ -40,7 +42,7 @@ static int	plane_free(t_vec *objects)
 	while (i < objects->len)
 	{
 		object = vec_get(objects, i++);
-		if (object->type == PLANE)
+		if (object->type == PLANE && object->plane)
 			if (pthread_mutex_destroy(&object->plane->normal_lock))
 				ft_error(EINHERIT, "pthread_mutex_destroy");
 	}

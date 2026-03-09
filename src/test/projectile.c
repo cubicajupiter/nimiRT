@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:42:04 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/06 11:59:54 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:27:56 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	projectile_test(t_tree *t)
 	mlx_loop_hook(t->window, commands, t);
 	throw(t);
 	mlx_loop(t->window);
-	window_destroy(t->window, t->image);
+	window_destroy(t->window);
 	return (SUCCESS);
 }

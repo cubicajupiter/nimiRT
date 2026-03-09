@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 10:38:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/05 11:18:48 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:22:32 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	of the viewport is set at -1 as we are always looking in the same direction
 	and the world moves around us.
 */
-static inline void	camera_viewport_point_get(t_tuple viewport_point, 
+static inline void	camera_viewport_point_get(t_tuple viewport_point,
 					t_camera *camera, int x, int y)
 {
 	t_fl		xoffset;

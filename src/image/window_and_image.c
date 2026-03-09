@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:49:39 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 10:13:42 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:26:31 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,8 @@ int	window_init(mlx_t **window, mlx_image_t **image)
 	return (SUCCESS);
 }
 
-int	window_destroy(mlx_t *window, mlx_image_t *image)
+int	window_destroy(mlx_t *window)
 {
-	(void)window;
-	(void)image;
-	// mlx_delete_image(window, image);
-	// mlx_close_window(window);
 	mlx_terminate(window);
 	return (SUCCESS);
 }
@@ -50,7 +46,7 @@ void	commands(void *data)
 	{
 		mlx_delete_image(t->window, t->image);
 		mlx_close_window(t->window);
-		// mlx_terminate(t->window);
+		t->image = NULL;
 		errno = 0;
 	}
 }

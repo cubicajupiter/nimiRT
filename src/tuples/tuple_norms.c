@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/05 12:19:28 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:23:54 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,3 @@ int	normalize_apply(t_tuple vector)
 	vector[Z] /= magnitude;
 	return (SUCCESS);
 }
-
-

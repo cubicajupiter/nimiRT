@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/06 16:36:12 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:25:33 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		materials_set(t_scene *s);
 
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
-int		window_destroy(mlx_t *window, mlx_image_t *image);
+int		window_destroy(mlx_t *window);
 int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
 int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
@@ -82,6 +82,7 @@ int		cylinder_resize(t_object *dst, t_fl radius, t_fl height);
 int		cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray);
 
 // Rays
+void	ray_trace(t_tree *t, t_scene *s, size_t i);
 int		ray_new(t_ray ray, t_tuple origin, t_tuple direction);
 int		position_get(t_tuple pos, t_ray ray, const t_fl time);
 int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
