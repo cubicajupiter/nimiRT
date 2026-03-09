@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-static int	input_handle(t_tree *tree, int ac, char **av);
+static int	input_handle_and_init(t_tree *tree, int ac, char **av);
 static int	ray_multithread(t_tree *t);
 // static void	ray_trace(t_tree *t);
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 
 	if (ac < 2 || !access_try(av[1], O_RDONLY))
 		return (rt_missing(av[1]));
-	flag = input_handle(&tree, ac, av);
+	flag = input_handle_and_init(&tree, ac, av);
 	if (flag != SUCCESS)
 		return (error_exit(flag, &tree));
 	//microsecond precision tracking of the performance of ray_trace()
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 	return (EXIT_SUCCESS);
 }
 
-static int	input_handle(t_tree *tree, int ac, char **av)
+static int	input_handle_and_init(t_tree *tree, int ac, char **av)
 {
 	t_run_mode	mode;
 	int			flag;
@@ -69,7 +69,10 @@ static int	ray_multithread(t_tree *t)
 {
 	camera_compute(&t->scene->camera);
 	if (threads_run(t) != SUCCESS)
-		return (ERROR); // TODO: Build thread error exit
+	{
+		threads_join(t);
+		return (ERROR);
+	}
 	return (threads_join(t));
 }
 
