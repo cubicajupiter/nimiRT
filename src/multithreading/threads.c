@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/01 12:43:40 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/09 17:14:26 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:58:57 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	*thread_routine(void *data)
 	if (thread_init(&i, &s, t) != SUCCESS)
 		return ((void *)-1);
 	ray_trace(t, &s, i);
+	vec_free(&s.objects);
 	return (NULL);
 }
 
@@ -54,12 +55,12 @@ static int	thread_init(size_t *i, t_scene *s, t_tree *t)
 	if (pthread_mutex_lock(&t->index_lock))
 		return (ft_error(EINHERIT, "pthread_mutex_lock"));
 	*i = t->thread_index++;
-	if (pthread_mutex_unlock(&t->index_lock))
-		return (ft_error(EINHERIT, "pthread_mutex_unlock"));
-	vec_alloc(&objects, t->arena);
+	vec_alloc(&objects, NULL);
 	vec_new(objects, t->scene->objects->len, sizeof(t_object));
 	vec_copy(objects, t->scene->objects);
 	s->objects = objects;
+	if (pthread_mutex_unlock(&t->index_lock))
+		return (ft_error(EINHERIT, "pthread_mutex_unlock"));
 	return (SUCCESS);
 }
 

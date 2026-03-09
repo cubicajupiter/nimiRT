@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/31 16:55:38 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/09 17:22:56 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:50:56 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	vector_multiply_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 	dst[X] = vector[X] * scalar;
 	dst[Y] = vector[Y] * scalar;
 	dst[Z] = vector[Z] * scalar;
+	dst[W] = VECTOR;
 	return (SUCCESS);
 }
 
@@ -34,6 +35,7 @@ int	vector_divide_get(t_tuple dst, const t_fl scalar, t_tuple vector)
 	dst[X] = vector[X] / scalar;
 	dst[Y] = vector[Y] / scalar;
 	dst[Z] = vector[Z] / scalar;
+	dst[W] = VECTOR;
 	return (SUCCESS);
 }
 

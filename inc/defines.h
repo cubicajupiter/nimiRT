@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/09 18:39:32 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:36:18 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ files.
 # include <stdatomic.h>
 
 // Window & Image
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 120
+# define HEIGHT 80
 
 // Tuples
 // Ray data indexes
