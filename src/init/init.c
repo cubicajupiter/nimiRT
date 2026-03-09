@@ -45,8 +45,16 @@ static int	program_init(t_tree *t)
 	if (!t)
 		return (ft_error(EINVAL, "program_init"));
 	t->arena = NULL;
-	if (ft_arena_init(&t->arena, BUF_SIZE) != SUCCESS)
-		return (ft_error(EINHERIT, "program_init"));
+	t->image = NULL;
+	t->window = NULL;
+	t->scene = NULL;
+	t->threads = NULL;
+	if (ft_arena_init(&t->arena, BUF_SIZE) != SUCCESS
+		|| ft_arena_alloc(t->arena, (void **)&t->threads,
+			sizeof(pthread_t) * DEFAULT_THREADS) != SUCCESS)
+		return (ft_error(EINVAL, "program_init"));
+	if (pthread_mutex_init(&t->index_lock, NULL))
+		return (ft_error(EINHERIT, "pthread_mutex_init"));
 	return (SUCCESS);
 }
 
@@ -76,7 +84,8 @@ static int	scene_init(t_tree *t)
 
 static int	window_and_image_init(t_tree *t)
 {
-	window_init(&t->window, &t->image);
+	if (window_init(&t->window, &t->image) != SUCCESS)
+		return (ft_error(EINHERIT, "window_and_image_init"));
 	mlx_loop_hook(t->window, commands, t);
 	return (SUCCESS);
 }

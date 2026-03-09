@@ -18,17 +18,9 @@ static int	close_thread(pthread_t *t, size_t i);
 static void	*thread_routine(void *data);
 static int	thread_init(size_t *i, t_scene *s, t_tree *t);
 static void	ray_trace(t_tree *t, t_scene *s, size_t i);
-// static int	thread_pixel_put(t_tree *t, t_uint x, t_uint y, t_trio c);
 
 int	threads_run(t_tree *t)
 {
-	if (ft_arena_alloc(t->arena, (void **)&t->threads,
-			sizeof(pthread_t) * DEFAULT_THREADS) != SUCCESS)
-		return (ft_error(EINHERIT, "threads_run"));
-	if (pthread_mutex_init(&t->index_lock, NULL))
-		return (ft_error(EINHERIT, "pthread_mutex_init"));
-	// if (pthread_mutex_init(&t->pixel_put_lock, NULL))
-	// 	return (ft_error(EINHERIT, "pthread_mutex_init"));
 	t->thread_count = 0;
 	t->thread_index = 0;
 	while (t->thread_count < DEFAULT_THREADS)
@@ -97,16 +89,6 @@ static void	ray_trace(t_tree *t, t_scene *s, size_t i)
 		y += DEFAULT_THREADS;
 	}
 }
-
-// static int	thread_pixel_put(t_tree *t, t_uint x, t_uint y, t_trio c)
-// {
-// 	if (pthread_mutex_lock(&t->pixel_put_lock))
-// 		return (ft_error(EINHERIT, "pthread_mutex_lock"));
-// 	pixel_put(t->image, x, y, c);
-// 	if (pthread_mutex_unlock(&t->pixel_put_lock))
-// 		return (ft_error(EINHERIT, "pthread_mutex_unlock"));
-// 	return (SUCCESS);
-// }
 
 int	threads_join(t_tree *t)
 {
