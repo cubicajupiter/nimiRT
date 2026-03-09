@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:23 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/09 17:22:21 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:26:56 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray)
 		return (ft_error(EINVAL, "plane_hit_get"));
 	matrix_invert(inversion, plane->transform);
 	ray_transform_get(ray2, ray, inversion);
-	if (fabsf(ray2[DIRECTION][Y]) < EPSILON)
+	if (is_float_equal(ray2[DIRECTION][Y], EPSILON))
 		return (FALSE);
 	time = -ray2[ORIGIN][Y] / ray2[DIRECTION][Y];
 	if (time > 0.0f)

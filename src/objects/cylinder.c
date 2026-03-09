@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/09 17:09:26 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:55:34 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
-	time[0] = (-b - sqrt(discriminant)) / (2 * a);
-	time[1] = (-b + sqrt(discriminant)) / (2 * a);
+	time[0] = (-b - ft_sqrt(discriminant)) / (2 * a);
+	time[1] = (-b + ft_sqrt(discriminant)) / (2 * a);
 	return (TRUE);
 }

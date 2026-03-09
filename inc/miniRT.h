@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/09 17:25:33 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:52:15 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 
 # include "defines.h"
 # include "headers.h"
-
-// Tests
-// FIX: Remove before evaluations
-int		test_matrix(void);
-int		test_rays(t_tree *t);
-int		projectile_test(t_tree *t);
-int		transformation_test(t_tree *t);
-void	test_draw_sphere(t_tree *tree);
-int		lighting_test(t_tree *t);
-void	sphere_shader_test(t_tree *tree);
-int		cylinder_intersect_test(t_tree *t);
 
 // Initialization
 int		init(t_tree *t, char *rt_file);
@@ -51,9 +40,7 @@ int		materials_set(t_scene *s);
 // Window & Image
 int		window_init(mlx_t **window, mlx_image_t **image);
 int		window_destroy(mlx_t *window);
-int		canvas_put(mlx_image_t *image, t_trio color);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
-int		point_put(mlx_image_t *image, t_tuple p, t_trio c);
 void	commands(void *data);
 
 // Multithreading
@@ -89,10 +76,6 @@ int		ray_transform_get(t_ray dst, t_ray src, t_matrix transform);
 int		ray_to_scene_hit_get(t_xs *hit, t_ray ray, t_scene *s);
 int		object_hit_get(t_fl *t, t_object *object, t_ray ray);
 int		closest_forward_hit_get(t_fl *dst, t_fl *time);
-int		first_intersection_get(t_xs **hit, t_vec *xs);
-int		scene_intersections_get(t_vec **dst, t_ray ray, t_tree *t);
-int		object_intersections_get(t_vec *xs, t_object *obj, t_ray ray);
-int		intersections_sort(t_vec *src);
 
 // Lighting
 int		hit_shade(t_xs *hit, t_ray ray, t_scene *scene);

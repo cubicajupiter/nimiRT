@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:12:19 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/05 16:22:46 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:49:28 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
  * Radian to degrees converter
 */
-
 int	ft_rtod(int *dst, float src)
 {
 	long long	tmp;

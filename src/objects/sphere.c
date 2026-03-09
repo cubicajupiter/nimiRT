@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/09 17:09:52 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:22:41 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere,
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
-	time[0] = (-b - sqrtf(discriminant)) / (2.0f * a);
-	time[1] = (-b + sqrtf(discriminant)) / (2.0f * a);
+	time[0] = (-b - ft_sqrt(discriminant)) / (2.0f * a);
+	time[1] = (-b + ft_sqrt(discriminant)) / (2.0f * a);
 	if (time[0] < 0.0 && time[1] < 0.0)
 		return (FALSE);
 	return (TRUE);

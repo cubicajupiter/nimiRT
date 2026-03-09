@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 16:19:34 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/05 16:23:17 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:49:40 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
  * Degrees to radian converter
 */
-
 int	ft_dtor(float *dst, int src)
 {
 	if (!dst)

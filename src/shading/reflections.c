@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 13:57:03 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/02/17 17:18:49 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:19:06 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	reflection_get(t_tuple dst, t_tuple in, t_tuple normal)
 	if (!dst || !in || !normal)
 		return (ft_error(EINVAL, "reflection"));
 	vector_dot(&dot_product, in, normal);
-	vector_multiply_get(new_normal, 2 * dot_product, normal);
+	vector_multiply_get(new_normal, 2.0 * dot_product, normal);
 	tuple_minus_get(dst, in, new_normal);
 	return (SUCCESS);
 }
@@ -36,7 +36,7 @@ void	reflection_diffuse(t_material *mat, t_fl light_dot)
 		trio_multiply_scalar_get(mat->shader.diff_refl, light_dot, weight);
 	}
 	else
-		color_new(mat->shader.diff_refl, 0, 0, 0);
+		color_new(mat->shader.diff_refl, 0.0, 0.0, 0.0);
 }
 
 void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
@@ -51,7 +51,7 @@ void	reflection_specular(t_material *mat, t_light *light, t_fl eye_dot)
 		trio_multiply_scalar_get(mat->shader.spec_refl, factor, weight);
 	}
 	else
-		color_new(mat->shader.spec_refl, 0, 0, 0);
+		color_new(mat->shader.spec_refl, 0.0, 0.0, 0.0);
 }
 
 void	reflection_ambient(t_material *mat, t_scene *s)

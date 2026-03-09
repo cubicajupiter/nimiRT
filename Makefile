@@ -6,7 +6,7 @@
 #    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
-#    Updated: 2026/03/06 17:51:50 by jvalkama         ###   ########.fr        #
+#    Updated: 2026/03/09 18:12:42 by thblack-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ DEPS		= $(OBJ:.o=.d)
 
 # TOOLS
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g
-CGENERAL	= -O2
+CFLAGS		= -Wall -Wextra -Werror
+CGENERAL	= -O2 -funroll-loops
 CDEBUG		= -g3 -O0
 MAKE_QUIET	= --no-print-directory
 

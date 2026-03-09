@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:11:05 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/06 16:58:23 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:50:26 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,3 @@ int	pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c)
 	}
 	return (SUCCESS);
 }
-
-// int	point_put(mlx_image_t *image, t_tuple p, t_trio c)
-// {
-// 	uint32_t	color;
-//
-// 	if (!image || !p || p[W] == 0 || !c)
-// 		return (ft_error(EINVAL, "point_put"));
-// 	if (is_pixel_on_image(p[X], p[Y]))
-// 	{
-// 		color_trio_to_uint(&color, c);
-// 		mlx_put_pixel(image, p[X], p[Y], color);
-// 	}
-// 	return (SUCCESS);
-// }
