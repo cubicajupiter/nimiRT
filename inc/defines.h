@@ -81,6 +81,9 @@ files.
 #  define DEFAULT_THREADS 1
 # endif
 
+// Error Tracking
+# define MUTEX_FAIL 2
+
 // Types (custom types allow for easy switching later)
 typedef float			t_fl; // Custom float type
 typedef uint32_t		t_uint; // Custom uint type

@@ -51,7 +51,8 @@ static int	plane_free(t_vec *objects)
 
 int	error_exit(int flag, t_tree *t)
 {
-	free_and_destroy(t);
+	if (flag != MUTEX_FAIL)
+		free_and_destroy(t);
 	if (errno)
 	{
 		ft_perror();

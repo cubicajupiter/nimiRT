@@ -24,6 +24,11 @@ int	init(t_tree *t, char *rt_file)
 
 	if (!t || !rt_file)
 		return (ft_error(EINVAL, "init"));
+	if (pthread_mutex_init(&t->index_lock, NULL))
+	{
+		ft_error(EINHERIT, "pthread_mutex_init");
+		return (MUTEX_FAIL);
+	}
 	if (program_init(t) != SUCCESS
 		|| scene_init(t) != SUCCESS
 		|| window_and_image_init(t) != SUCCESS)
@@ -53,8 +58,6 @@ static int	program_init(t_tree *t)
 		|| ft_arena_alloc(t->arena, (void **)&t->threads,
 			sizeof(pthread_t) * DEFAULT_THREADS) != SUCCESS)
 		return (ft_error(EINVAL, "program_init"));
-	if (pthread_mutex_init(&t->index_lock, NULL))
-		return (ft_error(EINHERIT, "pthread_mutex_init"));
 	return (SUCCESS);
 }
 
