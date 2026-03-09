@@ -25,10 +25,11 @@ files.
 # include "libft.h"
 # include "prototypes.h"
 # include <pthread.h>
+# include <stdatomic.h>
 
 // Window & Image
-# define WIDTH 1200
-# define HEIGHT 1000
+# define WIDTH 3000
+# define HEIGHT 2000
 
 // Tuples
 // Ray data indexes
@@ -117,7 +118,7 @@ typedef struct s_tree
 	t_scene				*scene;
 	pthread_t			*threads;
 	pthread_mutex_t		index_lock;
-	pthread_mutex_t		pixel_put_lock;
+	// pthread_mutex_t		pixel_put_lock;
 	size_t				thread_count;
 	size_t				thread_index;
 }						t_tree;
@@ -215,7 +216,7 @@ typedef struct s_plane
 	t_tuple				vector;
 	t_matrix			transform;
 	t_tuple				normal;
-	bool				is_normal_set;
+	atomic_bool			is_normal_set;
 	pthread_mutex_t		normal_lock;
 }						t_plane;
 

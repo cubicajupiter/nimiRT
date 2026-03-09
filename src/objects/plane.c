@@ -12,6 +12,7 @@
 
 #include "miniRT.h"
 
+static void	plane_normal_get_helper(t_tuple dst, t_plane *plane, t_tuple point);
 static inline int	plane_intersect_math(t_fl *time, t_plane *plane, t_ray ray);
 
 int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
@@ -35,10 +36,9 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 		|| translation(plane->transform, pos[X], pos[Y], pos[Z]) != SUCCESS
 		|| rotation_full3d(plane->transform, plane->vector) != SUCCESS
 		|| vector_new(plane->normal, 0, 0, 0) != SUCCESS
-		|| vec_push(t->scene->objects, &object) != SUCCESS)
+		|| vec_push(t->scene->objects, &object) != SUCCESS
+		|| pthread_mutex_init(&plane->normal_lock, NULL))
 		return (ft_error(EINHERIT, "plane_new"));
-	if (pthread_mutex_init(&plane->normal_lock, NULL))
-		return (ft_error(EINHERIT, "pthread_mutex_init"));
 	if (dst)
 		*dst = vec_get(t->scene->objects, object.id);
 	return (SUCCESS);
@@ -46,9 +46,6 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 
 int	plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point)
 {
-	t_tuple		obj_point;
-	t_tuple		obj_normal;
-
 	if (!dst || !plane || !point)
 		return (ft_error(EINVAL, "plane_normal_get"));
 	if (plane->is_normal_set == true)
@@ -58,24 +55,28 @@ int	plane_normal_get(t_tuple dst, t_plane *plane, t_tuple point)
 		if (pthread_mutex_lock(&plane->normal_lock))
 			return (ft_error(EINHERIT, "pthread_mutex_lock"));
 		if (plane->is_normal_set == true)
-		{
-			if (pthread_mutex_unlock(&plane->normal_lock))
-				return (ft_error(EINHERIT, "pthread_mutex_unlock"));
 			tuple_copy(dst, plane->normal);
-		}
 		else
 		{
-			normal_object_point_get(obj_point, plane->transform, point);
-			vector_new(obj_normal, 0, 1, 0);
-			normal_scene_vector_get(dst, plane->transform, obj_normal);
-			normalize_apply(dst);
-			tuple_copy(plane->normal, dst);
+			plane_normal_get_helper(dst, plane, point);
 			plane->is_normal_set = true;
-			if (pthread_mutex_unlock(&plane->normal_lock))
-				return (ft_error(EINHERIT, "pthread_mutex_unlock"));
 		}
+		if (pthread_mutex_unlock(&plane->normal_lock))
+			return (ft_error(EINHERIT, "pthread_mutex_unlock"));
 	}
 	return (SUCCESS);
+}
+
+static void	plane_normal_get_helper(t_tuple dst, t_plane *plane, t_tuple point)
+{
+	t_tuple		obj_point;
+	t_tuple		obj_normal;
+
+	normal_object_point_get(obj_point, plane->transform, point);
+	vector_new(obj_normal, 0, 1, 0);
+	normal_scene_vector_get(dst, plane->transform, obj_normal);
+	normalize_apply(dst);
+	tuple_copy(plane->normal, dst);
 }
 
 int	plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray)
