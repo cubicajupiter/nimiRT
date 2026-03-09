@@ -1,5 +1,4 @@
 *.json
-*.supp
 *obj/
 .cache
 *.a
