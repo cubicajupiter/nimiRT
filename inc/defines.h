@@ -113,8 +113,7 @@ typedef struct s_tree
 {
 	mlx_t				*window;
 	mlx_image_t			*image;
-	t_arena				*a_sys;
-	t_arena				*a_buf;
+	t_arena				*arena;
 	t_scene				*scene;
 	pthread_t			*threads;
 	pthread_mutex_t		index_lock;

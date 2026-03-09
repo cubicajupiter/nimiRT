@@ -23,10 +23,8 @@ int	free_and_destroy(t_tree *t)
 			ft_error(EINHERIT, "memory_free");
 		if (t->window && t->image)
 			window_destroy(t->window, t->image);
-		if (t->a_sys)
-			ft_arena_free(&t->a_sys);
-		if (t->a_buf)
-			ft_arena_free(&t->a_buf);
+		if (t->arena)
+			ft_arena_free(&t->arena);
 	}
 	if (pthread_mutex_destroy(&t->index_lock))
 		ft_error(EINHERIT, "pthread_mutex_destroy");

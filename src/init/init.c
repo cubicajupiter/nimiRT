@@ -44,10 +44,8 @@ static int	program_init(t_tree *t)
 {
 	if (!t)
 		return (ft_error(EINVAL, "program_init"));
-	t->a_sys = NULL;
-	t->a_buf = NULL;
-	if (ft_arena_init(&t->a_sys, BUF_SIZE) != SUCCESS
-		|| ft_arena_init(&t->a_buf, BUF_SIZE) != SUCCESS)
+	t->arena = NULL;
+	if (ft_arena_init(&t->arena, BUF_SIZE) != SUCCESS)
 		return (ft_error(EINHERIT, "program_init"));
 	return (SUCCESS);
 }
@@ -63,11 +61,11 @@ static int	scene_init(t_tree *t)
 	new = NULL;
 	objects = NULL;
 	xs = NULL;
-	if (ft_arena_alloc(t->a_buf, (void **)&new, sizeof(t_scene)) != SUCCESS
+	if (ft_arena_alloc(t->arena, (void **)&new, sizeof(t_scene)) != SUCCESS
 		|| ft_memset(new, 0, sizeof(t_scene)) == NULL
-		|| vec_alloc(&objects, t->a_buf) != SUCCESS
+		|| vec_alloc(&objects, t->arena) != SUCCESS
 		|| vec_new(objects, 0, sizeof(t_object)) != SUCCESS
-		|| vec_alloc(&xs, t->a_buf) != SUCCESS
+		|| vec_alloc(&xs, t->arena) != SUCCESS
 		|| vec_new(xs, 0, sizeof(t_xs)) != SUCCESS)
 		return (ft_error(EINHERIT, "scene_init"));
 	new->objects = objects;

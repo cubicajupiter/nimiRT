@@ -23,7 +23,7 @@ int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 	if (!pos || !vector || !t)
 		return (ft_error(EINVAL, "plane_new"));
 	plane = NULL;
-	if (ft_arena_alloc(t->a_buf, (void **)&plane, sizeof(t_plane)) != SUCCESS
+	if (ft_arena_alloc(t->arena, (void **)&plane, sizeof(t_plane)) != SUCCESS
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "plane_new"));
 	object.type = PLANE;

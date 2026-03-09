@@ -31,7 +31,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	if (!pos || !vector || !t)
 		return (ft_error(EINVAL, "cylinder_new"));
 	cylinder = NULL;
-	if (ft_arena_alloc(t->a_buf, (void **)&cylinder,
+	if (ft_arena_alloc(t->arena, (void **)&cylinder,
 			sizeof(t_cylinder)) != SUCCESS
 		|| ft_memset(cylinder, 0, sizeof(t_cylinder)) == NULL
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)

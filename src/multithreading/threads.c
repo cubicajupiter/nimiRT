@@ -22,7 +22,7 @@ static void	ray_trace(t_tree *t, t_scene *s, size_t i);
 
 int	threads_run(t_tree *t)
 {
-	if (ft_arena_alloc(t->a_buf, (void **)&t->threads,
+	if (ft_arena_alloc(t->arena, (void **)&t->threads,
 			sizeof(pthread_t) * DEFAULT_THREADS) != SUCCESS)
 		return (ft_error(EINHERIT, "threads_run"));
 	if (pthread_mutex_init(&t->index_lock, NULL))
@@ -65,7 +65,7 @@ static int	thread_init(size_t *i, t_scene *s, t_tree *t)
 	*i = t->thread_index++;
 	if (pthread_mutex_unlock(&t->index_lock))
 		return (ft_error(EINHERIT, "pthread_mutex_unlock"));
-	vec_alloc(&objects, t->a_buf);
+	vec_alloc(&objects, t->arena);
 	vec_new(objects, t->scene->objects->len, sizeof(t_object));
 	vec_copy(objects, t->scene->objects);
 	s->objects = objects;

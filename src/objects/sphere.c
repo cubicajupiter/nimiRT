@@ -30,7 +30,7 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 		return (ft_error(EINVAL, "sphere_new"));
 	sphere = NULL;
 	ft_memset(&object, 0, sizeof(t_object));
-	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
+	if (ft_arena_alloc(t->arena, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
 		|| ft_memset(sphere, 0, sizeof(t_sphere)) == NULL
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
