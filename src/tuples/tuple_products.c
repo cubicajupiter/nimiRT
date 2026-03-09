@@ -6,14 +6,11 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/04 14:40:06 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/09 18:15:48 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:44:11 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-//POTENTIAL POINT OF OPTIMISATION: remove most vector and point W stuff: those of it that do nothing but provide debug utility.
-//particularly after debugging! Computing W values is mostly dead weight.
 
 /*
 Dot product calculates the cosine of the angle between two (unit) vectors.
@@ -27,8 +24,8 @@ int	vector_dot(t_fl *dot, t_tuple a, t_tuple b)
 }
 
 /*
-Dot product selective calculates the dot product between two of the angles of a vector,
-ignoring the selected vector.
+Dot product selective calculates the dot product between two of the angles of
+a vector, ignoring the selected vector.
 */
 int	vector_dot_selective(t_fl *dot, t_tuple a, t_tuple b, int ignore)
 {

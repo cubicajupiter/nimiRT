@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:55:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/09 17:30:52 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:50:20 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	input_handle_and_init(t_tree *tree, int ac, char **av)
 	int			flag;
 
 	mode = RELEASE;
+	flag = SUCCESS;
 	if (ac > 2)
 	{
 		flag = mode_parse(&mode, av[2]);
