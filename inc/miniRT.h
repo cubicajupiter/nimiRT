@@ -223,7 +223,7 @@ int		trio_minus_apply(t_trio dst, t_trio c);
 int		trio_add3_get(t_trio dst, t_trio a, t_trio b, t_trio c);
 
 // Exit
-int		memory_free(t_tree *t);
+int		free_and_destroy(t_tree *t);
 int		error_exit(int flag, t_tree *t);
 int		rt_missing(char *path);
 int		rt_invalid(char c);

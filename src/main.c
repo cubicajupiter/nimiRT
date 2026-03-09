@@ -27,21 +27,21 @@ int	main(int ac, char **av)
 	if (flag != SUCCESS)
 		return (error_exit(flag, &tree));
 	//microsecond precision tracking of the performance of ray_trace()
-	#define _GNU_SOURCE
-	#include <time.h>
-	struct timespec ts; 
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	long long start_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
+	// #define _GNU_SOURCE
+	// #include <time.h>
+	// struct timespec ts; 
+	// clock_gettime(CLOCK_MONOTONIC, &ts);
+	// long long start_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
 	// ray_trace(&tree);
 	if (ray_multithread(&tree) != SUCCESS)
 		return (error_exit(flag, &tree));
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	long long end_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
-	printf("Elapsed time: %lld microseconds\n", end_time - start_time);
+	// clock_gettime(CLOCK_MONOTONIC, &ts);
+	// long long end_time = ((long long) ts.tv_sec * 1000000000LL + ts.tv_nsec) / 1000;
+	// printf("Elapsed time: %lld microseconds\n", end_time - start_time);
 	mlx_loop(tree.window);
-	if (errno)
+	if (errno && errno != EAGAIN)
 		ft_perror();
-	memory_free(&tree);
+	free_and_destroy(&tree);
 	return (EXIT_SUCCESS);
 }
 
