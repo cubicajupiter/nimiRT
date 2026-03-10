@@ -19,7 +19,7 @@ double	ft_sin(double x)
 	term = x;
 	sum = x;
 	i = 1;
-	while (i < 10)
+	while (i < 20)
 	{
 		term *= -x * x / ((2 * i) * (2 * i + 1));
 		sum += term;

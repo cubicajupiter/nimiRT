@@ -102,10 +102,10 @@ int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
 						t_ray ray)
 {
-	t_fl		discriminant;
-	t_fl		a;
-	t_fl		b;
-	t_fl		c;
+	t_fl	discriminant;
+	t_fl	a;
+	t_fl	b;
+	t_fl	c;
 
 	if (!time || !cylinder || !ray)
 		return (ft_error(EINVAL, "cylinder_intersect_math"));
@@ -121,7 +121,7 @@ static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
-	time[0] = (-b - ft_sqrt(discriminant)) / (2 * a);
-	time[1] = (-b + ft_sqrt(discriminant)) / (2 * a);
+	time[0] = (-b - sqrtf(discriminant)) / (2 * a);
+	time[1] = (-b + sqrtf(discriminant)) / (2 * a);
 	return (TRUE);
 }

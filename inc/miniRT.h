@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 14:55:32 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/09 17:52:15 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:06:16 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 int		init(t_tree *t, char *rt_file);
 int		rt_parse(t_tree *t, char *rt_file);
 int		rt_invalid(char c);
+bool	rt_max_size(char *value);
 int		main_info_parse(t_tree *t, char *line);
 int		objects_parse(t_tree *t, char *line);
 int		cylinder_parse(t_object **object, t_tree *t, char *line);

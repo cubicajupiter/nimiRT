@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/09 19:36:18 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/10 16:15:28 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ files.
 # include <stdatomic.h>
 
 // Window & Image
-# define WIDTH 3000
-# define HEIGHT 2000
+# define WIDTH 1200
+# define HEIGHT 800
 
 // Tuples
 // Ray data indexes
@@ -58,8 +58,7 @@ files.
 // Epsilon for float margin of error.
 # define EPSILON 1e-6
 # define OVERPOINT_HEIGHT 1e-2
-// # define EPSILON 1e-5
-// // NOTE: Was this value, but made bigger to remove spottiness.
+# define MAX_RENDER_SIZE 100000.0f
 
 // Weighting for Phong lighting components
 # define AMBIENT_RATIO 0.1f

@@ -138,11 +138,14 @@ static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere,
 	b *= -2.0f;
 	vector_dot(&c, sphere_to_ray, sphere_to_ray);
 	c -= sphere->radius * sphere->radius;
+	// printf("a: %f b: %f c: %f\n", a, b, c);
 	discriminant = (b * b) - (4.0f * a * c);
+	// printf("dis: %f\n", discriminant);
 	if (discriminant < 0.0f)
 		return (FALSE);
-	time[0] = (-b - ft_sqrt(discriminant)) / (2.0f * a);
-	time[1] = (-b + ft_sqrt(discriminant)) / (2.0f * a);
+	time[0] = (-b - sqrtf(discriminant)) / (2.0f * a);
+	time[1] = (-b + sqrtf(discriminant)) / (2.0f * a);
+	// printf("time[0]: %f time[1]: %f\n", time[0], time[1]);
 	if (time[0] < 0.0 && time[1] < 0.0)
 		return (FALSE);
 	return (TRUE);

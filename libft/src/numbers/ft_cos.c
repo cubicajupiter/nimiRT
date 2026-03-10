@@ -19,7 +19,7 @@ double	ft_cos(double x)
 	term = 1.0;
 	sum = 1.0;
 	i = 1;
-	while (i < 10)
+	while (i < 20)
 	{
 		term *= -x * x / ((2 * i - 1) * (2 * i));
 		sum += term;
