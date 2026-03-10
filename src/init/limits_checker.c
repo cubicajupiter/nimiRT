@@ -70,7 +70,5 @@ bool	values_within_limits(t_scene *s)
 			return (false);
 		i++;
 	}
-	if (!values_make_sense(s))
-		return (false);
 	return (true);
 }
