@@ -6,23 +6,25 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:46:04 by thblack-          #+#    #+#             */
-/*   Updated: 2025/10/01 16:46:11 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:06:56 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stddef.h>
 
 double	ft_sqrt(double nbr)
 {
 	double	res;
-	int		i;
+	size_t	i;
 
 	res = nbr;
 	i = 0;
 	if (nbr <= 0)
 		return (0);
-	while (i < 20)
+	while (i < 10)
 	{
 		res = 0.5 * (res + nbr / res);
-		i++;
+		++i;
 	}
 	return (res);
 }

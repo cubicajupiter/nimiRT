@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   canvas.c                                           :+:      :+:    :+:   */
+/*   ray_trace.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 15:34:03 by thblack-          #+#    #+#             */
-/*   Updated: 2026/02/02 15:37:44 by thblack-         ###   ########.fr       */
+/*   Created: 2026/03/09 17:05:52 by thblack-          #+#    #+#             */
+/*   Updated: 2026/03/09 17:06:19 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	canvas_put(mlx_image_t *image, t_trio color)
+void	ray_trace(t_tree *t, t_scene *s, size_t i)
 {
-	t_uint	x;
-	t_uint	y;
+	t_xs	hit;
+	t_ray	ray;
+	size_t	x;
+	size_t	y;
 
-	y = 0;
+	camera_compute(&s->camera);
+	y = i;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (pixel_put(image, x, y, color) != SUCCESS)
-				return (ERROR);
+			pixel_ray_get(ray, &s->camera, x, y);
+			if (ray_to_scene_hit_get(&hit, ray, s))
+			{
+				hit_shade(&hit, ray, s);
+				pixel_put(t->image, x, y, hit.object->material.shader.combined);
+			}
 			x++;
 		}
-		y++;
+		y += DEFAULT_THREADS;
 	}
-	return (SUCCESS);
 }

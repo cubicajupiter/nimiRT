@@ -1,0 +1,12 @@
+{
+   <dl_address>
+   Memcheck:Addr8
+   ...
+   fun:*dl_open*
+}
+{
+   <dl_malloc>
+   Memcheck:Leak
+   ...
+   fun:dlopen*
+}

@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:33:14 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/05 12:19:28 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:28:18 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	magnitude_get(t_fl *magnitude, t_tuple vector)
 {
 	if (!magnitude || !vector)
 		return (ft_error(EINVAL, "magnitude_get"));
-	*magnitude = sqrtf(vector[X] * vector[X]
+	*magnitude = ft_sqrt(vector[X] * vector[X]
 			+ vector[Y] * vector[Y]
 			+ vector[Z] * vector[Z]);
 	return (SUCCESS);
@@ -59,5 +59,3 @@ int	normalize_apply(t_tuple vector)
 	vector[Z] /= magnitude;
 	return (SUCCESS);
 }
-
-

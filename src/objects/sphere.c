@@ -6,14 +6,15 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 17:22:36 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/01 11:14:24 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 18:22:41 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "miniRT.h"
 
-static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray);
+static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere,
+						t_ray ray);
 
 // sphere_new()
 // Creates a new sphere object, malloc'ing space on the arena, and
@@ -30,7 +31,7 @@ int	sphere_new(t_object **dst, t_trio pos, t_fl radius, t_tree *t)
 		return (ft_error(EINVAL, "sphere_new"));
 	sphere = NULL;
 	ft_memset(&object, 0, sizeof(t_object));
-	if (ft_arena_alloc(t->a_buf, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
+	if (ft_arena_alloc(t->arena, (void **)&sphere, sizeof(t_sphere)) != SUCCESS
 		|| ft_memset(sphere, 0, sizeof(t_sphere)) == NULL
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
 		return (ft_error(EINHERIT, "sphere_new"));
@@ -120,7 +121,8 @@ int	sphere_intersect_get(t_vec *xs, t_object *object, t_ray ray)
 // Calculates mathss of intersections. Further reading required to fully
 // understand. If discriminant is less than 0 then ray misses the sphere and
 // the function returns FALSE.
-static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
+static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere,
+						t_ray ray)
 {
 	t_fl		discriminant;
 	t_tuple		sphere_to_ray;
@@ -139,8 +141,8 @@ static inline int	sphere_intersect_math(t_fl *time, t_sphere *sphere, t_ray ray)
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
-	time[0] = (-b - sqrtf(discriminant)) / (2.0f * a);
-	time[1] = (-b + sqrtf(discriminant)) / (2.0f * a);
+	time[0] = (-b - ft_sqrt(discriminant)) / (2.0f * a);
+	time[1] = (-b + ft_sqrt(discriminant)) / (2.0f * a);
 	if (time[0] < 0.0 && time[1] < 0.0)
 		return (FALSE);
 	return (TRUE);

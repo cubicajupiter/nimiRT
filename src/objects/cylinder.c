@@ -6,7 +6,7 @@
 /*   By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 09:24:11 by thblack-          #+#    #+#             */
-/*   Updated: 2026/03/01 11:17:06 by thblack-         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:55:34 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "miniRT.h"
 
 static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
-				t_ray ray);
+						t_ray ray);
 
 // cylinder_new()
 // Creates a new cylinder object, malloc'ing space on the arena, and
@@ -31,7 +31,7 @@ int	cylinder_new(t_object **dst, t_tuple pos, t_tuple vector, t_tree *t)
 	if (!pos || !vector || !t)
 		return (ft_error(EINVAL, "cylinder_new"));
 	cylinder = NULL;
-	if (ft_arena_alloc(t->a_buf, (void **)&cylinder,
+	if (ft_arena_alloc(t->arena, (void **)&cylinder,
 			sizeof(t_cylinder)) != SUCCESS
 		|| ft_memset(cylinder, 0, sizeof(t_cylinder)) == NULL
 		|| ft_memset(&object, 0, sizeof(t_object)) == NULL)
@@ -99,7 +99,8 @@ int	cylinder_hit_get(t_fl *dst, t_cylinder *cylinder, t_ray ray)
 // Calculates mathss of intersections. Further reading required to fully
 // understand. If discriminant is less than 0 then ray misses the cylinder and
 // the function returns FALSE.
-static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ray ray)
+static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder,
+						t_ray ray)
 {
 	t_fl		discriminant;
 	t_fl		a;
@@ -120,7 +121,7 @@ static inline int	cylinder_intersect_math(t_fl *time, t_cylinder *cylinder, t_ra
 	discriminant = (b * b) - (4.0f * a * c);
 	if (discriminant < 0.0f)
 		return (FALSE);
-	time[0] = (-b - sqrt(discriminant)) / (2 * a);
-	time[1] = (-b + sqrt(discriminant)) / (2 * a);
+	time[0] = (-b - ft_sqrt(discriminant)) / (2 * a);
+	time[1] = (-b + ft_sqrt(discriminant)) / (2 * a);
 	return (TRUE);
 }

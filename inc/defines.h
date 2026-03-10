@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 15:49:11 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/06 11:16:04 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:36:18 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ files.
 # include "MLX42.h"
 # include "libft.h"
 # include "prototypes.h"
+# include <pthread.h>
+# include <stdatomic.h>
 
 // Window & Image
-# define WIDTH 1200
-# define HEIGHT 1000
+# define WIDTH 3000
+# define HEIGHT 2000
 
 // Tuples
 // Ray data indexes
@@ -74,6 +76,14 @@ files.
 # define EYE 0
 # define NORMAL 1
 
+// Multithreading
+# ifndef DEFAULT_THREADS
+#  define DEFAULT_THREADS 1
+# endif
+
+// Error Tracking
+# define MUTEX_FAIL 2
+
 // Types (custom types allow for easy switching later)
 typedef float			t_fl; // Custom float type
 typedef uint32_t		t_uint; // Custom uint type
@@ -106,9 +116,13 @@ typedef struct s_tree
 {
 	mlx_t				*window;
 	mlx_image_t			*image;
-	t_arena				*a_sys;
-	t_arena				*a_buf;
+	t_arena				*arena;
 	t_scene				*scene;
+	pthread_t			*threads;
+	pthread_mutex_t		index_lock;
+	// pthread_mutex_t		pixel_put_lock;
+	size_t				thread_count;
+	size_t				thread_index;
 }						t_tree;
 
 // Scene, the lighting, viewpoint, objects and intersections from both camera
@@ -204,7 +218,8 @@ typedef struct s_plane
 	t_tuple				vector;
 	t_matrix			transform;
 	t_tuple				normal;
-	bool				is_normal_set;
+	atomic_bool			is_normal_set;
+	pthread_mutex_t		normal_lock;
 }						t_plane;
 
 typedef struct s_cylinder
