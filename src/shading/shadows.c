@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "defines.h"
+#include "libft.h"
 #include "miniRT.h"
 
 static int	overpoint_get(t_xs *hit);
@@ -55,7 +56,8 @@ static int	overpoint_get(t_xs *hit)
 
 	if (!hit)
 		return (ft_error(EINVAL, "overpoint_get"));
-	vector_multiply_get(offset_v, OVERPOINT_HEIGHT * hit->t, hit->normal_vector);
+	vector_multiply_get(offset_v, OVERPOINT_HEIGHT * hit->t,
+		hit->normal_vector);
 	tuple_add_get(hit->over_point, hit->point, offset_v);
 	return (SUCCESS);
 }
