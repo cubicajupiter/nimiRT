@@ -98,7 +98,7 @@ static int	plane_parse(t_object **object, t_tree *t, char *line)
 		return (flag);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
-	flag = ft_atovector(vector, line);
+	flag = ft_atovector(vector, line, "plane normal");
 	if (flag != SUCCESS)
 		return (flag);
 	if (plane_new(object, point, vector, t) != SUCCESS)

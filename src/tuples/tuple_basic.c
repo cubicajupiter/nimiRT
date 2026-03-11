@@ -55,3 +55,14 @@ int	tuple_minus_apply(t_tuple dst, const t_tuple decrement)
 	dst[W] -= decrement[W];
 	return (SUCCESS);
 }
+
+int	vector_iszero(t_tuple src)
+{
+	if (!src)
+		return (ft_error(EINVAL, "vector_iszero"));
+	if (is_float_equal(src[X], EPSILON)
+		&& is_float_equal(src[Y], EPSILON)
+		&& is_float_equal(src[Z], EPSILON))
+		return (TRUE);
+	return (FALSE);
+}

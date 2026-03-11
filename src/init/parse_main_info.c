@@ -83,7 +83,8 @@ static int	camera_parse(t_tree *t, char *line)
 		return (flag);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)
 		return (rt_invalid(*line));
-	flag = ft_atovector(t->scene->camera.ray[DIRECTION], line);
+	flag = ft_atovector(t->scene->camera.ray[DIRECTION],
+			line, "camera orientation");
 	if (flag != SUCCESS)
 		return (flag);
 	if (next_var_get(&line, ft_isfloat) != SUCCESS || !*line)

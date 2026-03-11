@@ -50,7 +50,7 @@ static int	cylinder_main_parse(t_tuple position, t_tuple axis, char **line)
 		return (flag);
 	if (next_var_get(line, ft_isfloat) != SUCCESS || !**line)
 		return (rt_invalid(**line));
-	flag = ft_atovector(axis, *line);
+	flag = ft_atovector(axis, *line, "cylinder axis");
 	if (flag != SUCCESS)
 		return (flag);
 	return (SUCCESS);

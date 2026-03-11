@@ -29,7 +29,7 @@ int	ft_atopoint(t_tuple dst, const char *nptr)
 	return (point_new(dst, xyz[X], xyz[Y], xyz[Z]));
 }
 
-int	ft_atovector(t_tuple dst, const char *nptr)
+int	ft_atovector(t_tuple dst, const char *nptr, char *type)
 {
 	t_fl	xyz[3];
 	int		flag;
@@ -39,10 +39,11 @@ int	ft_atovector(t_tuple dst, const char *nptr)
 		return (FAIL);
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "ft_atovector"));
-	if (is_float_equal(xyz[0], EPSILON)
-		&& is_float_equal(xyz[1], EPSILON)
-		&& is_float_equal(xyz[2], EPSILON))
-		return (rt_zerovector("cylinder axis"));
+	if (vector_iszero(xyz))
+	{
+		rt_zerovector(type);
+		return (FAIL);
+	}
 	return (vector_new(dst, xyz[X], xyz[Y], xyz[Z]));
 }
 

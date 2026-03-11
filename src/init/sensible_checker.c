@@ -63,10 +63,10 @@ bool	values_make_sense(t_scene *s)
 	bool		flag;
 	size_t		i;
 
-	if (!s)
-		return (false);
 	flag = true;
 	i = 0;
+	if (s->camera.set == false)
+		return (rt_no_camera());
 	if (!sensible_point(s->camera.ray[ORIGIN]))
 		return (rt_max_size("camera coordinates"));
 	if (!sensible_point(s->light.point))

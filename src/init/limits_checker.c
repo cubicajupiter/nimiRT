@@ -60,6 +60,8 @@ bool	values_within_limits(t_scene *s)
 		return (false);
 	if (!valid_vector(s->camera.ray[DIRECTION], "camera vector"))
 		return (false);
+	if (vector_iszero(s->camera.ray[DIRECTION]))
+		return (rt_zerovector("camera direction"));
 	if (s->camera.fov < 0.0f || s->camera.fov > PI + EPSILON)
 		return (rt_out_of_limits("camera fov"));
 	i = 0;
