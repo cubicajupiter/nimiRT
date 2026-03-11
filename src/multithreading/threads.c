@@ -55,9 +55,10 @@ static int	thread_init(size_t *i, t_scene *s, t_tree *t)
 	if (pthread_mutex_lock(&t->index_lock))
 		return (ft_error(EINHERIT, "pthread_mutex_lock"));
 	*i = t->thread_index++;
-	vec_alloc(&objects, NULL);
-	vec_new(objects, t->scene->objects->len, sizeof(t_object));
-	vec_copy(objects, t->scene->objects);
+		vec_alloc(&objects, NULL);
+		vec_new(objects, t->scene->objects->len, sizeof(t_object));
+	if (t->scene->objects->len > 0)
+		vec_copy(objects, t->scene->objects);
 	s->objects = objects;
 	if (pthread_mutex_unlock(&t->index_lock))
 		return (ft_error(EINHERIT, "pthread_mutex_unlock"));
