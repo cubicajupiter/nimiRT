@@ -62,26 +62,6 @@ int	rotation_z(t_matrix dst, t_fl radians)
 	return (SUCCESS);
 }
 
-int	rotation_full3d(t_matrix dst, t_tuple normal)
-{
-	t_fl		dp;
-	t_matrix	z_rotate_transform;
-	t_matrix	x_rotate_transform;
-	t_matrix	y_rotate_transform;
-
-	if (!dst || !normal)
-		return (ft_error(EINVAL, "rotation_full3D"));
-	vector_dot_selective(&dp, normal, (t_tuple){0, 1, 0, 0}, X);
-	rotation_x(x_rotate_transform, acos(dp));
-	vector_dot_selective(&dp, normal, (t_tuple){0, 1, 0, 0}, Y);
-	rotation_y(y_rotate_transform, acos(dp));
-	vector_dot_selective(&dp, normal, (t_tuple){0, 1, 0, 0}, Z);
-	rotation_z(z_rotate_transform, acos(dp));
-	chain4_apply(dst, x_rotate_transform, z_rotate_transform,
-		y_rotate_transform);
-	return (SUCCESS);
-}
-
 /* Rotation_xz: rotation clockwise in the x di mension (e.g. merry-go-round)
  * and rotation clockwise in the z dimension (e.g. bikewheels beneath
  * you as the rider) 

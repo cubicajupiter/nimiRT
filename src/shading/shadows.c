@@ -33,6 +33,8 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 		return (ft_error(EINVAL, "is_shadowed"));
 	tuple_minus_get(direction_v, scene->light.point, hit->point);
 	magnitude_get(&distance, direction_v);
+	if (is_float_equal(distance, EPSILON))
+		return (TRUE);
 	normalize_apply(direction_v);
 	if (hit->object->type == PLANE)
 		ray_new(light_ray, hit->point, direction_v);
