@@ -69,6 +69,7 @@ int	closest_forward_hit_get(t_fl *dst, t_fl *time)
 {
 	if (!dst || !time)
 		return (ft_error(EINVAL, "closest_hit_get"));
+	// printf("dst: %f time[0]: %f time[1]%f\n", *dst, time[0], time[1]);
 	if (time[0] > 0.0f && time[1] > 0.0f)
 	{
 		if (time[0] < time[1])

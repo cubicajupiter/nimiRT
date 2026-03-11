@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "defines.h"
 #include "miniRT.h"
 
 static int	overpoint_get(t_xs *hit);
@@ -50,11 +51,11 @@ int	is_shadowed(t_xs *hit, t_scene *scene)
 
 static int	overpoint_get(t_xs *hit)
 {
-	t_tuple		offset_v;
+	t_tuple	offset_v;
 
 	if (!hit)
 		return (ft_error(EINVAL, "overpoint_get"));
-	vector_multiply_get(offset_v, OVERPOINT_HEIGHT, hit->normal_vector);
+	vector_multiply_get(offset_v, OVERPOINT_HEIGHT * hit->t, hit->normal_vector);
 	tuple_add_get(hit->over_point, hit->point, offset_v);
 	return (SUCCESS);
 }

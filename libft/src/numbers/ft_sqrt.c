@@ -21,7 +21,7 @@ double	ft_sqrt(double nbr)
 	i = 0;
 	if (nbr <= 0)
 		return (0);
-	while (i < 10)
+	while (i < 20)
 	{
 		res = 0.5 * (res + nbr / res);
 		++i;
