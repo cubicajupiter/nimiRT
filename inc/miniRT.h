@@ -31,7 +31,7 @@ bool	valid_color(t_trio color, char *value);
 int		next_var_get(char **line, int (*increment_beyond_type)(int));
 int		ft_atotrio(t_trio dst, const char *nptr);
 int		ft_atopoint(t_tuple dst, const char *nptr);
-int		ft_atovector(t_tuple dst, const char *nptr);
+int		ft_atovector(t_tuple dst, const char *nptr, char *type);
 int		parser_atof(t_fl *nbr, char *line);
 int		parser_atoi(int *nbr, char *line);
 bool	values_within_limits(t_scene *s);
@@ -151,6 +151,7 @@ int		tuple_add_get(t_tuple new, const t_tuple a, const t_tuple b);
 int		tuple_add_apply(t_tuple dst, const t_tuple increment);
 int		tuple_minus_get(t_tuple new, const t_tuple a, const t_tuple b);
 int		tuple_minus_apply(t_tuple dst, const t_tuple decrement);
+int		vector_iszero(t_tuple src);
 
 // Scale
 int		vector_multiply_get(t_tuple new, const float scalar, t_tuple vector);
@@ -212,6 +213,7 @@ int		free_and_destroy(t_tree *t);
 int		error_exit(int flag, t_tree *t);
 int		rt_missing(char *path);
 int		rt_invalid(char c);
+int		rt_no_camera(void);
 bool	rt_out_of_limits(char *value);
 int		rt_zerovector(char *value);
 int		ft_error(int code, const char *message);

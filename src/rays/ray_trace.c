@@ -27,15 +27,12 @@ void	ray_trace(t_tree *t, t_scene *s, size_t i)
 		x = 0;
 		while (x < WIDTH)
 		{
-			// if (y == HEIGHT / 8 && x == WIDTH / 2)
-			// {
-				pixel_ray_get(ray, &s->camera, x, y);
-				if (ray_to_scene_hit_get(&hit, ray, s))
-				{
-					hit_shade(&hit, ray, s);
-					pixel_put(t->image, x, y, hit.object->material.shader.combined);
-				}
-			// }
+			pixel_ray_get(ray, &s->camera, x, y);
+			if (ray_to_scene_hit_get(&hit, ray, s))
+			{
+				hit_shade(&hit, ray, s);
+				pixel_put(t->image, x, y, hit.object->material.shader.combined);
+			}
 			x++;
 		}
 		y += DEFAULT_THREADS;

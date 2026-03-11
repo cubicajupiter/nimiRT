@@ -64,47 +64,18 @@ int	rt_zerovector(char *value)
 		ft_putstr_fd(" vector has an illogical magnitude of zero\n\n", 2);
 	}
 	ft_putendl_fd(MSG_INVALID_RT, 2);
-	return (FAIL);
+	return (FALSE);
 }
 
 /*
-rt_out_of_limits()
+rt_invlid()
 Prints a custom error message letting the user know where an *.rt file might
-contain a value that falls outside set limits.
+contain a bad syntax.
 */
-bool	rt_out_of_limits(char *value)
+int	rt_no_camera(void)
 {
-	ft_putendl_fd("Error\n", 2);
-	if (value)
-	{
-		ft_putstr_fd("Value of ", 2);
-		ft_putstr_fd(value, 2);
-		ft_putstr_fd(" outside of limits\n\n", 2);
-	}
+	ft_putstr_fd("Error\n\n", 2);
+	ft_putstr_fd("File needs to define a camera in order to view the scene\n\n", 2);
 	ft_putendl_fd(MSG_INVALID_RT, 2);
-	return (false);
-}
-
-/*
-rt_out_of_limits()
-Prints a custom error message letting the user know where an *.rt file might
-contain a value that falls outside set limits.
-*/
-bool	rt_max_size(char *value)
-{
-	char	*max_size;
-
-	max_size = ft_itoa(MAX_RENDER_SIZE);
-	ft_putendl_fd("Error\n", 2);
-	if (value)
-	{
-		ft_putstr_fd("Value of ", 2);
-		ft_putstr_fd(value, 2);
-		ft_putstr_fd(" excedes maximum size of ", 2);
-		ft_putstr_fd(max_size, 2);
-		ft_putstr_fd(" for this ray tracer\n\n", 2);
-	}
-	ft_putendl_fd(MSG_INVALID_RT, 2);
-	free(max_size);
-	return (false);
+	return (FALSE);
 }

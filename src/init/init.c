@@ -37,8 +37,8 @@ int	init(t_tree *t, char *rt_file)
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "init"));
 	if (flag == FAIL
-		|| !values_within_limits(t->scene)
-		|| !values_make_sense(t->scene))
+		|| !values_make_sense(t->scene)
+		|| !values_within_limits(t->scene))
 		return (FAIL);
 	if (materials_set(t->scene) != SUCCESS)
 		return (ft_error(EINHERIT, "init"));
@@ -81,6 +81,7 @@ static int	scene_init(t_tree *t)
 		return (ft_error(EINHERIT, "scene_init"));
 	new->objects = objects;
 	new->xs = xs;
+	new->light.set = false;
 	t->scene = new;
 	return (SUCCESS);
 }

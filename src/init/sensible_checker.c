@@ -63,27 +63,24 @@ bool	values_make_sense(t_scene *s)
 	bool		flag;
 	size_t		i;
 
-	if (!s)
-		return (false);
+	flag = true;
 	i = 0;
+	if (s->camera.set == false)
+		return (rt_no_camera());
 	if (!sensible_point(s->camera.ray[ORIGIN]))
 		return (rt_max_size("camera coordinates"));
 	if (!sensible_point(s->light.point))
 		return (rt_max_size("light coordinates"));
-	while (i < s->objects->len)
+	while (i < s->objects->len && flag == true)
 	{
 		object = vec_get(s->objects, i++);
 		if (object->type == PLANE)
-		{
 			if (!sensible_transform(object->plane->transform))
 				return (rt_max_size("plane coordinates"));
-		}
-		else if (object->type == SPHERE)
+		if (object->type == SPHERE)
 			flag = sensible_sphere(object->sphere);
-		else if (object->type == CYLINDER)
+		if (object->type == CYLINDER)
 			flag = sensible_cylinder(object->cylinder);
-		if (flag == false)
-			return (false);
 	}
-	return (true);
+	return (flag);
 }
