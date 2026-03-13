@@ -26,7 +26,7 @@ int	free_and_destroy(t_tree *t)
 		if (t->window)
 			window_destroy(t->window);
 		if (t->arena)
-			ft_arena_free(&t->arena);
+			ft_arena_list_free(&t->arena);
 	}
 	if (pthread_mutex_destroy(&t->index_lock))
 		ft_error(EINHERIT, "pthread_mutex_destroy");
