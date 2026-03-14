@@ -13,6 +13,13 @@
 #include "defines.h"
 #include "miniRT.h"
 
+// ray_trace()
+// Main render loop. Calculates the camera, then loops through all pixels in the
+// image line by line. In the multithreaded version threads calculate
+// alternating lines of pixels. Given a pixel at X,Y the loop calculates the
+// ray cast by the camera through the viewport, checks to see if an object is
+// hit, then assuming there was a hit, calculates what shade (color) the pixel
+// should be before placing that pixel on the image.
 void	ray_trace(t_tree *t, t_scene *s, size_t i)
 {
 	t_xs	hit;
@@ -20,7 +27,6 @@ void	ray_trace(t_tree *t, t_scene *s, size_t i)
 	size_t	x;
 	size_t	y;
 
-	camera_compute(&s->camera);
 	y = i;
 	while (y < HEIGHT)
 	{

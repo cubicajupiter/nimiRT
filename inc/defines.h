@@ -65,9 +65,6 @@ files.
 # define DIFFUSE_RATIO 0.7f
 # define SPECULAR_RATIO 0.2f
 
-// Initial assumed number of intersections per array
-# define INIT_XS 4
-
 // PI
 # define PI 3.14159
 
@@ -81,7 +78,7 @@ files.
 # endif
 
 // Error Tracking
-# define MUTEX_FAIL 2
+# define INIT_MUTEX_FAIL 2
 
 // Types (custom types allow for easy switching later)
 typedef float			t_fl; // Custom float type
@@ -119,7 +116,6 @@ typedef struct s_tree
 	t_scene				*scene;
 	pthread_t			*threads;
 	pthread_mutex_t		index_lock;
-	// pthread_mutex_t		pixel_put_lock;
 	size_t				thread_count;
 	size_t				thread_index;
 }						t_tree;
