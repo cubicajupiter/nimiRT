@@ -35,8 +35,8 @@ static int	pointing_up_or_down(t_tuple camera_ray)
 {
 	if (!camera_ray)
 		return (ft_error(EINVAL, "camera_ray"));
-	if (camera_ray[X] < EPSILON
-		&& camera_ray[Z] < EPSILON
+	if (is_float_equal(camera_ray[X], EPSILON)
+		&& is_float_equal(camera_ray[Z], EPSILON)
 		&& !is_float_equal(camera_ray[Y], 0.0))
 		return (TRUE);
 	return (FALSE);
