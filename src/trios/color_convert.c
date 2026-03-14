@@ -23,6 +23,9 @@ static t_fl	color_8bit_to_float(int c)
 	return ((t_fl)c / 255.0f);
 }
 
+// color_trio_to_uint()
+// Converts a color float trio to a single 8 bit RGB unsigned 32 bit integer.
+// Used for passing shading information to MLX.
 int	color_trio_to_uint(uint32_t *color, t_trio c)
 {
 	if (!color || !c)
@@ -35,6 +38,8 @@ int	color_trio_to_uint(uint32_t *color, t_trio c)
 	return (SUCCESS);
 }
 
+// color_uint_to_trio()
+// Converts a single 8 bit RGB unsigned 32 bit integer to a color float trio.
 int	color_uint_to_trio(t_trio c, int *color)
 {
 	if (!c || !color)

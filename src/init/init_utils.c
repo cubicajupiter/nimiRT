@@ -12,6 +12,9 @@
 
 #include "miniRT.h"
 
+// valid_rt_data()
+// Checks if a string contains only numbers, signs, period, spaces and commas.
+// Returns true or false.
 bool	valid_rt_data(char *line)
 {
 	while (*line)
@@ -26,6 +29,10 @@ bool	valid_rt_data(char *line)
 	return (true);
 }
 
+// next_var_get()
+// Increments a string **line using a function pointer that describes what kind
+// of data to increment past. Used to fetch the next data entry for each line
+// in an *.rt file.
 int	next_var_get(char **line, int (*increment_beyond_type)(int))
 {
 	char	*tmp;
@@ -44,6 +51,8 @@ int	next_var_get(char **line, int (*increment_beyond_type)(int))
 	return (SUCCESS);
 }
 
+// parser_atof()
+// A wrapper for atof() that contains extra error checking and printing.
 int	parser_atof(t_fl *nbr, char *line)
 {
 	int	flag;
@@ -58,6 +67,8 @@ int	parser_atof(t_fl *nbr, char *line)
 	return (SUCCESS);
 }
 
+// parser_atoi()
+// A wrapper for atoi() that contains extra error checking and printing.
 int	parser_atoi(int	*nbr, char *line)
 {
 	int	flag;

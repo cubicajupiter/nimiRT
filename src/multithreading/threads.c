@@ -18,6 +18,9 @@ static int	close_thread(pthread_t *t, size_t i);
 static void	*thread_routine(void *data);
 static int	thread_init(size_t *i, t_scene *s, t_tree *t);
 
+// threads_run()
+// Creates the threads for the program and calls the routine which itself calls
+// the main ray_trace() renderer.
 int	threads_run(t_tree *t)
 {
 	t->thread_count = 0;
@@ -65,6 +68,8 @@ static int	thread_init(size_t *i, t_scene *s, t_tree *t)
 	return (SUCCESS);
 }
 
+// threads_join()
+// Waits for each thread to finish its rouutine then closes each one.
 int	threads_join(t_tree *t)
 {
 	uint32_t	i;

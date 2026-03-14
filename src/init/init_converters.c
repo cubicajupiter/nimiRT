@@ -16,6 +16,8 @@
 static const char	*next_csv_get(const char *nptr);
 static int			ft_atotuple_helper(t_fl *dst, const char *nptr);
 
+// ft_atopoint()
+// ASCII to tuple point converter
 int	ft_atopoint(t_tuple dst, const char *nptr)
 {
 	t_fl	xyz[3];
@@ -29,6 +31,8 @@ int	ft_atopoint(t_tuple dst, const char *nptr)
 	return (point_new(dst, xyz[X], xyz[Y], xyz[Z]));
 }
 
+// ft_atovector()
+// ASCII to tuple vector converter
 int	ft_atovector(t_tuple dst, const char *nptr, char *type)
 {
 	t_fl	xyz[3];
@@ -69,6 +73,9 @@ static int	ft_atotuple_helper(t_fl *dst, const char *nptr)
 	return (SUCCESS);
 }
 
+// ft_atotrio()
+// ASCII to color float trio converter. Assumes the input is in 8 bit and
+// converts each value to float.
 int	ft_atotrio(t_trio dst, const char *nptr)
 {
 	const char	*ptr[3];

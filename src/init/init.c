@@ -18,6 +18,11 @@ static int	program_init(t_tree *t);
 static int	scene_init(t_tree *t);
 static int	window_and_image_init(t_tree *t);
 
+// init()
+// Main initializer for the program. Sets up the resources such as memory arena,
+// MLX window and image, threads and mutexes, and initializes values, then
+// parses the *.rt file, all the while checking for failures, invalid input or
+// non-sensical values.
 int	init(t_tree *t, char *rt_file)
 {
 	int	flag;
@@ -27,7 +32,7 @@ int	init(t_tree *t, char *rt_file)
 	if (pthread_mutex_init(&t->index_lock, NULL))
 	{
 		ft_error(EINHERIT, "pthread_mutex_init");
-		return (MUTEX_FAIL);
+		return (INIT_MUTEX_FAIL);
 	}
 	if (program_init(t) != SUCCESS
 		|| scene_init(t) != SUCCESS

@@ -15,6 +15,9 @@
 static int	cylinder_main_parse(t_tuple position, t_tuple axis, char **line);
 static int	cylinder_size_parse(t_fl *radius, t_fl *height, char **line);
 
+// cylinder_parse()
+// A separate set of functions for cylinders being called from objects_parse()
+// as cylinders require a large set of inputs to construct.
 int	cylinder_parse(t_object **object, t_tree *t, char *line)
 {
 	t_tuple		position;

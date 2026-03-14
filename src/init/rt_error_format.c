@@ -75,7 +75,7 @@ contain a bad syntax.
 int	rt_no_camera(void)
 {
 	ft_putstr_fd("Error\n\n", 2);
-	ft_putstr_fd("File needs to define a camera in order to view the scene\n\n", 2);
+	ft_putstr_fd("File needs a camera in order to view the scene\n\n", 2);
 	ft_putendl_fd(MSG_INVALID_RT, 2);
 	return (FALSE);
 }
