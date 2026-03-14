@@ -42,6 +42,8 @@ static void	*thread_routine(void *data)
 	size_t	i;
 
 	t = data;
+	if (!t->scene)
+		return ((void *)-1);
 	ft_memcpy(&s, t->scene, sizeof(t_scene));
 	if (thread_init(&i, &s, t) != SUCCESS)
 		return ((void *)-1);

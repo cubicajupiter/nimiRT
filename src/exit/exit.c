@@ -24,13 +24,13 @@ static int	plane_free(t_vec *objects);
 // input are provided by separate rt_error functions.
 int	error_exit(int flag, t_tree *t)
 {
-	if (flag != INIT_MUTEX_FAIL)
-		free_and_destroy(t);
 	if (errno)
 	{
 		ft_perror();
 		return (errno);
 	}
+	if (flag != INIT_MUTEX_FAIL)
+		free_and_destroy(t);
 	if (flag == FAIL)
 		return (EXIT_FAILURE);
 	return (ERROR);
