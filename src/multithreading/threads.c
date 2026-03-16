@@ -18,6 +18,9 @@ static int	close_thread(pthread_t *t, size_t i);
 static void	*thread_routine(void *data);
 static int	thread_init(size_t *i, t_scene *s, t_tree *t);
 
+// threads_run()
+// Creates the threads for the program and calls the routine which itself calls
+// the main ray_trace() renderer.
 int	threads_run(t_tree *t)
 {
 	t->thread_count = 0;
@@ -39,6 +42,8 @@ static void	*thread_routine(void *data)
 	size_t	i;
 
 	t = data;
+	if (!t->scene)
+		return ((void *)-1);
 	ft_memcpy(&s, t->scene, sizeof(t_scene));
 	if (thread_init(&i, &s, t) != SUCCESS)
 		return ((void *)-1);
@@ -55,8 +60,8 @@ static int	thread_init(size_t *i, t_scene *s, t_tree *t)
 	if (pthread_mutex_lock(&t->index_lock))
 		return (ft_error(EINHERIT, "pthread_mutex_lock"));
 	*i = t->thread_index++;
-		vec_alloc(&objects, NULL);
-		vec_new(objects, t->scene->objects->len, sizeof(t_object));
+	vec_alloc(&objects, NULL);
+	vec_new(objects, t->scene->objects->len, sizeof(t_object));
 	if (t->scene->objects->len > 0)
 		vec_copy(objects, t->scene->objects);
 	s->objects = objects;
@@ -65,6 +70,8 @@ static int	thread_init(size_t *i, t_scene *s, t_tree *t)
 	return (SUCCESS);
 }
 
+// threads_join()
+// Waits for each thread to finish its rouutine then closes each one.
 int	threads_join(t_tree *t)
 {
 	uint32_t	i;

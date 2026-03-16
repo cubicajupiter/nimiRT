@@ -18,6 +18,10 @@ static int	camera_parse(t_tree *t, char *line);
 static int	light_parse(t_tree *t, char *line);
 static int	light_parse_helper(t_tree *t, t_fl brightness, char *line);
 
+// main_info_parser()
+// If a line in an *.rt document begins with a upper case letter, then we pass
+// to this function and parse the data into the main info for the t_tree tree,
+// i.e. the ambient light, main light and camera info.
 int	main_info_parse(t_tree *t, char *line)
 {
 	char	*element_info;

@@ -14,6 +14,9 @@
 
 static int	var_count_get(size_t *var_count, t_object *object);
 
+// color_parser()
+// A utility function for parsing 8 bit RGB values into float trio RGB values.
+// Called by many functions in the parser.
 int	color_parse(t_object *object, t_tree *t, char *line)
 {
 	size_t	var_count;

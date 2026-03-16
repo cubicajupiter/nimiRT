@@ -14,6 +14,12 @@
 
 static void	plane_normal_get_helper(t_tuple dst, t_plane *plane, t_tuple point);
 
+// plane_new()
+// Creates a new plane object, malloc'ing space on the arena, and
+// and initializing the position and axis vector of the new plane to values
+// given at input. Confusingly input position is saved to the plane transform
+// matrix and actual position is always zero. Material variables are set to
+// default values. All other values are set to zero.
 int	plane_new(t_object **dst, t_trio pos, t_trio vector, t_tree *t)
 {
 	t_plane		*plane;
@@ -97,26 +103,3 @@ int	plane_hit_get(t_fl *dst, t_plane *plane, t_ray ray)
 		return (FALSE);
 	return (TRUE);
 }
-
-// int	plane_intersect_get(t_vec *xs, t_object *object, t_ray ray)
-// {
-// 	t_fl		time;
-// 	t_xs		tmp;
-// 	t_ray		ray2;
-// 	t_matrix	inversion;
-//
-// 	if (!xs || !object || !ray)
-// 		return (ft_error(EINVAL, "plane_intersect_get"));
-// 	matrix_invert(inversion, object->plane->transform);
-// 	ray_transform_get(ray2, ray, inversion);
-// 	if (plane_intersect_math(&time, object->plane, ray2))
-// 	{
-// 		tmp.t = time;
-// 		tmp.object = object;
-// 		if (vec_push(xs, &tmp) != SUCCESS)
-// 			return (ft_error(EINHERIT, "plane_intersect_get"));
-// 	}
-// 	else
-// 		return (FALSE);
-// 	return (TRUE);
-// }

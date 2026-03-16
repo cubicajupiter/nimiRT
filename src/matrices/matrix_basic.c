@@ -12,6 +12,8 @@
 
 #include "miniRT.h"
 
+// matrix_compare()
+// Checks if two matrixes are equal. Returns true or false.
 int	matrix_compare(t_matrix a, t_matrix b)
 {
 	size_t	i;
@@ -34,6 +36,8 @@ int	matrix_compare(t_matrix a, t_matrix b)
 	return (TRUE);
 }
 
+// matrix_transpose()
+// Flips a matrix by 90 degrees
 int	matrix_transpose(t_matrix dst, t_matrix src)
 {
 	size_t	i;

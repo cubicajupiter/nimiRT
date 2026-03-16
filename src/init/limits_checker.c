@@ -12,19 +12,30 @@
 
 #include "miniRT.h"
 
-bool	valid_01_float(t_fl nbr, char *value)
-{
-	if (nbr < 0.0f || nbr > 1.0f)
-		return (rt_out_of_limits(value));
-	return (true);
-}
+static bool	object_checker(t_object *object);
+static bool	valid_vector(t_tuple vector, char *value);
 
-bool	valid_color(t_trio color, char *value)
+bool	values_within_limits(t_scene *s)
 {
-	if (color[R] < 0.0f || color[R] > 1.0f
-		|| color[G] < 0.0f || color[G] > 1.0f
-		|| color[B] < 0.0f || color[B] > 1.0f)
-		return (rt_out_of_limits(value));
+	t_object	*object;
+	size_t		i;
+
+	if (!s)
+		return (false);
+	if (!valid_vector(s->camera.ray[DIRECTION], "camera vector"))
+		return (false);
+	if (vector_iszero(s->camera.ray[DIRECTION]))
+		return (rt_zerovector("camera direction"));
+	if (s->camera.fov < 0.0f || s->camera.fov > PI + EPSILON)
+		return (rt_out_of_limits("camera fov"));
+	i = 0;
+	while (i < s->objects->len)
+	{
+		object = vec_get(s->objects, i);
+		if (!object_checker(object))
+			return (false);
+		i++;
+	}
 	return (true);
 }
 
@@ -51,26 +62,18 @@ static bool	object_checker(t_object *object)
 	return (true);
 }
 
-bool	values_within_limits(t_scene *s)
+bool	valid_01_float(t_fl nbr, char *value)
 {
-	t_object	*object;
-	size_t		i;
+	if (nbr < 0.0f || nbr > 1.0f)
+		return (rt_out_of_limits(value));
+	return (true);
+}
 
-	if (!s)
-		return (false);
-	if (!valid_vector(s->camera.ray[DIRECTION], "camera vector"))
-		return (false);
-	if (vector_iszero(s->camera.ray[DIRECTION]))
-		return (rt_zerovector("camera direction"));
-	if (s->camera.fov < 0.0f || s->camera.fov > PI + EPSILON)
-		return (rt_out_of_limits("camera fov"));
-	i = 0;
-	while (i < s->objects->len)
-	{
-		object = vec_get(s->objects, i);
-		if (!object_checker(object))
-			return (false);
-		i++;
-	}
+bool	valid_color(t_trio color, char *value)
+{
+	if (color[R] < 0.0f || color[R] > 1.0f
+		|| color[G] < 0.0f || color[G] > 1.0f
+		|| color[B] < 0.0f || color[B] > 1.0f)
+		return (rt_out_of_limits(value));
 	return (true);
 }

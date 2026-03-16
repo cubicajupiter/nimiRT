@@ -33,24 +33,19 @@ Examples of elements and the order of their data:\n\
   (ID, brightness [0.0-1.0], RGB color [0-255])\n\
 - Camera: C -50.0,0,20 0,0,1 70\n\
   (ID, XYZ viewpoint [float], XYZ orientation [float], field-of-view [0-180])\n\
-- Light: L -40.0,50.0,0.0 0.6\n\
-  (ID, XYZ light position [float], brightness [0.0-1.0])\n\
+- Light: L -40.0,50.0,0.0 0.6 *10,0,255\n\
+  (ID, XYZ light position [float], brightness [0.0-1.0], *RGB color [0-255])\n\
 - Sphere: sp 0.0,0.0,20.6 12.6 10,0,255\n\
   (ID, XYZ position [float], diameter [float], RGB color [0-255])\n\
 - Plane: pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,255\n\
   (ID, XYZ point in plane [float], XYZ vector [float], RGB color [0-255])\n\
 - Cylinder: cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255\n\
   (ID, XYZ position [float], XYZ axis vector [float], diameter [float]\n\
-  height [float], RGB color [0-255])\n"
+  height [float], RGB color [0-255])\n\n\
+  *Light color optional, full white light assumed if not defined\n"
 # define MSG_MODE_PROMPT "\
 miniRT can be run in different modes by running a flag as the 2nd argument\n\
 Example usage: ./miniRT scene.rt -d\n\
 Available flags: -i (input debug) -f (full debug)\n"
-
-/*
-// NOTE: Add for bonus
-// - Light: L -40.0,50.0,0.0 0.6 10,0,255\n\
-//   (ID, XYZ light position [float], brightness [0.0-1.0], RGB color [0-255])\n\
-*/
 
 #endif

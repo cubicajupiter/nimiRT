@@ -16,15 +16,19 @@
 static void	shadow(t_xs *hit);
 static int	intersection_compute(t_xs *hit, t_ray ray);
 
+// hit_shaade()
+// Called if a hit is detected. First fetches important data about the
+// intersection, then checks if the point is shadowed by the main light, then
+// if true or false calls or shadow() or lighting() respectively.
 int	hit_shade(t_xs *hit, t_ray ray, t_scene *scene)
 {
 	if (!hit || !ray || !scene)
 		return (ft_error(EINVAL, "hit_shade"));
 	intersection_compute(hit, ray);
-	if (is_shadowed(hit, scene) == FALSE)
-		lighting(hit, &scene->light);
-	else
+	if (is_shadowed(hit, scene) == TRUE)
 		shadow(hit);
+	else
+		lighting(hit, &scene->light);
 	return (SUCCESS);
 }
 

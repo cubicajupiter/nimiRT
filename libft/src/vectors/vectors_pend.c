@@ -78,8 +78,9 @@ int	vec_inpend(t_vec *dst, t_vec *src, size_t after)
 	if (offset > 0)
 	{
 		if (vec_safe_size(offset, dst->elem_size, &dst_bytes) != SUCCESS)
-			ft_memmove((uint8_t *)dst->data + (after + src->len) * dst->elem_size,
-			(uint8_t *)dst->data + after * dst->elem_size, dst_bytes);
+			ft_memmove((uint8_t *)dst->data + (after + src->len)
+				* dst->elem_size, (uint8_t *)dst->data + after * dst->elem_size,
+				dst_bytes);
 	}
 	ft_memcpy((uint8_t *)dst->data + after * dst->elem_size,
 		(uint8_t *)src->data, src->len * dst->elem_size);

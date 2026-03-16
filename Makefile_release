@@ -1,0 +1,154 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    release_Makefile                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: thblack- <thblack-@student.hive.fi>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/04/24 14:57:58 by thblack-          #+#    #+#              #
+#    Updated: 2026/01/16 15:17:23 by thblack-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# PROJECT NAME
+PROJECT		= miniRT
+NAME		= miniRT
+
+# COMPILING
+CC			= cc
+CFLAGS		= -Wall -Wextra -Werror -O2 -funroll-loops
+
+# PROJECT DIRECTORIES
+SRC_D		= src
+OBJ_D		= obj
+INC_D		= inc
+LIB_D		= libft
+MLX_D		= MLX42
+
+# SOURCE DIRECTORIES
+CAMERA_D	= src/camera
+EXIT_D		= src/exit
+IMAGE_D		= src/image
+INIT_D		= src/init
+MATRICES_D	= src/matrices
+MTHREAD_D	= src/multithreading
+OBJECTS_D	= src/objects
+PRIMITIVE_D	= src/primitives
+RAYS_D		= src/rays
+SHADING_D	= src/shading
+TRANSFORM_D	= src/transformations
+TRIOS_D		= src/trios
+TUPLES_D	= src/tuples
+UTILS_D		= src/utils
+
+# SOURCE FILES
+CAMERA_F	= camera.c orientation.c
+EXIT_F		= exit.c
+IMAGE_F		= pixel.c window_and_image.c
+INIT_F		= init.c init_converters.c init_utils.c limits_checker.c \
+			  materials_set.c parse_color.c parse_cylinder.c \
+			  parse_main_info.c parse_objects.c parse_rt.c \
+			  rt_error_format.c rt_error_limits.c sensible_checker.c
+MATRICES_F	= matrix_basic.c matrix_determinant.c matrix_invert.c \
+			  matrix_multiply.c matrix_new.c matrix_submatrices.c
+MTHREAD_F	= threads.c
+OBJECTS_F	= cylinder.c materials.c plane.c sphere.c
+PRIMITIVE_F	= floats.c ft_dtor.c ft_rtod.c
+RAYS_F		= hits.c pixel_ray_get.c ray_basic.c ray_trace.c
+SHADING_F	= hit_shade.c lighting.c normals.c reflections.c shadows.c
+TRANSFORM_F	= chaining.c moving_scaling_shearing.c rotation.c
+TRIOS_F		= color_convert.c color_new.c trio_basic.c \
+			  trio_scale_divide.c trio_scale_multiply.c
+TUPLES_F	= tuple_basic.c tuple_new.c tuple_norms.c \
+			  tuple_products.c tuple_scale.c
+UTILS_F		= debug.c error.c mode_handler.c number_print.c \
+			  objects_print.c scene_data_print.c struct_print.c \
+			  system_calls.c
+
+# PROJECT SOURCES
+CAMERA		= $(addprefix $(CAMERA_D)/, $(CAMERA_F))
+EXIT		= $(addprefix $(EXIT_D)/, $(EXIT_F))
+IMAGE		= $(addprefix $(IMAGE_D)/, $(IMAGE_F))
+INIT		= $(addprefix $(INIT_D)/, $(INIT_F))
+MATRICES	= $(addprefix $(MATRICES_D)/, $(MATRICES_F))
+MTHREAD		= $(addprefix $(MTHREAD_D)/, $(MTHREAD_F))
+OBJECTS		= $(addprefix $(OBJECTS_D)/, $(OBJECTS_F))
+PRIMITIVE	= $(addprefix $(PRIMITIVE_D)/, $(PRIMITIVE_F))
+RAYS		= $(addprefix $(RAYS_D)/, $(RAYS_F))
+SHADING		= $(addprefix $(SHADING_D)/, $(SHADING_F))
+TRANSFORM	= $(addprefix $(TRANSFORM_D)/, $(TRANSFORM_F))
+TRIOS		= $(addprefix $(TRIOS_D)/, $(TRIOS_F))
+TUPLES		= $(addprefix $(TUPLES_D)/, $(TUPLES_F))
+UTILS		= $(addprefix $(UTILS_D)/, $(UTILS_F))
+SOURCES		= src/main.c $(CAMERA) $(EXIT) $(IMAGE) $(INIT) $(MATRICES) \
+			  $(MTHREAD) $(OBJECTS) $(PRIMITIVE) $(RAYS) $(SHADING) \
+			  $(TRANSFORM) $(TRIOS) $(TUPLES) $(UTILS)
+
+# HEADER FILES
+HEADER_F	= defines.h headers.h matrix_invert.h messages.h miniRT.h \
+			  prototypes.h
+HEADER		= $(addprefix $(INC_D)/, $(HEADER_F))
+
+# PROJECT OBJECTS
+OBJ			= $(patsubst $(SRC_D)/%.c, $(OBJ_D)/%.o, $(SOURCES))
+OBJ_DIRS	= $(sort $(dir $(OBJ)))
+DEPS		= $(OBJ:.o=.d)
+
+# MLX42 LINKING
+MLX42_DIR	= MLX42
+MLX42_OBJ	= ./MLX42
+MLX42_H		= $(MLX42_DIR)/include/MLX42/MLX42.h
+MLX42_A		= $(MLX42_DIR)/build/libmlx42.a
+MLX42_CLONE	= git clone https://github.com/codam-coding-college/MLX42.git
+
+# MAC INCLUDE PATHS AND LIBRARIES
+INC			= -I. -I$(INC_D) -I$(LIB_D)/inc -I$(MLX42_DIR)/include/MLX42
+LIBFT		= -L$(LIB_D) -lft
+LIBFT_A		= $(LIB_D)/libft.a
+MLX42		= -L$(MLX42_DIR)/build -lmlx42
+LIBS		= $(LIBFT) $(MLX42) -lm -lglfw
+
+# MULTITHREADING
+NPROC		= $(shell sh -c 'command -v nproc >/dev/null 2>&1 && nproc || sysctl -n hw.ncpu')
+CFLAGS		+= -DDEFAULT_THREADS=$(NPROC)
+
+# <<<<<<< MAIN TARGETS >>>>>>>
+
+all: $(NAME)
+
+$(NAME): $(OBJ) $(LIBFT_A) $(MLX42_A)
+	$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBS) -o $(NAME)
+
+$(MLX42_A):
+	@if [ ! -d "$(MLX42_DIR)" ]; then
+		$(MLX42_CLONE)
+	fi
+	cmake -S $(MLX42_OBJ) -B $(MLX42_OBJ)/build
+	cmake --build $(MLX42_OBJ)/build -j4
+
+$(LIBFT_A):
+	$(MAKE) -C $(LIB_D)
+
+$(OBJ_DIRS):
+	mkdir -p $@
+
+$(OBJ_D)/%.o: $(SRC_D)/%.c $(HEADER) | $(OBJ_DIRS)
+	$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@
+
+-include $(DEPS)
+
+.SECONDARY: $(OBJ) 
+
+# <<<<<<< PHONY TARGETS >>>>>>>
+
+.PHONY: all clean fclean re
+
+clean:
+	rm -rf obj
+	$(MAKE) -C libft clean
+
+fclean: clean
+	rm -f $(NAME)
+	$(MAKE) -C libft fclean
+
+re: fclean all

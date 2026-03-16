@@ -12,8 +12,32 @@
 
 #include "miniRT.h"
 
+static int	objects_parse_helper(t_tree *t, char *line);
 static int	sphere_parse(t_object **object, t_tree *t, char *line);
 static int	plane_parse(t_object **object, t_tree *t, char *line);
+
+// objects_parse()
+// If a line in an *.rt document begins with a lower case letter, then we pass
+// to this function and parse the data into an object and add it to the objects
+// vector array in the t_tree tree.
+int	objects_parse(t_tree *t, char *line)
+{
+	int			flag;
+
+	if (!t || !line)
+		return (ft_error(EINVAL, "objects_parse"));
+	if (!line[2] || (!ft_strncmp(line, "sp", 2) && !ft_strncmp(line, "pl", 2)
+			&& !ft_strncmp(line, "cy", 2)))
+		return (rt_invalid(*line));
+	if (!valid_rt_data(line + 2))
+		return (FAIL);
+	flag = objects_parse_helper(t, line);
+	if (flag == FAIL)
+		return (FAIL);
+	if (flag == ERROR)
+		return (ft_error(EINHERIT, "objects_parse"));
+	return (SUCCESS);
+}
 
 static int	objects_parse_helper(t_tree *t, char *line)
 {
@@ -38,25 +62,6 @@ static int	objects_parse_helper(t_tree *t, char *line)
 		return (FAIL);
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "objects_parse_helper"));
-	return (SUCCESS);
-}
-
-int	objects_parse(t_tree *t, char *line)
-{
-	int			flag;
-
-	if (!t || !line)
-		return (ft_error(EINVAL, "objects_parse"));
-	if (!line[2] || (!ft_strncmp(line, "sp", 2) && !ft_strncmp(line, "pl", 2)
-			&& !ft_strncmp(line, "cy", 2)))
-		return (rt_invalid(*line));
-	if (!valid_rt_data(line + 2))
-		return (FAIL);
-	flag = objects_parse_helper(t, line);
-	if (flag == FAIL)
-		return (FAIL);
-	if (flag == ERROR)
-		return (ft_error(EINHERIT, "objects_parse"));
 	return (SUCCESS);
 }
 

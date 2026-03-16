@@ -15,6 +15,13 @@
 static int	pointing_up_or_down(t_tuple camera_ray);
 static int	camera_pixel_size_compute(t_camera *camera);
 
+// camera_compute()
+// Calculates the camera for usage in the main render loop. Only happens once
+// before the image pixel loop. A matrix transform is calculated (we start with
+// the assumption the camera is pointing forward in the Z direction, then apply
+// transformations from there), then the camera viewport is calculated in
+// relation to the field-of-view (fov) and the window size (defined as WIDTH and
+// HEIGHT respectively in the defines.h header.
 int	camera_compute(t_camera *camera)
 {
 	t_tuple	up_v;
@@ -35,8 +42,8 @@ static int	pointing_up_or_down(t_tuple camera_ray)
 {
 	if (!camera_ray)
 		return (ft_error(EINVAL, "camera_ray"));
-	if (camera_ray[X] < EPSILON
-		&& camera_ray[Z] < EPSILON
+	if (is_float_equal(camera_ray[X], EPSILON)
+		&& is_float_equal(camera_ray[Z], EPSILON)
 		&& !is_float_equal(camera_ray[Y], 0.0))
 		return (TRUE);
 	return (FALSE);

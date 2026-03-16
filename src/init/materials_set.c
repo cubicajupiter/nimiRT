@@ -12,6 +12,9 @@
 
 #include "miniRT.h"
 
+// materials_set()
+// A set of equations that initializes colors we will later need for shading
+// in the renderer.
 int	materials_set(t_scene *s)
 {
 	t_object	*object;
