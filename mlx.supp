@@ -10,3 +10,39 @@
    ...
    fun:dlopen*
 }
+{
+	<mlx>
+	Helgrind:Race
+	...
+	fun:mlx*
+}
+{
+	<libGLX>
+	Helgrind:Race
+	...
+	fun:*libGLX_mesa*
+}
+{
+	<clone>
+	Helgrind:Race
+	...
+	fun:*clone*
+}
+{
+	<glfw>
+	Helgrind:Race
+	...
+	fun:*glfw*
+}
+{
+	<radeon>
+	Helgrind:Race
+	...
+	obj:*radeon*
+}
+{
+	<libglfw-LockOrder>
+	Helgrind:LockOrder
+	...
+	obj:*libglfw*
+}
