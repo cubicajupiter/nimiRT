@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-BINARY="../miniRT"		# Path to your binary executable
+BINARY="../miniRT"	# Path to your binary executable
 SUCCESS_DIR="rt_valid"	# Directory with files that should succeed
 ERROR_DIR="rt_invalid"	# Directory with files that should produce errors
 

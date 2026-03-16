@@ -81,7 +81,7 @@ int	rotation_xz(t_matrix dst, t_tuple normal)
 	if (!dst || !normal)
 		return (ft_error(EINVAL, "rotation_xz"));
 	xy_magnitude = sqrtf(normal[X] * normal[X] + normal[Y] * normal[Y]);
-	roll = atan2f(normal[X], normal[Y]);
+	roll = -atan2f(normal[X], normal[Y]);
 	pitch = atan2f(normal[Z], xy_magnitude);
 	rotation_x(x_rotate_trans, pitch);
 	rotation_z(z_rotate_trans, roll);
