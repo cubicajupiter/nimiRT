@@ -3,9 +3,9 @@
 Minimal ray tracer built following The Ray Tracer Challenge book by Jamis Buck and using the **MLX42** library.  
 Generates 3D scenes using basic ray tracing techniques.
 
-![Screenshot showing a miniRT render of asphere cult.]()
-![Screenshot showing a miniRT render of Saturn and its rings with the sun in the background.]()
-![Screenshot showing a miniRT render of a Japanese torii.]()
+![Screenshot showing a miniRT render of a sphere cult.](https://github.com/cubicajupiter/nimiRT/blob/main/gallery/miniRT_sphere_cult.png)
+![Screenshot showing a miniRT render of Saturn and its rings with the sun in the background.](https://github.com/cubicajupiter/nimiRT/blob/main/gallery/miniRT_saturn_rings.png)
+![Screenshot showing a miniRT render of a Japanese torii.](https://github.com/cubicajupiter/nimiRT/blob/main/gallery/miniRT_torii.png)
 
 ## Overview [WIP]
 

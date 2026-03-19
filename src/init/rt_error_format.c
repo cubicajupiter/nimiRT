@@ -50,6 +50,31 @@ int	rt_invalid(char c)
 }
 
 /*
+rt_naf()
+Prints a custom error message letting the user know where an *.rt file might
+contain a bad syntax.
+*/
+int	rt_naf(char c)
+{
+	char	*max_size;
+
+	max_size = ft_itoa(MAX_RENDER_SIZE);
+	ft_putendl_fd("Error\n", 2);
+	if (c)
+	{
+		ft_putstr_fd("Invalid float value near '", 2);
+		ft_putchar_fd(c, 2);
+		ft_putstr_fd("'.\nFloats may only contain numeric, sign and period \
+period characters and\n", 2);
+		ft_putstr_fd("absolute values must be in the range ", 2);
+		ft_putstr_fd(max_size, 2);
+		ft_putstr_fd(" - 0.000000001.\n\n", 2);
+	}
+	ft_putendl_fd(MSG_INVALID_RT, 2);
+	return (FAIL);
+}
+
+/*
 rt_invlid()
 Prints a custom error message letting the user know where an *.rt file might
 contain a bad syntax.

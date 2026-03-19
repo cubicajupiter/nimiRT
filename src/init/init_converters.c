@@ -54,9 +54,11 @@ int	ft_atovector(t_tuple dst, const char *nptr, char *type)
 static int	ft_atotuple_helper(t_fl *dst, const char *nptr)
 {
 	const char	*ptr[3];
+	int			flag;
+	size_t		i;
 
 	if (!dst || !nptr)
-		return (ft_error(EINVAL, "ft_atotuple"));
+		return (ft_error(EINVAL, "ft_atotuple_helper"));
 	ptr[0] = nptr;
 	nptr = next_csv_get(nptr);
 	if (!nptr)
@@ -66,10 +68,14 @@ static int	ft_atotuple_helper(t_fl *dst, const char *nptr)
 	if (!nptr)
 		return (rt_invalid((*ptr)[1]));
 	ptr[2] = nptr;
-	if (ft_atof(ptr[0], &dst[X]) != SUCCESS
-		|| ft_atof(ptr[1], &dst[Y]) != SUCCESS
-		|| ft_atof(ptr[2], &dst[Z]) != SUCCESS)
-		return (ft_error(EINHERIT, "ft_atotuple"));
+	i = 0;
+	while (i < 3)
+	{
+		flag = ft_atof(ptr[i], &dst[i]);
+		if (flag == FAIL)
+			return (rt_naf((*ptr)[i]));
+		i++;
+	}
 	return (SUCCESS);
 }
 

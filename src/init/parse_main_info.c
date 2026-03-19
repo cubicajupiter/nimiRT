@@ -144,7 +144,7 @@ static int	light_parse_helper(t_tree *t, t_fl brightness, char *line)
 	}
 	flag = ft_atotrio(color, line);
 	if (flag == FAIL)
-		return (rt_invalid(*line));
+		return (FAIL);
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "light_parse"));
 	if (!valid_color(color, "light color"))

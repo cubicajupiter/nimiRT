@@ -36,7 +36,7 @@ int	color_parse(t_object *object, t_tree *t, char *line)
 	}
 	flag = ft_atotrio(object->material.color, nptr);
 	if (flag == FAIL)
-		return (rt_invalid(*nptr));
+		return (FAIL);
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "objects_parse"));
 	return (SUCCESS);
