@@ -132,7 +132,7 @@ $(LIBFT_A):
 $(OBJ_DIRS):
 	mkdir -p $@
 
-$(OBJ_D)/%.o: $(SRC_D)/%.c $(HEADER) | $(OBJ_DIRS)
+$(OBJ_D)/%.o: $(SRC_D)/%.c $(HEADER) $(LIBFT_A) $(MLX42_A) | $(OBJ_DIRS)
 	$(CC) $(CFLAGS) $(INC) -MMD -c $< -o $@
 
 -include $(DEPS)
