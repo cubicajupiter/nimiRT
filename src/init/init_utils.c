@@ -61,7 +61,7 @@ int	parser_atof(t_fl *nbr, char *line)
 		return (ft_error(EINVAL, "parser_atoi"));
 	flag = ft_atof(line, nbr);
 	if (flag == FAIL)
-		return (rt_invalid(*line));
+		return (rt_naf(*line));
 	if (flag == ERROR)
 		return (ft_error(EINHERIT, "parser_atoi"));
 	return (SUCCESS);

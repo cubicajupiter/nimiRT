@@ -78,7 +78,11 @@ int	ft_atof(const char *nptr, float	*nbr)
 	find_decimal_and_handle_sign(&nptr, &sign);
 	i = 0;
 	while (ft_isdigit((int)nptr[i]))
+	{
 		fl.dec = (fl.dec * 10) + (nptr[i++] - '0');
+		if (i > 8)
+			return (FAIL);
+	}
 	*nbr = ((float)fl.whole + (fl.dec / (float)ft_power(10, i))) * (float)sign;
 	return (SUCCESS);
 }

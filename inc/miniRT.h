@@ -214,6 +214,7 @@ int		free_and_destroy(t_tree *t);
 int		error_exit(int flag, t_tree *t);
 int		rt_missing(char *path);
 int		rt_invalid(char c);
+int		rt_naf(char c);
 int		rt_no_camera(void);
 bool	rt_out_of_limits(char *value);
 int		rt_zerovector(char *value);
