@@ -6,7 +6,7 @@
 /*   By: jvalkama <jvalkama@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:18:42 by jvalkama          #+#    #+#             */
-/*   Updated: 2026/03/06 14:39:29 by jvalkama         ###   ########.fr       */
+/*   Updated: 2026/03/19 18:31:00 by thblack-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	overpoint_get(t_xs *hit)
 
 	if (!hit)
 		return (ft_error(EINVAL, "overpoint_get"));
-	vector_multiply_get(offset_v, OVERPOINT_HEIGHT * hit->t,
+	vector_multiply_get(offset_v, OVERPOINT_HEIGHT * hit->t * hit->t,
 		hit->normal_vector);
 	tuple_add_get(hit->over_point, hit->point, offset_v);
 	return (SUCCESS);
