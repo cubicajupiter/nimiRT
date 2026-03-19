@@ -28,8 +28,8 @@ files.
 # include <stdatomic.h>
 
 // Window & Image
-# define WIDTH 1920
-# define HEIGHT 1024
+# define WIDTH 3000
+# define HEIGHT 2000
 
 // Tuples
 // Ray data indexes

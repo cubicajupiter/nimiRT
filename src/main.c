@@ -57,6 +57,7 @@ static int	input_handle_and_init(t_tree *tree, int ac, char **av)
 
 static int	ray_multithread(t_tree *t)
 {
+	canvas_put(t->image, (t_trio){0.0f, 0.0f, 0.0f});
 	camera_compute(&t->scene->camera);
 	if (threads_run(t) != SUCCESS)
 	{

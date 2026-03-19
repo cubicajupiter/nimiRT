@@ -42,6 +42,7 @@ int		materials_set(t_scene *s);
 int		window_init(mlx_t **window, mlx_image_t **image);
 int		window_destroy(mlx_t *window);
 int		pixel_put(mlx_image_t *image, t_uint x, t_uint y, t_trio c);
+int		canvas_put(mlx_image_t *image, t_trio color);
 void	commands(void *data);
 
 // Multithreading

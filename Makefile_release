@@ -44,7 +44,7 @@ UTILS_D		= src/utils
 # SOURCE FILES
 CAMERA_F	= camera.c orientation.c
 EXIT_F		= exit.c
-IMAGE_F		= pixel.c window_and_image.c
+IMAGE_F		= pixel.c window_and_image.c canvas.c
 INIT_F		= init.c init_converters.c init_utils.c limits_checker.c \
 			  materials_set.c parse_color.c parse_cylinder.c \
 			  parse_main_info.c parse_objects.c parse_rt.c \
@@ -120,8 +120,8 @@ $(NAME): $(OBJ) $(LIBFT_A) $(MLX42_A)
 	$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBS) -o $(NAME)
 
 $(MLX42_A):
-	@if [ ! -d "$(MLX42_DIR)" ]; then
-		$(MLX42_CLONE)
+	if [ ! -d "$(MLX42_DIR)" ]; then \
+		$(MLX42_CLONE); \
 	fi
 	cmake -S $(MLX42_OBJ) -B $(MLX42_OBJ)/build
 	cmake --build $(MLX42_OBJ)/build -j4
@@ -146,9 +146,13 @@ $(OBJ_D)/%.o: $(SRC_D)/%.c $(HEADER) | $(OBJ_DIRS)
 clean:
 	rm -rf obj
 	$(MAKE) -C libft clean
+	if [ -d "$(MLX42_OBJ)/build" ]; then \
+		cmake --build $(MLX42_OBJ)/build --target clean; \
+	fi
 
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C libft fclean
+	rm -rf $(MLX42_DIR)
 
 re: fclean all
