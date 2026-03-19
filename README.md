@@ -1,9 +1,11 @@
 # miniRT [WIP]
 
-Minimal ray tracer built with **MLX42**.  
+Minimal ray tracer built following The Ray Tracer Challenge book by Jamis Buck and using the **MLX42** library.  
 Generates 3D scenes using basic ray tracing techniques.
 
-![Gif to represent ray casting](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWgwMXp4ZXN4Z2QyMW0xNnV0cHJuazlmdzYydWM1YnBjdDNpMW8yMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i6BsWXxUSHp7amMJS3/giphy.gif)
+![Screenshot showing a miniRT render of asphere cult.]()
+![Screenshot showing a miniRT render of Saturn and its rings with the sun in the background.]()
+![Screenshot showing a miniRT render of a Japanese torii.]()
 
 ## Overview [WIP]
 
@@ -24,10 +26,11 @@ A 42-project implementing a minimal ray tracer.
 - Lighting:
   - Ambient lighting
   - Diffuse lighting
+  - Specular lighting
   - Hard shadows
 - Camera with position and orientation
-- Scene parsing from `.rt` files
-- Real-time window rendering using MLX42
+- Scene parsing from `*.rt` files
+- Window creation and image rendering using MLX42
 
 ## Controls [WIP]
 
@@ -38,7 +41,7 @@ A 42-project implementing a minimal ray tracer.
 ```bash
 make
 ```
-Make sure MiniLibX (MLX42) is correcty installed and linked.
+Makefile downloads and links MLX42 dependencies.
 
 ## Run [WIP]
 - `./miniRT scenes/example.rt`
