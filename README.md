@@ -1,4 +1,4 @@
-# miniRT
+# C-based 3D Ray Tracing Engine
 
 Minimal ray tracer built following The Ray Tracer Challenge book by Jamis Buck and using the **MLX42** library.  
 Generates 3D scenes using basic ray tracing techniques.
