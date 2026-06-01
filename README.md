@@ -1,4 +1,4 @@
-# miniRT [WIP]
+# miniRT
 
 Minimal ray tracer built following The Ray Tracer Challenge book by Jamis Buck and using the **MLX42** library.  
 Generates 3D scenes using basic ray tracing techniques.
@@ -7,11 +7,11 @@ Generates 3D scenes using basic ray tracing techniques.
 ![Screenshot showing a miniRT render of Saturn and its rings with the sun in the background.](https://github.com/cubicajupiter/nimiRT/blob/main/gallery/miniRT_saturn_rings.png)
 ![Screenshot showing a miniRT render of a Japanese torii.](https://github.com/cubicajupiter/nimiRT/blob/main/gallery/miniRT_torii.png)
 
-## Overview [WIP]
+## Overview
 
 A 42-project implementing a minimal ray tracer.
 
-## Features (Current / Planned) [WIP]
+## Features (Current / Planned)
 
 - Ray tracing rendering pipeline
 - Supported objects:
@@ -32,25 +32,24 @@ A 42-project implementing a minimal ray tracer.
 - Scene parsing from `*.rt` files
 - Window creation and image rendering using MLX42
 
-## Controls [WIP]
+## Controls
 
 - `ESC` — close window and exit cleanly
 - Window close button (red cross) — exit cleanly
 
-## Build [WIP]
+## Build
 ```bash
 make
 ```
 Makefile downloads and links MLX42 dependencies.
 
-## Run [WIP]
+## Run
 - `./miniRT scenes/example.rt`
 
-## Status [WIP]
-- **Work in progress**
-- Rendering accuracy, performance optimizations, and edge cases are still being improved.
+## Status
+- Finished for now.
 
-## Resources [WIP]
+## Resource
 - MiniLibX documentation
 - Ray Tracing in One Weekend (concept reference)
 - The Ray Tracer Challenge
